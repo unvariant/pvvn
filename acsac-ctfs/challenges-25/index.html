@@ -1,0 +1,4005 @@
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>pwn.college</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="pwn.college">
+    <meta property="og:description" content="Learn to Hack!">
+    <meta property="og:image" content="https://pwn.college/themes/dojo_theme/static/img/dojo/ninja.png?d=0cd72d60">
+
+    <link rel="icon" href="/themes/dojo_theme/static/img/favicon.png?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/fonts.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/main.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/core.min.css?d=0cd72d60">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceMono-Regular.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceMono-Bold.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceGrotesk-VariableFont_wght.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <style>
+      @font-face {
+        font-family: 'Space Mono';
+        src: url("/themes/dojo_theme/static/font/SpaceMono-Regular.ttf?d=0cd72d60") format('truetype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Space Mono';
+        src: url("/themes/dojo_theme/static/font/SpaceMono-Bold.ttf?d=0cd72d60") format('truetype');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Space Grotesk';
+        src: url("/themes/dojo_theme/static/font/SpaceGrotesk-VariableFont_wght.ttf?d=0cd72d60") format('truetype');
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/custom.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    
+
+    
+
+<style>
+.scroll-disabled {
+  overflow: hidden;
+}
+
+.challenge-workspace {
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+
+.challenge-iframe {
+  display: block;
+  width: 100%;
+  min-height: 60vh;
+  aspect-ratio: 16/9;
+  border: 0;
+}
+
+.challenge-iframe-fs {
+  aspect-ratio: unset !important;
+  height: calc(100vh - 2.5em - 10px);
+}
+
+.challenge-init {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.challenge-hidden {
+  visibility: hidden;
+  max-height: 0 !important;
+}
+
+.workspace-fullscreen {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  z-index: 1031;/* Navbar z-index + 1 */
+  bottom: -16px;
+  right: 0;
+  background-color: #111;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.workspace-fullscreen .iframe-wrapper {
+  display: flex;
+}
+
+.workspace-ssh {
+  padding: 1em;
+  margin-bottom: 1em;
+  background-color: var(--foreground);
+  border-radius: 0.5em;
+}
+
+
+.challenge-hidden .workspace-ssh {
+  display: none !important;
+}
+</style>
+
+
+
+
+    
+    <script type="text/javascript">
+      var init = {
+	  'urlRoot': "",
+	  'csrfNonce': "a5535ce4910028c06502f57e236bf020d405041ffaeff23114a34a0de0a3d309",
+	  'userMode': "users",
+	  'userId': 0,
+	  'start': null,
+	  'end': null,
+	  'theme_settings': null,
+          'dojo': "acsac-ctfs",
+          'module': "challenges-25"
+      }
+    </script>
+    
+  </head>
+  <body>
+    
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top">
+  <div class="container">
+    <a href="/" class="brand-mono-bold wordmark">
+      
+      <span class="brand-white">pwn</span><span class="brand-dot-white">.</span><span class="brand-white">college</span>
+      
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#base-navbars"
+            aria-controls="base-navbars" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="base-navbars">
+      <div class="d-none d-md-block" style="border-left: 2px solid white; height: 20px; margin: 0 20px;"></div>
+      <ul class="navbar-nav mr-auto">
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/dojos">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Dojos">
+      <i class="fas fa-torii-gate d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-torii-gate pr-1"></i>
+      
+      Dojos
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/workspace">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Workspace">
+      <i class="fas fa-desktop d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-desktop pr-1"></i>
+      
+      Workspace
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/sensai.html" target="_blank">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Help">
+      <i class="fas fa-question d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-question pr-1"></i>
+      
+      Help
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="https://discord.gg/pwncollege" target="_blank">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Chat">
+      <i class="fas fa-comments d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-comments pr-1"></i>
+      
+      Chat
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="#">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Search">
+      <i class="fas fa-search d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-search pr-1"></i>
+      
+      Search
+      
+    </span>
+  </a>
+</li>
+
+      </ul>
+      <hr class="d-sm-flex d-md-flex d-lg-none">
+      <ul class="navbar-nav ml-md-auto d-block d-sm-flex d-md-flex">
+        
+        
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/register.html">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Register">
+      <i class="fas fa-user-plus d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-user-plus pr-1"></i>
+      
+      Register
+      
+    </span>
+  </a>
+</li>
+
+        
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/login.html">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Login">
+      <i class="fas fa-sign-in-alt d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-sign-in-alt pr-1"></i>
+      
+      Login
+      
+    </span>
+  </a>
+</li>
+
+        
+
+        <li class="nav-item">
+          <a class="nav-link close-link" href="javascript:void(0)">
+            <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Hide Navbar">
+              <i class="fas caret-up d-none d-md-block d-lg-none"></i>
+            </span>
+            <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+              <i class="fas fa-caret-up pr-1"></i>
+              <span class="d-lg-none">Hide Navbar</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="navbar-pulldown">
+  <i class="fas fa-fw fa-caret-down" title="Show navigation bar"></i>
+</div>
+
+<div id="searchModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document" style="margin: 10vh auto; max-width: 650px; width: 80%;">
+    <div class="modal-content bg-dark text-white rounded-lg shadow-lg">
+      <div class="modal-body p-4">
+        <form id="searchForm">
+          <div class="input-group input-group-lg">
+            <div class="input-group-prepend">
+              <span class="input-group-text bg-secondary border-0 text-white">
+                <i class="fas fa-search"></i>
+              </span>
+            </div>
+            <input type="text" id="searchInput" class="form-control bg-dark text-white border-0" placeholder="Search..." autocomplete="off">
+            <div class="input-group-append">
+              <button type="button" class="btn btn-outline-light" data-dismiss="modal">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <div id="searchResults" class="mt-3">
+          <!-- Results will be inserted here dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <main role="main">
+      
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="brand-white brand-mono-bold">ACSAC 2025 CTF Challenges</h1>
+    <br>
+    <h2 class="module-dojo"><a class="brand-white brand-mono-bold" href="/dojo/acsac-ctfs">ACSAC CTFs<span class="brand-dot">.</span></a></h2>
+
+    
+  </div>
+</div>
+<div class="container">
+
+  
+  <div>
+    
+      <a href="https://github.com/pwncollege/acsac-ctf-dojo/edit/main/dojo.yml#L1"
+         target="_blank"
+         class="github-edit-link"
+         title="Edit on GitHub">
+        <i class="fas fa-edit"></i>
+      </a>
+    
+    <p>Welcome to the second-ever ACSAC <a href="https://ctftime.org/ctf-wtf/">Capture the Flag (CTF)</a>, celebrating the 41st year of ACSAC.
+This year’s narrative follows the legendary voyager Hawaiʻiloa, who is said to have discovered the Hawaiian Islands by navigating the stars.
+Help Hawaiʻiloa across the Pacific toward Hawaiʻi, one constellation at a time.</p>
+<p>Start with the starter challenge (the compass).</p>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<div style="display: flex; justify-content: center; position: relative; padding-bottom: 15ex;">
+<style>
+.island_container {
+position: relative;
+display: inline-block;
+width: 100%;
+height: 100%;
+overflow: hidden;
+transition: transform 0.5s ease;
+transform-origin: top left;
+max-width: 100%;
+}
+.island_container:not(.zoomed) {
+transform: scale(1);
+}
+.island_container.zoomed {
+transform: scale(3);
+}
+.island_container .ocean {
+display: block;
+width: 100%;
+height: auto;
+}
+.hide {
+display: none;
+}
+.island_container .island {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: auto;
+}
+.overlay-svg {
+position: absolute;
+top: 0;
+left: 0;
+z-index: 100;
+width: 100%;
+height: 100%;
+}
+.overlay-svg .island:hover {
+cursor: pointer;
+}
+#current-challenge {
+position: absolute;
+top: 0;
+left: 0;
+margin-left: 15%;
+margin-top: 10%;
+width: 70%;
+height: auto;
+z-index: 1000;
+background: rgba(26, 41, 66, 0.85);
+padding: 2em;
+color: #ffffff;
+}
+#current-challenge p, h1, h2, h3, h4 {
+color: #ffffff !important;
+}
+#current-challenge a {
+color: #7090a3 !important;
+}
+#challenge-input {
+color: #ffffff !important;
+}
+</style>
+<div class="hide" id="current-challenge">
+<span class="close" onclick="zoomOut()">X</span>
+<h1 class="title">Challenge Title</h1>
+<h2 class="pwn-solves">0</h2>
+<h4 class="points">500</h4>
+<h4 class="num-solves">0</h4>
+<p class="challenge-description">
+  Click a constellation to view its challenge.
+</p>
+<div class="container">
+  <div class="accordion accordion-item" id="challenges">
+    <div class="row">
+      <div class="col-sm-6 form-group text-center">
+        <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary w-100">
+          <span class="d-sm-block d-md-block d-lg-block">
+            <i class="fas fa-play fa-2x pr-3"></i>Start
+          </span>
+        </button>
+      </div>
+      <div class="col-sm-6 form-group text-center">
+        <button id="challenge-practice" type="submit" class="btn btn-md btn-outline-secondary w-100">
+          <span class="d-sm-block d-md-block d-lg-block">
+            <i class="fas fa-flask fa-2x pr-3"></i>Practice
+          </span>
+        </button>
+      </div>
+    </div>
+    <div class="row submit-row">
+      <div class="col-md-9 form-group">
+        <input id="module" type="hidden" value="">
+        <input id="challenge" type="hidden" value="">
+        <input id="challenge-id" type="hidden" value="">
+        <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+      </div>
+      <div class="col-md-3 form-group key-submit">
+        <button id="challenge-submit" type="submit" class="challenge-submit btn btn-md btn-outline-secondary float-right w-100 h-100">
+          Submit
+        </button>
+      </div>
+    </div>
+    <div class="row notification-row">
+      <div class="col-md-12">
+        <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+          <strong id="result-message"></strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="island_container" id="island_container">
+<img class="ocean" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/Background_flip.png?raw=true" alt="Background" id="baseImage">
+<img class="island unsolved halulu-current halulu" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/halulu_L1.png?raw=true" alt="halulu unsolved" id="halulu-light">
+<img class="island unsolved hide halulu" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/color/halulu_L3.png?raw=true" alt="halulu solved" id="halulu-color">
+<img class="island hide medium halulu" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/halulu_L2.png?raw=true" alt="halulu medium" id="halulu-medium">
+<img class="island unsolved hokupaa-current hokupaa" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/hokupaa_L1.png?raw=true" alt="hokupaa unsolved" id="hokupaa-light">
+<img class="island unsolved hide hokupaa" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/color/hokupaa_L3.png?raw=true" alt="hokupaa solved" id="hokupaa-color">
+<img class="island hide medium hokupaa" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/hokupaa_L2.png?raw=true" alt="hokupaa medium" id="hokupaa-medium">
+<img class="island unsolved iwakelii-current iwakelii" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/iwakelii_L1.png?raw=true" alt="iwakelii unsolved" id="iwakelii-light">
+<img class="island unsolved hide iwakelii" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/color/iwakelii_L3.png?raw=true" alt="iwakelii solved" id="iwakelii-color">
+<img class="island hide medium iwakelii" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/iwakelii_L2.png?raw=true" alt="iwakelii medium" id="iwakelii-medium">
+<img class="island unsolved ka-heihei-ona-keiki-current ka-heihei-ona-keiki" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/ka-hei-hei-ona-keiki_L1.png?raw=true" alt="ka-heihei-ona-keiki unsolved" id="ka-heihei-ona-keiki-light">
+<img class="island unsolved hide ka-heihei-ona-keiki" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/color/ka-hei-hei-ona-keiki_L3.png?raw=true" alt="ka-heihei-ona-keiki solved" id="ka-heihei-ona-keiki-color">
+<img class="island hide medium ka-heihei-ona-keiki" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/ka-hei-hei-ona-keiki_L2.png?raw=true" alt="ka-heihei-ona-keiki medium" id="ka-heihei-ona-keiki-medium">
+<img class="island unsolved ka-lupe-o-kawelo-current ka-lupe-o-kawelo" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/ka-lupe-o-kawelo_L1.png?raw=true" alt="ka-lupe-o-kawelo unsolved" id="ka-lupe-o-kawelo-light">
+<img class="island unsolved hide ka-lupe-o-kawelo" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/color/ka-lupe-o-kawelo_L3.png?raw=true" alt="ka-lupe-o-kawelo solved" id="ka-lupe-o-kawelo-color">
+<img class="island hide medium ka-lupe-o-kawelo" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/ka-lupe-o-kawelo_L2.png?raw=true" alt="ka-lupe-o-kawelo medium" id="ka-lupe-o-kawelo-medium">
+<img class="island unsolved ka-moi-current ka-moi" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/ka_moi_L1.png?raw=true" alt="ka-moi unsolved" id="ka-moi-light">
+<img class="island unsolved hide ka-moi" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/color/ka_moi_L3.png?raw=true" alt="ka-moi solved" id="ka-moi-color">
+<img class="island hide medium ka-moi" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/ka_moi_L2.png?raw=true" alt="ka-moi medium" id="ka-moi-medium">
+<img class="island unsolved kaahupahau-current kaahupahau" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/kaahupahau_L1.png?raw=true" alt="kaahupahau unsolved" id="kaahupahau-light">
+<img class="island unsolved hide kaahupahau" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/color/kaahupahau_L3.png?raw=true" alt="kaahupahau solved" id="kaahupahau-color">
+<img class="island hide medium kaahupahau" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/kaahupahau_L2.png?raw=true" alt="kaahupahau medium" id="kaahupahau-medium">
+<img class="island unsolved kukalaniehu-current kukalaniehu" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/kukalaniehu_L1.png?raw=true" alt="kukalaniehu unsolved" id="kukalaniehu-light">
+<img class="island unsolved hide kukalaniehu" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/color/kukalaniehu_L3.png?raw=true" alt="kukalaniehu solved" id="kukalaniehu-color">
+<img class="island hide medium kukalaniehu" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/kukalaniehu_L2.png?raw=true" alt="kukalaniehu medium" id="kukalaniehu-medium">
+<img class="island unsolved manaiakalani-current manaiakalani" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/manaiakalani_L1.png?raw=true" alt="manaiakalani unsolved" id="manaiakalani-light">
+<img class="island unsolved hide manaiakalani" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/color/manaiakalani_L3.png?raw=true" alt="manaiakalani solved" id="manaiakalani-color">
+<img class="island hide medium manaiakalani" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/manaiakalani_L2.png?raw=true" alt="manaiakalani medium" id="manaiakalani-medium">
+<img class="island unsolved compass-current compass" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/compass_L1.png?raw=true" alt="compass unsolved" id="compass-light">
+<img class="island unsolved hide compass" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/color/compass_L3.png?raw=true" alt="compass solved" id="compass-color">
+<img class="island hide medium compass" src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/compass_L2.png?raw=true" alt="compass medium" id="compass-medium">
+<svg class="overlay-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 1423">
+<polygon class="island ka-heihei-ona-keiki" points="40,524 235,46 238,42 239,41 241,40 423,175 428,181 428,187 290,611 286,618 45,538 40,536" fill="transparent" />
+<polygon class="island halulu" points="58,1090 61,1088 191,1022 193,1021 496,1080 501,1081 518,1090 534,1210 212,1364 209,1364 207,1362" fill="transparent" />
+<polygon class="island kaahupahau" points="1259,925 1262,922 1344,897 1350,897 1354,899 1358,902 1439,1000 1439,1002 1416,1255 1415,1257 1342,1336 1340,1338 1336,1338 1333,1337 1331,1335 1285,1200" fill="transparent" />
+<polygon class="island ka-lupe-o-kawelo" points="533,875 708,679 711,676 713,675 718,674 1156,854 1157,855 1158,859 1193,1029 1193,1032 1074,1307 1072,1309 1069,1311 1063,1313 925,1313 921,1311 534,881" fill="transparent" />
+<polygon class="island hokupaa" points="1384,95 1385,91 1386,88 1391,74 1896,148 1899,150 1900,151 1957,230 1957,239 1954,245 1800,312 1614,242 1490,181 1395,117 1386,103 1385,101 1384,96" fill="transparent" />
+<polygon class="island kukalaniehu" points="502,779 526,294 528,291 530,290 534,291 537,294 578,623 552,749 507,783 504,782 502,780" fill="transparent" />
+<polygon class="island iwakelii" points="810,283 822,93 833,96 836,101 1101,557 1103,562 1104,566 1104,580 909,575 897,570 894,563 811,300 810,296" fill="transparent" />
+<polygon class="island ka-moi" points="1161,265 1162,265 1168,266 1451,414 1454,418 1584,608 1586,611 1587,613 1587,619 1458,805 1456,805 1452,804 1450,803 1279,603 1277,599 1161,272" fill="transparent" />
+<polygon class="island manaiakalani" points="1486,914 1488,903 1494,893 1525,865 1536,856 1571,839 1955,704 1963,716 1964,758 1961,772 1932,867 1930,870 1916,886 1657,1000 1597,996 1522,973" fill="transparent" />
+<polygon class="island compass" points="1597,1151 1786,974 1811,974 1989,1149 1992,1166 1991,1173 1891,1272 1804,1355 1791,1356 1703,1272 1606,1175 1597,1152" fill="transparent" />
+</svg>
+</div>
+</div>
+<script>
+const islands = ['halulu', 'hokupaa', 'iwakelii', 'ka-heihei-ona-keiki', 'ka-lupe-o-kawelo', 'ka-moi', 'kaahupahau', 'kukalaniehu', 'manaiakalani', 'compass'];
+const baseImage = document.getElementById('baseImage');
+const container = document.getElementById('island_container');
+var zoomedIsland = null;
+var challenge_id_to_name = {};
+const islandChallenge = {
+"halulu": "halulu",
+"hokupaa": "postmortem",
+"iwakelii": "iwakelii",
+"ka-heihei-ona-keiki": "kaheiheionakeiki",
+"ka-lupe-o-kawelo": "kalupeokawelo",
+"ka-moi": "kamoi",
+"kaahupahau": "stargazer",
+"kukalaniehu": "doubleblindside",
+"manaiakalani": "manaiakalani",
+"compass": "panana",
+};
+const challenge_points = {
+};
+const challenge_solves = {
+};
+var challengeIsland = {
+};
+Object.keys(islandChallenge).forEach(function(challenge_name) {
+challengeIsland[islandChallenge[challenge_name]] = challenge_name;
+});
+var challenges = {};
+function zoomOut() {
+if (zoomedIsland !== null)
+{
+    container.style.transform = 'none';
+    $(`#current-challenge`).addClass("hide");
+    zoomedIsland = null;
+}
+}
+islands.forEach(function(island) {
+const polygon = document.querySelector(`.overlay-svg .${island}`);
+$(polygon).hover(
+  function() {
+    $(`#${island}-medium`).toggleClass("hide");
+    $(`.${island}-current`).toggleClass("hide");
+  }
+);
+function addChallenge(island) {
+const challengeName = islandChallenge[island];
+const challenge = challenges[challengeName];
+const points = challenge_points[challenge.id] || 500;
+$('#current-challenge .title').text(challenge.name);
+$('#current-challenge .points').text(`Worth ${points} points in CTF`);
+$('#current-challenge .num-solves').text(`${challenge_solves[challenge.id]} solves during the CTF`);
+$('#current-challenge .pwn-solves').text(`${challenge.solves}`);
+$('#current-challenge .challenge-description').html(challenge.description);
+$('#current-challenge #module').val(challenge.module);
+$('#current-challenge #challenge').val(challenge.id);
+$('#current-challenge #challenge-id').val(challenge.challenge_id);
+}
+// Click logic for zoom
+polygon.addEventListener('click', function() {
+    if (zoomedIsland !== null)
+    {
+        zoomOut();
+    }
+    else
+    {
+        // Parse polygon points
+        const pointsAttr = polygon.getAttribute('points');
+        const points = pointsAttr.trim().split(/\s+/).map(p => {
+            const [x, y] = p.split(',').map(Number);
+            return {x, y};
+        });
+        // Compute centroid (or bounding box center)
+        let sumX = 0, sumY = 0;
+        points.forEach(pt => {
+            sumX += pt.x;
+            sumY += pt.y;
+        });
+        const zoomFactor = 3;
+        const centroidX = sumX / points.length;
+        const centroidY = sumY / points.length;
+        const displayedWidth = baseImage.clientWidth;
+        const displayedHeight = baseImage.clientHeight;
+        const originalWidth = baseImage.naturalWidth;
+        const originalHeight = baseImage.naturalHeight;
+        const xScale = displayedWidth / originalWidth;
+        const yScale = displayedHeight / originalHeight;
+        const displayedCentroidX = centroidX * xScale;
+        const displayedCentroidY = centroidY * yScale;
+        const translationX = (displayedCentroidX * zoomFactor) - (window.innerWidth / 2);
+        const translationY = (displayedCentroidY * zoomFactor) - (window.innerHeight / 2);
+        const finalTranslateX = -translationX;
+        const finalTranslateY = -translationY;
+        container.style.transform = `translate(${finalTranslateX}px, ${finalTranslateY}px) scale(${zoomFactor})`;
+        addChallenge(island);
+        $(`#current-challenge`).removeClass("hide");
+        zoomedIsland = island;
+    }
+});
+});
+// Listen for Escape key to zoom out if currently zoomed in
+document.addEventListener('keydown', function(e) {
+if (e.key === 'Escape') {
+    zoomOut();
+}
+});
+$( document ).ready(function () {
+  $(".accordion-item").each(function () {
+      if (this.id == "challenges") return;
+      const chall = $(this);
+      const challenge = {
+          module: chall.find("#module").val(),
+          solves: chall.find(".total-solves").text(),
+          description: chall.find(".accordion-item-body .embed-responsive").html(),
+          id: chall.find("#challenge").val(),
+          challenge_id: chall.find("#challenge-id").val(),
+          name: chall.find(".challenge-name").text(),
+          solved: chall.find(".challenge-unsolved").length == 0,
+      };
+      if (challenge.solved)
+      {
+          const island = challengeIsland[challenge.id];
+          $(`#${island}-light`).removeClass(`${island}-current`);
+          $(`#${island}-color`).addClass(`${island}-current`);
+          $(`#${island}-light`).addClass("hide");
+          $(`#${island}-color`).removeClass("hide");
+      }
+      challenges[challenge.id] = challenge;
+  });
+});
+function onClassChange(element, callback) {
+// Ensure the element is a DOM node
+const target = $(element)[0];
+// Create a MutationObserver instance
+const observer = new MutationObserver((mutationsList) => {
+for (const mutation of mutationsList) {
+if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+callback(mutation.target); // Call the callback with the updated element
+}
+}
+});
+// Configure the observer to listen for attribute changes
+observer.observe(target, { attributes: true });
+// Return the observer so it can be disconnected later if needed
+return observer;
+}
+onClassChange('#current-challenge #challenge-input', (element) => {
+var island = zoomedIsland;
+if (zoomedIsland === null)
+{
+  return;
+}
+if ($(element).hasClass("correct"))
+{
+  $(`#${island}-light`).removeClass(`${island}-current`);
+  $(`#${island}-color`).addClass(`${island}-current`);
+  $(`#${island}-light`).addClass("hide");
+  $(`#${island}-color`).removeClass("hide");
+}
+});
+</script>
+<h4>CTF created by:</h4>
+<ul>
+<li>Zion Leonahenahe Basque, Arizona State University, CTF Ali'i</li>
+<li>Will Rosenberg, Arizona State University</li>
+<li>Wil Gibbs, Arizona State University</li>
+<li>Siddharth Mishra, Arizona State University</li>
+<li>Pulkit Singh Singaria, Arizona State University</li>
+<li>Pratham Gupta, Arizona State University</li>
+<li>Nathan Wong, University of Hawaiʻi at Mānoa</li>
+<li>Hulin Wang, Arizona State University</li>
+<li>Ethan Morrell, University of Hawaiʻi at Mānoa</li>
+<li>Caden Sounart, Arizona State University</li>
+<li>Ahmad Samara, Arizona State University</li>
+</ul>
+
+  </div>
+  <br>
+  
+
+  
+  
+
+  
+
+  <div class="accordion" id="module-content">
+    
+    
+      
+        
+        
+          <br>
+          <h2>Challenges</h2>
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-2">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-1" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-1" aria-expanded="false" aria-controls="challenges-body-1">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="1" data-challenge-id="panana" data-challenge-name="Pānānā" id="challenges-header-1">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Pānānā</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                13 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-1" class="collapse" aria-labelledby="module-content-header-2" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwncollege/acsac-ctf-dojo/edit/main/challenges-25/panana/DESCRIPTION.md#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <h2>Pānānā</h2>
+<ul>
+<li>Category: <code>sanity-check</code></li>
+<li>Difficulty: <code>tutorial</code></li>
+<li>Author: <code>mahaloz</code></li>
+</ul>
+<p>To navigate the stars, you must first orient yourself within the world.
+Where are you now? Where are you going? You need a guide.</p>
+<p>The Pānānā (compass) guides you, showing you the way to the greater stars of the universe.</p>
+<p>This challenge is a sanity check to help you understand the CTF infrastructure.
+Thank you for playing participating in ACSAC CTF.</p>
+<p>In all of the challenges the challenge items will be located in <code>/challenge/</code> directory.</p>
+<p>Practice mode gives you access to <code>sudo</code> so you can debug challenges using root permissions. Flag will be replaced with <code>acsacctf{practice}</code>.</p>
+<p>Your goal is to submit the flag written in <code>/flag</code> file.</p>
+<p>To run the challenge binary: <code>/challenge/run</code>.</p>
+<p>Good Luck!</p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="challenges-25">
+                <input id="challenge" type="hidden" value="panana">
+                <input id="challenge-id" type="hidden" value="23187">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0e666f6d656b7c4e6a616461207e7960206d6162626b696b">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="23187" data-challenge-name="Pānānā">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/acsac-ctfs/surveys/challenges-25/panana" id="survey-notification" class="survey alert-dismissable w-100 survey-id-23187" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-3">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-2" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-2" aria-expanded="false" aria-controls="challenges-body-2">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="2" data-challenge-id="postmortem" data-challenge-name="Hōkūpaʻa - postmortem" id="challenges-header-2">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Hōkūpaʻa - postmortem</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                0 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-2" class="collapse" aria-labelledby="module-content-header-3" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwncollege/acsac-ctf-dojo/edit/main/challenges-25/postmortem/DESCRIPTION.md#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <h2>Postmortem</h2>
+<ul>
+<li>Category: <code>pwn</code></li>
+<li>Difficulty: <code>medium</code></li>
+<li>Author: <code>mowteam</code></li>
+</ul>
+<p>Even stars must die, but after death, they can shine even brighter.</p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="challenges-25">
+                <input id="challenge" type="hidden" value="postmortem">
+                <input id="challenge-id" type="hidden" value="23188">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dcb4bdbfb7b9ae9cb8b3b6b3f2acabb2f2bfb3b0b0b9bbb9">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="23188" data-challenge-name="Hōkūpaʻa - postmortem">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/acsac-ctfs/surveys/challenges-25/postmortem" id="survey-notification" class="survey alert-dismissable w-100 survey-id-23188" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-4">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-3" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-3" aria-expanded="false" aria-controls="challenges-body-3">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="3" data-challenge-id="halulu" data-challenge-name="Halulu" id="challenges-header-3">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Halulu</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                0 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-3" class="collapse" aria-labelledby="module-content-header-4" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwncollege/acsac-ctf-dojo/edit/main/challenges-25/halulu/DESCRIPTION.md#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <h2>Halulu</h2>
+<ul>
+<li>Category: <code>pwn</code></li>
+<li>Difficulty: <code>hard</code></li>
+<li>Author: <code>Sammy</code></li>
+</ul>
+<p>&quot;You might wanna get familiar with libc source code, or not, There is always more than one way to solve a problem :)&quot;</p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="challenges-25">
+                <input id="challenge" type="hidden" value="halulu">
+                <input id="challenge-id" type="hidden" value="23189">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="82eae3e1e9e7f0c2e6ede8edacf2f5ecace1edeeeee7e5e7">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="23189" data-challenge-name="Halulu">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/acsac-ctfs/surveys/challenges-25/halulu" id="survey-notification" class="survey alert-dismissable w-100 survey-id-23189" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-5">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-4" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-4" aria-expanded="false" aria-controls="challenges-body-4">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="4" data-challenge-id="kaheiheionakeiki" data-challenge-name="Ka hei hei o nā keiki" id="challenges-header-4">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Ka hei hei o nā keiki</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                2 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-4" class="collapse" aria-labelledby="module-content-header-5" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwncollege/acsac-ctf-dojo/edit/main/challenges-25/kaheiheionakeiki/DESCRIPTION.md#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <h2>Ka Hei-hei o nā Keiki</h2>
+<ul>
+<li>Category: <code>crypto</code></li>
+<li>Difficulty: <code>medium</code></li>
+<li>Author: <code>Alchemy1729</code></li>
+</ul>
+<p>Look up, there are shooting stars waiting to fulfill your wishes.</p>
+<p>Run the challenge with <code>/challenge/run</code>.</p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="challenges-25">
+                <input id="challenge" type="hidden" value="kaheiheionakeiki">
+                <input id="challenge-id" type="hidden" value="23190">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b2dad3d1d9d7c0f2d6ddd8dd9cc2c5dc9cd1dddeded7d5d7">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="23190" data-challenge-name="Ka hei hei o nā keiki">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/acsac-ctfs/surveys/challenges-25/kaheiheionakeiki" id="survey-notification" class="survey alert-dismissable w-100 survey-id-23190" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-6">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-5" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-5" aria-expanded="false" aria-controls="challenges-body-5">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="5" data-challenge-id="iwakelii" data-challenge-name="Iwakeli`i" id="challenges-header-5">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Iwakeli`i</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                1 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-5" class="collapse" aria-labelledby="module-content-header-6" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwncollege/acsac-ctf-dojo/edit/main/challenges-25/iwakelii/DESCRIPTION.md#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <h2>Iwakeli`i</h2>
+<ul>
+<li>Category: <code>crypto</code></li>
+<li>Difficulty: <code>medium</code></li>
+<li>Author: <code>Flipout50</code></li>
+</ul>
+<p>A new god has been created to usher cryptography into the post quantum age.
+Its a shame he is too arrogant to keep our data secure...</p>
+<p>Run the challenge with <code>/challenge/chall.py</code>.</p>
+<p>Note: SageMath is only installed on python 3.8 in the dojo. Run your solve script with <code>python3.8 solve.py</code>.</p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="challenges-25">
+                <input id="challenge" type="hidden" value="iwakelii">
+                <input id="challenge-id" type="hidden" value="23191">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7a121b19111f083a1e151015540a0d1454191516161f1d1f">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="23191" data-challenge-name="Iwakeli`i">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/acsac-ctfs/surveys/challenges-25/iwakelii" id="survey-notification" class="survey alert-dismissable w-100 survey-id-23191" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-7">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-6" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-6" aria-expanded="false" aria-controls="challenges-body-6">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="6" data-challenge-id="doubleblindside" data-challenge-name="Kūkalaniʻehu - doubleblindside" id="challenges-header-6">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Kūkalaniʻehu - doubleblindside</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                2 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-6" class="collapse" aria-labelledby="module-content-header-7" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwncollege/acsac-ctf-dojo/edit/main/challenges-25/doubleblindside/DESCRIPTION.md#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <h2>DoubleBlindside</h2>
+<ul>
+<li>Category: <code>web</code></li>
+<li>Difficulty: <code>easy</code></li>
+<li>Author: <code>DeviRule</code></li>
+</ul>
+<p>Our prestigious double-blind review system promises fairness, anonymity, and absolutely zero drama—so naturally, it’s held together with duct tape and wishful thinking. Poke around this academic circus, impress the “committee,” and maybe you’ll uncover where the flag is really filed.
+Necessary libraries are only installed on Python 3.8 in the dojo. Run your solve script with <code>python3.8 solve.py</code></p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="challenges-25">
+                <input id="challenge" type="hidden" value="doubleblindside">
+                <input id="challenge-id" type="hidden" value="23192">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fe969f9d959b8cbe9a919491d08e8990d09d9192929b999b">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="23192" data-challenge-name="Kūkalaniʻehu - doubleblindside">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/acsac-ctfs/surveys/challenges-25/doubleblindside" id="survey-notification" class="survey alert-dismissable w-100 survey-id-23192" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-8">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-7" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-7" aria-expanded="false" aria-controls="challenges-body-7">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="7" data-challenge-id="kamoi" data-challenge-name="Ka Mō&#39;ī" id="challenges-header-7">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Ka Mō&#39;ī</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                1 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-7" class="collapse" aria-labelledby="module-content-header-8" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwncollege/acsac-ctf-dojo/edit/main/challenges-25/kamoi/DESCRIPTION.md#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <h2>Ka Mō'ī</h2>
+<ul>
+<li>Category: <code>reversing</code></li>
+<li>Difficulty: <code>medium</code></li>
+<li>Author: <code>x3ero0</code></li>
+</ul>
+<p>Running AFL++ is easy, but reading its coverage is not. Do you really understand your fuzzer?</p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="challenges-25">
+                <input id="challenge" type="hidden" value="kamoi">
+                <input id="challenge-id" type="hidden" value="23193">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b5ddd4d6ded0c7f5d1dadfda9bc5c2db9bd6dad9d9d0d2d0">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="23193" data-challenge-name="Ka Mō&#39;ī">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/acsac-ctfs/surveys/challenges-25/kamoi" id="survey-notification" class="survey alert-dismissable w-100 survey-id-23193" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-9">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-8" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-8" aria-expanded="false" aria-controls="challenges-body-8">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="8" data-challenge-id="kalupeokawelo" data-challenge-name="Ka lupe o kawelo" id="challenges-header-8">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Ka lupe o kawelo</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                1 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-8" class="collapse" aria-labelledby="module-content-header-9" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwncollege/acsac-ctf-dojo/edit/main/challenges-25/kalupeokawelo/DESCRIPTION.md#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <h2>Ka Lupe o Kawelo</h2>
+<ul>
+<li>Category: <code>pwn</code></li>
+<li>Difficulty: <code>hard</code></li>
+<li>Author: <code>vy</code></li>
+</ul>
+<p>&quot;Shoot for the moon. Even if you miss, you'll land among the stars.&quot;</p>
+<p>Note: The intended solution for this challenge has a 16-bit brute force.</p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="challenges-25">
+                <input id="challenge" type="hidden" value="kalupeokawelo">
+                <input id="challenge-id" type="hidden" value="23194">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="94fcf5f7fff1e6d4f0fbfefbbae4e3fabaf7fbf8f8f1f3f1">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="23194" data-challenge-name="Ka lupe o kawelo">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/acsac-ctfs/surveys/challenges-25/kalupeokawelo" id="survey-notification" class="survey alert-dismissable w-100 survey-id-23194" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-10">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-9" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-9" aria-expanded="false" aria-controls="challenges-body-9">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="9" data-challenge-id="manaiakalani" data-challenge-name="Mānaiakalani" id="challenges-header-9">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Mānaiakalani</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                0 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-9" class="collapse" aria-labelledby="module-content-header-10" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwncollege/acsac-ctf-dojo/edit/main/challenges-25/manaiakalani/DESCRIPTION.md#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <h2>Mānaiakalani</h2>
+<ul>
+<li>Category: <code>reversing</code></li>
+<li>Difficulty: <code>medium</code></li>
+<li>Author: <code>bp</code></li>
+</ul>
+<p>the constellations are well aligned, this is the time
+you need to read that secret file before it expires
+the big brother gave me this program that can read any secret files on the system
+but the big brother has his own ways of doing things</p>
+<p>hint :<br />
+big brother modified it before giving us, he is deceiving us. the variables in the code aren't always what they look like. word around the place is that he expects us to rely on the existing tools too much, maybe we need to think differently. take care!</p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="challenges-25">
+                <input id="challenge" type="hidden" value="manaiakalani">
+                <input id="challenge-id" type="hidden" value="23195">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b0d8d1d3dbd5c2f0d4dfdadf9ec0c7de9ed3dfdcdcd5d7d5">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="23195" data-challenge-name="Mānaiakalani">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/acsac-ctfs/surveys/challenges-25/manaiakalani" id="survey-notification" class="survey alert-dismissable w-100 survey-id-23195" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-11">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-10" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-10" aria-expanded="false" aria-controls="challenges-body-10">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="10" data-challenge-id="stargazer" data-challenge-name="Kaʻahupāhau - Stargazer" id="challenges-header-10">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Kaʻahupāhau - Stargazer</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                0 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-10" class="collapse" aria-labelledby="module-content-header-11" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwncollege/acsac-ctf-dojo/edit/main/challenges-25/stargazer/DESCRIPTION.md#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <h2>Stargazer</h2>
+<ul>
+<li>Category: <code>pwn</code></li>
+<li>Difficulty: <code>medium</code></li>
+<li>Author: <code>Clasm</code></li>
+</ul>
+<p>Gaze into the night sky.
+Rely on what is known.
+May the stars guide your way.</p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="challenges-25">
+                <input id="challenge" type="hidden" value="stargazer">
+                <input id="challenge-id" type="hidden" value="23196">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="aec6cfcdc5cbdceecac1c4c180ded9c080cdc1c2c2cbc9cb">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="23196" data-challenge-name="Kaʻahupāhau - Stargazer">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/acsac-ctfs/surveys/challenges-25/stargazer" id="survey-notification" class="survey alert-dismissable w-100 survey-id-23196" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+  </div>
+
+  <br>
+  
+
+  
+
+  <h2 class="row" id="scoreboard-heading">30-Day Scoreboard:</h2>
+  <p>This scoreboard reflects solves for challenges in this module after the module launched in this dojo.</p>
+  
+  <div class="scoreboard-controls row">
+  <p>
+  <span id="scoreboard-control-week"><a href="javascript:loadScoreboard(7, 1)">7-Day</a></span> |
+  <span id="scoreboard-control-month"><a href="javascript:loadScoreboard(30, 1)">30-Day</a></span> |
+  <span id="scoreboard-control-all"><a href="javascript:loadScoreboard(0, 1)">All-Time</a></span>
+  </p>
+</div>
+<div class="scoreboard row">
+  <div class="col-md-12 p-0">
+    <table class="table table-striped">
+	    <thead>
+	      <tr>
+	        <td scope="col" class="col-md-1"><b>Rank</b></td>
+          <td scope="col" class="col-md-1"></td>
+	        <td scope="col" class="col-md-4"><b>Hacker</b></td>
+	        <td scope="col" class="col-md-4"><b>Badges</b></td>
+	        <td scope="col" class="col-md-1"></td>
+	        <td scope="col" class="col-md-1"><b>Score</b></td>
+	      </tr>
+	    </thead>
+	    <tbody id="scoreboard">
+	    </tbody>
+    </table>
+  </div>
+  <div>
+    <ul id="scoreboard-pages" class="p-0">
+    </ul>
+  </div>
+</div>
+
+  
+
+</div>
+
+    </main>
+
+    <footer class="footer">
+      <div class="container text-center" style="line-height: 20px; opacity: 0.7">
+        <small>
+          Powered by <strong>pwn.college</strong><br>
+          Interested in dedicated training or tailored services for your organization?
+          <a href="https://llc.pwn.college/">Find out more</a>.
+        </small>
+      </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="/themes/dojo_theme/static/js/vendor.bundle.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/core.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/helpers.min.js?d=0cd72d60"></script>
+
+    
+    <script defer src="/themes/dojo_theme/static/js/pages/main.min.js?d=0cd72d60"></script>
+    
+
+    <script defer src="/themes/dojo_theme/static/js/dojo/util.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/dojo/navbar.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/dojo/popup.min.js?d=0cd72d60"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+
+    
+<script defer src="/themes/dojo_theme/static/js/dojo/actionbar.min.js?d=0cd72d60"></script>
+<script defer src="/themes/dojo_theme/static/js/dojo/challenges.min.js?d=0cd72d60"></script>
+<script defer onload="loadScoreboard(30, 1);" src="/themes/dojo_theme/static/js/dojo/scoreboard.min.js?d=0cd72d60"></script>
+
+
+
+    <script>
+      window.addEventListener('load', function() {
+        if (typeof renderMathInElement !== 'undefined') {
+          renderMathInElement(document.body, {
+            delimiters: [
+              {left: '\\[', right: '\\]', display: true},
+              {left: '\\(', right: '\\)', display: false}
+            ],
+            throwOnError: false,
+            strict: false,
+            ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          });
+        }
+      });
+    </script>
+
+    
+
+    
+
+    
+    
+  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c44fb2dcc643975',t:'MTc2OTQ4MjYzMQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

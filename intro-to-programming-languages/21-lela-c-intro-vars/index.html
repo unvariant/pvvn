@@ -1,0 +1,5285 @@
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>pwn.college</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="pwn.college">
+    <meta property="og:description" content="Learn to Hack!">
+    <meta property="og:image" content="https://pwn.college/themes/dojo_theme/static/img/dojo/ninja.png?d=0cd72d60">
+
+    <link rel="icon" href="/themes/dojo_theme/static/img/favicon.png?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/fonts.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/main.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/core.min.css?d=0cd72d60">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceMono-Regular.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceMono-Bold.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceGrotesk-VariableFont_wght.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <style>
+      @font-face {
+        font-family: 'Space Mono';
+        src: url("/themes/dojo_theme/static/font/SpaceMono-Regular.ttf?d=0cd72d60") format('truetype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Space Mono';
+        src: url("/themes/dojo_theme/static/font/SpaceMono-Bold.ttf?d=0cd72d60") format('truetype');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Space Grotesk';
+        src: url("/themes/dojo_theme/static/font/SpaceGrotesk-VariableFont_wght.ttf?d=0cd72d60") format('truetype');
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/custom.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    
+
+    
+
+<style>
+.scroll-disabled {
+  overflow: hidden;
+}
+
+.challenge-workspace {
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+
+.challenge-iframe {
+  display: block;
+  width: 100%;
+  min-height: 60vh;
+  aspect-ratio: 16/9;
+  border: 0;
+}
+
+.challenge-iframe-fs {
+  aspect-ratio: unset !important;
+  height: calc(100vh - 2.5em - 10px);
+}
+
+.challenge-init {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.challenge-hidden {
+  visibility: hidden;
+  max-height: 0 !important;
+}
+
+.workspace-fullscreen {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  z-index: 1031;/* Navbar z-index + 1 */
+  bottom: -16px;
+  right: 0;
+  background-color: #111;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.workspace-fullscreen .iframe-wrapper {
+  display: flex;
+}
+
+.workspace-ssh {
+  padding: 1em;
+  margin-bottom: 1em;
+  background-color: var(--foreground);
+  border-radius: 0.5em;
+}
+
+
+.challenge-hidden .workspace-ssh {
+  display: none !important;
+}
+</style>
+
+
+
+
+    
+    <script type="text/javascript">
+      var init = {
+	  'urlRoot': "",
+	  'csrfNonce': "a5535ce4910028c06502f57e236bf020d405041ffaeff23114a34a0de0a3d309",
+	  'userMode': "users",
+	  'userId': 0,
+	  'start': null,
+	  'end': null,
+	  'theme_settings': null,
+          'dojo': "intro-to-programming-languages",
+          'module': "21-lela-c-intro-vars"
+      }
+    </script>
+    
+  </head>
+  <body>
+    
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top">
+  <div class="container">
+    <a href="/" class="brand-mono-bold wordmark">
+      
+      <span class="brand-white">pwn</span><span class="brand-dot-white">.</span><span class="brand-white">college</span>
+      
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#base-navbars"
+            aria-controls="base-navbars" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="base-navbars">
+      <div class="d-none d-md-block" style="border-left: 2px solid white; height: 20px; margin: 0 20px;"></div>
+      <ul class="navbar-nav mr-auto">
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/dojos">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Dojos">
+      <i class="fas fa-torii-gate d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-torii-gate pr-1"></i>
+      
+      Dojos
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/workspace">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Workspace">
+      <i class="fas fa-desktop d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-desktop pr-1"></i>
+      
+      Workspace
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/sensai.html" target="_blank">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Help">
+      <i class="fas fa-question d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-question pr-1"></i>
+      
+      Help
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="https://discord.gg/pwncollege" target="_blank">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Chat">
+      <i class="fas fa-comments d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-comments pr-1"></i>
+      
+      Chat
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="#">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Search">
+      <i class="fas fa-search d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-search pr-1"></i>
+      
+      Search
+      
+    </span>
+  </a>
+</li>
+
+      </ul>
+      <hr class="d-sm-flex d-md-flex d-lg-none">
+      <ul class="navbar-nav ml-md-auto d-block d-sm-flex d-md-flex">
+        
+        
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/register.html">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Register">
+      <i class="fas fa-user-plus d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-user-plus pr-1"></i>
+      
+      Register
+      
+    </span>
+  </a>
+</li>
+
+        
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/login.html">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Login">
+      <i class="fas fa-sign-in-alt d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-sign-in-alt pr-1"></i>
+      
+      Login
+      
+    </span>
+  </a>
+</li>
+
+        
+
+        <li class="nav-item">
+          <a class="nav-link close-link" href="javascript:void(0)">
+            <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Hide Navbar">
+              <i class="fas caret-up d-none d-md-block d-lg-none"></i>
+            </span>
+            <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+              <i class="fas fa-caret-up pr-1"></i>
+              <span class="d-lg-none">Hide Navbar</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="navbar-pulldown">
+  <i class="fas fa-fw fa-caret-down" title="Show navigation bar"></i>
+</div>
+
+<div id="searchModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document" style="margin: 10vh auto; max-width: 650px; width: 80%;">
+    <div class="modal-content bg-dark text-white rounded-lg shadow-lg">
+      <div class="modal-body p-4">
+        <form id="searchForm">
+          <div class="input-group input-group-lg">
+            <div class="input-group-prepend">
+              <span class="input-group-text bg-secondary border-0 text-white">
+                <i class="fas fa-search"></i>
+              </span>
+            </div>
+            <input type="text" id="searchInput" class="form-control bg-dark text-white border-0" placeholder="Search..." autocomplete="off">
+            <div class="input-group-append">
+              <button type="button" class="btn btn-outline-light" data-dismiss="modal">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <div id="searchResults" class="mt-3">
+          <!-- Results will be inserted here dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <main role="main">
+      
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="brand-white brand-mono-bold">LecLabs 2.1 C Intro and Vars</h1>
+    <br>
+    <h2 class="module-dojo"><a class="brand-white brand-mono-bold" href="/dojo/intro-to-programming-languages">Intro to Programming Languages<span class="brand-dot">.</span></a></h2>
+
+    
+  </div>
+</div>
+<div class="container">
+
+  
+  <div>
+    
+      <a href="https://github.com/pwn-compsci/intro-to-programming-languages/edit/main/21-lela-c-intro-vars/module.yml#L1"
+         target="_blank"
+         class="github-edit-link"
+         title="Edit on GitHub">
+        <i class="fas fa-edit"></i>
+      </a>
+    
+    <p> [ <a href="../"> ← Module List </a> ]</p> 
+This module introduces the basics of Linux, including its history, architecture, and common commands.
+It is designed for beginners who are new to Linux and want to understand its fundamental concepts.
+
+  </div>
+  <br>
+  
+
+  
+  
+
+  
+
+  <div class="accordion" id="module-content">
+    
+    
+      
+        
+        
+          <br>
+          <h2>Challenges</h2>
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-2">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-1" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-1" aria-expanded="false" aria-controls="challenges-body-1">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="1" data-challenge-id="lec2110-paradigms-and-c" data-challenge-name="Lecture 2.1.1.0 Paradigms and C" id="challenges-header-1">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Lecture 2.1.1.0 Paradigms and C</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                591 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-1" class="collapse" aria-labelledby="module-content-header-2" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwn-compsci/intro-to-programming-languages/edit/main/21-lela-c-intro-vars/module.yml#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <p>Lecture video on Paradigms and C</p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-9">
+                <input id="module" type="hidden" value="21-lela-c-intro-vars">
+                <input id="challenge" type="hidden" value="lec2110-paradigms-and-c">
+                <input id="challenge-id" type="hidden" value="17886">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5d353c3e36382f1d39323732732d2a33733e323131383a38">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="17886" data-challenge-name="Lecture 2.1.1.0 Paradigms and C">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/intro-to-programming-languages/surveys/21-lela-c-intro-vars/lec2110-paradigms-and-c" id="survey-notification" class="survey alert-dismissable w-100 survey-id-17886" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-3">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-2" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-2" aria-expanded="false" aria-controls="challenges-body-2">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="2" data-challenge-id="lec2120-first-c-program-and-va" data-challenge-name="Lecture 2.1.2. First C Program and Vars" id="challenges-header-2">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Lecture 2.1.2. First C Program and Vars</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                590 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-2" class="collapse" aria-labelledby="module-content-header-3" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwn-compsci/intro-to-programming-languages/edit/main/21-lela-c-intro-vars/module.yml#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <p>Lecture video on First C Program and Vars</p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-9">
+                <input id="module" type="hidden" value="21-lela-c-intro-vars">
+                <input id="challenge" type="hidden" value="lec2120-first-c-program-and-va">
+                <input id="challenge-id" type="hidden" value="17887">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="553d34363e302715313a3f3a7b25223b7b363a3939303230">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="17887" data-challenge-name="Lecture 2.1.2. First C Program and Vars">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/intro-to-programming-languages/surveys/21-lela-c-intro-vars/lec2120-first-c-program-and-va" id="survey-notification" class="survey alert-dismissable w-100 survey-id-17887" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-4">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-3" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-3" aria-expanded="false" aria-controls="challenges-body-3">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="3" data-challenge-id="lec2121-standrd-output" data-challenge-name="Lecture 2.1.2.1. Standard Output" id="challenges-header-3">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Lecture 2.1.2.1. Standard Output</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                583 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-3" class="collapse" aria-labelledby="module-content-header-4" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwn-compsci/intro-to-programming-languages/edit/main/21-lela-c-intro-vars/module.yml#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <p>Lecture video on Standard Output</p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-9">
+                <input id="module" type="hidden" value="21-lela-c-intro-vars">
+                <input id="challenge" type="hidden" value="lec2121-standrd-output">
+                <input id="challenge-id" type="hidden" value="17888">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2d454c4e46485f6d49424742035d5a43034e424141484a48">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="17888" data-challenge-name="Lecture 2.1.2.1. Standard Output">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/intro-to-programming-languages/surveys/21-lela-c-intro-vars/lec2121-standrd-output" id="survey-notification" class="survey alert-dismissable w-100 survey-id-17888" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-5">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-4" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-4" aria-expanded="false" aria-controls="challenges-body-4">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="4" data-challenge-id="lec2122-standard-in" data-challenge-name="Lecture 2.1.2.2. Standard In" id="challenges-header-4">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Lecture 2.1.2.2. Standard In</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                573 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-4" class="collapse" aria-labelledby="module-content-header-5" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwn-compsci/intro-to-programming-languages/edit/main/21-lela-c-intro-vars/module.yml#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <p>Lecture video on Standard In</p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-9">
+                <input id="module" type="hidden" value="21-lela-c-intro-vars">
+                <input id="challenge" type="hidden" value="lec2122-standard-in">
+                <input id="challenge-id" type="hidden" value="17889">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7a121b19111f083a1e151015540a0d1454191516161f1d1f">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="17889" data-challenge-name="Lecture 2.1.2.2. Standard In">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/intro-to-programming-languages/surveys/21-lela-c-intro-vars/lec2122-standard-in" id="survey-notification" class="survey alert-dismissable w-100 survey-id-17889" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-6">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-5" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-5" aria-expanded="false" aria-controls="challenges-body-5">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="5" data-challenge-id="lab2121-scanf-getch" data-challenge-name="Lab 2.1.2.1 - C Input" id="challenges-header-5">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Lab 2.1.2.1 - C Input</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                534 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-5" class="collapse" aria-labelledby="module-content-header-6" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwn-compsci/intro-to-programming-languages/edit/main/21-lela-c-intro-vars/module.yml#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <h3>Objective</h3>
+In this lab, you will create a program that receives multiple types of input from arguments and standard input.
+<p><h4><a href="https://youtu.be/m-Ew6eEt-hM" target="_blank">CTRL-Click Here for Follow Along Video </a></h4></p>
+<h3>Steps to Complete</h3>
+<ol>
+  <li> The program should implement the requirements, which are marked with <code>//CODE: </code>
+  <li> Add args, input, and output for user test 21.21.1 to test whether the program prints out argument 1 when supplied
+  <li> Add args, input, and output for user test 21.21.2 to test whether the program prints the correct message when 't' is provided via standard input.
+  <li> Make sure to use <code>gcc main.c -g -o main.bin</code> to compile your program</li>
+  <li> Test your program from the command line and using /challenge/tester</li>            
+  <li> /challenge/tester will give you the flag </li>
+</ol>     
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-9">
+                <input id="module" type="hidden" value="21-lela-c-intro-vars">
+                <input id="challenge" type="hidden" value="lab2121-scanf-getch">
+                <input id="challenge-id" type="hidden" value="17941">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fd959c9e96988fbd99929792d38d8a93d39e929191989a98">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="17941" data-challenge-name="Lab 2.1.2.1 - C Input">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/intro-to-programming-languages/surveys/21-lela-c-intro-vars/lab2121-scanf-getch" id="survey-notification" class="survey alert-dismissable w-100 survey-id-17941" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-7">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-6" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-6" aria-expanded="false" aria-controls="challenges-body-6">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="6" data-challenge-id="lec2123-flow-control-args" data-challenge-name="Lecture 2.1.2.3. Flow Control &amp; Command Line Arguments" id="challenges-header-6">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Lecture 2.1.2.3. Flow Control &amp; Command Line Arguments</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                551 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-6" class="collapse" aria-labelledby="module-content-header-7" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwn-compsci/intro-to-programming-languages/edit/main/21-lela-c-intro-vars/module.yml#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <p>Lecture video on Flow Control &amp; Command Line Arguments</p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-9">
+                <input id="module" type="hidden" value="21-lela-c-intro-vars">
+                <input id="challenge" type="hidden" value="lec2123-flow-control-args">
+                <input id="challenge-id" type="hidden" value="17890">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6d050c0e06081f2d09020702431d1a03430e020101080a08">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="17890" data-challenge-name="Lecture 2.1.2.3. Flow Control &amp; Command Line Arguments">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/intro-to-programming-languages/surveys/21-lela-c-intro-vars/lec2123-flow-control-args" id="survey-notification" class="survey alert-dismissable w-100 survey-id-17890" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-8">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-7" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-7" aria-expanded="false" aria-controls="challenges-body-7">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="7" data-challenge-id="lab2123ez-control-flow" data-challenge-name="EzLab 2.1.2.3 - Control Flow" id="challenges-header-7">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">EzLab 2.1.2.3 - Control Flow</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                546 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-7" class="collapse" aria-labelledby="module-content-header-8" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwn-compsci/intro-to-programming-languages/edit/main/21-lela-c-intro-vars/module.yml#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <p>Write a C program that gets a number from standard input and then prints out &quot;I can do it!\n&quot; that many times with each line being the count.</p>
+<p>For example, if the input is 3 then the program will print out</p>
+<pre>
+I can do it!
+I can do it!
+I can do it!     
+</pre>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-9">
+                <input id="module" type="hidden" value="21-lela-c-intro-vars">
+                <input id="challenge" type="hidden" value="lab2123ez-control-flow">
+                <input id="challenge-id" type="hidden" value="17942">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8fe7eeece4eafdcfebe0e5e0a1fff8e1a1ece0e3e3eae8ea">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="17942" data-challenge-name="EzLab 2.1.2.3 - Control Flow">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/intro-to-programming-languages/surveys/21-lela-c-intro-vars/lab2123ez-control-flow" id="survey-notification" class="survey alert-dismissable w-100 survey-id-17942" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-9">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-8" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-8" aria-expanded="false" aria-controls="challenges-body-8">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="8" data-challenge-id="lec2130-dec-def-functions" data-challenge-name="Lecture 2.1.3.0 Dec &amp; Def Functions" id="challenges-header-8">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Lecture 2.1.3.0 Dec &amp; Def Functions</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                550 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-8" class="collapse" aria-labelledby="module-content-header-9" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwn-compsci/intro-to-programming-languages/edit/main/21-lela-c-intro-vars/module.yml#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <p>Lecture video on Dec &amp; Def Functions</p>
+<pre><code>
+int main(int argc, char *argv[]) {
+    // Function body
+    return 0;
+}
+</code></pre>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-9">
+                <input id="module" type="hidden" value="21-lela-c-intro-vars">
+                <input id="challenge" type="hidden" value="lec2130-dec-def-functions">
+                <input id="challenge-id" type="hidden" value="17891">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="adc5cccec6c8dfedc9c2c7c283dddac383cec2c1c1c8cac8">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="17891" data-challenge-name="Lecture 2.1.3.0 Dec &amp; Def Functions">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/intro-to-programming-languages/surveys/21-lela-c-intro-vars/lec2130-dec-def-functions" id="survey-notification" class="survey alert-dismissable w-100 survey-id-17891" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-10">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-9" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-9" aria-expanded="false" aria-controls="challenges-body-9">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="9" data-challenge-id="lec2131-globals-locals" data-challenge-name="Lecture 2.1.3.1. Globals &amp; Locals" id="challenges-header-9">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Lecture 2.1.3.1. Globals &amp; Locals</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                546 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-9" class="collapse" aria-labelledby="module-content-header-10" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwn-compsci/intro-to-programming-languages/edit/main/21-lela-c-intro-vars/module.yml#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <p>Lecture video on Globals &amp; Locals</p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-9">
+                <input id="module" type="hidden" value="21-lela-c-intro-vars">
+                <input id="challenge" type="hidden" value="lec2131-globals-locals">
+                <input id="challenge-id" type="hidden" value="17892">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bdd5dcded6d8cffdd9d2d7d293cdcad393ded2d1d1d8dad8">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="17892" data-challenge-name="Lecture 2.1.3.1. Globals &amp; Locals">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/intro-to-programming-languages/surveys/21-lela-c-intro-vars/lec2131-globals-locals" id="survey-notification" class="survey alert-dismissable w-100 survey-id-17892" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-11">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-10" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-10" aria-expanded="false" aria-controls="challenges-body-10">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="10" data-challenge-id="lec2132-function-params-and-" data-challenge-name="Lecture 2.1.3.2. Function Params and Ret Vals " id="challenges-header-10">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Lecture 2.1.3.2. Function Params and Ret Vals </span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                544 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-10" class="collapse" aria-labelledby="module-content-header-11" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwn-compsci/intro-to-programming-languages/edit/main/21-lela-c-intro-vars/module.yml#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <p>Lecture video on Function Params and Ret Vals</p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-9">
+                <input id="module" type="hidden" value="21-lela-c-intro-vars">
+                <input id="challenge" type="hidden" value="lec2132-function-params-and-">
+                <input id="challenge-id" type="hidden" value="17893">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7e161f1d151b0c3e1a111411500e0910501d1112121b191b">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="17893" data-challenge-name="Lecture 2.1.3.2. Function Params and Ret Vals ">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/intro-to-programming-languages/surveys/21-lela-c-intro-vars/lec2132-function-params-and-" id="survey-notification" class="survey alert-dismissable w-100 survey-id-17893" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-12">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-11" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-11" aria-expanded="false" aria-controls="challenges-body-11">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="11" data-challenge-id="lab2132ez-pass-by-value" data-challenge-name="EzLab 2.1.3.2 Pass by Value" id="challenges-header-11">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">EzLab 2.1.3.2 Pass by Value</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                527 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-11" class="collapse" aria-labelledby="module-content-header-12" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwn-compsci/intro-to-programming-languages/edit/main/21-lela-c-intro-vars/module.yml#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <p>Modify the provided main.c, to call the proper function (read the comments)</p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-9">
+                <input id="module" type="hidden" value="21-lela-c-intro-vars">
+                <input id="challenge" type="hidden" value="lab2132ez-pass-by-value">
+                <input id="challenge-id" type="hidden" value="17943">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5d353c3e36382f1d39323732732d2a33733e323131383a38">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="17943" data-challenge-name="EzLab 2.1.3.2 Pass by Value">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/intro-to-programming-languages/surveys/21-lela-c-intro-vars/lab2132ez-pass-by-value" id="survey-notification" class="survey alert-dismissable w-100 survey-id-17943" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-13">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-12" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-12" aria-expanded="false" aria-controls="challenges-body-12">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="12" data-challenge-id="lab2131-funcs" data-challenge-name="Lab 2.1.3.1 - Functions" id="challenges-header-12">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Lab 2.1.3.1 - Functions</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                501 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-12" class="collapse" aria-labelledby="module-content-header-13" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwn-compsci/intro-to-programming-languages/edit/main/21-lela-c-intro-vars/module.yml#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <h3>Objective</h3>
+<p>In this lab, you will practice writing and using functions in C by creating a simple simulation of a galactic pizza delivery service. You will create functions to handle different aspects of the delivery process, focusing on function usage and parameter passing.</p>
+<p><h4><a href="https://youtu.be/fi4CmcjbNjM" target="_blank">CTRL-Click Here for Follow Along Video </a></h4></p>
+<h2>Requirements</h2>
+<ol>
+    <li><b>Define Pizza Order Variables</b>
+        <ul>
+          <li>Create global variable that holds the delivery speed of 50</li>
+          <li>Create a local variables in main for customer1's Id, customer1's distance, make id = 1, and distance = 50</li>
+          <li>Create local variables in main for customer2's Id, and customer2's distance, make id = 2 and distance = 25. </li>
+        </ul>
+    </li>
+    <li>
+      <b> Functions</b>
+      <ul>
+        <li>Create both a prototype (forward declaration) and a definition for each function below and place the main function inbetween them.</li>
+        <li>Functions to Implement:
+          <ul>
+              <li><code>void display_order(int customer_number, int distance)</code>: This function will take a pizza order's attributes as arguments and display them.</li>
+                <ul>
+                  <li>Print "Customer number: <FORMATTER> \n"
+                  <li>Print "Distance to customer is <FORMATTER> light years.\n"
+                </ul>
+              <li><code>double calculate_delivery_time(int distance, int speed)</code>: This function will calculate the delivery time based on distance and speed, and return the delivery time.</li>
+                <ul>
+                  <li>Calculate the delivery time 
+                  <li>Cast the result of the calculation to a double by placing (double) before the calcuation. 
+                  <li>Return the result of the calculation
+                </ul>
+              <li><code>void deliver_pizza(int customer_number, int distance, int speed)</code>: This function will simulate the pizza delivery. 
+                <ul>
+                  <li>Calculate the delivery time using the <code>calculate_delivery_time</code> function  
+                  <li>Print "Customer <FORMMATTER>'s pizza will arrive in <FORMATTER> hours!\n."
+                  <li>Use the appropriate formatter for delivery time and make sure only 2 decimal points are shown, it should look like 0.50 or 1.00.
+                </ul>
+              </li>
+          </ul>
+        </li>                  
+      </ul>
+    </li>
+    <li> 
+      <b> main</b>
+      <ul>
+        <li> Define main</li>
+        <li> Add the local variables</li>
+        <li> For each customer: Call display order and Call deliver pizza </li>
+      </ul>
+    </li>
+    <li> 
+      <b>Tests</b> 
+        <ul>
+          <li>Write one test following the requirements in the user test descriptions.</li>
+          <li> Use /challenge/tester to pass the tests and get the flag </li>
+        </ul>
+    </li>
+</ol>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-9">
+                <input id="module" type="hidden" value="21-lela-c-intro-vars">
+                <input id="challenge" type="hidden" value="lab2131-funcs">
+                <input id="challenge-id" type="hidden" value="17944">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e08881838b8592a0848f8a8fce90978ece838f8c8c858785">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="17944" data-challenge-name="Lab 2.1.3.1 - Functions">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/intro-to-programming-languages/surveys/21-lela-c-intro-vars/lab2131-funcs" id="survey-notification" class="survey alert-dismissable w-100 survey-id-17944" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-14">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-13" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-13" aria-expanded="false" aria-controls="challenges-body-13">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="13" data-challenge-id="lec2140-global-and-local-memor" data-challenge-name="Lecture 2.1.4. Global and Local Memory" id="challenges-header-13">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Lecture 2.1.4. Global and Local Memory</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                532 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-13" class="collapse" aria-labelledby="module-content-header-14" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwn-compsci/intro-to-programming-languages/edit/main/21-lela-c-intro-vars/module.yml#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <p>Lecture video on Global and Local Memory</p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-9">
+                <input id="module" type="hidden" value="21-lela-c-intro-vars">
+                <input id="challenge" type="hidden" value="lec2140-global-and-local-memor">
+                <input id="challenge-id" type="hidden" value="17894">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="157d74767e706755717a7f7a3b65627b3b767a7979707270">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="17894" data-challenge-name="Lecture 2.1.4. Global and Local Memory">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/intro-to-programming-languages/surveys/21-lela-c-intro-vars/lec2140-global-and-local-memor" id="survey-notification" class="survey alert-dismissable w-100 survey-id-17894" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-15">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-14" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-14" aria-expanded="false" aria-controls="challenges-body-14">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="14" data-challenge-id="lec2141-function-frames" data-challenge-name="Lecture 2.1.4.1. Function Frames" id="challenges-header-14">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Lecture 2.1.4.1. Function Frames</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                526 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-14" class="collapse" aria-labelledby="module-content-header-15" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwn-compsci/intro-to-programming-languages/edit/main/21-lela-c-intro-vars/module.yml#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <p>Lecture video on Function Frames</p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-9">
+                <input id="module" type="hidden" value="21-lela-c-intro-vars">
+                <input id="challenge" type="hidden" value="lec2141-function-frames">
+                <input id="challenge-id" type="hidden" value="17895">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="543c35373f312614303b3e3b7a24233a7a373b3838313331">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="17895" data-challenge-name="Lecture 2.1.4.1. Function Frames">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/intro-to-programming-languages/surveys/21-lela-c-intro-vars/lec2141-function-frames" id="survey-notification" class="survey alert-dismissable w-100 survey-id-17895" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-16">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-15" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-15" aria-expanded="false" aria-controls="challenges-body-15">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="15" data-challenge-id="lec2150-debugging-c-programs" data-challenge-name="Lecture 2.1.5. Debugging C Programs" id="challenges-header-15">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Lecture 2.1.5. Debugging C Programs</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                516 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-15" class="collapse" aria-labelledby="module-content-header-16" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwn-compsci/intro-to-programming-languages/edit/main/21-lela-c-intro-vars/module.yml#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <p>Lecture video on Debugging C Programs</p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-9">
+                <input id="module" type="hidden" value="21-lela-c-intro-vars">
+                <input id="challenge" type="hidden" value="lec2150-debugging-c-programs">
+                <input id="challenge-id" type="hidden" value="17896">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="533b323038362113373c393c7d23243d7d303c3f3f363436">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="17896" data-challenge-name="Lecture 2.1.5. Debugging C Programs">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/intro-to-programming-languages/surveys/21-lela-c-intro-vars/lec2150-debugging-c-programs" id="survey-notification" class="survey alert-dismissable w-100 survey-id-17896" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-17">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-16" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-16" aria-expanded="false" aria-controls="challenges-body-16">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="16" data-challenge-id="lab2151-debug" data-challenge-name="Lab 2.1.5.1 - Using VSCode Debugger" id="challenges-header-16">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Lab 2.1.5.1 - Using VSCode Debugger</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                445 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-16" class="collapse" aria-labelledby="module-content-header-17" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwn-compsci/intro-to-programming-languages/edit/main/21-lela-c-intro-vars/module.yml#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <p>Using VSCode's debugger you can quickly find bugs!</p>
+<h3>Objective</h3>
+<p>We will work with the VSCode debugger to extract a few values from the program and change a variable in the middle of execution.</p>
+<p>You can follow the more detailed steps here or use the less detailed comments in the code</p>
+<p><h4><a href="https://youtu.be/RkklRdmZzbs" target="_blank">CTRL-Click Here for Follow Along Video </a></h4></p>
+<h2>Requirements</h2>          
+<ol>
+  <li><b>Set Breakpoints:</b></li>
+  <ul>
+    <li>Click to the left of the line number in your source code where you want to pause the execution. 
+    <li>For your first debugging challenge, we will set a breakpoint on line 22, with the line
+    <li>A red dot appears, indicating a breakpoint is set.
+    <li>You can set multiple breakpoints.
+  </ul>          
+  <li><b>Start Debugging:</b></li>
+  <ul>
+    <li>Click the Debugging Button in the side bar 
+    <li>Then press F5 or click on the green play button in the Debug Side Bar to start debugging.
+    <li>The debugger will start and pause at the first breakpoint encountered.
+  </ul>          
+  <li><b>Inspecting Variables and State:</b></li>
+  <ul>
+    <li>When the debugger pauses, you can hover over variables in your code to see their current values.
+    <li>The Debug Side Bar will also show variables, call stack, and breakpoints. 
+    <li>When you stop for the first time, expand the variables heading in the Debug Side Bar
+    <li>Under that section, you'll see <code>x</code>, <code>new_value</code>, and <code>plain_value</code>
+  </ul>          
+  <li><b>Execution Tool Bar:</b></li>
+  <ul>
+    <li>Use the top control bar (appearing during debugging) to continue (F5), step over (F10), step into (F11), step out (Shift+F11), or stop (Shift+F5) the debugging process.
+    <ul>
+      <li>Continue (F5) restarts the execution until the next breakpoint is reached
+      <li>Step Over (F10) executes the next line in the program but does not go into a function call 
+      <li>Step into (F11) works like Step Over but it steps into a function call. 
+      <li>Step Out (Shift-F11) will continue executing until the end of the current function is reached.
+    </ul>
+  </ul>          
+  <li><b>Control Execution:</b></li>
+  <ul>
+    <li>The program should be stopped at line the breakpoint, in the variables window, x will be 0
+    <li>You will want to use either the continue (F5) or the Step Over (F10) to move the execution forward until you reach the breakpoint line and the value of x is 2
+    <li>Write down the hex value of <code>new_value</code> (x is 2) 
+    <li>Step through again until reaching the print statement again, x should now be 3
+    <li>Write down the hex value of new_value (x is 3)
+  </ul>          
+  <li><b>Change new_value's value</b></li>
+  <ul>
+    <li>While still at the location from the last step (step 5) and stopped at line 18, where x==3 after looping three times 
+    <li>Change the value of <code>new_value</code> to 'b' which is 0x62 in hex by double clicking it and entering 'b'
+  </ul>          
+  <li><b>Complete the programs execution</b></li>
+  <ul>
+    <li>Remove the breakpoint by clicking on the red dot
+    <li>Click Continue (F5)
+    <li>Write down the "Final value" printed out by the program 
+  </ul>          
+  <li><b>Get Flag</b></li>
+  <ul>
+    <li>Execute <code>/challenge/getflag</code> and enter in the 3 values you wrote down
+    <li>You are done!
+  </ul>
+</ol>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-9">
+                <input id="module" type="hidden" value="21-lela-c-intro-vars">
+                <input id="challenge" type="hidden" value="lab2151-debug">
+                <input id="challenge-id" type="hidden" value="17945">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e48c85878f8196a4808b8e8bca94938aca878b8888818381">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="17945" data-challenge-name="Lab 2.1.5.1 - Using VSCode Debugger">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/intro-to-programming-languages/surveys/21-lela-c-intro-vars/lab2151-debug" id="survey-notification" class="survey alert-dismissable w-100 survey-id-17945" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+  </div>
+
+  <br>
+  
+
+  
+
+  <h2 class="row" id="scoreboard-heading">30-Day Scoreboard:</h2>
+  <p>This scoreboard reflects solves for challenges in this module after the module launched in this dojo.</p>
+  
+  <div class="scoreboard-controls row">
+  <p>
+  <span id="scoreboard-control-week"><a href="javascript:loadScoreboard(7, 1)">7-Day</a></span> |
+  <span id="scoreboard-control-month"><a href="javascript:loadScoreboard(30, 1)">30-Day</a></span> |
+  <span id="scoreboard-control-all"><a href="javascript:loadScoreboard(0, 1)">All-Time</a></span>
+  </p>
+</div>
+<div class="scoreboard row">
+  <div class="col-md-12 p-0">
+    <table class="table table-striped">
+	    <thead>
+	      <tr>
+	        <td scope="col" class="col-md-1"><b>Rank</b></td>
+          <td scope="col" class="col-md-1"></td>
+	        <td scope="col" class="col-md-4"><b>Hacker</b></td>
+	        <td scope="col" class="col-md-4"><b>Badges</b></td>
+	        <td scope="col" class="col-md-1"></td>
+	        <td scope="col" class="col-md-1"><b>Score</b></td>
+	      </tr>
+	    </thead>
+	    <tbody id="scoreboard">
+	    </tbody>
+    </table>
+  </div>
+  <div>
+    <ul id="scoreboard-pages" class="p-0">
+    </ul>
+  </div>
+</div>
+
+  
+
+</div>
+
+    </main>
+
+    <footer class="footer">
+      <div class="container text-center" style="line-height: 20px; opacity: 0.7">
+        <small>
+          Powered by <strong>pwn.college</strong><br>
+          Interested in dedicated training or tailored services for your organization?
+          <a href="https://llc.pwn.college/">Find out more</a>.
+        </small>
+      </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="/themes/dojo_theme/static/js/vendor.bundle.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/core.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/helpers.min.js?d=0cd72d60"></script>
+
+    
+    <script defer src="/themes/dojo_theme/static/js/pages/main.min.js?d=0cd72d60"></script>
+    
+
+    <script defer src="/themes/dojo_theme/static/js/dojo/util.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/dojo/navbar.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/dojo/popup.min.js?d=0cd72d60"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+
+    
+<script defer src="/themes/dojo_theme/static/js/dojo/actionbar.min.js?d=0cd72d60"></script>
+<script defer src="/themes/dojo_theme/static/js/dojo/challenges.min.js?d=0cd72d60"></script>
+<script defer onload="loadScoreboard(30, 1);" src="/themes/dojo_theme/static/js/dojo/scoreboard.min.js?d=0cd72d60"></script>
+
+
+
+    <script>
+      window.addEventListener('load', function() {
+        if (typeof renderMathInElement !== 'undefined') {
+          renderMathInElement(document.body, {
+            delimiters: [
+              {left: '\\[', right: '\\]', display: true},
+              {left: '\\(', right: '\\)', display: false}
+            ],
+            throwOnError: false,
+            strict: false,
+            ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          });
+        }
+      });
+    </script>
+
+    
+
+    
+
+    
+    
+  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c44fc7f1a9b3975',t:'MTc2OTQ4MjY4NQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

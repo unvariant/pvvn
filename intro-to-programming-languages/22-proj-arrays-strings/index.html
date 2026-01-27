@@ -1,0 +1,3140 @@
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>pwn.college</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="pwn.college">
+    <meta property="og:description" content="Learn to Hack!">
+    <meta property="og:image" content="https://pwn.college/themes/dojo_theme/static/img/dojo/ninja.png?d=0cd72d60">
+
+    <link rel="icon" href="/themes/dojo_theme/static/img/favicon.png?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/fonts.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/main.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/core.min.css?d=0cd72d60">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceMono-Regular.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceMono-Bold.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceGrotesk-VariableFont_wght.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <style>
+      @font-face {
+        font-family: 'Space Mono';
+        src: url("/themes/dojo_theme/static/font/SpaceMono-Regular.ttf?d=0cd72d60") format('truetype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Space Mono';
+        src: url("/themes/dojo_theme/static/font/SpaceMono-Bold.ttf?d=0cd72d60") format('truetype');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Space Grotesk';
+        src: url("/themes/dojo_theme/static/font/SpaceGrotesk-VariableFont_wght.ttf?d=0cd72d60") format('truetype');
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/custom.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    
+
+    
+
+<style>
+.scroll-disabled {
+  overflow: hidden;
+}
+
+.challenge-workspace {
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+
+.challenge-iframe {
+  display: block;
+  width: 100%;
+  min-height: 60vh;
+  aspect-ratio: 16/9;
+  border: 0;
+}
+
+.challenge-iframe-fs {
+  aspect-ratio: unset !important;
+  height: calc(100vh - 2.5em - 10px);
+}
+
+.challenge-init {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.challenge-hidden {
+  visibility: hidden;
+  max-height: 0 !important;
+}
+
+.workspace-fullscreen {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  z-index: 1031;/* Navbar z-index + 1 */
+  bottom: -16px;
+  right: 0;
+  background-color: #111;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.workspace-fullscreen .iframe-wrapper {
+  display: flex;
+}
+
+.workspace-ssh {
+  padding: 1em;
+  margin-bottom: 1em;
+  background-color: var(--foreground);
+  border-radius: 0.5em;
+}
+
+
+.challenge-hidden .workspace-ssh {
+  display: none !important;
+}
+</style>
+
+
+
+
+    
+    <script type="text/javascript">
+      var init = {
+	  'urlRoot': "",
+	  'csrfNonce': "a5535ce4910028c06502f57e236bf020d405041ffaeff23114a34a0de0a3d309",
+	  'userMode': "users",
+	  'userId': 0,
+	  'start': null,
+	  'end': null,
+	  'theme_settings': null,
+          'dojo': "intro-to-programming-languages",
+          'module': "22-proj-arrays-strings"
+      }
+    </script>
+    
+  </head>
+  <body>
+    
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top">
+  <div class="container">
+    <a href="/" class="brand-mono-bold wordmark">
+      
+      <span class="brand-white">pwn</span><span class="brand-dot-white">.</span><span class="brand-white">college</span>
+      
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#base-navbars"
+            aria-controls="base-navbars" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="base-navbars">
+      <div class="d-none d-md-block" style="border-left: 2px solid white; height: 20px; margin: 0 20px;"></div>
+      <ul class="navbar-nav mr-auto">
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/dojos">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Dojos">
+      <i class="fas fa-torii-gate d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-torii-gate pr-1"></i>
+      
+      Dojos
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/workspace">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Workspace">
+      <i class="fas fa-desktop d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-desktop pr-1"></i>
+      
+      Workspace
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/sensai.html" target="_blank">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Help">
+      <i class="fas fa-question d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-question pr-1"></i>
+      
+      Help
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="https://discord.gg/pwncollege" target="_blank">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Chat">
+      <i class="fas fa-comments d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-comments pr-1"></i>
+      
+      Chat
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="#">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Search">
+      <i class="fas fa-search d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-search pr-1"></i>
+      
+      Search
+      
+    </span>
+  </a>
+</li>
+
+      </ul>
+      <hr class="d-sm-flex d-md-flex d-lg-none">
+      <ul class="navbar-nav ml-md-auto d-block d-sm-flex d-md-flex">
+        
+        
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/register.html">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Register">
+      <i class="fas fa-user-plus d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-user-plus pr-1"></i>
+      
+      Register
+      
+    </span>
+  </a>
+</li>
+
+        
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/login.html">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Login">
+      <i class="fas fa-sign-in-alt d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-sign-in-alt pr-1"></i>
+      
+      Login
+      
+    </span>
+  </a>
+</li>
+
+        
+
+        <li class="nav-item">
+          <a class="nav-link close-link" href="javascript:void(0)">
+            <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Hide Navbar">
+              <i class="fas caret-up d-none d-md-block d-lg-none"></i>
+            </span>
+            <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+              <i class="fas fa-caret-up pr-1"></i>
+              <span class="d-lg-none">Hide Navbar</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="navbar-pulldown">
+  <i class="fas fa-fw fa-caret-down" title="Show navigation bar"></i>
+</div>
+
+<div id="searchModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document" style="margin: 10vh auto; max-width: 650px; width: 80%;">
+    <div class="modal-content bg-dark text-white rounded-lg shadow-lg">
+      <div class="modal-body p-4">
+        <form id="searchForm">
+          <div class="input-group input-group-lg">
+            <div class="input-group-prepend">
+              <span class="input-group-text bg-secondary border-0 text-white">
+                <i class="fas fa-search"></i>
+              </span>
+            </div>
+            <input type="text" id="searchInput" class="form-control bg-dark text-white border-0" placeholder="Search..." autocomplete="off">
+            <div class="input-group-append">
+              <button type="button" class="btn btn-outline-light" data-dismiss="modal">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <div id="searchResults" class="mt-3">
+          <!-- Results will be inserted here dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <main role="main">
+      
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="brand-white brand-mono-bold">Project 2.2 on Arrays and C-Strings</h1>
+    <br>
+    <h2 class="module-dojo"><a class="brand-white brand-mono-bold" href="/dojo/intro-to-programming-languages">Intro to Programming Languages<span class="brand-dot">.</span></a></h2>
+
+    
+  </div>
+</div>
+<div class="container">
+
+  
+  <div>
+    
+      <a href="https://github.com/pwn-compsci/intro-to-programming-languages/edit/main/22-proj-arrays-strings/module.yml#L1"
+         target="_blank"
+         class="github-edit-link"
+         title="Edit on GitHub">
+        <i class="fas fa-edit"></i>
+      </a>
+    
+    <p> [ <a href="../"> ← Module List </a> ]</p> 
+Greetings Coders!<br>
+You are moving forward with your C knowledge! Prepare to journey even further into C.
+In this set of challenges you'll learn more about debugging, arrays, c-strings, and file input/output.
+<li>Using print statements to debug </li>
+<li>Set breakpoints and investigate variables using the visual debugger</li>
+<li>Identify the location of a segmentation fault using valgrind.</li>
+<li>Define a local array using one of the primitive types</li>
+<li>Declare arrays using a literal </li>
+<li>Access elements of an array using []</li>
+<li>Iterate through an array of values</li>
+<li>Define a c-string of with a maximum size</li>
+<li>Access the characters of a c-string using []</li>
+<li>Loop through a c-string</li>
+<li>Writing a string to standard output using printf or puts</li>
+<li>Open a file for output </li>
+<li>Write output to a text file with fprintf</li>
+<li>Open a file for input</li>
+<li>Gather input from a text file using fgets</li>
+
+  </div>
+  <br>
+  
+
+  
+  
+
+  
+
+  <div class="accordion" id="module-content">
+    
+    
+      
+        
+        
+          <br>
+          <h2>Challenges</h2>
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-2">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-1" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-1" aria-expanded="false" aria-controls="challenges-body-1">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="1" data-challenge-id="p22-level-01" data-challenge-name="P2.2 Level 01 length" id="challenges-header-1">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">P2.2 Level 01 length</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                399 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-1" class="collapse" aria-labelledby="module-content-header-2" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwn-compsci/intro-to-programming-languages/edit/main/22-proj-arrays-strings/module.yml#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <p>📋 <strong>Requirements available in VS Code!</strong></p>
+      <p>Click the <strong>"Requirements"</strong> button in the status bar (bottom right of VS Code) or use the keyboard shortcut <strong>Ctrl+Shift+Q</strong> to view the full assignment requirements.</p>
+      <p><img src="https://cse240.com/requirements.jpg" alt="Requirements button location" style="max-width: 600px;"/></p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-9">
+                <input id="module" type="hidden" value="22-proj-arrays-strings">
+                <input id="challenge" type="hidden" value="p22-level-01">
+                <input id="challenge-id" type="hidden" value="17752">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7f171e1c141a0d3f1b101510510f0811511c1013131a181a">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="17752" data-challenge-name="P2.2 Level 01 length">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/intro-to-programming-languages/surveys/22-proj-arrays-strings/p22-level-01" id="survey-notification" class="survey alert-dismissable w-100 survey-id-17752" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-3">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-2" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-2" aria-expanded="false" aria-controls="challenges-body-2">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="2" data-challenge-id="p22-level-02" data-challenge-name="P2.2 Level 02 c-cat" id="challenges-header-2">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">P2.2 Level 02 c-cat</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                369 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-2" class="collapse" aria-labelledby="module-content-header-3" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwn-compsci/intro-to-programming-languages/edit/main/22-proj-arrays-strings/module.yml#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <p>📋 <strong>Requirements available in VS Code!</strong></p>
+      <p>Click the <strong>"Requirements"</strong> button in the status bar (bottom right of VS Code) or use the keyboard shortcut <strong>Ctrl+Shift+Q</strong> to view the full assignment requirements.</p>
+      <p><img src="https://cse240.com/requirements.jpg" alt="Requirements button location" style="max-width: 600px;"/></p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-9">
+                <input id="module" type="hidden" value="22-proj-arrays-strings">
+                <input id="challenge" type="hidden" value="p22-level-02">
+                <input id="challenge-id" type="hidden" value="17753">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="deb6bfbdb5bbac9ebab1b4b1f0aea9b0f0bdb1b2b2bbb9bb">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="17753" data-challenge-name="P2.2 Level 02 c-cat">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/intro-to-programming-languages/surveys/22-proj-arrays-strings/p22-level-02" id="survey-notification" class="survey alert-dismissable w-100 survey-id-17753" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-4">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-3" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-3" aria-expanded="false" aria-controls="challenges-body-3">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="3" data-challenge-id="p22-level-03" data-challenge-name="P2.2 Level 03 c-copy" id="challenges-header-3">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">P2.2 Level 03 c-copy</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                373 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-3" class="collapse" aria-labelledby="module-content-header-4" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwn-compsci/intro-to-programming-languages/edit/main/22-proj-arrays-strings/module.yml#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <p>📋 <strong>Requirements available in VS Code!</strong></p>
+      <p>Click the <strong>"Requirements"</strong> button in the status bar (bottom right of VS Code) or use the keyboard shortcut <strong>Ctrl+Shift+Q</strong> to view the full assignment requirements.</p>
+      <p><img src="https://cse240.com/requirements.jpg" alt="Requirements button location" style="max-width: 600px;"/></p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-9">
+                <input id="module" type="hidden" value="22-proj-arrays-strings">
+                <input id="challenge" type="hidden" value="p22-level-03">
+                <input id="challenge-id" type="hidden" value="17754">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fa929b99919f88ba9e959095d48a8d94d4999596969f9d9f">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="17754" data-challenge-name="P2.2 Level 03 c-copy">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/intro-to-programming-languages/surveys/22-proj-arrays-strings/p22-level-03" id="survey-notification" class="survey alert-dismissable w-100 survey-id-17754" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-5">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-4" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-4" aria-expanded="false" aria-controls="challenges-body-4">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="4" data-challenge-id="p22-level-04" data-challenge-name="P2.2 Level 04 c-compare" id="challenges-header-4">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">P2.2 Level 04 c-compare</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                372 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-4" class="collapse" aria-labelledby="module-content-header-5" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwn-compsci/intro-to-programming-languages/edit/main/22-proj-arrays-strings/module.yml#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <p>📋 <strong>Requirements available in VS Code!</strong></p>
+      <p>Click the <strong>"Requirements"</strong> button in the status bar (bottom right of VS Code) or use the keyboard shortcut <strong>Ctrl+Shift+Q</strong> to view the full assignment requirements.</p>
+      <p><img src="https://cse240.com/requirements.jpg" alt="Requirements button location" style="max-width: 600px;"/></p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-9">
+                <input id="module" type="hidden" value="22-proj-arrays-strings">
+                <input id="challenge" type="hidden" value="p22-level-04">
+                <input id="challenge-id" type="hidden" value="17755">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c1a9a0a2aaa4b381a5aeabaeefb1b6afefa2aeadada4a6a4">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="17755" data-challenge-name="P2.2 Level 04 c-compare">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/intro-to-programming-languages/surveys/22-proj-arrays-strings/p22-level-04" id="survey-notification" class="survey alert-dismissable w-100 survey-id-17755" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-6">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-5" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-5" aria-expanded="false" aria-controls="challenges-body-5">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="5" data-challenge-id="p22-level-05" data-challenge-name="P2.2 Level 05 c-up" id="challenges-header-5">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">P2.2 Level 05 c-up</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-hackers">
+                2 hacking,
+              </span>
+              
+              <span class="total-solves">
+                344 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-5" class="collapse" aria-labelledby="module-content-header-6" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwn-compsci/intro-to-programming-languages/edit/main/22-proj-arrays-strings/module.yml#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <p>📋 <strong>Requirements available in VS Code!</strong></p>
+      <p>Click the <strong>"Requirements"</strong> button in the status bar (bottom right of VS Code) or use the keyboard shortcut <strong>Ctrl+Shift+Q</strong> to view the full assignment requirements.</p>
+      <p><img src="https://cse240.com/requirements.jpg" alt="Requirements button location" style="max-width: 600px;"/></p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-9">
+                <input id="module" type="hidden" value="22-proj-arrays-strings">
+                <input id="challenge" type="hidden" value="p22-level-05">
+                <input id="challenge-id" type="hidden" value="17756">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b0d8d1d3dbd5c2f0d4dfdadf9ec0c7de9ed3dfdcdcd5d7d5">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="17756" data-challenge-name="P2.2 Level 05 c-up">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/intro-to-programming-languages/surveys/22-proj-arrays-strings/p22-level-05" id="survey-notification" class="survey alert-dismissable w-100 survey-id-17756" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-7">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-6" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-6" aria-expanded="false" aria-controls="challenges-body-6">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="6" data-challenge-id="p22-level-06" data-challenge-name="P2.2 Level 06 c-bugs" id="challenges-header-6">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">P2.2 Level 06 c-bugs</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                331 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-6" class="collapse" aria-labelledby="module-content-header-7" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwn-compsci/intro-to-programming-languages/edit/main/22-proj-arrays-strings/module.yml#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <p>📋 <strong>Requirements available in VS Code!</strong></p>
+      <p>Click the <strong>"Requirements"</strong> button in the status bar (bottom right of VS Code) or use the keyboard shortcut <strong>Ctrl+Shift+Q</strong> to view the full assignment requirements.</p>
+      <p><img src="https://cse240.com/requirements.jpg" alt="Requirements button location" style="max-width: 600px;"/></p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-9">
+                <input id="module" type="hidden" value="22-proj-arrays-strings">
+                <input id="challenge" type="hidden" value="p22-level-06">
+                <input id="challenge-id" type="hidden" value="17757">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9cf4fdfff7f9eedcf8f3f6f3b2ecebf2b2fff3f0f0f9fbf9">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="17757" data-challenge-name="P2.2 Level 06 c-bugs">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/intro-to-programming-languages/surveys/22-proj-arrays-strings/p22-level-06" id="survey-notification" class="survey alert-dismissable w-100 survey-id-17757" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-8">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-7" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-7" aria-expanded="false" aria-controls="challenges-body-7">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="7" data-challenge-id="p22-level-07" data-challenge-name="P2.2 Level 07 c-debugger" id="challenges-header-7">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">P2.2 Level 07 c-debugger</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                350 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-7" class="collapse" aria-labelledby="module-content-header-8" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwn-compsci/intro-to-programming-languages/edit/main/22-proj-arrays-strings/module.yml#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <p>📋 <strong>Requirements available in VS Code!</strong></p>
+      <p>Click the <strong>"Requirements"</strong> button in the status bar (bottom right of VS Code) or use the keyboard shortcut <strong>Ctrl+Shift+Q</strong> to view the full assignment requirements.</p>
+      <p><img src="https://cse240.com/requirements.jpg" alt="Requirements button location" style="max-width: 600px;"/></p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-9">
+                <input id="module" type="hidden" value="22-proj-arrays-strings">
+                <input id="challenge" type="hidden" value="p22-level-07">
+                <input id="challenge-id" type="hidden" value="17758">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e981888a828c9ba98d868386c7999e87c78a8685858c8e8c">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="17758" data-challenge-name="P2.2 Level 07 c-debugger">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/intro-to-programming-languages/surveys/22-proj-arrays-strings/p22-level-07" id="survey-notification" class="survey alert-dismissable w-100 survey-id-17758" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-9">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-8" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-8" aria-expanded="false" aria-controls="challenges-body-8">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="8" data-challenge-id="p22-level-08" data-challenge-name="P2.2 Level 08 c-debugger2" id="challenges-header-8">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">P2.2 Level 08 c-debugger2</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                337 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-8" class="collapse" aria-labelledby="module-content-header-9" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwn-compsci/intro-to-programming-languages/edit/main/22-proj-arrays-strings/module.yml#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <p>📋 <strong>Requirements available in VS Code!</strong></p>
+      <p>Click the <strong>"Requirements"</strong> button in the status bar (bottom right of VS Code) or use the keyboard shortcut <strong>Ctrl+Shift+Q</strong> to view the full assignment requirements.</p>
+      <p><img src="https://cse240.com/requirements.jpg" alt="Requirements button location" style="max-width: 600px;"/></p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-9">
+                <input id="module" type="hidden" value="22-proj-arrays-strings">
+                <input id="challenge" type="hidden" value="p22-level-08">
+                <input id="challenge-id" type="hidden" value="17759">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d5bdb4b6beb0a795b1babfbafba5a2bbfbb6bab9b9b0b2b0">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="17759" data-challenge-name="P2.2 Level 08 c-debugger2">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/intro-to-programming-languages/surveys/22-proj-arrays-strings/p22-level-08" id="survey-notification" class="survey alert-dismissable w-100 survey-id-17759" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-10">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-9" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-9" aria-expanded="false" aria-controls="challenges-body-9">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="9" data-challenge-id="p22-level-09" data-challenge-name="P2.2 Level 09 c-grind" id="challenges-header-9">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">P2.2 Level 09 c-grind</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                336 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-9" class="collapse" aria-labelledby="module-content-header-10" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                  <a href="https://github.com/pwn-compsci/intro-to-programming-languages/edit/main/22-proj-arrays-strings/module.yml#L1"
+                     target="_blank"
+                     class="github-edit-link"
+                     title="Edit on GitHub">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                
+                <p>📋 <strong>Requirements available in VS Code!</strong></p>
+      <p>Click the <strong>"Requirements"</strong> button in the status bar (bottom right of VS Code) or use the keyboard shortcut <strong>Ctrl+Shift+Q</strong> to view the full assignment requirements.</p>
+      <p><img src="https://cse240.com/requirements.jpg" alt="Requirements button location" style="max-width: 600px;"/></p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-9">
+                <input id="module" type="hidden" value="22-proj-arrays-strings">
+                <input id="challenge" type="hidden" value="p22-level-09">
+                <input id="challenge-id" type="hidden" value="17760">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f890999b939d8ab89c979297d6888f96d69b9794949d9f9d">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="17760" data-challenge-name="P2.2 Level 09 c-grind">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/intro-to-programming-languages/surveys/22-proj-arrays-strings/p22-level-09" id="survey-notification" class="survey alert-dismissable w-100 survey-id-17760" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+  </div>
+
+  <br>
+  
+
+  
+
+  <h2 class="row" id="scoreboard-heading">30-Day Scoreboard:</h2>
+  <p>This scoreboard reflects solves for challenges in this module after the module launched in this dojo.</p>
+  
+  <div class="scoreboard-controls row">
+  <p>
+  <span id="scoreboard-control-week"><a href="javascript:loadScoreboard(7, 1)">7-Day</a></span> |
+  <span id="scoreboard-control-month"><a href="javascript:loadScoreboard(30, 1)">30-Day</a></span> |
+  <span id="scoreboard-control-all"><a href="javascript:loadScoreboard(0, 1)">All-Time</a></span>
+  </p>
+</div>
+<div class="scoreboard row">
+  <div class="col-md-12 p-0">
+    <table class="table table-striped">
+	    <thead>
+	      <tr>
+	        <td scope="col" class="col-md-1"><b>Rank</b></td>
+          <td scope="col" class="col-md-1"></td>
+	        <td scope="col" class="col-md-4"><b>Hacker</b></td>
+	        <td scope="col" class="col-md-4"><b>Badges</b></td>
+	        <td scope="col" class="col-md-1"></td>
+	        <td scope="col" class="col-md-1"><b>Score</b></td>
+	      </tr>
+	    </thead>
+	    <tbody id="scoreboard">
+	    </tbody>
+    </table>
+  </div>
+  <div>
+    <ul id="scoreboard-pages" class="p-0">
+    </ul>
+  </div>
+</div>
+
+  
+
+</div>
+
+    </main>
+
+    <footer class="footer">
+      <div class="container text-center" style="line-height: 20px; opacity: 0.7">
+        <small>
+          Powered by <strong>pwn.college</strong><br>
+          Interested in dedicated training or tailored services for your organization?
+          <a href="https://llc.pwn.college/">Find out more</a>.
+        </small>
+      </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="/themes/dojo_theme/static/js/vendor.bundle.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/core.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/helpers.min.js?d=0cd72d60"></script>
+
+    
+    <script defer src="/themes/dojo_theme/static/js/pages/main.min.js?d=0cd72d60"></script>
+    
+
+    <script defer src="/themes/dojo_theme/static/js/dojo/util.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/dojo/navbar.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/dojo/popup.min.js?d=0cd72d60"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+
+    
+<script defer src="/themes/dojo_theme/static/js/dojo/actionbar.min.js?d=0cd72d60"></script>
+<script defer src="/themes/dojo_theme/static/js/dojo/challenges.min.js?d=0cd72d60"></script>
+<script defer onload="loadScoreboard(30, 1);" src="/themes/dojo_theme/static/js/dojo/scoreboard.min.js?d=0cd72d60"></script>
+
+
+
+    <script>
+      window.addEventListener('load', function() {
+        if (typeof renderMathInElement !== 'undefined') {
+          renderMathInElement(document.body, {
+            delimiters: [
+              {left: '\\[', right: '\\]', display: true},
+              {left: '\\(', right: '\\)', display: false}
+            ],
+            throwOnError: false,
+            strict: false,
+            ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          });
+        }
+      });
+    </script>
+
+    
+
+    
+
+    
+    
+  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c44fc890c503975',t:'MTc2OTQ4MjY4Ng=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

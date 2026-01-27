@@ -1,0 +1,2384 @@
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>pwn.college</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="pwn.college">
+    <meta property="og:description" content="Learn to Hack!">
+    <meta property="og:image" content="https://pwn.college/themes/dojo_theme/static/img/dojo/ninja.png?d=0cd72d60">
+
+    <link rel="icon" href="/themes/dojo_theme/static/img/favicon.png?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/fonts.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/main.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/core.min.css?d=0cd72d60">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceMono-Regular.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceMono-Bold.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceGrotesk-VariableFont_wght.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <style>
+      @font-face {
+        font-family: 'Space Mono';
+        src: url("/themes/dojo_theme/static/font/SpaceMono-Regular.ttf?d=0cd72d60") format('truetype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Space Mono';
+        src: url("/themes/dojo_theme/static/font/SpaceMono-Bold.ttf?d=0cd72d60") format('truetype');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Space Grotesk';
+        src: url("/themes/dojo_theme/static/font/SpaceGrotesk-VariableFont_wght.ttf?d=0cd72d60") format('truetype');
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/custom.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    
+
+    
+
+<style>
+.scroll-disabled {
+  overflow: hidden;
+}
+
+.challenge-workspace {
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+
+.challenge-iframe {
+  display: block;
+  width: 100%;
+  min-height: 60vh;
+  aspect-ratio: 16/9;
+  border: 0;
+}
+
+.challenge-iframe-fs {
+  aspect-ratio: unset !important;
+  height: calc(100vh - 2.5em - 10px);
+}
+
+.challenge-init {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.challenge-hidden {
+  visibility: hidden;
+  max-height: 0 !important;
+}
+
+.workspace-fullscreen {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  z-index: 1031;/* Navbar z-index + 1 */
+  bottom: -16px;
+  right: 0;
+  background-color: #111;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.workspace-fullscreen .iframe-wrapper {
+  display: flex;
+}
+
+.workspace-ssh {
+  padding: 1em;
+  margin-bottom: 1em;
+  background-color: var(--foreground);
+  border-radius: 0.5em;
+}
+
+
+.challenge-hidden .workspace-ssh {
+  display: none !important;
+}
+</style>
+
+
+
+
+    
+    <script type="text/javascript">
+      var init = {
+	  'urlRoot': "",
+	  'csrfNonce': "a5535ce4910028c06502f57e236bf020d405041ffaeff23114a34a0de0a3d309",
+	  'userMode': "users",
+	  'userId': 0,
+	  'start': null,
+	  'end': null,
+	  'theme_settings': null,
+          'dojo': "gca-ctf~8018193d",
+          'module': "pwn-re-1"
+      }
+    </script>
+    
+  </head>
+  <body>
+    
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top">
+  <div class="container">
+    <a href="/" class="brand-mono-bold wordmark">
+      
+      <span class="brand-white">pwn</span><span class="brand-dot-white">.</span><span class="brand-white">college</span>
+      
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#base-navbars"
+            aria-controls="base-navbars" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="base-navbars">
+      <div class="d-none d-md-block" style="border-left: 2px solid white; height: 20px; margin: 0 20px;"></div>
+      <ul class="navbar-nav mr-auto">
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/dojos">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Dojos">
+      <i class="fas fa-torii-gate d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-torii-gate pr-1"></i>
+      
+      Dojos
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/workspace">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Workspace">
+      <i class="fas fa-desktop d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-desktop pr-1"></i>
+      
+      Workspace
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/sensai.html" target="_blank">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Help">
+      <i class="fas fa-question d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-question pr-1"></i>
+      
+      Help
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="https://discord.gg/pwncollege" target="_blank">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Chat">
+      <i class="fas fa-comments d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-comments pr-1"></i>
+      
+      Chat
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="#">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Search">
+      <i class="fas fa-search d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-search pr-1"></i>
+      
+      Search
+      
+    </span>
+  </a>
+</li>
+
+      </ul>
+      <hr class="d-sm-flex d-md-flex d-lg-none">
+      <ul class="navbar-nav ml-md-auto d-block d-sm-flex d-md-flex">
+        
+        
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/register.html">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Register">
+      <i class="fas fa-user-plus d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-user-plus pr-1"></i>
+      
+      Register
+      
+    </span>
+  </a>
+</li>
+
+        
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/login.html">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Login">
+      <i class="fas fa-sign-in-alt d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-sign-in-alt pr-1"></i>
+      
+      Login
+      
+    </span>
+  </a>
+</li>
+
+        
+
+        <li class="nav-item">
+          <a class="nav-link close-link" href="javascript:void(0)">
+            <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Hide Navbar">
+              <i class="fas caret-up d-none d-md-block d-lg-none"></i>
+            </span>
+            <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+              <i class="fas fa-caret-up pr-1"></i>
+              <span class="d-lg-none">Hide Navbar</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="navbar-pulldown">
+  <i class="fas fa-fw fa-caret-down" title="Show navigation bar"></i>
+</div>
+
+<div id="searchModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document" style="margin: 10vh auto; max-width: 650px; width: 80%;">
+    <div class="modal-content bg-dark text-white rounded-lg shadow-lg">
+      <div class="modal-body p-4">
+        <form id="searchForm">
+          <div class="input-group input-group-lg">
+            <div class="input-group-prepend">
+              <span class="input-group-text bg-secondary border-0 text-white">
+                <i class="fas fa-search"></i>
+              </span>
+            </div>
+            <input type="text" id="searchInput" class="form-control bg-dark text-white border-0" placeholder="Search..." autocomplete="off">
+            <div class="input-group-append">
+              <button type="button" class="btn btn-outline-light" data-dismiss="modal">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <div id="searchResults" class="mt-3">
+          <!-- Results will be inserted here dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <main role="main">
+      
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="brand-white brand-mono-bold">PWN/RE</h1>
+    <br>
+    <h2 class="module-dojo"><a class="brand-white brand-mono-bold" href="/dojo/gca-ctf~8018193d">GCA CTF<span class="brand-dot">.</span></a></h2>
+
+    
+  </div>
+</div>
+<div class="container">
+
+  
+
+  
+  
+
+  
+
+  <div class="accordion" id="module-content">
+    
+    
+      
+        
+        
+          <br>
+          <h2>Challenges</h2>
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-2">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-1" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-1" aria-expanded="false" aria-controls="challenges-body-1">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="1" data-challenge-id="buffer-overflow" data-challenge-name="Buffer Overflow" id="challenges-header-1">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Buffer Overflow</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                49 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-1" class="collapse" aria-labelledby="module-content-header-2" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                <h2>Challenge Description</h2>
+<p>Software vulnerabilities are everywhere! Don't let the futuristic date of 2025 mislead you; headlines abound of software vulnerabliities plaguing even the most advanced companies. This challenge will introduce you to the humble buffer overflow, but don't let its simplicty fool you! It is the bread and butter of even sophisticated attacks used today.</p>
+<h2>How it Works</h2>
+<p>Run the program <code>buffer_overflow</code> and follow the prompts. You will need to enter a very specific number of characters to cause the buffer overflow to occur. This program is written so that once you reach the correct number of characters, it will automatically trigger the vulnerability: no debuggers necessary for this one! In &quot;the real world&quot; entering the correct number of characters would only be the first step, then you'd have to find the memory address you want to go to; but that is a challenge for a different day.</p>
+<h2>When You're Done</h2>
+<p>You are done when the <code>buffer_overflow</code> program emits a string; there will be no mistaking what is the correct string. When you've received it, copy the string and run <code>python verify</code> and paste the value at the prompt. You will receive a flag that you will use in pwn.college to complete the challenge.</p>
+<h2>Challenge Steps</h2>
+<ol>
+<li>Open a terminal</li>
+<li>Run the <code>buffer_overflow</code> program (type the name and press Enter)</li>
+<li>Keep trying to enter a different number of characters, until you trigger the overflow!</li>
+<li>Run <code>verify</code> or <code>/challenge/verify</code>, enter the string you found with the overflow, and receive your flag!</li>
+</ol>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="pwn-re-1">
+                <input id="challenge" type="hidden" value="buffer-overflow">
+                <input id="challenge-id" type="hidden" value="19065">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="89e1e8eae2ecfbc9ede6e3e6a7f9fee7a7eae6e5e5eceeec">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="19065" data-challenge-name="Buffer Overflow">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/gca-ctf~8018193d/surveys/pwn-re-1/buffer-overflow" id="survey-notification" class="survey alert-dismissable w-100 survey-id-19065" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-3">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-2" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-2" aria-expanded="false" aria-controls="challenges-body-2">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="2" data-challenge-id="magic-number" data-challenge-name="Magic Number" id="challenges-header-2">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Magic Number</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                45 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-2" class="collapse" aria-labelledby="module-content-header-3" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                <h2>Challenge Description</h2>
+<p>This challenge contains four different numbers that are randomly chosen as the 'secret' number. Each execution of the program chooses a different one of the four as the 'secret' number. The goal of this challenge is to enter the correct 'secret' number and retrieve the token. There are several techniques you can use to get the correct number(s), which one you learn is up to you!</p>
+<h2>How it Works</h2>
+<p>Run the program <code>magic_numbers</code> and you will see the prompt <code>Please guess the number between 1 and 1000:</code>. Enter a number and you will either have guessed correctly or incorrectly! Guessing correctly will result in a token printing to the screen that you must use to retrieve the flag. And remember, each time you run the program it will select a different number! So be persistent! You could have the right number, but it wasn't selected this time.</p>
+<h3>Strings</h3>
+<p>One of the easiest ways to retrieve information from a program in Linux is to use the command line tool <code>strings</code>. This command analyzes the program and prints all of the strings to the screen: but beware! What a computer thinks is a string isn't always what humans think of as strings. To use this command you must provide the program to retrieve strings from: <code>strings magic_numbers</code> for example. This challenge not only contains four different numbers, but it also contains strings that represent those numbers. For example, if the four numbers were <code>0, 1, 2, 3</code> there would be four strings <code>zero, one, two thee</code> in the output from <code>strings</code>. But there are lots of other 'strings' in the program too, so it will take some time to find the correct values.</p>
+<h3>GNU Debugger</h3>
+<p>One of the more challenging, but precise, ways to solve this challenge is to use a debugger. Debuggers are very sophisticated and complex tools that allow people to see <em>exactly</em> how a program makes decisions. Using debuggers requires a level of knowledge that is not within the scope of this training, but can with a little know-how quickly find the solution. GDB is a debugger available in Linux that can inspect <code>magic_numbers</code> and find the exact function call that selects and returns one of the 'secret' numbers. A very basic introduction can be found <a href="web.eecs.umich.edu/~sugih/pointers/summary.html">here</a>.</p>
+<p>Debuggers are very powerful tools. Using a debugger you can look at the code for the entire program, not just the code executing. In this way, you could find the token that is displayed when you enter the correct number, even if you didn't!</p>
+<h2>When You're Done</h2>
+<p>You are done when the <code>magic_numbers</code> program emits a string; there will be no mistaking what is the correct string. When you've received it, copy the string and run <code>python verify</code> and paste the value at the prompt. You will receive a flag that you will use in pwn.college to complete the challenge.</p>
+<h2>Challenge Steps</h2>
+<ol>
+<li>Open a terminal</li>
+<li>Use <code>strings</code> or <code>gdb</code> on the <code>/challenge/magic_numbers</code> file to help you find the magic number (note that the <code>/challenge</code> path may be necessary when using tools)</li>
+<li>Run the <code>magic_numbers</code> program, and enter the magic number to get the string</li>
+<li>Run <code>verify</code> and enter the string to receive your flag!</li>
+</ol>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="pwn-re-1">
+                <input id="challenge" type="hidden" value="magic-number">
+                <input id="challenge-id" type="hidden" value="19066">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bdd5dcded6d8cffdd9d2d7d293cdcad393ded2d1d1d8dad8">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="19066" data-challenge-name="Magic Number">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/gca-ctf~8018193d/surveys/pwn-re-1/magic-number" id="survey-notification" class="survey alert-dismissable w-100 survey-id-19066" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-4">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-3" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-3" aria-expanded="false" aria-controls="challenges-body-3">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="3" data-challenge-id="reverse-password-plaintext" data-challenge-name="Reverse Password Plaintext" id="challenges-header-3">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Reverse Password Plaintext</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                36 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-3" class="collapse" aria-labelledby="module-content-header-4" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                <h2>Challenge Description</h2>
+<p>This challenge focuses on your ability to follow the program's call structure and identify the final password. You have access to the source code of this python program, so the challenge is not deciphering the output, but understanding the source code.</p>
+<h2>How it Works</h2>
+<p>There are four functions utilized in this program to generate the password. Each function uses some variation of the two lists (<code>alphabet</code> and <code>special_char</code>) to create the password. Attention to detail is the key to solving this challenge! You can run the program to see what the initial word lists look like.</p>
+<h2>When You're Done</h2>
+<p>When you have finished your analysis, follow the steps in the Challenge Steps section below.</p>
+<h2>Challenge Steps</h2>
+<ol>
+<li>Select the &quot;VSCode Workspace&quot; option from the challenge menu.</li>
+<li>Open a file by pressing <code>ctrl</code>+<code>o</code> and in the text field type <code>/challenge/plaintextPassword.py</code>.</li>
+<li>Read the source code to identify the password.</li>
+<li>When you have the password open a terminal by pressing <code>ctrl</code>+<code>~</code> and in the terminal type <code>cd /challenge</code>.</li>
+<li>Run <code>verify</code> and enter the password to retrieve the flag.</li>
+</ol>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="pwn-re-1">
+                <input id="challenge" type="hidden" value="reverse-password-plaintext">
+                <input id="challenge-id" type="hidden" value="19067">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c3aba2a0a8a6b183a7aca9acedb3b4adeda0acafafa6a4a6">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="19067" data-challenge-name="Reverse Password Plaintext">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/gca-ctf~8018193d/surveys/pwn-re-1/reverse-password-plaintext" id="survey-notification" class="survey alert-dismissable w-100 survey-id-19067" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-5">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-4" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-4" aria-expanded="false" aria-controls="challenges-body-4">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="4" data-challenge-id="reverse-password-backward" data-challenge-name="Reverse Password Backward" id="challenges-header-4">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Reverse Password Backward</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                32 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-4" class="collapse" aria-labelledby="module-content-header-5" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                <h2>Challenge Description</h2>
+<p>This challenge is very similar to <code>reversePassword.py</code> but with an added twist. You must follow the program's call structure again (remember to pay attention to details) but a new wrinkle is introduced.</p>
+<h2>How it Works</h2>
+<p>Again there are functions that you must analyze to find the password, however the lists containing the characters are occasionally reversed! In Python this is represented by the syntax <code>[::-1]</code>. This is used to reverse the contents of a list; an example is shown below.</p>
+<pre><code># The list is first created
+myList = list((1, 2, 3))
+&gt;&gt;&gt; [1, 2, 3]
+
+# Then the list is reversed
+myList[::-1]
+&gt;&gt;&gt; [3, 2, 1]
+
+# The revered contents can be stored in a new variable
+reversedList = myList[::-1]
+reversedList
+&gt;&gt;&gt; [3, 2, 1]
+</code></pre>
+<p>There are four functions utilized in this program to generate the password. Each function uses some variation of the two lists (<code>alphabet</code> and <code>special_char</code>) to create the password. Once again, attention to detail is the key to solving this challenge. Running the program will output the starting lists.</p>
+<h2>When You're Done</h2>
+<p>When you have finished your analysis, follow the steps in the Challenge Steps section below.</p>
+<h2>Challenge Steps</h2>
+<ol>
+<li>Select the &quot;VSCode Workspace&quot; option from the challenge menu.</li>
+<li>Open a file by pressing <code>ctrl</code>+<code>o</code> and in the text field type <code>/challenge/backwardPassword.py</code>.</li>
+<li>Read the source code to identify the password.</li>
+<li>When you have the password open a terminal by pressing <code>ctrl</code>+<code>~</code> and in the terminal type <code>cd /challenge</code>.</li>
+<li>Run <code>verify</code> and enter the password to retrieve the flag.</li>
+</ol>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="pwn-re-1">
+                <input id="challenge" type="hidden" value="reverse-password-backward">
+                <input id="challenge-id" type="hidden" value="19068">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="630b020008061123070c090c4d13140d4d000c0f0f060406">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="19068" data-challenge-name="Reverse Password Backward">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/gca-ctf~8018193d/surveys/pwn-re-1/reverse-password-backward" id="survey-notification" class="survey alert-dismissable w-100 survey-id-19068" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-6">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-5" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-5" aria-expanded="false" aria-controls="challenges-body-5">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="5" data-challenge-id="reverse-password-cipher" data-challenge-name="Reverse Password Cipher" id="challenges-header-5">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Reverse Password Cipher</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                29 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-5" class="collapse" aria-labelledby="module-content-header-6" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                <h2>Challenge Description</h2>
+<p>This challenge is more complex than the other reversing password challenges. This time a cipher alphabet is used to encipher a plaintext phrase. Your challenge is to identify what cipher alphabet was used to generate the cipher text and discover the plaintext phrase. This phrase is used to retrieve the flag.</p>
+<h2>How it Works</h2>
+<p>Substitution ciphers are one of the oldest ways to encode text. This challenges uses a simple rotation of the alphabet to generate a 'cipher'bet that encodes plaintext to generate ciphertext. This challenge provides a way to generate alphabets to decipher the ciphertext back into plaintext. It also allows you to play with different substitution ciphers and see how different plaintext is encoded into ciphertext.</p>
+<h3>Steps To Substitution</h3>
+<p>First you must have an alphabet to generate text from. This can be the standard 26-letter alphabet taught in the U.S., or it can be expanded to include special characters like '*', '?', or '}': the sky is the limit to what constitutes an alphabet! The important thing is that the same alphabet used to generate your plaintext <em>must</em> be used in the enciphering and deciphering phases, discussed later.</p>
+<p>Lets assume you want to encipher the phrase &quot;hello world!&quot;. The letters that <em>must</em> constitute your alphabet are: 'd', 'e', 'h', 'l', 'o', 'r', 'w', '!', ' '. Notice how every letter used in the phrase &quot;hello world!&quot; appears exactly once in the alphabet, including spaces. We will use the full alphabet, and add the special characters to the end for simplicity. This results in the alphabet: <code>'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',' ','!'</code></p>
+<p>If we wanted to create a cipher, we can rotate our alphabet by a number to generate a <strong>new</strong> alphabet, the cipherbet, that we can use to generate our ciphertext. Lets say we rotate our alphabet to the right by 2, this would generate the cipherbet <code>' ','!','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'</code>. Notice how the last 2 characters rotate around to the front: this is very important! No letters can be lost otherwise we couldn't encipher them!</p>
+<p>With the cipherbet generated, we can generate our ciphertext. Simply line up the two alphabets, and follow the plaintext letter down to find its cipherbet counterpart. In this way, &quot;h&quot; in the alphabet translates to &quot;f&quot; in the cipherbet, &quot;e&quot; to &quot;c&quot;, and so on until you get the ciphertext &quot;fcjjmyumpjbz&quot;.</p>
+<pre><code>alphabet:  'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',' ','!'
+                            |           |
+                            2           1
+                            |           |
+cipherbet: ' ','!','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'
+</code></pre>
+<p>To go from the ciphertext to the plaintext, you must know the number of rotations used to generate the cipherbet. If you don't, you must guess-and-check until you find the correct cipherbet. Then the process works in reverse. Line up the two alphabets and go from the cipherbet letter to the alphabet letter until you get the plaintext.</p>
+<h2>When You're Done</h2>
+<p>Your goal is to identify how many times the alphabet must be rotated to generate the correct cipherbet, which is then used to decode the ciphertext. The ciphertext is comprised of human-readable text: there will be no mistaking the correct passphrase when it is retrieved. Once you have obtained the plaintext passphrase, enter it into the <code>verify.py</code> script to retrieve the flag.</p>
+<h2>Challenge Steps</h2>
+<h2>Challenge Steps</h2>
+<ol>
+<li>Select the &quot;VSCode Workspace&quot; option from the challenge menu.</li>
+<li>Open a file by pressing <code>ctrl</code>+<code>o</code> and in the text field type <code>/challenge/cipher.py</code>.</li>
+<li>Read the source code to identify the password.</li>
+<li>When you have the password open a terminal by pressing <code>ctrl</code>+<code>~</code> and in the terminal type <code>cd /challenge</code>.</li>
+<li>Run <code>verify</code> and enter the password to retrieve the flag.</li>
+</ol>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="pwn-re-1">
+                <input id="challenge" type="hidden" value="reverse-password-cipher">
+                <input id="challenge-id" type="hidden" value="19069">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e28a8381898790a2868d888dcc92958ccc818d8e8e878587">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="19069" data-challenge-name="Reverse Password Cipher">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/gca-ctf~8018193d/surveys/pwn-re-1/reverse-password-cipher" id="survey-notification" class="survey alert-dismissable w-100 survey-id-19069" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-7">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-6" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-6" aria-expanded="false" aria-controls="challenges-body-6">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="6" data-challenge-id="icky-input" data-challenge-name="Icky Input" id="challenges-header-6">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Icky Input</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                30 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-6" class="collapse" aria-labelledby="module-content-header-7" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                <h2>Challenge Description</h2>
+<p>The Greatest Calculator Ever™ is so good that it might even be able to do things that aren't math...</p>
+<h2>Challenge Steps</h2>
+<ol>
+<li>Navigate to the <code>/challenge</code> directory</li>
+<li>Run <code>./verify</code></li>
+<li>Find a way to print the flag!</li>
+</ol>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="pwn-re-1">
+                <input id="challenge" type="hidden" value="icky-input">
+                <input id="challenge-id" type="hidden" value="19294">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5d353c3e36382f1d39323732732d2a33733e323131383a38">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="19294" data-challenge-name="Icky Input">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/gca-ctf~8018193d/surveys/pwn-re-1/icky-input" id="survey-notification" class="survey alert-dismissable w-100 survey-id-19294" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+  </div>
+
+  <br>
+  
+
+  
+
+  <h2 class="row" id="scoreboard-heading">30-Day Scoreboard:</h2>
+  <p>This scoreboard reflects solves for challenges in this module after the module launched in this dojo.</p>
+  
+  <div class="scoreboard-controls row">
+  <p>
+  <span id="scoreboard-control-week"><a href="javascript:loadScoreboard(7, 1)">7-Day</a></span> |
+  <span id="scoreboard-control-month"><a href="javascript:loadScoreboard(30, 1)">30-Day</a></span> |
+  <span id="scoreboard-control-all"><a href="javascript:loadScoreboard(0, 1)">All-Time</a></span>
+  </p>
+</div>
+<div class="scoreboard row">
+  <div class="col-md-12 p-0">
+    <table class="table table-striped">
+	    <thead>
+	      <tr>
+	        <td scope="col" class="col-md-1"><b>Rank</b></td>
+          <td scope="col" class="col-md-1"></td>
+	        <td scope="col" class="col-md-4"><b>Hacker</b></td>
+	        <td scope="col" class="col-md-4"><b>Badges</b></td>
+	        <td scope="col" class="col-md-1"></td>
+	        <td scope="col" class="col-md-1"><b>Score</b></td>
+	      </tr>
+	    </thead>
+	    <tbody id="scoreboard">
+	    </tbody>
+    </table>
+  </div>
+  <div>
+    <ul id="scoreboard-pages" class="p-0">
+    </ul>
+  </div>
+</div>
+
+  
+
+</div>
+
+    </main>
+
+    <footer class="footer">
+      <div class="container text-center" style="line-height: 20px; opacity: 0.7">
+        <small>
+          Powered by <strong>pwn.college</strong><br>
+          Interested in dedicated training or tailored services for your organization?
+          <a href="https://llc.pwn.college/">Find out more</a>.
+        </small>
+      </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="/themes/dojo_theme/static/js/vendor.bundle.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/core.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/helpers.min.js?d=0cd72d60"></script>
+
+    
+    <script defer src="/themes/dojo_theme/static/js/pages/main.min.js?d=0cd72d60"></script>
+    
+
+    <script defer src="/themes/dojo_theme/static/js/dojo/util.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/dojo/navbar.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/dojo/popup.min.js?d=0cd72d60"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+
+    
+<script defer src="/themes/dojo_theme/static/js/dojo/actionbar.min.js?d=0cd72d60"></script>
+<script defer src="/themes/dojo_theme/static/js/dojo/challenges.min.js?d=0cd72d60"></script>
+<script defer onload="loadScoreboard(30, 1);" src="/themes/dojo_theme/static/js/dojo/scoreboard.min.js?d=0cd72d60"></script>
+
+
+
+    <script>
+      window.addEventListener('load', function() {
+        if (typeof renderMathInElement !== 'undefined') {
+          renderMathInElement(document.body, {
+            delimiters: [
+              {left: '\\[', right: '\\]', display: true},
+              {left: '\\(', right: '\\)', display: false}
+            ],
+            throwOnError: false,
+            strict: false,
+            ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          });
+        }
+      });
+    </script>
+
+    
+
+    
+
+    
+    
+  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c44fda619703975',t:'MTc2OTQ4MjczMg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

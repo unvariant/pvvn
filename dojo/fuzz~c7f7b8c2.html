@@ -1,0 +1,734 @@
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>pwn.college</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="pwn.college">
+    <meta property="og:description" content="Learn to Hack!">
+    <meta property="og:image" content="https://pwn.college/themes/dojo_theme/static/img/dojo/ninja.png?d=0cd72d60">
+
+    <link rel="icon" href="/themes/dojo_theme/static/img/favicon.png?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/fonts.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/main.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/core.min.css?d=0cd72d60">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceMono-Regular.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceMono-Bold.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceGrotesk-VariableFont_wght.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <style>
+      @font-face {
+        font-family: 'Space Mono';
+        src: url("/themes/dojo_theme/static/font/SpaceMono-Regular.ttf?d=0cd72d60") format('truetype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Space Mono';
+        src: url("/themes/dojo_theme/static/font/SpaceMono-Bold.ttf?d=0cd72d60") format('truetype');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Space Grotesk';
+        src: url("/themes/dojo_theme/static/font/SpaceGrotesk-VariableFont_wght.ttf?d=0cd72d60") format('truetype');
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/custom.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    
+    
+
+    
+    <script type="text/javascript">
+      var init = {
+	  'urlRoot': "",
+	  'csrfNonce': "a5535ce4910028c06502f57e236bf020d405041ffaeff23114a34a0de0a3d309",
+	  'userMode': "users",
+	  'userId': 0,
+	  'start': null,
+	  'end': null,
+	  'theme_settings': null,
+          'dojo': "fuzz~c7f7b8c2",
+          'module': ""
+      }
+    </script>
+    
+  </head>
+  <body>
+    
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top">
+  <div class="container">
+    <a href="/" class="brand-mono-bold wordmark">
+      
+      <span class="brand-white">pwn</span><span class="brand-dot-white">.</span><span class="brand-white">college</span>
+      
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#base-navbars"
+            aria-controls="base-navbars" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="base-navbars">
+      <div class="d-none d-md-block" style="border-left: 2px solid white; height: 20px; margin: 0 20px;"></div>
+      <ul class="navbar-nav mr-auto">
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/dojos">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Dojos">
+      <i class="fas fa-torii-gate d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-torii-gate pr-1"></i>
+      
+      Dojos
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/workspace">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Workspace">
+      <i class="fas fa-desktop d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-desktop pr-1"></i>
+      
+      Workspace
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/sensai.html" target="_blank">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Help">
+      <i class="fas fa-question d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-question pr-1"></i>
+      
+      Help
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="https://discord.gg/pwncollege" target="_blank">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Chat">
+      <i class="fas fa-comments d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-comments pr-1"></i>
+      
+      Chat
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="#">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Search">
+      <i class="fas fa-search d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-search pr-1"></i>
+      
+      Search
+      
+    </span>
+  </a>
+</li>
+
+      </ul>
+      <hr class="d-sm-flex d-md-flex d-lg-none">
+      <ul class="navbar-nav ml-md-auto d-block d-sm-flex d-md-flex">
+        
+        
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/register.html">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Register">
+      <i class="fas fa-user-plus d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-user-plus pr-1"></i>
+      
+      Register
+      
+    </span>
+  </a>
+</li>
+
+        
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/login.html">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Login">
+      <i class="fas fa-sign-in-alt d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-sign-in-alt pr-1"></i>
+      
+      Login
+      
+    </span>
+  </a>
+</li>
+
+        
+
+        <li class="nav-item">
+          <a class="nav-link close-link" href="javascript:void(0)">
+            <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Hide Navbar">
+              <i class="fas caret-up d-none d-md-block d-lg-none"></i>
+            </span>
+            <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+              <i class="fas fa-caret-up pr-1"></i>
+              <span class="d-lg-none">Hide Navbar</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="navbar-pulldown">
+  <i class="fas fa-fw fa-caret-down" title="Show navigation bar"></i>
+</div>
+
+<div id="searchModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document" style="margin: 10vh auto; max-width: 650px; width: 80%;">
+    <div class="modal-content bg-dark text-white rounded-lg shadow-lg">
+      <div class="modal-body p-4">
+        <form id="searchForm">
+          <div class="input-group input-group-lg">
+            <div class="input-group-prepend">
+              <span class="input-group-text bg-secondary border-0 text-white">
+                <i class="fas fa-search"></i>
+              </span>
+            </div>
+            <input type="text" id="searchInput" class="form-control bg-dark text-white border-0" placeholder="Search..." autocomplete="off">
+            <div class="input-group-append">
+              <button type="button" class="btn btn-outline-light" data-dismiss="modal">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <div id="searchResults" class="mt-3">
+          <!-- Results will be inserted here dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <main role="main">
+      
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="brand-white brand-mono-bold">Fuzz Dojo<span class="brand-dot">.</span></h1>
+  </div>
+</div>
+<div class="container">
+  <div>
+
+
+</div>
+
+  
+  <div>
+    
+    <p>Forum link: <a href="https://discord.com/channels/750635557666816031/1409993436328759328">https://discord.com/channels/750635557666816031/1409993436328759328</a></p>
+<ul>
+<li>
+<p>Jan 12, 2025 update: 30 individuals have completed the study, and there are no remaining gift cards available.</p>
+</li>
+<li>
+<p>Dec 5, 2025 update: 20 individuals have completed the study, and 10 gift cards ($50) are still available.</p>
+</li>
+</ul>
+<p>Fuzzing is a powerful automated technique that feeds a program many unexpected or malformed inputs and monitors it for crashes, hangs, or other anomalous behavior.  The Fuzz Dojo is a training program developed by an ASU PhD student to help you design and implement fuzz drivers via an online platform that streamlines the process. This program is part of a research study examining the effectiveness of these teaching tools. You’ll also gain hands-on experience with OSS-Fuzz, Google’s large-scale continuous fuzzing infrastructure for open-source software, giving you direct insight into real-world bug-finding workflows. OSS-Fuzz has been used successfully in over a thousand projects.  However, due to its limitations, only about 30% of the code is typically tested, leaving 70% unevaluated, which presents a significant opportunity for improvement.</p>
+<p>The Dojo is built around 11 optional training challenges designed to help you become comfortable with the platform and fuzz-driver workflow. While these are optional, they’re strongly recommended.  You should be comfortable reading and navigating C++ code. You’ll be assigned two open-source projects (roughly 1,500 to 22,000 LOC) and will search their codebases for suitable functions to fuzz and build fuzz drivers around. New fuzz drivers should increase the overall project code coverage by 5% or more. You also have the option to submit your work to Google for a monetary compensation of up to $10,000, as described in the training slides.</p>
+<p>This is a programming challenge. Fuzz drivers for these real-world challenges are typically between 30 to 200 LOC.  The Real-World Fuzzing module consists of four challenges:</p>
+<ul>
+<li>2 practice tasks (with full coding solutions included in the training slides)</li>
+<li>2 real-world-style tasks where you’ll write new fuzz drivers</li>
+</ul>
+<p>The first 30 participants to will be rewarded with a $50 Amazon gift card upon completion of the study.  Valid contact information required.  Limit 1 submission per person.</p>
+<p>Minimum requirements for the $50 award are:</p>
+<ol>
+<li>Consent Form Challenge</li>
+<li>Initial Survey - <a href="https://forms.gle/FWF1iEn9pLpkRMGq9">https://forms.gle/FWF1iEn9pLpkRMGq9</a></li>
+<li>Completion of all (4) Real-World Fuzzing Challenges (2 demo, 2 real)</li>
+<li>Exit Survey <a href="https://forms.gle/uG8yik8pXFRXQHSGA">https://forms.gle/uG8yik8pXFRXQHSGA</a></li>
+</ol>
+<p>To see how many people have completed the study, open the &quot;Real World Fuzzing&quot; module below and check on the &quot;All-Time&quot; scoreboard how many people have a score of 4.</p>
+<p>In the interest of this study's integrity, please refrain from exploiting any bugs or vulnerabilities in the platform discovered during testing.</p>
+
+  </div>
+  <br>
+  
+
+  <div class="row text-center">
+    
+    
+  </div>
+
+  <br>
+
+  
+  <h2 class="row">Award: <b>🐇</b></h2>
+  <br>
+  
+
+  
+  <h2 class="row">Stats</h2>
+  <div id="stats-dashboard" class="stats-dashboard">
+  <div class="stat-card">
+    <div class="stat-card-header">Dojo Stats</div>
+    <div class="stat-container">
+      <div class="stat-box">
+        <div class="stat-label">Total Solves</div>
+        <div class="stat-value">
+  <div class="stat-value">
+    948
+    
+      <span class="stat-trend trend-up">
+        ▲200%
+      </span>
+    
+  </div></div>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-label">Hacking Now</div>
+        <div class="stat-value">
+  <div class="stat-value">
+    1
+    
+      <span class="stat-trend trend-neutral"></span>
+    
+  </div></div>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-label">Unique Hackers</div>
+        <div class="stat-value">
+  <div class="stat-value">
+    228
+    
+      <span class="stat-trend trend-neutral"></span>
+    
+  </div></div>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-label">Challenges</div>
+        <div class="stat-value">
+  <div class="stat-value">
+    16
+    
+      <span class="stat-trend trend-neutral"></span>
+    
+  </div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-card-header">Activity History</div>
+    <div class="chart-container">
+      <canvas id="activity-chart"
+              data-labels='["Today", "1w ago", "1mo ago", "2mo ago"]'
+              data-solves='[3, 1, 6, 8]'
+              data-users='[1, 1, 2, 5]'>
+      </canvas>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-card-header">Recent Awardees</div>
+    <div class="recent-awards">
+      
+        
+        <div class="recent-item">
+          <a href="/hacker/49925" class="brand-mono">
+            SYS_exit
+          </a>
+          <div class="recent-time">
+              12/31/25 08:50 AM
+          </div>
+        </div>
+        
+        <div class="recent-item">
+          <a href="/hacker/118762" class="brand-mono">
+            Lovely
+          </a>
+          <div class="recent-time">
+              12/19/25 04:12 PM
+          </div>
+        </div>
+        
+        <div class="recent-item">
+          <a href="/hacker/3409" class="brand-mono">
+            kylma
+          </a>
+          <div class="recent-time">
+              12/18/25 03:39 PM
+          </div>
+        </div>
+        
+      
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-card-header">Recent Solves</div>
+    <div class="recent-activity">
+      
+        
+        <div class="recent-item">
+          Fix Broken Fuzzing Harness
+          <div class="recent-time">01/26/26 03:16 AM</div>
+        </div>
+        
+        <div class="recent-item">
+          Modify a Fuzzing Harness
+          <div class="recent-time">01/26/26 03:10 AM</div>
+        </div>
+        
+        <div class="recent-item">
+          Level 1.1 Practice
+          <div class="recent-time">01/25/26 07:18 PM</div>
+        </div>
+        
+        <div class="recent-item">
+          Level 1.0 Practice
+          <div class="recent-time">01/25/26 06:44 PM</div>
+        </div>
+        
+        <div class="recent-item">
+          OSS-Fuzz - Add new_fuzzer
+          <div class="recent-time">01/25/26 11:45 AM</div>
+        </div>
+        
+      
+    </div>
+  </div>
+</div>
+
+<script>
+function initializeChart() {
+  const chartCanvas = document.getElementById('activity-chart');
+  if (!chartCanvas || typeof Chart === 'undefined') {
+    setTimeout(initializeChart, 100);
+    return;
+  }
+
+  const parseData = (attr, fallback) => {
+    try {
+      const value = chartCanvas.dataset[attr];
+      return value ? JSON.parse(value) : fallback;
+    } catch (e) {
+      console.error(`Error parsing ${attr}:`, e);
+      return fallback;
+    }
+  };
+
+  const labels = parseData('labels', ['Today', '1w ago', '1mo ago', '2mo ago']);
+  const solvesData = parseData('solves', [0, 0, 0, 0]);
+  const usersData = parseData('users', [0, 0, 0, 0]);
+
+  // Chart.js config
+  Chart.defaults.color = '#ffffff';
+  Chart.defaults.font.family = "'Space Mono', 'JetBrains Mono', 'Consolas', monospace";
+  Chart.defaults.font.size = 9;
+
+  new Chart(chartCanvas.getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Daily Solves',
+          data: solvesData,
+          backgroundColor: 'rgba(120, 190, 32, 0.7)',
+          borderColor: '#78be20',
+          borderWidth: 1
+        },
+        {
+          label: 'Daily Users',
+          data: usersData,
+          backgroundColor: 'rgba(0, 163, 224, 0.7)',
+          borderColor: '#00a3e0',
+          borderWidth: 1
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {
+        intersect: false,
+        mode: 'index'
+      },
+      scales: {
+        x: {
+          grid: {
+            display: false
+          },
+          ticks: {
+            color: '#747474',
+            maxRotation: 25,
+            minRotation: 15
+          }
+        },
+        y: {
+          beginAtZero: true,
+          grid: {
+            color: 'rgba(72, 72, 72, 0.3)'
+          },
+          ticks: {
+            color: '#747474'
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          backgroundColor: 'rgba(0, 0, 0, 0.9)',
+          titleColor: '#ffffff',
+          bodyColor: '#ffffff',
+          borderColor: '#484848',
+          borderWidth: 1,
+          cornerRadius: 4,
+          padding: 8,
+          displayColors: true,
+          callbacks: {
+            title: function(context) {
+              return `${context[0].label}`;
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
+if (document.readyState === 'loading') {
+  if (!window.chartInitialized) {
+    window.chartInitialized = true;
+    document.addEventListener('DOMContentLoaded', initializeChart);
+  }
+} else {
+  initializeChart();
+}
+</script>
+  <div class="row"></div>
+
+  <br>
+
+  <h2 class="row">Modules</h2>
+  <br>
+  <ul class="card-list">
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/fuzz~c7f7b8c2/consent/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Consent Form</h4>
+        
+        <p class="card-text"><br>0 / 1<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/fuzz~c7f7b8c2/training/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Introduction to Fuzzing</h4>
+        
+        <p class="card-text">1 Hacking<br>0 / 11<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/fuzz~c7f7b8c2/exercises/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Real World Fuzzing</h4>
+        
+        <p class="card-text"><br>0 / 4<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+  </ul>
+
+  
+  <br>
+
+  <h2 class="row" id="scoreboard-heading">30-Day Scoreboard:</h2>
+  <br>
+  
+  <div class="scoreboard-controls row">
+  <p>
+  <span id="scoreboard-control-week"><a href="javascript:loadScoreboard(7, 1)">7-Day</a></span> |
+  <span id="scoreboard-control-month"><a href="javascript:loadScoreboard(30, 1)">30-Day</a></span> |
+  <span id="scoreboard-control-all"><a href="javascript:loadScoreboard(0, 1)">All-Time</a></span>
+  </p>
+</div>
+<div class="scoreboard row">
+  <div class="col-md-12 p-0">
+    <table class="table table-striped">
+	    <thead>
+	      <tr>
+	        <td scope="col" class="col-md-1"><b>Rank</b></td>
+          <td scope="col" class="col-md-1"></td>
+	        <td scope="col" class="col-md-4"><b>Hacker</b></td>
+	        <td scope="col" class="col-md-4"><b>Badges</b></td>
+	        <td scope="col" class="col-md-1"></td>
+	        <td scope="col" class="col-md-1"><b>Score</b></td>
+	      </tr>
+	    </thead>
+	    <tbody id="scoreboard">
+	    </tbody>
+    </table>
+  </div>
+  <div>
+    <ul id="scoreboard-pages" class="p-0">
+    </ul>
+  </div>
+</div>
+
+  
+
+  
+</div>
+
+    </main>
+
+    <footer class="footer">
+      <div class="container text-center" style="line-height: 20px; opacity: 0.7">
+        <small>
+          Powered by <strong>pwn.college</strong><br>
+          Interested in dedicated training or tailored services for your organization?
+          <a href="https://llc.pwn.college/">Find out more</a>.
+        </small>
+      </div>
+    </footer>
+
+    <script defer src="/themes/dojo_theme/static/js/vendor.bundle.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/core.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/helpers.min.js?d=0cd72d60"></script>
+
+    
+    <script defer src="/themes/dojo_theme/static/js/pages/main.min.js?d=0cd72d60"></script>
+    
+
+    <script defer src="/themes/dojo_theme/static/js/dojo/util.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/dojo/navbar.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/dojo/popup.min.js?d=0cd72d60"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+
+    
+<script defer onload="loadScoreboard(30, 1);" src="/themes/dojo_theme/static/js/dojo/scoreboard.min.js?d=0cd72d60"></script>
+<script defer src="/themes/dojo_theme/static/js/dojo/copy.min.js?d=0cd72d60"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <script>
+      window.addEventListener('load', function() {
+        if (typeof renderMathInElement !== 'undefined') {
+          renderMathInElement(document.body, {
+            delimiters: [
+              {left: '\\[', right: '\\]', display: true},
+              {left: '\\(', right: '\\)', display: false}
+            ],
+            throwOnError: false,
+            strict: false,
+            ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          });
+        }
+      });
+    </script>
+
+    
+
+    
+
+    
+    
+  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c44f8e699ed3975',t:'MTc2OTQ4MjUzOA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

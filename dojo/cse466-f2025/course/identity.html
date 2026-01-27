@@ -1,0 +1,904 @@
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>pwn.college</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="pwn.college">
+    <meta property="og:description" content="Learn to Hack!">
+    <meta property="og:image" content="https://pwn.college/themes/dojo_theme/static/img/dojo/ninja.png?d=0cd72d60">
+
+    <link rel="icon" href="/themes/dojo_theme/static/img/favicon.png?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/fonts.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/main.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/core.min.css?d=0cd72d60">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceMono-Regular.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceMono-Bold.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceGrotesk-VariableFont_wght.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <style>
+      @font-face {
+        font-family: 'Space Mono';
+        src: url("/themes/dojo_theme/static/font/SpaceMono-Regular.ttf?d=0cd72d60") format('truetype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Space Mono';
+        src: url("/themes/dojo_theme/static/font/SpaceMono-Bold.ttf?d=0cd72d60") format('truetype');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Space Grotesk';
+        src: url("/themes/dojo_theme/static/font/SpaceGrotesk-VariableFont_wght.ttf?d=0cd72d60") format('truetype');
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/custom.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    
+<style>
+  .setup-complete::before, .setup-incomplete::before, .setup-unknown::before {
+      position: absolute;
+      left: 10px;
+      font-size: 24px;
+      line-height: 1;
+  }
+
+  .setup-incomplete::before {
+    content: '✗';
+    color: rgb(244, 67, 54);
+  }
+
+  .setup-complete::before {
+    content: '✓';
+    color: rgb(76, 175, 80);
+  }
+
+  .setup-unknown::before {
+    content: '?';
+    color: rgb(255, 193, 7);
+  }
+</style>
+
+
+    
+    <script type="text/javascript">
+      var init = {
+	  'urlRoot': "",
+	  'csrfNonce': "b3494b98d2eb382109468c6d57a2b7c65c80dd6b380026df89a9796c31bdf9d5",
+	  'userMode': "users",
+	  'userId': 0,
+	  'start': null,
+	  'end': null,
+	  'theme_settings': null,
+          'dojo': "cse466-f2025",
+          'module': ""
+      }
+    </script>
+    
+  </head>
+  <body>
+    
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top">
+  <div class="container">
+    <a href="/" class="brand-mono-bold wordmark">
+      
+      <span class="brand-white">pwn</span><span class="brand-dot-white">.</span><span class="brand-white">college</span>
+      
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#base-navbars"
+            aria-controls="base-navbars" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="base-navbars">
+      <div class="d-none d-md-block" style="border-left: 2px solid white; height: 20px; margin: 0 20px;"></div>
+      <ul class="navbar-nav mr-auto">
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/dojos">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Dojos">
+      <i class="fas fa-torii-gate d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-torii-gate pr-1"></i>
+      
+      Dojos
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/workspace">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Workspace">
+      <i class="fas fa-desktop d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-desktop pr-1"></i>
+      
+      Workspace
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/sensai.html" target="_blank">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Help">
+      <i class="fas fa-question d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-question pr-1"></i>
+      
+      Help
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="https://discord.gg/pwncollege" target="_blank">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Chat">
+      <i class="fas fa-comments d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-comments pr-1"></i>
+      
+      Chat
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="#">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Search">
+      <i class="fas fa-search d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-search pr-1"></i>
+      
+      Search
+      
+    </span>
+  </a>
+</li>
+
+      </ul>
+      <hr class="d-sm-flex d-md-flex d-lg-none">
+      <ul class="navbar-nav ml-md-auto d-block d-sm-flex d-md-flex">
+        
+        
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/register.html">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Register">
+      <i class="fas fa-user-plus d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-user-plus pr-1"></i>
+      
+      Register
+      
+    </span>
+  </a>
+</li>
+
+        
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/login.html">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Login">
+      <i class="fas fa-sign-in-alt d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-sign-in-alt pr-1"></i>
+      
+      Login
+      
+    </span>
+  </a>
+</li>
+
+        
+
+        <li class="nav-item">
+          <a class="nav-link close-link" href="javascript:void(0)">
+            <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Hide Navbar">
+              <i class="fas caret-up d-none d-md-block d-lg-none"></i>
+            </span>
+            <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+              <i class="fas fa-caret-up pr-1"></i>
+              <span class="d-lg-none">Hide Navbar</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="navbar-pulldown">
+  <i class="fas fa-fw fa-caret-down" title="Show navigation bar"></i>
+</div>
+
+<div id="searchModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document" style="margin: 10vh auto; max-width: 650px; width: 80%;">
+    <div class="modal-content bg-dark text-white rounded-lg shadow-lg">
+      <div class="modal-body p-4">
+        <form id="searchForm">
+          <div class="input-group input-group-lg">
+            <div class="input-group-prepend">
+              <span class="input-group-text bg-secondary border-0 text-white">
+                <i class="fas fa-search"></i>
+              </span>
+            </div>
+            <input type="text" id="searchInput" class="form-control bg-dark text-white border-0" placeholder="Search..." autocomplete="off">
+            <div class="input-group-append">
+              <button type="button" class="btn btn-outline-light" data-dismiss="modal">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <div id="searchResults" class="mt-3">
+          <!-- Results will be inserted here dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <main role="main">
+      
+<div class="jumbotron">
+  <div class="container">
+    <h1>Course</h1>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-2 offset-md-1">
+      <div class="nav flex-column nav-pills" role="tablist">
+        <a class="nav-link active" id="course-syllabus-tab" data-toggle="pill" href="#syllabus" role="tab">Syllabus</a>
+        
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="tab-content" id="v-pills-tabContent">
+        <div class="tab-pane fade show active" id="syllabus" role="tabpanel">
+          
+            <h1>Syllabus - CSE 466 &quot;System Security&quot; Fall 2025</h1>
+<h1>Course Info</h1>
+<p><strong>Course Numbers:</strong> CSE 466 (75180 and 75181)<br />
+<strong>Meeting Times:</strong> Tuesday, 4:30pm--5:45pm (BYAC270)<br />
+<strong>Meeting Times:</strong> Thursday, 4:30pm--5:45pm (BYAC270)<br />
+<strong>Course Discord</strong>: <a href="https://discord.gg/pwncollege">Join the pwn.college discord</a></p>
+<h2>Instructors</h2>
+<p><strong>Instructor:</strong> Robert Wasinger<br />
+<strong>Discord Handle:</strong> robwaz<br />
+<strong>Email:</strong> <a href="/cdn-cgi/l/email-protection#fe8c899f8d9790999b8cbe9f8d8bd09b9a8b"><span class="__cf_email__" data-cfemail="67151006140e090002152706141249020312">[email&#160;protected]</span></a></p>
+<p><strong>Instructor:</strong> Michael Tompkins<br />
+<strong>Discord Handle:</strong> frqmod<br />
+<strong>Email:</strong> <a href="/cdn-cgi/l/email-protection#08656b7c676578633948697b7d266d6c7d"><span class="__cf_email__" data-cfemail="deb3bdaab1b3aeb5ef9ebfadabf0bbbaab">[email&#160;protected]</span></a></p>
+<p><strong>Instructor:</strong> Tiffany Bao<br />
+<strong>Discord Handle:</strong> tiffanyb<br />
+<strong>Email:</strong> <a href="/cdn-cgi/l/email-protection#582c3a393718392b2d763d3c2d"><span class="__cf_email__" data-cfemail="ff8b9d9e90bf9e8c8ad19a9b8a">[email&#160;protected]</span></a></p>
+<h3>TAs</h3>
+<p><strong>Name:</strong> Sam Zhu<br />
+<strong>Discord Handle:</strong> sjzhu</p>
+<p><strong>Name:</strong> Zack Smith<br />
+<strong>Discord Handle:</strong> donkey</p>
+<p><strong>Name:</strong> Ahmad Samara<br />
+<strong>Discord Handle:</strong> sammy177</p>
+<h2>Course Description</h2>
+<p>This course will explore a number ways that the Security of Computer Systems can fail.
+Security is a complicated thing: it is only as strong as its weakest link, and a small, single mistake can often bring down otherwise extremely secure software.
+Taking the intuition that, to build secure systems in the future, one must understand how security can break, we will cover a number of different failure modes of computer systems, including application security and operating system security.
+Each lecture will consist of an introduction to a new topic, examples of real-world effects of security failures related to the topic, and an assignment for students to explore these concepts.</p>
+<p>These assignments will be very thorough, and by the end, students will have an <em>intuitive</em> understanding on how to exploit these vulnerabilities, and will have the building blocks needed to prevent them, both in the lab and in the real world.</p>
+<p>This course will feature a flipped-classroom model.
+Lectures are pre-recorded and class time is intended to be spent expanding upon the pre-recorded lecture content with live demonstrations focusing on answering conceptual questions surrounding the current module.</p>
+<h2>Recommended Textbook</h2>
+<p>There is no recommended textbook for this course.
+Any reading material assigned will be from publicly-available sources on the internet.</p>
+<h2>Prerequisites</h2>
+<p>This course will be <em>EXTREMELY</em> challenging, and students are expected to learn some of the necessary technologies on their own time.</p>
+<p>This course requires a good understanding of low-level computer architecture (for example, students should understand x86 assembly) and low-level programming languages (specifically, C), and good command of a high-level programming language (specifically, Python).
+You should have a <em>very</em> good background in operating systems (especially Linux or UNIX variants).
+If you do not have these skills, or do not plan on acquiring them very early in the course, you will have a hard time.
+A good approximation of the type of material that you will be faced with is the first six levels of the <a href="http://overthewire.org/wargames/vortex/">Vortex wargame</a>.</p>
+<h1>Schedule</h1>
+<p>The listing below is the <strong>tentative</strong> module progression of the course.</p>
+<h2>Module 1: Program Security</h2>
+<table>
+<thead>
+<tr>
+<th>Dates</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Start</td>
+<td>Tuesday August 21, 2025 @ 18:00</td>
+</tr>
+<tr>
+<td>Checkpoint  </td>
+<td>Sunday August 31, 2025 @ 23:59</td>
+</tr>
+<tr>
+<td>Due</td>
+<td>Sunday September 7, 2025 @ 23:59</td>
+</tr>
+</tbody>
+</table>
+<h2>Module 2: Advanced Reverse Engineering</h2>
+<table>
+<thead>
+<tr>
+<th>Dates</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Start</td>
+<td>Friday September 5, 2025 @ 18:00</td>
+</tr>
+<tr>
+<td>Checkpoint  </td>
+<td>Sunday September 14, 2025 @ 23:59</td>
+</tr>
+<tr>
+<td>Due</td>
+<td>Sunday September 21, 2025 @ 23:59</td>
+</tr>
+</tbody>
+</table>
+<h2>Module 3: Return Oriented Programming</h2>
+<table>
+<thead>
+<tr>
+<th>Dates</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Start</td>
+<td>Friday September 19, 2025 @ 18:00</td>
+</tr>
+<tr>
+<td>Checkpoint  </td>
+<td>Sunday September 28, 2025 @ 23:59</td>
+</tr>
+<tr>
+<td>Due</td>
+<td>Sunday October  5, 2025 @ 23:59</td>
+</tr>
+</tbody>
+</table>
+<h2>Module 4: Dynamic Alocator Misuse</h2>
+<table>
+<thead>
+<tr>
+<th>Dates</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Start</td>
+<td>Friday October 3, 2025 @ 18:00</td>
+</tr>
+<tr>
+<td>Checkpoint  </td>
+<td>Sunday October 12, 2025 @ 23:59</td>
+</tr>
+<tr>
+<td>Due</td>
+<td>Sunday October 19, 2025 @ 23:59</td>
+</tr>
+</tbody>
+</table>
+<h2>Module 5: Program Exploitation</h2>
+<table>
+<thead>
+<tr>
+<th>Dates</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Start</td>
+<td>Friday October 17, 2025 @ 18:00</td>
+</tr>
+<tr>
+<td>Checkpoint  </td>
+<td>Sunday October 26, 2025 @ 23:59</td>
+</tr>
+<tr>
+<td>Due</td>
+<td>Sunday November 2, 2025 @ 23:59</td>
+</tr>
+</tbody>
+</table>
+<h2>Module 6: Race Conditions</h2>
+<table>
+<thead>
+<tr>
+<th>Dates</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Start</td>
+<td>Friday October 31, 2025 @ 18:00</td>
+</tr>
+<tr>
+<td>Checkpoint  </td>
+<td>Sunday November 9, 2025 @ 23:59</td>
+</tr>
+<tr>
+<td>Due</td>
+<td>Sunday November 9, 2025 @ 23:59</td>
+</tr>
+</tbody>
+</table>
+<h2>Module 7: Sandbox Escapes</h2>
+<table>
+<thead>
+<tr>
+<th>Dates</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Start</td>
+<td>Friday November 7, 2025 @ 18:00</td>
+</tr>
+<tr>
+<td>Checkpoint  </td>
+<td>Sunday November 16, 2025 @ 23:59</td>
+</tr>
+<tr>
+<td>Due</td>
+<td>Sunday November 16, 2025 @ 23:59</td>
+</tr>
+</tbody>
+</table>
+<h2>Module 8: Kernel Security</h2>
+<table>
+<thead>
+<tr>
+<th>Dates</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Start</td>
+<td>Friday November 14, 2025 @ 18:00</td>
+</tr>
+<tr>
+<td>Checkpoint  </td>
+<td>Sunday November 23, 2025 @ 23:59</td>
+</tr>
+<tr>
+<td>Due</td>
+<td>Sunday November 23, 2025 @ 23:59</td>
+</tr>
+</tbody>
+</table>
+<h2>Module 9: Microarchitecture Exploitation</h2>
+<table>
+<thead>
+<tr>
+<th>Dates</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Start</td>
+<td>Friday November 21, 2025 @ 18:00</td>
+</tr>
+<tr>
+<td>Checkpoint  </td>
+<td>Sunday December 15, 2025 @ 23:59</td>
+</tr>
+<tr>
+<td>Due</td>
+<td>Sunday December 15, 2025 @ 23:59</td>
+</tr>
+</tbody>
+</table>
+<h2>Module 10: System Exploitation</h2>
+<table>
+<thead>
+<tr>
+<th>Dates</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Start</td>
+<td>Friday November 28, 2025 @ 18:00</td>
+</tr>
+<tr>
+<td>Checkpoint  </td>
+<td>Sunday December 7, 2025 @ 23:59</td>
+</tr>
+<tr>
+<td>Due</td>
+<td>Monday December 15, 2025 @ 12:00</td>
+</tr>
+</tbody>
+</table>
+<h1>Course Communication</h1>
+<p>All announcements and communications for the class will take place on the discord, with announcements in the #announcements and discussion in the #text class-specific channel.
+Students are <em>required</em> to be on this discord.</p>
+<p>Student may use the discord to ask questions or seek clarifications, and the TA, Instructor, or other students can answer.
+Note that sharing full solution scripts or answers is expressly prohibited, but otherwise, collaboration on the way to the solution is allowed.</p>
+<p>Questions may be directly messaged to the instructors.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Discord Handle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Robert Wasinger</td>
+<td>robwaz</td>
+</tr>
+<tr>
+<td>Michael Tompkins</td>
+<td>frqmod</td>
+</tr>
+<tr>
+<td>Tiffany Bao</td>
+<td>tiffanyb</td>
+</tr>
+</tbody>
+</table>
+<p>Before directly messaging your question, please consider asking it in the course channel instead.
+This way, the entire class will benefit from your question.</p>
+<h1>Office Hours</h1>
+<p>Office hours will be held weekly.  All students are encouraged to attend office hours for in-person assistance.</p>
+<table>
+<thead>
+<tr>
+<th>When</th>
+<th>Course Role</th>
+<th>Name</th>
+<th>Discord Handle</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Monday 4:30 - 5:30</td>
+<td>TA</td>
+<td>Zack Smith</td>
+<td>donkey</td>
+<td>BYENG M1-09</td>
+</tr>
+<tr>
+<td>Tuesday 9:30 - 10:30</td>
+<td>Instructor</td>
+<td>Tiffany Bao</td>
+<td>tiffanyb</td>
+<td><a href="https://asu.zoom.us/j/87889509690">Zoom</a></td>
+</tr>
+<tr>
+<td>Wednesday 4:30 - 5:30</td>
+<td>TA</td>
+<td>Sam Zhu</td>
+<td>sjzhu</td>
+<td>BYENG M1-09</td>
+</tr>
+<tr>
+<td>Friday 4:30 - 5:30</td>
+<td>TA</td>
+<td>Ahmad Samara</td>
+<td>sammy177</td>
+<td>BYENG M1-09</td>
+</tr>
+<tr>
+<td>Saturday 2:00 - 3:00</td>
+<td>Instructor</td>
+<td>Robert Wasinger</td>
+<td>robwaz</td>
+<td>Discord</td>
+</tr>
+<tr>
+<td>Friday 10:00 - 11:00</td>
+<td>Instructor</td>
+<td>Michael Thompkins</td>
+<td>frqmod</td>
+<td>Discord</td>
+</tr>
+</tbody>
+</table>
+<h1>Assignments</h1>
+<p>Students performance will be evaluated on between 7 and 14 homework equally weighted assignments (the modules), where each assignment will consist of between 10 and 100 challenge problems.</p>
+<h1>Assessment</h1>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Assignments</td>
+<td>80%</td>
+</tr>
+<tr>
+<td>Midterm Exam</td>
+<td>10%</td>
+</tr>
+<tr>
+<td>Final Exam</td>
+<td>10%</td>
+</tr>
+<tr>
+<td>Extra Credit Cap</td>
+<td>5%</td>
+</tr>
+</tbody>
+</table>
+<h2>Challenge-based assignments with flags as rewards.</h2>
+<p>Each assignment will consist of a large amount of varied, but related challenges, and will be live for between one and two weeks.
+Solving these challenges may require the use or implementation of fairly complex hacking tools.
+Solving each individual challenge will grant a <em>challenge-specific</em> passcode, called a &quot;flag&quot;.
+The maximum number of flags possible to score for an assignment is equal to the maximum number of challenges in the assignment.</p>
+<p>The existence of flags means that <em>there is no wrong way to solve a challenge</em>.
+If you tricked the challenge into giving you the valid flag, good job.</p>
+<h2>Module Scoring</h2>
+<p>The first 20% of an assignment is earned by solving the first 1/2 of the challenges by the checkpoint: you either earn it, or you don't.</p>
+<ul>
+<li>For assignments that run aproximately one week, the checkpoint is the due date.</li>
+<li>For assignments that run two weeks, the checkpoint is one week into the assignment.
+The remaining 80% of an assignment is earned by solving challenges: your solves / total number of challenges; with solves after the assignment deadline being worth half credit.</li>
+</ul>
+<h2>Exams</h2>
+<p>There will be two <strong>in-class, handwritten exams</strong> this semester. These exams are designed to assess your conceptual understanding of the mechanisms underlying the vulnerabilities studied throughout the course. Exams will be closed-book, and no laptops, tablets, or other electronic devices will be permitted. However, you may bring one cheat sheet: a single 8.5&quot; x 11&quot; sheet of paper with <strong>handwritten</strong> notes on both sides.</p>
+<p>Students must attend class during the week of an exam on the day assigned to the section in which they are registered. Exam dates will be announced as early as possible, but please plan ahead based on the tentative schedule below.</p>
+<p><strong>Tentative Midterm Dates</strong></p>
+<ul>
+<li>Tuesday 10/21</li>
+<li>Thursday 10/23</li>
+</ul>
+<h2>Extra credit: Helping Others</h2>
+<p>This course encourages collaboration.
+We have recruited the help of a reputation bot on the discord to this end.
+Students can thank other students by reacting to helpful messages with the :upvote: emojji on the Discord server.  Whenever you get thanked this way by a student in a public discord channel, the reputation bot will also react with a thanks emoji and log the interaction.
+Extra credit for receiving thanks is logarithmic (<code>5 * log_50_(thanks)</code>), for up to 5% extra credit at 50 thanks received.
+Abuse of this system is considered a violation of academic integrity.</p>
+<h2>Extra credit: Memes</h2>
+<p>Are you a meemer?
+Meme, and earn grades!
+If you post an on-topic meme in the #memes channel and we emoji-react to acknowledge it, you will get 0.5% extra credit, to your final grade, per week (A week begins on Sunday and ends the following Monday at midnight MST).
+In order to foster a good learning community, and encourage creative thinking around the material, you may receive extra credit each week for sharing educational memes in the course discord.
+It is important to note that memes must be <em>relevant</em>, <em>educational</em>, and <em>non-offensive</em>.
+No excessively spicy memes please.
+The course discord bot will acknowledge credited memes with an :upvote: emoji if the meme is approved by the course staff.
+Good memes might be reviewed in class.
+Meme extra credit will be at most 5% of your grade.</p>
+<h2><strong>Help and meme extra credit are hard-capped at a combined 5%!</strong></h2>
+<h2>More Extra Credit: Bug Bounty Program</h2>
+<p>Any <em>responsibly-disclosed</em> <em>serious</em> security issues in course infrastructure will earn an extra 1 to 25 &quot;bug bounty&quot; <em>percentage points</em> to their final grade, depending on the severity of the issue.
+Blatantly spurious reports may earn a <em>negative</em> percentage report of up to -5 percentage points.
+Allowances will be made for honest mistakes leading to a spurious bug bounty filing, but please don't waste our time on purpose.</p>
+<h1>Collaboration Policy</h1>
+<p>Collaboration is highly encouraged in this course.
+However, there is a delicate balance between being <strong>excessively</strong> helpful, and learning.
+The purpose of course collaboration is understanding concepts.
+As such, questions and answers should be <em>focused on concepts</em>, and <em>not how to solve challenge X</em>.</p>
+<p>The challenges explore important concepts, and so it is fine to discuss the challenges.
+However, <em>you may not discuss full or significant portions of a challenge's solution</em>.
+Furthermore, <em>you may not intentionally solve challenges as a group</em>.
+The assignments must still be solved individually.</p>
+<p>Feel free to discuss ideas important to the challenge, or tools which may be useful.</p>
+<p>If there is any confusion, just ask!
+We try to assume good intentions, but egregious violations will result an academic integrity violation.</p>
+<h2>Final Grade Calculation</h2>
+<p>The final grade will be calculated by averaging the grades of each homework assignment, equally weighted, then adding extra credit.
+Percentages will be translated to letter grades with the following initial cutoffs:</p>
+<table>
+<thead>
+<tr>
+<th>Percentage Grade</th>
+<th>Letter Grade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&gt;= 100</td>
+<td>A+</td>
+</tr>
+<tr>
+<td>&gt;= 93</td>
+<td>A</td>
+</tr>
+<tr>
+<td>&gt;= 90</td>
+<td>A-</td>
+</tr>
+<tr>
+<td>&gt;= 88</td>
+<td>B+</td>
+</tr>
+<tr>
+<td>&gt;= 83</td>
+<td>B</td>
+</tr>
+<tr>
+<td>&gt;= 80</td>
+<td>B-</td>
+</tr>
+<tr>
+<td>&gt;= 78</td>
+<td>C+</td>
+</tr>
+<tr>
+<td>&gt;= 70</td>
+<td>C</td>
+</tr>
+<tr>
+<td>&lt; 70</td>
+<td>E</td>
+</tr>
+</tbody>
+</table>
+<p>With the exception of the cutoff for A+, these cutoffs can be curved <em>downward</em> in the event that students do worse than expected.</p>
+<h1>Special Accommodations</h1>
+<p>Students requesting disability accommodations should register with the Disability Resource Center (DRC) and present the instructor with appropriate documentation from the DRC.</p>
+<h1>Plagiarism and Cheating</h1>
+<p>Plagiarism or any form of cheating in assignments or projects is subject to serious academic penalty. To understand your responsibilities as a student read: <a href="http://www.asu.edu/aad/manuals/usi/usi104-01.html">ASU Student Code of Conduct</a> and <a href="http://provost.asu.edu/academicintegrity/policy">ASU Student Academic Integrity Policy</a>.
+There is a zero tolerance policy in this class: any violation of the academic integrity policy will result in a zero on the assignment and the violation will be reported to the Dean’s office.
+Plagiarism is taken very seriously in this course.</p>
+<p>Examples of academic integrity violations include (but are not limited to):</p>
+<ul>
+<li>Sharing code with a fellow student (even if it’s only a few lines).</li>
+<li>Collaborating on code with a fellow student (unless explicitly allowed).</li>
+<li>Using another student's solution to solve a challenge and get a flag.</li>
+<li>Sharing a flag with another student (NEVER ALLOWED UNDER ANY CIRCUMSTANCES).</li>
+</ul>
+<p>Posting your assignment solutions online is expressly forbidden, and will be considered a violation of the academic integrity policy.
+Note that this includes working out of a public Github repository.
+The <a href="https://education.github.com/pack">Github Student Developer Pack</a> provides unlimited private repositories while you are a student, making it easy to begin with a private GitHub repository.</p>
+<h1>Syllabus Update</h1>
+<p>Information in the syllabus may be subject to change with reasonable advance notice and an announcement on discord.</p>
+<h1>Misc</h1>
+<p>Syllabus copyright 2025 Robert Wasinger, along with all lectures and course-related written materials.
+During this course students are prohibited from making audio, video, digital, or other recordings during class, or selling notes to or being paid for taking notes by any person or commercial firm without the express written permission of the faculty member teaching this course.</p>
+<p>Be reasonable.</p>
+<p>Title IX is a federal law that provides that no person be excluded on the basis of sex from participation in, be denied benefits of, or be subjected to discrimination under any education program or activity.  Both Title IX and university policy make clear that sexual violence and harassment based on sex is prohibited.  An individual who believes they have been subjected to sexual violence or harassed on the basis of sex can seek support, including counseling and academic support, from the university.  If you or someone you know has been harassed on the basis of sex or sexually assaulted, you can find information and resources at <a href="https://sexualviolenceprevention.asu.edu/faqs">https://sexualviolenceprevention.asu.edu/faqs</a>.</p>
+<p>As a mandated reporter, I am obligated to report any information I become aware of regarding alleged acts of sexual discrimination, including sexual violence and dating violence. ASU Counseling Services, <a href="https://eoss.asu.edu/counseling">https://eoss.asu.edu/counseling</a>, is available if you wish discuss any concerns confidentially and privately.</p>
+
+          
+        </div>
+
+        
+        <div class="tab-pane fade" id="setup" role="tabpanel">
+          <ol>
+            <li class="setup-incomplete">Create a pwn.college account <a href="/register.html">here</a>. You can use an existing account, or create a new one specifically for the course. The username <strong>will be visible publicly</strong>: if you want to be anonymous, do not use your real name.</li>
+            
+              <li class="setup-incomplete">Create a Discord account <a href="https://discord.com/register">here</a>. You can use an existing account, or create a new one specifically for the course.</li>
+              <li class="setup-incomplete">Join the pwn.college Discord server <a href="https://discord.gg/pwncollege">here</a>. This is where you will be able to discuss the challenges with your peers and see official course announcements.</li>
+              <li class="setup-incomplete">Link your pwn.college account with your Discord <a href="/settings#discord">here</a>. As a verified student, you will receive an official course role in Discord for viewing course announcements.</li>
+            
+            <li class="setup-incomplete">Link your pwn.college account with your ASU Student ID (10-digit number) <a href="identity">here</a>. This is how we will be able to give you your official course grade, and how we will be able to verify your student status for an official course role in Discord.</li>
+          </ol>
+          
+            <p>Setup incomplete.</p>
+          
+          <p></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </main>
+
+    <footer class="footer">
+      <div class="container text-center" style="line-height: 20px; opacity: 0.7">
+        <small>
+          Powered by <strong>pwn.college</strong><br>
+          Interested in dedicated training or tailored services for your organization?
+          <a href="https://llc.pwn.college/">Find out more</a>.
+        </small>
+      </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="/themes/dojo_theme/static/js/vendor.bundle.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/core.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/helpers.min.js?d=0cd72d60"></script>
+
+    
+    <script defer src="/themes/dojo_theme/static/js/pages/main.min.js?d=0cd72d60"></script>
+    
+
+    <script defer src="/themes/dojo_theme/static/js/dojo/util.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/dojo/navbar.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/dojo/popup.min.js?d=0cd72d60"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+
+    
+<script defer src="/themes/dojo_theme/static/js/dojo/course.min.js?d=0cd72d60"></script>
+<script defer src="/themes/dojo_theme/static/js/dojo/grades.min.js?d=0cd72d60"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => loadGrades("#grades"));
+</script>
+
+
+
+    <script>
+      window.addEventListener('load', function() {
+        if (typeof renderMathInElement !== 'undefined') {
+          renderMathInElement(document.body, {
+            delimiters: [
+              {left: '\\[', right: '\\]', display: true},
+              {left: '\\(', right: '\\)', display: false}
+            ],
+            throwOnError: false,
+            strict: false,
+            ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          });
+        }
+      });
+    </script>
+
+    
+
+    
+
+    
+    
+  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c44f407ceb5e60c',t:'MTc2OTQ4MjMzOA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

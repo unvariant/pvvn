@@ -1,0 +1,2860 @@
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>pwn.college</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="pwn.college">
+    <meta property="og:description" content="Learn to Hack!">
+    <meta property="og:image" content="https://pwn.college/themes/dojo_theme/static/img/dojo/ninja.png?d=0cd72d60">
+
+    <link rel="icon" href="/themes/dojo_theme/static/img/favicon.png?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/fonts.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/main.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/core.min.css?d=0cd72d60">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceMono-Regular.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceMono-Bold.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceGrotesk-VariableFont_wght.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <style>
+      @font-face {
+        font-family: 'Space Mono';
+        src: url("/themes/dojo_theme/static/font/SpaceMono-Regular.ttf?d=0cd72d60") format('truetype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Space Mono';
+        src: url("/themes/dojo_theme/static/font/SpaceMono-Bold.ttf?d=0cd72d60") format('truetype');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Space Grotesk';
+        src: url("/themes/dojo_theme/static/font/SpaceGrotesk-VariableFont_wght.ttf?d=0cd72d60") format('truetype');
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/custom.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    
+
+    
+
+<style>
+.scroll-disabled {
+  overflow: hidden;
+}
+
+.challenge-workspace {
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+
+.challenge-iframe {
+  display: block;
+  width: 100%;
+  min-height: 60vh;
+  aspect-ratio: 16/9;
+  border: 0;
+}
+
+.challenge-iframe-fs {
+  aspect-ratio: unset !important;
+  height: calc(100vh - 2.5em - 10px);
+}
+
+.challenge-init {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.challenge-hidden {
+  visibility: hidden;
+  max-height: 0 !important;
+}
+
+.workspace-fullscreen {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  z-index: 1031;/* Navbar z-index + 1 */
+  bottom: -16px;
+  right: 0;
+  background-color: #111;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.workspace-fullscreen .iframe-wrapper {
+  display: flex;
+}
+
+.workspace-ssh {
+  padding: 1em;
+  margin-bottom: 1em;
+  background-color: var(--foreground);
+  border-radius: 0.5em;
+}
+
+
+.challenge-hidden .workspace-ssh {
+  display: none !important;
+}
+</style>
+
+
+
+
+    
+    <script type="text/javascript">
+      var init = {
+	  'urlRoot': "",
+	  'csrfNonce': "a5535ce4910028c06502f57e236bf020d405041ffaeff23114a34a0de0a3d309",
+	  'userMode': "users",
+	  'userId': 0,
+	  'start': null,
+	  'end': null,
+	  'theme_settings': null,
+          'dojo': "honors-dojo~9d345510",
+          'module': "security"
+      }
+    </script>
+    
+  </head>
+  <body>
+    
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top">
+  <div class="container">
+    <a href="/" class="brand-mono-bold wordmark">
+      
+      <span class="brand-white">pwn</span><span class="brand-dot-white">.</span><span class="brand-white">college</span>
+      
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#base-navbars"
+            aria-controls="base-navbars" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="base-navbars">
+      <div class="d-none d-md-block" style="border-left: 2px solid white; height: 20px; margin: 0 20px;"></div>
+      <ul class="navbar-nav mr-auto">
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/dojos">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Dojos">
+      <i class="fas fa-torii-gate d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-torii-gate pr-1"></i>
+      
+      Dojos
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/workspace">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Workspace">
+      <i class="fas fa-desktop d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-desktop pr-1"></i>
+      
+      Workspace
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/sensai.html" target="_blank">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Help">
+      <i class="fas fa-question d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-question pr-1"></i>
+      
+      Help
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="https://discord.gg/pwncollege" target="_blank">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Chat">
+      <i class="fas fa-comments d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-comments pr-1"></i>
+      
+      Chat
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="#">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Search">
+      <i class="fas fa-search d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-search pr-1"></i>
+      
+      Search
+      
+    </span>
+  </a>
+</li>
+
+      </ul>
+      <hr class="d-sm-flex d-md-flex d-lg-none">
+      <ul class="navbar-nav ml-md-auto d-block d-sm-flex d-md-flex">
+        
+        
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/register.html">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Register">
+      <i class="fas fa-user-plus d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-user-plus pr-1"></i>
+      
+      Register
+      
+    </span>
+  </a>
+</li>
+
+        
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/login.html">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Login">
+      <i class="fas fa-sign-in-alt d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-sign-in-alt pr-1"></i>
+      
+      Login
+      
+    </span>
+  </a>
+</li>
+
+        
+
+        <li class="nav-item">
+          <a class="nav-link close-link" href="javascript:void(0)">
+            <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Hide Navbar">
+              <i class="fas caret-up d-none d-md-block d-lg-none"></i>
+            </span>
+            <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+              <i class="fas fa-caret-up pr-1"></i>
+              <span class="d-lg-none">Hide Navbar</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="navbar-pulldown">
+  <i class="fas fa-fw fa-caret-down" title="Show navigation bar"></i>
+</div>
+
+<div id="searchModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document" style="margin: 10vh auto; max-width: 650px; width: 80%;">
+    <div class="modal-content bg-dark text-white rounded-lg shadow-lg">
+      <div class="modal-body p-4">
+        <form id="searchForm">
+          <div class="input-group input-group-lg">
+            <div class="input-group-prepend">
+              <span class="input-group-text bg-secondary border-0 text-white">
+                <i class="fas fa-search"></i>
+              </span>
+            </div>
+            <input type="text" id="searchInput" class="form-control bg-dark text-white border-0" placeholder="Search..." autocomplete="off">
+            <div class="input-group-append">
+              <button type="button" class="btn btn-outline-light" data-dismiss="modal">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <div id="searchResults" class="mt-3">
+          <!-- Results will be inserted here dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <main role="main">
+      
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="brand-white brand-mono-bold">Web3 Wallet Security Fundamentals (Linux Command Line)</h1>
+    <br>
+    <h2 class="module-dojo"><a class="brand-white brand-mono-bold" href="/dojo/honors-dojo~9d345510">Honors Dojo<span class="brand-dot">.</span></a></h2>
+
+    
+  </div>
+</div>
+<div class="container">
+
+  
+  <div>
+    
+    <h1>Web3 Wallet Security Fundamentals: A Linux Command Line Approach</h1>
+<p>A practical, hands-on module focused on Web3/Crypto wallet security, using only the Linux command-line utilities that students have learned in class(CSE365).</p>
+<ul>
+<li><strong>Objective:</strong> Learn fundamental and advanced wallet security concepts by using core Linux commands to simulate real-world security failures and forensic analysis.</li>
+<li><strong>Commands Used:</strong> <code>cat</code>, <code>grep</code>, <code>diff</code>, <code>touch</code>, <code>tr</code>, <code>chmod</code>, Pipelining, Shell Scripting with Conditionals (<code>if/then/else</code>), and Environment Variable usage.</li>
+</ul>
+<h3>Challenge Progression</h3>
+<p><strong>1. Securing the Seed Phrase</strong></p>
+<ul>
+<li><strong>Core Concept:</strong> Cold Storage Simulation, File Permissions, Simple Obfuscation</li>
+<li><strong>Key Commands Used:</strong> <code>touch</code>, <code>cat</code>, <code>tr</code> (Translating chars), <code>chmod</code> (Changing Permissions)</li>
+</ul>
+<p><strong>2. The Hot Wallet Exposure</strong></p>
+<ul>
+<li><strong>Core Concept:</strong> Environment Variable Attacks, Private Key Leakage</li>
+<li><strong>Key Commands Used:</strong> <code>grep</code> (on Exported Variables)</li>
+</ul>
+<p><strong>3. Phishing Content Analysis</strong></p>
+<ul>
+<li><strong>Core Concept:</strong> Content Forensics, Identifying Subtle Fraud</li>
+<li><strong>Key Commands Used:</strong> <code>diff</code> (comparing files), <code>grep</code></li>
+</ul>
+<p><strong>4. API Key Log Forensics</strong></p>
+<ul>
+<li><strong>Core Concept:</strong> Multi-Stage Log Filtering, Data Pipelining</li>
+<li><strong>Key Commands Used:</strong> <code>grep</code> (Pipelining/Grepping live output), Text Extraction</li>
+</ul>
+<p><strong>5. Basic Signature Validation</strong></p>
+<ul>
+<li><strong>Core Concept:</strong> Integrity Check Simulation, Scripting Logic</li>
+<li><strong>Key Commands Used:</strong> <code>Scripting with Conditionals</code> (<code>if/then/else</code>), <code>cat</code></li>
+</ul>
+<p>It is recommended to have a solid understanding of the commands listed above to successfully complete this module.</p>
+<p>This module was created by <a href="https://github.com/j-ble">Jacob Blemaster</a>.</p>
+
+  </div>
+  <br>
+  
+
+  
+  
+
+  
+
+  <div class="accordion" id="module-content">
+    
+    
+      
+        
+        
+          <br>
+          <h2>Challenges</h2>
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-2">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-1" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-1" aria-expanded="false" aria-controls="challenges-body-1">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="1" data-challenge-id="securingtheseedphrase" data-challenge-name="Securing the Seed Phrase" id="challenges-header-1">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Securing the Seed Phrase</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                1 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-1" class="collapse" aria-labelledby="module-content-header-2" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                <h1>Securing the Seed Phrase</h1>
+<h2>Introduction to Seed Phrases</h2>
+<p>In the world of cryptocurrency and Web3, a <strong>seed phrase</strong> (also called a recovery phrase) is a series of 12-24 words that gives you access to your crypto wallet. It's essentially the master key to all your funds.</p>
+<p><strong>Critical Security Concept:</strong> If someone gets your seed phrase, they own your wallet. Forever.</p>
+<p>This is why seed phrases should NEVER be:</p>
+<ul>
+<li>Stored in plain text on your computer</li>
+<li>Saved in cloud storage</li>
+<li>Shared with anyone</li>
+<li>Left with default file permissions that anyone can read</li>
+</ul>
+<h2>Cold Storage Best Practice</h2>
+<p>One approach to securing seed phrases is <strong>cold storage</strong> - keeping them completely offline and protected. In this challenge, you'll simulate cold storage security using Linux commands:</p>
+<ol>
+<li><strong>Obfuscation with <code>tr</code>:</strong> Transform the text so it's not immediately readable</li>
+<li><strong>File Permissions with <code>chmod</code>:</strong> Restrict access to owner-only</li>
+</ol>
+<h2>The Challenge</h2>
+<p>In this challenge, you need to:</p>
+<ol>
+<li>Create a file containing a dummy seed phrase</li>
+<li>Obfuscate it using the <code>tr</code> command (ROT13 cipher)</li>
+<li>Set proper file permissions so only YOU (the owner) can read/write it</li>
+</ol>
+<h3>Commands You'll Use</h3>
+<p><strong><code>tr</code> (translate characters):</strong></p>
+<pre><code>hacker@dojo:~$ echo &quot;hello&quot; | tr 'a-z' 'n-za-m'
+uryyb
+</code></pre>
+<p>The <code>tr</code> command translates characters. The format <code>A-Za-z</code> to <code>N-ZA-Mn-za-m</code> performs ROT13 encryption.</p>
+<p><strong><code>chmod</code> (change mode/permissions):</strong></p>
+<pre><code>hacker@dojo:~$ chmod 600 myfile.txt
+</code></pre>
+<p>This sets permissions to <code>rw-------</code> (read/write for owner only).</p>
+<p><strong>File permission format:</strong></p>
+<ul>
+<li><code>6</code> = read(4) + write(2) for owner</li>
+<li><code>0</code> = no permissions for group</li>
+<li><code>0</code> = no permissions for others</li>
+</ul>
+<h2>Your Task</h2>
+<p>Run the <code>seedPhrase</code> command to validate your solution. This script will check:</p>
+<ol>
+<li>Whether you created the obfuscated seed phrase file correctly</li>
+<li>Whether file permissions are set to 600 (owner read/write only)</li>
+</ol>
+<p>If successful, you'll receive the flag!</p>
+<h3>Hint</h3>
+<p>The <code>tr</code> command can read from a file and output to another file using:</p>
+<pre><code>cat input.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m' &gt; output.txt
+</code></pre>
+<p>Good luck, and remember: In the real world, proper seed phrase security can mean the difference between keeping your crypto safe and losing everything!</p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="security">
+                <input id="challenge" type="hidden" value="securingtheseedphrase">
+                <input id="challenge-id" type="hidden" value="22172">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="076f66646c62754763686d68297770692964686b6b626062">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="22172" data-challenge-name="Securing the Seed Phrase">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/honors-dojo~9d345510/surveys/security/securingtheseedphrase" id="survey-notification" class="survey alert-dismissable w-100 survey-id-22172" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-3">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-2" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-2" aria-expanded="false" aria-controls="challenges-body-2">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="2" data-challenge-id="thehotwalletexposure" data-challenge-name="The Hot Wallet Exposure" id="challenges-header-2">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">The Hot Wallet Exposure</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                1 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-2" class="collapse" aria-labelledby="module-content-header-3" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                <h1>The Hot Wallet Exposure</h1>
+<h2>What is a Hot Wallet?</h2>
+<p>A <strong>hot wallet</strong> is a cryptocurrency wallet that's connected to the internet and actively used for transactions. Unlike cold storage (offline wallets), hot wallets prioritize convenience over security, making them vulnerable to various attacks.</p>
+<p><strong>The Risk:</strong> Hot wallets are especially vulnerable when private keys are exposed through:</p>
+<ul>
+<li>Environment variables</li>
+<li>Log files</li>
+<li>Process memory dumps</li>
+<li>Temporary files</li>
+<li>Error messages</li>
+</ul>
+<h2>Environment Variables: A Hidden Threat</h2>
+<p>In Linux, environment variables are dynamic values that affect running processes. Developers sometimes make a critical mistake: storing sensitive information (API keys, passwords, <strong>private keys</strong>) in environment variables.</p>
+<p><strong>Why is this dangerous?</strong></p>
+<ol>
+<li>Environment variables are <strong>inherited by child processes</strong> - any program you run can see them</li>
+<li>They can be <strong>accidentally logged</strong> by applications or system tools</li>
+<li>They're <strong>visible to anyone</strong> who can run commands on the system</li>
+<li>Many debugging tools and error messages <strong>dump environment variables</strong></li>
+<li>They persist in shell history and process listings</li>
+</ol>
+<h3>Real-World Example</h3>
+<p>A developer might do this thinking it's &quot;secure&quot;:</p>
+<pre><code>export WALLET_PRIVATE_KEY=&quot;0x1234567890abcdef...&quot;
+</code></pre>
+<p>But now ANY process can access it:</p>
+<pre><code># Other users or processes can see it
+ps aux -e  # Shows environment variables of all processes
+/proc/PID/environ  # Kernel exposes env vars in filesystem
+</code></pre>
+<h2>Viewing Environment Variables</h2>
+<h3>The <code>env</code> Command</h3>
+<p>The <code>env</code> command displays all environment variables in your current shell:</p>
+<pre><code>hacker@dojo:~$ env
+USER=hacker
+HOME=/home/hacker
+PATH=/usr/local/bin:/usr/bin:/bin
+SHELL=/bin/bash
+WALLET_PRIVATE_KEY=0xABCD1234...
+...
+</code></pre>
+<h3>The <code>grep</code> Command for Searching</h3>
+<p>Since <code>env</code> outputs many variables, we use <code>grep</code> to filter:</p>
+<pre><code>hacker@dojo:~$ env | grep WALLET
+WALLET_PRIVATE_KEY=0xABCD1234567890...
+</code></pre>
+<p><strong>How this works:</strong></p>
+<ul>
+<li><code>env</code> lists all environment variables</li>
+<li><code>|</code> (pipe) sends the output to the next command</li>
+<li><code>grep WALLET</code> searches for lines containing &quot;WALLET&quot;</li>
+</ul>
+<h3>Other Useful Commands</h3>
+<p><strong><code>printenv</code></strong> - Another way to display environment variables:</p>
+<pre><code>hacker@dojo:~$ printenv WALLET_PRIVATE_KEY
+0xABCD1234567890...
+</code></pre>
+<p><strong>Direct variable access:</strong></p>
+<pre><code>hacker@dojo:~$ echo $WALLET_PRIVATE_KEY
+0xABCD1234567890...
+</code></pre>
+<h2>The Scenario</h2>
+<p>You're a security analyst investigating a cryptocurrency theft. A careless developer exported their wallet's private key as an environment variable named <code>WALLET_PRIVATE_KEY</code> during development.</p>
+<p>The private key is still exposed in the environment, and you need to find it before an attacker does.</p>
+<h2>Your Task</h2>
+<p>Run <code>bin/walletExposure</code> to set up the challenge environment. This will export the <code>WALLET_PRIVATE_KEY</code> variable to your shell configuration.</p>
+<p>Use <code>grep</code> to search through the environment variables and locate the exposed <code>WALLET_PRIVATE_KEY</code>.</p>
+<p><strong>Optional:</strong> Run the <code>walletExposure</code> command to see challenge instructions and hints.</p>
+<p><strong>The flag is embedded in the private key value.</strong></p>
+<h3>Hints</h3>
+<ol>
+<li>Use the <code>env</code> command to list all environment variables</li>
+<li>Pipe the output to <code>grep</code> to search for patterns: <code>env | grep PATTERN</code></li>
+<li>Look for a variable named <code>WALLET_PRIVATE_KEY</code></li>
+<li>The private key contains your flag</li>
+</ol>
+<h3>Commands You'll Need</h3>
+<pre><code># List all environment variables
+env
+
+# Search for a specific pattern
+env | grep WALLET
+
+# Alternative approach
+printenv | grep WALLET
+</code></pre>
+<h2>Security Best Practices</h2>
+<p><strong>DO:</strong></p>
+<ul>
+<li>Use <strong>hardware wallets</strong> (Ledger, Trezor) for storing private keys</li>
+<li>Use <strong>secret management tools</strong> (HashiCorp Vault, AWS Secrets Manager, 1Password)</li>
+<li>Use <strong>encrypted configuration files</strong> with restricted permissions</li>
+<li>Keep private keys in <strong>cold storage</strong> for long-term holdings</li>
+<li>Use <strong>environment-specific secrets</strong> that are never committed to version control</li>
+</ul>
+<p><strong>DON'T:</strong></p>
+<ul>
+<li>Store private keys in environment variables</li>
+<li>Log environment variables in application logs</li>
+<li>Share environment variables across services</li>
+<li>Commit <code>.env</code> files to Git repositories</li>
+<li>Use the same keys in development and production</li>
+</ul>
+<p><strong>Remember:</strong> In production Web3 applications, use proper key management systems and hardware security modules (HSMs). Never expose private keys in environment variables, even &quot;temporarily&quot; during development!</p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="security">
+                <input id="challenge" type="hidden" value="thehotwalletexposure">
+                <input id="challenge-id" type="hidden" value="22173">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8de5eceee6e8ffcde9e2e7e2a3fdfae3a3eee2e1e1e8eae8">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="22173" data-challenge-name="The Hot Wallet Exposure">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/honors-dojo~9d345510/surveys/security/thehotwalletexposure" id="survey-notification" class="survey alert-dismissable w-100 survey-id-22173" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-4">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-3" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-3" aria-expanded="false" aria-controls="challenges-body-3">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="3" data-challenge-id="phishingcontentanalysis" data-challenge-name="Phishing Content Analysis" id="challenges-header-3">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Phishing Content Analysis</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                1 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-3" class="collapse" aria-labelledby="module-content-header-4" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                <h1>Phishing Content Analysis</h1>
+<h2>The Phishing Threat in Web3</h2>
+<p><strong>Phishing</strong> is one of the most dangerous and common attack vectors in the cryptocurrency ecosystem. Attackers create fake websites that look nearly identical to legitimate services (MetaMask, Coinbase, Uniswap, OpenSea) to steal users' credentials, private keys, or trick them into sending funds to attacker-controlled wallets.</p>
+<p><strong>The Statistics:</strong></p>
+<ul>
+<li>Over $100 million stolen through phishing attacks in 2023 alone</li>
+<li>80% of crypto theft starts with phishing</li>
+<li>Average time to detect a phishing site: 12-24 hours</li>
+<li>Victims rarely recover stolen funds</li>
+</ul>
+<h2>Common Phishing Techniques</h2>
+<h3>1. Domain Spoofing</h3>
+<p>Using similar-looking domains that are easy to miss:</p>
+<ul>
+<li>Legitimate: <code>metamask.io</code></li>
+<li>Phishing: <code>metarnask.io</code> (rn looks like m)</li>
+<li>Phishing: <code>metamask.io</code> (Cyrillic 'а' instead of Latin 'a')</li>
+</ul>
+<h3>2. Visual Cloning</h3>
+<p>Creating pixel-perfect copies of legitimate sites:</p>
+<ul>
+<li>Identical logos, colors, fonts</li>
+<li>Same page layout and structure</li>
+<li>Copied error messages and help text</li>
+</ul>
+<h3>3. Subtle Content Changes</h3>
+<p>The most dangerous type - everything looks legitimate except:</p>
+<ul>
+<li>Wallet addresses where funds are sent</li>
+<li>Smart contract addresses for token swaps</li>
+<li>Transaction confirmations</li>
+<li>One character different in a 42-character address</li>
+</ul>
+<h3>4. URL Manipulation</h3>
+<p>Using Unicode homoglyphs and look-alike characters:</p>
+<ul>
+<li><code>һ</code> (Cyrillic) vs <code>h</code> (Latin)</li>
+<li><code>а</code> (Cyrillic) vs <code>a</code> (Latin)</li>
+<li><code>О</code> (Cyrillic) vs <code>O</code> (Latin)</li>
+</ul>
+<h2>The <code>diff</code> Command: Finding Differences</h2>
+<p>The <code>diff</code> command compares two files line by line and shows what's different.</p>
+<p><strong>Basic syntax:</strong></p>
+<pre><code>hacker@dojo:~$ diff file1.txt file2.txt
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre><code>hacker@dojo:~$ diff legitimate.txt phishing.txt
+3c3
+&lt; Send funds to: 0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb
+---
+&gt; Send funds to: 0xDEADBEEF1234567890ABCDEF...
+</code></pre>
+<p><strong>Understanding the output:</strong></p>
+<ul>
+<li><code>3c3</code> means &quot;line 3 changed&quot; (c = change)</li>
+<li><code>&lt;</code> shows content from the first file (legitimate.txt)</li>
+<li><code>---</code> is a separator</li>
+<li><code>&gt;</code> shows content from the second file (phishing.txt)</li>
+</ul>
+<p><strong>Other diff notations:</strong></p>
+<ul>
+<li><code>5a6</code> - line added after line 5</li>
+<li><code>7d6</code> - line 7 deleted</li>
+<li><code>2,4c2,5</code> - lines 2-4 changed to lines 2-5</li>
+</ul>
+<h2>Using <code>grep</code> with <code>diff</code></h2>
+<p>You can filter diff output to find specific changes:</p>
+<pre><code>hacker@dojo:~$ diff file1.txt file2.txt | grep &quot;&gt;&quot;
+&gt; Send funds to: 0xDEADBEEF...
+</code></pre>
+<p>This shows only lines from the <strong>second file</strong> that are different.</p>
+<pre><code>hacker@dojo:~$ diff file1.txt file2.txt | grep &quot;0x&quot;
+&lt; Send funds to: 0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb
+&gt; Send funds to: 0xDEADBEEF1234567890ABCDEF...
+</code></pre>
+<p>This shows both lines containing wallet addresses.</p>
+<h2>The Scenario</h2>
+<p>You're a security analyst at a cryptocurrency exchange. Multiple users have reported losing funds after &quot;confirming&quot; MetaMask transactions.</p>
+<p>Upon investigation, you've obtained two HTML files:</p>
+<ol>
+<li><strong>legitimate_metamask.html</strong> - The real MetaMask transaction confirmation page</li>
+<li><strong>phishing_metamask.html</strong> - A suspected phishing page from a malicious site</li>
+</ol>
+<p>The files look <strong>visually identical</strong>, but somewhere in the code there's a subtle change: the destination wallet address has been swapped to the attacker's address.</p>
+<p><strong>Your mission:</strong> Find the malicious wallet address that's stealing user funds.</p>
+<h2>Your Task</h2>
+<p>Run the <code>phishingDetector</code> command to set up the challenge files. Then use <code>diff</code> to compare the legitimate and phishing HTML files to identify the exact line that was changed.</p>
+<p><strong>The flag is embedded in the phishing wallet address.</strong></p>
+<h3>Hints</h3>
+<ol>
+<li>The <code>phishingDetector</code> command will create two files for you to compare</li>
+<li>Use <code>diff</code> to compare both HTML files</li>
+<li>Look for lines showing destination wallet addresses</li>
+<li>The <code>&gt;</code> symbol in diff output shows content from the phishing file</li>
+<li>Try combining with <code>grep</code> to filter for specific patterns</li>
+<li>The malicious address contains the flag</li>
+</ol>
+<h3>Commands You'll Need</h3>
+<pre><code># Compare two files
+diff legitimate_metamask.html phishing_metamask.html
+
+# Show only lines from the phishing file (second file)
+diff legitimate_metamask.html phishing_metamask.html | grep &quot;&gt;&quot;
+
+# Filter for wallet addresses (0x pattern)
+diff legitimate_metamask.html phishing_metamask.html | grep &quot;0x&quot;
+
+# Show just the changed lines with context
+diff -u legitimate_metamask.html phishing_metamask.html
+</code></pre>
+<h2>Real-World Phishing Detection</h2>
+<p>In production environments, security teams use:</p>
+<p><strong>Automated Tools:</strong></p>
+<ul>
+<li><strong>PhishTank</strong> - Community-driven phishing site database</li>
+<li><strong>Google Safe Browsing</strong> - Real-time phishing detection API</li>
+<li><strong>MetaMask's phishing detector</strong> - Checks domains against known phishing lists</li>
+<li><strong>OpenPhish</strong> - Machine learning phishing detection</li>
+</ul>
+<p><strong>Manual Analysis:</strong></p>
+<ul>
+<li>Visual inspection of page source</li>
+<li>SSL certificate verification</li>
+<li>WHOIS domain registration checks</li>
+<li>File hash comparison</li>
+<li>Network traffic analysis</li>
+</ul>
+<p><strong>Browser Extensions:</strong></p>
+<ul>
+<li><strong>MetaMask</strong> - Built-in phishing detection</li>
+<li><strong>Pocket Universe</strong> - Transaction simulation before signing</li>
+<li><strong>Fire</strong> - Warns about malicious smart contracts</li>
+<li><strong>Wallet Guard</strong> - Blocks known phishing sites</li>
+</ul>
+<h2>Security Best Practices</h2>
+<p><strong>DO:</strong></p>
+<ul>
+<li>Always verify URLs character by character before entering credentials</li>
+<li>Bookmark legitimate sites and only use bookmarks</li>
+<li>Check SSL certificates (look for the padlock icon)</li>
+<li>Verify contract addresses on multiple block explorers</li>
+<li>Use hardware wallets with address verification on-device</li>
+<li>Double-check wallet addresses before confirming transactions</li>
+<li>Enable transaction simulation (Pocket Universe, Fire)</li>
+</ul>
+<p><strong>DON'T:</strong></p>
+<ul>
+<li>Click links in emails, Discord, Telegram, or Twitter DMs</li>
+<li>Trust sites from Google search results (attackers buy ads)</li>
+<li>Ignore browser security warnings</li>
+<li>Rush through transaction confirmations</li>
+<li>Share your screen during transactions</li>
+<li>Enter seed phrases anywhere except your hardware wallet</li>
+</ul>
+<p><strong>Critical Rule:</strong> If a site asks for your seed phrase, it's 100% a scam. Legitimate services never ask for seed phrases.</p>
+<h2>Real-World Examples</h2>
+<p><strong>1. Fake Uniswap (2023):</strong> $8M stolen via fake swap interface
+<strong>2. MetaMask Phishing (2022):</strong> Thousands of users lost funds to fake &quot;verify wallet&quot; pages
+<strong>3. OpenSea Clone (2022):</strong> Users tricked into listing NFTs on fake marketplace
+<strong>4. Ledger Phishing (2021):</strong> Fake firmware update emails led to seed phrase theft</p>
+<p><strong>Remember:</strong> In crypto, you are your own bank. There's no customer support to reverse fraudulent transactions. Once your private keys are compromised or you send funds to an attacker, they're gone forever.</p>
+<p>Stay vigilant, verify everything, and when in doubt, don't click!</p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="security">
+                <input id="challenge" type="hidden" value="phishingcontentanalysis">
+                <input id="challenge-id" type="hidden" value="22174">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2840494b434d5a684c47424706585f46064b4744444d4f4d">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="22174" data-challenge-name="Phishing Content Analysis">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/honors-dojo~9d345510/surveys/security/phishingcontentanalysis" id="survey-notification" class="survey alert-dismissable w-100 survey-id-22174" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-5">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-4" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-4" aria-expanded="false" aria-controls="challenges-body-4">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="4" data-challenge-id="apikeylogforensics" data-challenge-name="API Key Log Forensics" id="challenges-header-4">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">API Key Log Forensics</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                1 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-4" class="collapse" aria-labelledby="module-content-header-5" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                <h1>API Key Log Forensics</h1>
+<h2>The Logging Vulnerability</h2>
+<p>Server logs are essential for debugging, monitoring, and security analysis. However, they can also become a <strong>massive security liability</strong> when sensitive information is accidentally logged.</p>
+<p><strong>Common Secrets Leaked in Logs:</strong></p>
+<ul>
+<li>API keys and access tokens</li>
+<li>Private keys and wallet seeds</li>
+<li>User passwords and session tokens</li>
+<li>Database credentials</li>
+<li>OAuth tokens and JWT secrets</li>
+<li>Credit card numbers (PCI compliance violation)</li>
+</ul>
+<p><strong>The Problem:</strong> A single exposed API key buried in millions of log lines can lead to:</p>
+<ul>
+<li>Complete system compromise</li>
+<li>Data breaches affecting millions of users</li>
+<li>Cryptocurrency wallet drains</li>
+<li>Unauthorized access to cloud resources</li>
+<li>Regulatory fines (GDPR, PCI-DSS violations)</li>
+</ul>
+<h2>Real-World Log Security Incidents</h2>
+<p><strong>Uber (2016):</strong> Engineers stored AWS keys in private GitHub repo, which were then logged. Cost: $148M settlement.</p>
+<p><strong>Capital One (2019):</strong> Misconfigured logging exposed 100M customer records. Cost: $80M fine.</p>
+<p><strong>DeFi Protocol Exploit (2022):</strong> API key logged in error messages. Result: $3.6M stolen.</p>
+<p><strong>Docker Hub (2021):</strong> Authentication tokens exposed in container logs. Result: 190,000 accounts compromised.</p>
+<h2>The Scenario</h2>
+<p>You're a security analyst at a Web3 infrastructure company. Yesterday morning, attackers drained $500,000 from the company's hot wallet using an unauthorized API key.</p>
+<p>Your job: Find the compromised API key that was accidentally logged during a security incident.</p>
+<p><strong>The challenge:</strong> The log file contains <strong>over 50,000 lines</strong> of mixed operational logs, errors, warnings, and debug messages from various services.</p>
+<h2>The <code>grep</code> Command: Searching Through Noise</h2>
+<p><code>grep</code> is a powerful command-line tool for searching text using patterns.</p>
+<p><strong>Basic syntax:</strong></p>
+<pre><code>hacker@dojo:~$ grep &quot;pattern&quot; filename.txt
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre><code>hacker@dojo:~$ grep &quot;ERROR&quot; server.log
+[2024-01-15 10:23:45] [ERROR] NetworkService: Connection timeout
+[2024-01-15 10:24:12] [ERROR] APIGateway: Rate limit exceeded
+[2024-01-15 10:25:33] [ERROR] WalletService: Transaction failed
+</code></pre>
+<h2>Pipelining: Multi-Stage Filtering</h2>
+<p>The real power of <code>grep</code> comes from <strong>pipelining</strong> - chaining multiple grep commands together to progressively narrow down results.</p>
+<p><strong>Pipe symbol <code>|</code>:</strong> Sends output from one command as input to the next command.</p>
+<p><strong>Example - Three-stage filter:</strong></p>
+<pre><code>hacker@dojo:~$ cat server.log | grep &quot;ERROR&quot; | grep &quot;API&quot; | grep &quot;KEY&quot;
+</code></pre>
+<p><strong>How it works:</strong></p>
+<ol>
+<li><code>cat server.log</code> - Reads the entire file (50,000+ lines)</li>
+<li><code>| grep &quot;ERROR&quot;</code> - Filters to only ERROR level logs (~500 lines)</li>
+<li><code>| grep &quot;API&quot;</code> - Further filters to API-related errors (~50 lines)</li>
+<li><code>| grep &quot;KEY&quot;</code> - Final filter for lines containing &quot;KEY&quot; (~1 line)</li>
+</ol>
+<p><strong>More efficient syntax (skip cat):</strong></p>
+<pre><code>hacker@dojo:~$ grep &quot;ERROR&quot; server.log | grep &quot;UNAUTHORIZED&quot; | grep &quot;API_KEY&quot;
+</code></pre>
+<h2>Log Levels Explained</h2>
+<p><strong>DEBUG:</strong> Verbose developer information (usually too detailed)</p>
+<ul>
+<li>Example: &quot;Cache hit for key: wallet_balance_abc123&quot;</li>
+</ul>
+<p><strong>INFO:</strong> General informational messages</p>
+<ul>
+<li>Example: &quot;Transaction added to pool: 0x1234...&quot;</li>
+</ul>
+<p><strong>WARN:</strong> Warning messages that aren't errors yet</p>
+<ul>
+<li>Example: &quot;Rate limit approaching for IP: 192.168.1.1&quot;</li>
+</ul>
+<p><strong>ERROR:</strong> Error events that need attention</p>
+<ul>
+<li>Example: &quot;Connection timeout to peer node&quot;</li>
+</ul>
+<p><strong>CRITICAL:</strong> Severe errors requiring immediate action</p>
+<ul>
+<li>Example: &quot;Database connection pool exhausted&quot;</li>
+</ul>
+<h2>Your Task</h2>
+<p>Run the <code>logForensics</code> command to generate the breach log file.</p>
+<p>Then, use multi-stage <code>grep</code> pipelining to:</p>
+<ol>
+<li>Filter the 50,000+ line log to only ERROR entries</li>
+<li>Further filter to UNAUTHORIZED access attempts</li>
+<li>Finally, extract the line containing the compromised API_KEY</li>
+</ol>
+<p><strong>The flag is embedded in the API key value.</strong></p>
+<h3>Hints</h3>
+<ol>
+<li>The <code>logForensics</code> command will create a large log file for you</li>
+<li>Start by filtering for ERROR level logs</li>
+<li>The breach involved &quot;UNAUTHORIZED&quot; access</li>
+<li>Look for a line containing &quot;API_KEY=&quot;</li>
+<li>Use pipes (|) to chain grep commands together</li>
+<li>Each stage should significantly reduce the number of lines</li>
+</ol>
+<h3>Commands You'll Need</h3>
+<pre><code># Count total lines in the log
+wc -l ~/web3_server.log
+
+# Filter for ERROR logs and count them
+grep &quot;ERROR&quot; ~/web3_server.log | wc -l
+
+# Three-stage pipeline to find the API key
+grep &quot;ERROR&quot; ~/web3_server.log | grep &quot;UNAUTHORIZED&quot; | grep &quot;API_KEY&quot;
+
+# Alternative: Use regex for more precise matching
+grep -E &quot;ERROR.*UNAUTHORIZED.*API_KEY&quot; ~/web3_server.log
+
+# Show line numbers with matches
+grep -n &quot;UNAUTHORIZED&quot; ~/web3_server.log
+
+# Case-insensitive search
+grep -i &quot;api_key&quot; ~/web3_server.log
+</code></pre>
+<h2>Advanced <code>grep</code> Options</h2>
+<p><strong><code>grep -n</code>:</strong> Show line numbers</p>
+<pre><code>hacker@dojo:~$ grep -n &quot;ERROR&quot; server.log
+523:[2024-01-15 10:23:45] [ERROR] Connection timeout
+1247:[2024-01-15 11:15:22] [ERROR] Invalid token
+</code></pre>
+<p><strong><code>grep -i</code>:</strong> Case-insensitive search</p>
+<pre><code>hacker@dojo:~$ grep -i &quot;api&quot; server.log
+# Matches API, api, Api, etc.
+</code></pre>
+<p><strong><code>grep -c</code>:</strong> Count matching lines</p>
+<pre><code>hacker@dojo:~$ grep -c &quot;ERROR&quot; server.log
+523
+</code></pre>
+<p><strong><code>grep -v</code>:</strong> Invert match (show lines that DON'T match)</p>
+<pre><code>hacker@dojo:~$ grep -v &quot;DEBUG&quot; server.log
+# Show all logs except DEBUG level
+</code></pre>
+<p><strong><code>grep -A 3</code>:</strong> Show 3 lines AFTER match
+<strong><code>grep -B 3</code>:</strong> Show 3 lines BEFORE match
+<strong><code>grep -C 3</code>:</strong> Show 3 lines of context (before and after)</p>
+<h2>Production Log Security Best Practices</h2>
+<h3>DO:</h3>
+<p><strong>Log Sanitization:</strong></p>
+<ul>
+<li>Strip sensitive data before logging</li>
+<li>Use placeholder values: <code>API_KEY=***REDACTED***</code></li>
+<li>Implement structured logging (JSON) with field filtering</li>
+</ul>
+<p><strong>Secure Storage:</strong></p>
+<ul>
+<li>Encrypt logs at rest</li>
+<li>Restrict access with IAM policies</li>
+<li>Use log aggregation services (ELK, Splunk, Datadog)</li>
+<li>Implement log rotation and retention policies</li>
+</ul>
+<p><strong>Monitoring:</strong></p>
+<ul>
+<li>Set up alerts for suspicious patterns</li>
+<li>Monitor for leaked credentials in logs</li>
+<li>Scan logs for accidental PII exposure</li>
+<li>Use automated secret scanning tools</li>
+</ul>
+<h3>DON'T:</h3>
+<ul>
+<li>Log full API keys, passwords, or private keys</li>
+<li>Store logs in world-readable locations</li>
+<li>Keep logs indefinitely without review</li>
+<li>Log request/response bodies without sanitization</li>
+<li>Include user PII in debug logs</li>
+<li>Disable logging in production (you need it for security!)</li>
+</ul>
+<h2>Log Forensics Tools</h2>
+<p><strong>For Local Analysis:</strong></p>
+<ul>
+<li><code>grep</code> - Pattern matching (what we're using!)</li>
+<li><code>awk</code> - Text processing and filtering</li>
+<li><code>sed</code> - Stream editing and substitution</li>
+<li><code>jq</code> - JSON log parsing</li>
+<li><code>cut</code>, <code>sort</code>, <code>uniq</code> - Data manipulation</li>
+</ul>
+<p><strong>For Production:</strong></p>
+<ul>
+<li><strong>ELK Stack</strong> (Elasticsearch, Logstash, Kibana) - Log aggregation and search</li>
+<li><strong>Splunk</strong> - Enterprise log management and SIEM</li>
+<li><strong>Datadog</strong> - Cloud monitoring and log analytics</li>
+<li><strong>AWS CloudWatch</strong> - AWS-native log management</li>
+<li><strong>Google Cloud Logging</strong> - GCP log aggregation</li>
+<li><strong>Grafana Loki</strong> - Open-source log aggregation</li>
+</ul>
+<h2>The Investigation Process</h2>
+<ol>
+<li><strong>Understand the incident:</strong> API key was used to drain hot wallet</li>
+<li><strong>Identify the timeframe:</strong> Breach occurred yesterday morning</li>
+<li><strong>Locate relevant logs:</strong> server.log contains all service logs</li>
+<li><strong>Filter progressively:</strong> ERROR → UNAUTHORIZED → API_KEY</li>
+<li><strong>Extract evidence:</strong> Find the exact API key used</li>
+<li><strong>Report findings:</strong> Document the compromised credential</li>
+</ol>
+<h2>Security Lessons</h2>
+<p><strong>Why was the API key logged?</strong></p>
+<ul>
+<li>Developer left debug logging enabled in production</li>
+<li>Error handler printed full request context</li>
+<li>Exception stack trace included environment variables</li>
+<li>Middleware logged all API request headers</li>
+</ul>
+<p><strong>How to prevent this:</strong></p>
+<ul>
+<li>Use secret management services (Vault, AWS Secrets Manager)</li>
+<li>Implement log sanitization middleware</li>
+<li>Review all logging statements before deployment</li>
+<li>Set up automated secret scanning (GitGuardian, TruffleHog)</li>
+<li>Regular security audits of logging practices</li>
+<li>Train developers on secure logging</li>
+</ul>
+<p><strong>Remember:</strong> Logs are permanent. Once a secret is logged, assume it's compromised. Rotate keys immediately, review access logs, and implement monitoring.</p>
+<p>In production systems, security teams often scan logs retroactively for accidentally exposed secrets. This challenge simulates that real-world forensics workflow!</p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="security">
+                <input id="challenge" type="hidden" value="apikeylogforensics">
+                <input id="challenge-id" type="hidden" value="22175">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f29a9391999780b2969d989ddc82859cdc919d9e9e979597">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="22175" data-challenge-name="API Key Log Forensics">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/honors-dojo~9d345510/surveys/security/apikeylogforensics" id="survey-notification" class="survey alert-dismissable w-100 survey-id-22175" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-6">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-5" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-5" aria-expanded="false" aria-controls="challenges-body-5">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="5" data-challenge-id="basicsignaturevalidation" data-challenge-name="Basic Signature Validation" id="challenges-header-5">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Basic Signature Validation</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                1 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-5" class="collapse" aria-labelledby="module-content-header-6" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                <h1>Basic Signature Validation</h1>
+<h2>Digital Signatures in Web3</h2>
+<p>In cryptocurrency and blockchain systems, <strong>digital signatures</strong> are the fundamental mechanism that proves ownership and authorization. Every transaction you make with your crypto wallet is digitally signed with your private key.</p>
+<p><strong>What a digital signature proves:</strong></p>
+<ol>
+<li><strong>Authentication:</strong> The message was signed by the owner of the private key</li>
+<li><strong>Integrity:</strong> The message wasn't altered after being signed</li>
+<li><strong>Non-repudiation:</strong> The signer cannot deny having signed it</li>
+</ol>
+<p><strong>Without signatures, crypto wouldn't work</strong> - anyone could spend anyone else's funds!</p>
+<h2>How Digital Signatures Work</h2>
+<h3>The Process</h3>
+<ol>
+<li><strong>Transaction Creation:</strong> You want to send 1 ETH to someone</li>
+<li><strong>Hashing:</strong> The transaction data is hashed into a fixed-size digest</li>
+<li><strong>Signing:</strong> Your private key encrypts the hash, creating a signature</li>
+<li><strong>Broadcasting:</strong> Transaction + signature sent to the network</li>
+<li><strong>Verification:</strong> Nodes use your public key to verify the signature</li>
+</ol>
+<h3>The Math (Simplified)</h3>
+<p>Ethereum uses <strong>ECDSA</strong> (Elliptic Curve Digital Signature Algorithm) with the secp256k1 curve:</p>
+<ul>
+<li><strong>Private Key:</strong> A random 256-bit number (keep secret!)</li>
+<li><strong>Public Key:</strong> Derived from private key using elliptic curve math</li>
+<li><strong>Wallet Address:</strong> Last 20 bytes of the Keccak-256 hash of the public key</li>
+<li><strong>Signature:</strong> 65 bytes (r, s, v values from ECDSA)</li>
+</ul>
+<p><strong>Ethereum Signature Format:</strong></p>
+<pre><code>0x + 64 hex characters = 66 total characters
+Example: 0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef12345678
+</code></pre>
+<h2>Shell Scripting with Conditionals</h2>
+<p>For this challenge, we'll simulate signature validation using bash conditionals. Real validation uses cryptographic libraries, but the <strong>conditional logic pattern</strong> is the same.</p>
+<h3>Basic If/Then/Else Structure</h3>
+<pre><code>#!/bin/bash
+
+if [ condition ]; then
+    # Code if condition is true
+    echo &quot;Condition met!&quot;
+else
+    # Code if condition is false
+    echo &quot;Condition not met&quot;
+fi
+</code></pre>
+<h3>Variable Assignment</h3>
+<pre><code># Read file content into a variable
+CONTENT=$(cat filename.txt)
+
+# Get character count
+LENGTH=$(echo -n &quot;$CONTENT&quot; | wc -c)
+
+# Command line arguments
+FIRST_ARG=$1
+SECOND_ARG=$2
+</code></pre>
+<h3>Comparison Operators</h3>
+<p><strong>Numeric Comparisons:</strong></p>
+<ul>
+<li><code>-eq</code> → equal to</li>
+<li><code>-ne</code> → not equal to</li>
+<li><code>-lt</code> → less than</li>
+<li><code>-le</code> → less than or equal to</li>
+<li><code>-gt</code> → greater than</li>
+<li><code>-ge</code> → greater than or equal to</li>
+</ul>
+<p><strong>String Comparisons:</strong></p>
+<ul>
+<li><code>=</code> → equal to</li>
+<li><code>!=</code> → not equal to</li>
+<li><code>-z</code> → string is empty</li>
+<li><code>-n</code> → string is not empty</li>
+</ul>
+<p><strong>Examples:</strong></p>
+<pre><code>if [ $NUMBER -eq 42 ]; then
+    echo &quot;The answer!&quot;
+fi
+
+if [ &quot;$STRING&quot; = &quot;hello&quot; ]; then
+    echo &quot;Greeting found&quot;
+fi
+
+if [ $COUNT -gt 100 ]; then
+    echo &quot;More than 100&quot;
+fi
+</code></pre>
+<h2>The Challenge</h2>
+<p>In this challenge, you'll write a bash script that validates Ethereum signatures by checking their format.</p>
+<h3>The Scenario</h3>
+<p>You're building a transaction validator for a Web3 application. Before attempting cryptographic verification (which is expensive), you need to check if signatures have the correct format.</p>
+<p><strong>Valid Ethereum signatures must be exactly 66 characters:</strong></p>
+<ul>
+<li><code>0x</code> prefix (2 characters)</li>
+<li>64 hexadecimal characters</li>
+</ul>
+<p><strong>Your task:</strong> Write a validation script that:</p>
+<ol>
+<li>Reads a transaction file</li>
+<li>Reads a signature file (passed as argument)</li>
+<li>Counts the signature's characters</li>
+<li>Checks if it's exactly 66 characters</li>
+<li>Awards the flag if valid, shows error if invalid</li>
+</ol>
+<h2>Your Task</h2>
+<p>Run the <code>signatureValidator</code> command to set up the challenge files.</p>
+<p>Then, write a bash script called <code>validate.sh</code> that implements the validation logic using <code>if/then/else</code> conditionals.</p>
+<p><strong>The flag will be awarded when your script correctly validates the signature format.</strong></p>
+<h3>Files Provided</h3>
+<p>After running <code>signatureValidator</code>, you'll have:</p>
+<ul>
+<li><code>transaction.txt</code> - A JSON transaction object</li>
+<li><code>valid_signature.txt</code> - A properly formatted signature (66 chars)</li>
+<li><code>invalid_signature.txt</code> - An improperly formatted signature (wrong length)</li>
+</ul>
+<h3>Hints</h3>
+<ol>
+<li>Use <code>wc -c</code> to count characters in a file</li>
+<li>Use <code>echo -n &quot;$VAR&quot; | wc -c</code> to count variable length</li>
+<li>Ethereum signatures are exactly 66 characters</li>
+<li>Use <code>-eq</code> for numeric equality in bash</li>
+<li>The script should accept a filename as its first argument (<code>$1</code>)</li>
+<li>Make your script executable with <code>chmod +x validate.sh</code></li>
+</ol>
+<h3>Script Template</h3>
+<p>Here's the structure (you need to fill in the logic):</p>
+<pre><code>#!/bin/bash
+
+# Read the transaction (for context)
+TRANSACTION=$(cat ~/transaction.txt)
+
+# Get signature filename from first argument
+SIGNATURE_FILE=$1
+
+# Read the signature content
+SIGNATURE=$(cat &quot;$SIGNATURE_FILE&quot;)
+
+# Count signature length
+SIG_LENGTH=$(echo -n &quot;$SIGNATURE&quot; | wc -c)
+
+# Validate length
+if [ $SIG_LENGTH -eq 66 ]; then
+    echo &quot;✓ Valid signature format!&quot;
+    echo &quot;✓ Length correct: 66 characters&quot;
+    echo &quot;✓ Transaction can proceed&quot;
+    # Award flag here
+else
+    echo &quot;✗ Invalid signature format&quot;
+    echo &quot;✗ Expected: 66 characters&quot;
+    echo &quot;✗ Got: $SIG_LENGTH characters&quot;
+    echo &quot;✗ Transaction rejected&quot;
+fi
+</code></pre>
+<h2>Real-World Signature Verification</h2>
+<p>In production systems, signature verification involves cryptographic operations:</p>
+<h3>JavaScript (ethers.js)</h3>
+<pre><code>const ethers = require('ethers');
+
+// Message to sign
+const message = &quot;Transfer 1 ETH&quot;;
+
+// Sign with private key
+const wallet = new ethers.Wallet(privateKey);
+const signature = await wallet.signMessage(message);
+
+// Verify signature
+const recoveredAddress = ethers.utils.verifyMessage(message, signature);
+console.log(recoveredAddress === wallet.address); // true
+</code></pre>
+<h3>Python (web3.py)</h3>
+<pre><code>from eth_account import Account
+from eth_account.messages import encode_defunct
+
+# Message to sign
+message = encode_defunct(text=&quot;Transfer 1 ETH&quot;)
+
+# Sign with private key
+signed_message = Account.sign_message(message, private_key)
+signature = signed_message.signature.hex()
+
+# Verify signature
+recovered_address = Account.recover_message(message, signature=signature)
+print(recovered_address == wallet_address)  # True
+</code></pre>
+<h3>Solidity (Smart Contract)</h3>
+<pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract SignatureVerifier {
+    function verifySignature(
+        bytes32 messageHash,
+        bytes memory signature,
+        address signer
+    ) public pure returns (bool) {
+        // Recover signer address from signature
+        address recovered = recoverSigner(messageHash, signature);
+        return recovered == signer;
+    }
+
+    function recoverSigner(
+        bytes32 messageHash,
+        bytes memory signature
+    ) internal pure returns (address) {
+        (bytes32 r, bytes32 s, uint8 v) = splitSignature(signature);
+        return ecrecover(messageHash, v, r, s);
+    }
+}
+</code></pre>
+<h2>Security Implications</h2>
+<p><strong>Why signature validation matters:</strong></p>
+<p><strong>Without Validation:</strong></p>
+<ul>
+<li>Malformed signatures could crash your app</li>
+<li>Attackers could bypass authentication</li>
+<li>Invalid transactions processed</li>
+<li>Gas wasted on verification attempts</li>
+</ul>
+<p><strong>With Validation:</strong></p>
+<ul>
+<li>Early rejection of invalid signatures</li>
+<li>Reduced computational cost</li>
+<li>Better error messages for users</li>
+<li>Protection against malformed input attacks</li>
+</ul>
+<p><strong>Real attacks prevented by validation:</strong></p>
+<ul>
+<li><strong>Replay attacks:</strong> Reusing signatures on different chains</li>
+<li><strong>Signature malleability:</strong> Modifying signature values</li>
+<li><strong>Invalid parameter attacks:</strong> Crafted inputs to break verification</li>
+<li><strong>DoS attacks:</strong> Flooding with invalid signatures</li>
+</ul>
+<h2>Advanced Bash Scripting</h2>
+<h3>File Tests</h3>
+<pre><code>if [ -f filename.txt ]; then
+    echo &quot;File exists&quot;
+fi
+
+if [ -r filename.txt ]; then
+    echo &quot;File is readable&quot;
+fi
+
+if [ -x script.sh ]; then
+    echo &quot;File is executable&quot;
+fi
+</code></pre>
+<h3>Logical Operators</h3>
+<pre><code># AND
+if [ $AGE -gt 18 ] &amp;&amp; [ $AGE -lt 65 ]; then
+    echo &quot;Working age&quot;
+fi
+
+# OR
+if [ $DAY = &quot;Saturday&quot; ] || [ $DAY = &quot;Sunday&quot; ]; then
+    echo &quot;Weekend!&quot;
+fi
+
+# NOT
+if [ ! -f temp.txt ]; then
+    echo &quot;Temp file doesn't exist&quot;
+fi
+</code></pre>
+<h3>Case Statements</h3>
+<pre><code>case $RESPONSE in
+    yes|YES|y|Y)
+        echo &quot;Proceeding...&quot;
+        ;;
+    no|NO|n|N)
+        echo &quot;Cancelled&quot;
+        ;;
+    *)
+        echo &quot;Invalid response&quot;
+        ;;
+esac
+</code></pre>
+<h2>Testing Your Script</h2>
+<pre><code># Create your validation script
+nano validate.sh
+
+# Make it executable
+chmod +x validate.sh
+
+# Test with valid signature (should succeed)
+./validate.sh ~/valid_signature.txt
+
+# Test with invalid signature (should fail with error)
+./validate.sh ~/invalid_signature.txt
+</code></pre>
+<h3>Expected Outputs</h3>
+<p><strong>Valid Signature:</strong></p>
+<pre><code>✓ Valid signature format!
+✓ Length correct: 66 characters
+✓ Transaction can proceed
+pwn{...your_flag...}
+</code></pre>
+<p><strong>Invalid Signature:</strong></p>
+<pre><code>✗ Invalid signature format
+✗ Expected: 66 characters
+✗ Got: 9 characters
+✗ Transaction rejected
+</code></pre>
+<h2>Security Best Practices</h2>
+<p><strong>DO:</strong></p>
+<ul>
+<li>Always validate input before cryptographic operations</li>
+<li>Check signature format (length, encoding, structure)</li>
+<li>Verify signatures match expected addresses</li>
+<li>Implement replay protection (nonces, chainID)</li>
+<li>Use hardware wallets for signing high-value transactions</li>
+<li>Test signature verification with known test vectors</li>
+</ul>
+<p><strong>DON'T:</strong></p>
+<ul>
+<li>Skip format validation (&quot;it's probably fine&quot;)</li>
+<li>Trust user-provided signatures without verification</li>
+<li>Reuse signatures across different chains</li>
+<li>Store private keys in code or environment variables</li>
+<li>Implement your own cryptography (use audited libraries)</li>
+</ul>
+<p><strong>Remember:</strong> In Web3, signature verification is the only thing protecting your funds. Every transaction must be properly signed and verified. A single bypass could mean complete loss of funds with no recovery possible!</p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="security">
+                <input id="challenge" type="hidden" value="basicsignaturevalidation">
+                <input id="challenge-id" type="hidden" value="22176">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b0d8d1d3dbd5c2f0d4dfdadf9ec0c7de9ed3dfdcdcd5d7d5">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="22176" data-challenge-name="Basic Signature Validation">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/honors-dojo~9d345510/surveys/security/basicsignaturevalidation" id="survey-notification" class="survey alert-dismissable w-100 survey-id-22176" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+  </div>
+
+  <br>
+  
+
+  
+
+  <h2 class="row" id="scoreboard-heading">30-Day Scoreboard:</h2>
+  <p>This scoreboard reflects solves for challenges in this module after the module launched in this dojo.</p>
+  
+  <div class="scoreboard-controls row">
+  <p>
+  <span id="scoreboard-control-week"><a href="javascript:loadScoreboard(7, 1)">7-Day</a></span> |
+  <span id="scoreboard-control-month"><a href="javascript:loadScoreboard(30, 1)">30-Day</a></span> |
+  <span id="scoreboard-control-all"><a href="javascript:loadScoreboard(0, 1)">All-Time</a></span>
+  </p>
+</div>
+<div class="scoreboard row">
+  <div class="col-md-12 p-0">
+    <table class="table table-striped">
+	    <thead>
+	      <tr>
+	        <td scope="col" class="col-md-1"><b>Rank</b></td>
+          <td scope="col" class="col-md-1"></td>
+	        <td scope="col" class="col-md-4"><b>Hacker</b></td>
+	        <td scope="col" class="col-md-4"><b>Badges</b></td>
+	        <td scope="col" class="col-md-1"></td>
+	        <td scope="col" class="col-md-1"><b>Score</b></td>
+	      </tr>
+	    </thead>
+	    <tbody id="scoreboard">
+	    </tbody>
+    </table>
+  </div>
+  <div>
+    <ul id="scoreboard-pages" class="p-0">
+    </ul>
+  </div>
+</div>
+
+  
+
+</div>
+
+    </main>
+
+    <footer class="footer">
+      <div class="container text-center" style="line-height: 20px; opacity: 0.7">
+        <small>
+          Powered by <strong>pwn.college</strong><br>
+          Interested in dedicated training or tailored services for your organization?
+          <a href="https://llc.pwn.college/">Find out more</a>.
+        </small>
+      </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="/themes/dojo_theme/static/js/vendor.bundle.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/core.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/helpers.min.js?d=0cd72d60"></script>
+
+    
+    <script defer src="/themes/dojo_theme/static/js/pages/main.min.js?d=0cd72d60"></script>
+    
+
+    <script defer src="/themes/dojo_theme/static/js/dojo/util.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/dojo/navbar.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/dojo/popup.min.js?d=0cd72d60"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+
+    
+<script defer src="/themes/dojo_theme/static/js/dojo/actionbar.min.js?d=0cd72d60"></script>
+<script defer src="/themes/dojo_theme/static/js/dojo/challenges.min.js?d=0cd72d60"></script>
+<script defer onload="loadScoreboard(30, 1);" src="/themes/dojo_theme/static/js/dojo/scoreboard.min.js?d=0cd72d60"></script>
+
+
+
+    <script>
+      window.addEventListener('load', function() {
+        if (typeof renderMathInElement !== 'undefined') {
+          renderMathInElement(document.body, {
+            delimiters: [
+              {left: '\\[', right: '\\]', display: true},
+              {left: '\\(', right: '\\)', display: false}
+            ],
+            throwOnError: false,
+            strict: false,
+            ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          });
+        }
+      });
+    </script>
+
+    
+
+    
+
+    
+    
+  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c44fdd59c623975',t:'MTc2OTQ4Mjc0MA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

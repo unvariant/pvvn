@@ -1,0 +1,858 @@
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>pwn.college</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="pwn.college">
+    <meta property="og:description" content="Learn to Hack!">
+    <meta property="og:image" content="https://pwn.college/themes/dojo_theme/static/img/dojo/ninja.png?d=0cd72d60">
+
+    <link rel="icon" href="/themes/dojo_theme/static/img/favicon.png?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/fonts.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/main.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/core.min.css?d=0cd72d60">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceMono-Regular.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceMono-Bold.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceGrotesk-VariableFont_wght.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <style>
+      @font-face {
+        font-family: 'Space Mono';
+        src: url("/themes/dojo_theme/static/font/SpaceMono-Regular.ttf?d=0cd72d60") format('truetype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Space Mono';
+        src: url("/themes/dojo_theme/static/font/SpaceMono-Bold.ttf?d=0cd72d60") format('truetype');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Space Grotesk';
+        src: url("/themes/dojo_theme/static/font/SpaceGrotesk-VariableFont_wght.ttf?d=0cd72d60") format('truetype');
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/custom.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    
+<style>
+  .setup-complete::before, .setup-incomplete::before, .setup-unknown::before {
+      position: absolute;
+      left: 10px;
+      font-size: 24px;
+      line-height: 1;
+  }
+
+  .setup-incomplete::before {
+    content: '✗';
+    color: rgb(244, 67, 54);
+  }
+
+  .setup-complete::before {
+    content: '✓';
+    color: rgb(76, 175, 80);
+  }
+
+  .setup-unknown::before {
+    content: '?';
+    color: rgb(255, 193, 7);
+  }
+</style>
+
+
+    
+    <script type="text/javascript">
+      var init = {
+	  'urlRoot': "",
+	  'csrfNonce': "b3494b98d2eb382109468c6d57a2b7c65c80dd6b380026df89a9796c31bdf9d5",
+	  'userMode': "users",
+	  'userId': 0,
+	  'start': null,
+	  'end': null,
+	  'theme_settings': null,
+          'dojo': "cse365-s2025",
+          'module': ""
+      }
+    </script>
+    
+  </head>
+  <body>
+    
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top">
+  <div class="container">
+    <a href="/" class="brand-mono-bold wordmark">
+      
+      <span class="brand-white">pwn</span><span class="brand-dot-white">.</span><span class="brand-white">college</span>
+      
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#base-navbars"
+            aria-controls="base-navbars" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="base-navbars">
+      <div class="d-none d-md-block" style="border-left: 2px solid white; height: 20px; margin: 0 20px;"></div>
+      <ul class="navbar-nav mr-auto">
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/dojos">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Dojos">
+      <i class="fas fa-torii-gate d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-torii-gate pr-1"></i>
+      
+      Dojos
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/workspace">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Workspace">
+      <i class="fas fa-desktop d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-desktop pr-1"></i>
+      
+      Workspace
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/sensai.html" target="_blank">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Help">
+      <i class="fas fa-question d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-question pr-1"></i>
+      
+      Help
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="https://discord.gg/pwncollege" target="_blank">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Chat">
+      <i class="fas fa-comments d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-comments pr-1"></i>
+      
+      Chat
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="#">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Search">
+      <i class="fas fa-search d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-search pr-1"></i>
+      
+      Search
+      
+    </span>
+  </a>
+</li>
+
+      </ul>
+      <hr class="d-sm-flex d-md-flex d-lg-none">
+      <ul class="navbar-nav ml-md-auto d-block d-sm-flex d-md-flex">
+        
+        
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/register.html">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Register">
+      <i class="fas fa-user-plus d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-user-plus pr-1"></i>
+      
+      Register
+      
+    </span>
+  </a>
+</li>
+
+        
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/login.html">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Login">
+      <i class="fas fa-sign-in-alt d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-sign-in-alt pr-1"></i>
+      
+      Login
+      
+    </span>
+  </a>
+</li>
+
+        
+
+        <li class="nav-item">
+          <a class="nav-link close-link" href="javascript:void(0)">
+            <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Hide Navbar">
+              <i class="fas caret-up d-none d-md-block d-lg-none"></i>
+            </span>
+            <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+              <i class="fas fa-caret-up pr-1"></i>
+              <span class="d-lg-none">Hide Navbar</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="navbar-pulldown">
+  <i class="fas fa-fw fa-caret-down" title="Show navigation bar"></i>
+</div>
+
+<div id="searchModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document" style="margin: 10vh auto; max-width: 650px; width: 80%;">
+    <div class="modal-content bg-dark text-white rounded-lg shadow-lg">
+      <div class="modal-body p-4">
+        <form id="searchForm">
+          <div class="input-group input-group-lg">
+            <div class="input-group-prepend">
+              <span class="input-group-text bg-secondary border-0 text-white">
+                <i class="fas fa-search"></i>
+              </span>
+            </div>
+            <input type="text" id="searchInput" class="form-control bg-dark text-white border-0" placeholder="Search..." autocomplete="off">
+            <div class="input-group-append">
+              <button type="button" class="btn btn-outline-light" data-dismiss="modal">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <div id="searchResults" class="mt-3">
+          <!-- Results will be inserted here dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <main role="main">
+      
+<div class="jumbotron">
+  <div class="container">
+    <h1>Course</h1>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-2 offset-md-1">
+      <div class="nav flex-column nav-pills" role="tablist">
+        <a class="nav-link active" id="course-syllabus-tab" data-toggle="pill" href="#syllabus" role="tab">Syllabus</a>
+        
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="tab-content" id="v-pills-tabContent">
+        <div class="tab-pane fade show active" id="syllabus" role="tabpanel">
+          
+            <h1>Syllabus: CSE 365, Spring 2025</h1>
+<hr />
+<p><strong>IMPORTANT: READ THIS FIRST: READ READ READ READ READ READ READ</strong>
+<strong>IMPORTANT: READ THIS FIRST: READ READ READ READ READ READ READ</strong>
+<strong>IMPORTANT: READ THIS FIRST: READ READ READ READ READ READ READ</strong>
+<strong>IMPORTANT: READ THIS FIRST: READ READ READ READ READ READ READ</strong>
+<strong>IMPORTANT: READ THIS FIRST: READ READ READ READ READ READ READ</strong>
+<strong>IMPORTANT: READ THIS FIRST: READ READ READ READ READ READ READ</strong></p>
+<p>Are you looking for the Fall 2025 CSE 365 syllabus? This is not it; Yan linked the wrong one! Go <a href="https://pwn.college/dojo/cse365-s2025/course/syllabus">here</a>.</p>
+<p><strong>IMPORTANT: READ ^ FIRST: READ READ READ READ READ READ READ</strong>
+<strong>IMPORTANT: READ ^ FIRST: READ READ READ READ READ READ READ</strong>
+<strong>IMPORTANT: READ ^ FIRST: READ READ READ READ READ READ READ</strong>
+<strong>IMPORTANT: READ ^ FIRST: READ READ READ READ READ READ READ</strong>
+<strong>IMPORTANT: READ ^ FIRST: READ READ READ READ READ READ READ</strong>
+<strong>IMPORTANT: READ ^ FIRST: READ READ READ READ READ READ READ</strong>
+<strong>IMPORTANT: READ ^ FIRST: READ READ READ READ READ READ READ</strong>
+<strong>IMPORTANT: READ ^ FIRST: READ READ READ READ READ READ READ</strong>
+<strong>IMPORTANT: READ ^ FIRST: READ READ READ READ READ READ READ</strong>
+<strong>IMPORTANT: READ ^ FIRST: READ READ READ READ READ READ READ</strong>
+<strong>IMPORTANT: READ ^ FIRST: READ READ READ READ READ READ READ</strong>
+<strong>IMPORTANT: READ ^ FIRST: READ READ READ READ READ READ READ</strong></p>
+<hr />
+<p><strong>University:</strong> Arizona State University <br />
+<strong>Course:</strong> CSE 365 — Introduction to Cybersecurity <br />
+<strong>Term:</strong> Spring 2025 <br />
+<strong>Course Discord Channel:</strong> <a href="https://discord.com/channels/750635557666816031/1328463339528913058">here</a> (you must first complete <a href="/dojo/cse365-s2025/course/setup">setup</a>) <br />
+<strong>Course Twitch</strong>: <a href="https://twitch.tv/pwncollege">follow this channel</a> <br />
+<strong>Course YouTube</strong>: <a href="https://youtube.com/pwncollege">follow this channel</a></p>
+<h1>Getting Started:</h1>
+<ul>
+<li>Complete course <a href="/dojo/cse365-s2025/course/setup">setup</a>.</li>
+<li>Learn <a href="/welcome">how to use the dojo</a>.</li>
+<li>Read information <a href="https://discord.com/channels/750635557666816031/1276410621558132839">on discord</a>.</li>
+<li>Read the <a href="/dojo/cse365-s2025/course/syllabus">syllabus</a>.</li>
+</ul>
+<h1>Lecture/Live Events Schedule:</h1>
+<p>Live lectures:</p>
+<ul>
+<li><code>Tuesday 12:00pm: </code> JJ in LSA191</li>
+<li><code>Thursday 12:00pm: </code> JJ in LSA191</li>
+<li>Additionally, make sure to watch all lectures in the module pages!</li>
+</ul>
+<p>Recitation (optional, hands-on challenge/concept help):</p>
+<ul>
+<li><code>Mon 4:30pm: </code>  recitation (optional hands-on challenge/concept help), BYAC 260 and BYAC 190</li>
+<li><code>Tue 4:30pm: </code>  recitation (optional hands-on challenge/concept help), BYAC 260 and BYAC 190</li>
+<li><code>Wed 4:30pm: </code>  recitation (optional hands-on challenge/concept help), BYAC 260 and BYAC 190</li>
+<li><code>Thu 4:30pm: </code>  recitation (optional hands-on challenge/concept help), BYAC 260 and BYAC 190</li>
+<li><code>Fri 4:30pm: </code>  recitation (optional hands-on challenge/concept help), BYAC 260 and BYAC 190</li>
+<li>TODO: discord</li>
+</ul>
+<p>Office hours:</p>
+<ul>
+<li><code>Wed 2:30pm</code>: Yan's office hours</li>
+<li>TBD: Connor's office hours</li>
+</ul>
+<p>Discuss, help, get help on <a href="https://discord.gg/pwncollege">our discord</a>.</p>
+<h1>Course Emails</h1>
+<p>For help with the course, email <a href="cse365@pwn.college"><span class="__cf_email__" data-cfemail="ee8d9d8bddd8dbae9e9980c08d8182828b898b">[email&#160;protected]</span></a> rather than individual faculty or TAs!</p>
+<h1>Instructors</h1>
+<p><strong>Instructor:</strong> <a href="https://search.asu.edu/profile/3030677">Jaejong Baek</a> <br />
+<strong>Discord Handle:</strong> Dr.JJ <br />
+<strong>Email:</strong> <a href="/cdn-cgi/l/email-protection#741e1615111f43341507015a111001"><span class="__cf_email__" data-cfemail="afc5cdcecac498efcedcda81cacbda">[email&#160;protected]</span></a></p>
+<p><strong>Instructor:</strong> <a href="https://connornelson.com/">Connor Nelson</a> <br />
+<strong>Discord Handle:</strong> kanak <br />
+<strong>Email:</strong> <a href="/cdn-cgi/l/email-protection#5635393838392478327838333a2539381637252378333223"><span class="__cf_email__" data-cfemail="51323e3f3f3e237f357f3f343d223e3f113022247f343524">[email&#160;protected]</span></a></p>
+<p><strong>Instructor:</strong> <a href="https://yancomm.net">Yan Shoshitaishvili</a> <br />
+<strong>Discord Handle:</strong> zardus <br />
+<strong>Email:</strong> <a href="/cdn-cgi/l/email-protection#c1b8a0afb281a0b2b4efa4a5b4"><span class="__cf_email__" data-cfemail="8cf5ede2ffccedfff9a2e9e8f9">[email&#160;protected]</span></a> <br />
+<strong>Office:</strong> BYENG 480</p>
+<h2>Graduate Teaching Assistants</h2>
+<p><strong>Name:</strong> Pulkit Singaria <br />
+<strong>Discord Handle:</strong> x3ero0</p>
+<p><strong>Name:</strong> Pratham Gupta <br />
+<strong>Discord Handle:</strong> Alchemy1729</p>
+<p><strong>Name:</strong> Michael Tompkins <br />
+<strong>Discord Handle:</strong> frqmod</p>
+<h1>Undergraduate Teaching Assistants</h1>
+<pre><code>--------------------------------------------------
+| Name                   | Discord Handle        |
+--------------------------------------------------
+| Ahmad Samara           | sammy177              |
+| Albert Vo              | albertvo2003          |
+| Chase Bulkin           | floww3rs              |
+| Hansel Lopez           | Bread.                |
+| Justin Yen             | renegadepenguin       |
+| Luke Perez             | lukepeke12            |
+| Miles Nguyen           | 0x.fffff              |
+| Nauman Sayed           | Nauman107             |
+| Neil Ravikumar         | rm95634               |
+| Nishanth Pallapu       | nishthefish2          |
+| Pranav Battu           | Nav69                 |
+| Roen Wainscoat         | b34ver                |
+| Ryan Hanover           | rh4hunnid             |
+| Tanay Jaiman           | darthvaderiscool      |
+| Zaid Taiyab            | zaid6491              |
+--------------------------------------------------
+</code></pre>
+<h1>Course Description</h1>
+<p>This course will introduce students to the fundamentals of cybersecurity.
+Security is a complicated thing: it is only as strong as its weakest link, and a small, single mistake can often bring down otherwise extremely secure software.</p>
+<p>In this course, we will explore security from the perspective of the web, following the entire technology stack from the CPU, to the kernel, userspace, networking, cryptography, and finally, all the way up to the browser and http server.
+Each lecture will consist of an introduction to a new topic and an assignment for students to explore these concepts.</p>
+<p>These assignments will be very thorough, and by the end, students will have an intuitive understanding of how to exploit these vulnerabilities, and will have the building blocks needed to prevent them, both in the lab and in the real world.</p>
+<h1>Course Philosophy and Expectations</h1>
+<p>In our experience, true learning emerges not from observation alone but from action—-purposeful, frequent, and unrelenting.
+To truly understand, one must engage fully and often: to experiment, to explore, to fail, and to try again.</p>
+<p>In this course, you will learn by doing--and you will do a lot to learn a lot.
+The majority of your time in this course will be spent solving challenges, and a lot of the learning will come from the process of actually solving these challenges.
+Lecture videos will provide you with some background and context, but you may feel &quot;underprepared&quot; for the challenges at times: that is ok, and by design.
+You will learn by doing, and by failing, and by trying again: this course will challenge you, and the learning process may feel uncomfortable and frustrating, different from what you are probably used to.</p>
+<p>This course is designed to teach you the fundamentals of cybersecurity, but also to teach you how to learn, how to think, how to analyze and solve problems.
+To master cybersecurity is to master computer science, and to master computer science is to master problem solving.
+This is the art of hacking--and it will be critical not only to your success in this course, but in your future career as a computer scientist--even if your future career feels completely unrelated to cybersecurity.</p>
+<p>To do in this course, is to complete challenges.
+At the end of each challenge, you will receive a &quot;flag&quot;, which makes it very clear that you have completed the challenge.
+Within a module, there may be anywhere from 10 to 100 challenges, each exploring a different aspect of the module's topic.
+We strive to make the challenges clear, and to build on each other, so that with each challenge you only need to learn a little bit more, to reach a little bit further, than the last.</p>
+<p>During this course, you should expect to run into many gaps in your knowledge and experience.
+This course will not only teach you the fundamentals of cybersecurity, but also help you identify and fill in these gaps.
+That's great: this means that you are learning.</p>
+<p>Completing this course will require a significant amount of time and effort.
+In general, if there are more challenges in a module, each will take less time to solve, and if there are fewer challenges in a module, each will take more time to solve.
+Some challenges may take significantly more time than others.
+Regardless, <strong>completing all of these challenges will take a significant amount of time--start early</strong>: ignore this warning at your own peril.</p>
+<p>Estimate how many hours you have spent so far in your computer science career, actually on the keyboard: writing code, solving problems.
+How many hours have you spent in your average computer science course; what about outside of the classroom?
+The Arizona Board of Regents requires that a <em>minimum</em> of of 45 hours of work per credit hour is expected for a course.
+This course is 3 credit hours, and so you should expect to spend at least 135 hours on this course over the semester.
+At 15 weeks, this is 9 hours per week--<em>minimum</em>.</p>
+<p>We do not take this lightly: this course is a significant time commitment, and you should plan accordingly.
+Many of you will, in fact, spend <em>more</em> than 9 hours per week on this course depending on your background and experience, and how much time you have already invested into your computer science education up to this point.
+Many of you might find this course to be the most challenging course you have taken, and find this experience to be very uncomfortable.</p>
+<p>Recognize that learning isn't supposed to be easy.
+In the moment, it may be difficult to see the value, it may be frustrating, you may feel discouraged.
+We ask you to trust us, and to trust the process: your job will be to put in the time, to make a serious effort, and our job will be to make sure that time and effort is well-spent--we're on your team even if it doesn't always feel like it.
+We hope that at the end you will look back on this course as one of the most valuable courses you have taken, and that you will be proud of the work you have done here.
+We want you to succeed not only in this course, but in your future computer science career: time spent here is a critical investment in your future.</p>
+<h1>Course Structure</h1>
+<p>This course will be delivered using the <a href="https://pwn.college">pwn.college</a> platform.</p>
+<p>All sections of this course will be treated as one big course.
+The section (and recitation) you signed up for with ASU will have zero-effect on how you take this course.</p>
+<p>All students are able to take this course completely online (and asyncronously):</p>
+<ul>
+<li>Watching pre-recorded lectures (YouTube)</li>
+<li>Working on and completing assignments (pwn.college)</li>
+<li>Seeking guidance and participating in demos (Twitch)</li>
+<li>Asking questions and collaborating (Discord)</li>
+</ul>
+<p>Students, who are able to do so, may optionally seek out in-person (syncronous) resources:</p>
+<ul>
+<li>Attending in-person lectures</li>
+<li>Asking questions and seeking help in recitations</li>
+</ul>
+<p>At a high level, the course will be broken down into 9 modules, each of which will be a deep dive into a specific area of cybersecurity, and 1 final cumulative module.
+When one module ends, the next will begin, and so on, at a steady pace of one module per 1-2 weeks (depending on the specific module) until the end of the semester.
+The majority of your time will be spent solving challenges in these modules, but you will also be expected to watch lectures and complete reflections.</p>
+<p>Challenges will often build on each other, and so in general you are encouraged to solve them in order; however, this is not required.
+In some cases, we may introduce new concepts in later challenges that do not rely on earlier challenges, and you may find to actually be easier to solve.
+And so, it may be a good strategy to pay attention to the solve counts of each challenge, as this may give you an indication of the difficulty of the challenge, and help you better prioritize your time as each challenge is worth the same amount of points.</p>
+<h1>Course Communication</h1>
+<p>All announcements and communications for the class will take place on the discord, with announcements in the #announcements and discussion in the #text class-specific channel.
+Students are expected to be on this discord and regularly monitor for new announcements.</p>
+<p>Student may use the discord to ask questions or clarifications, and the TA, Instructor, or other students can answer.
+Note that sharing full solution scripts or answers is expressly prohibited, but otherwise, collaboration on the way to the solution is allowed.</p>
+<p>Other questions should be emailed to the course mailing list at <a href="cse365@pwn.college"><span class="__cf_email__" data-cfemail="eb88988ed8dddeab9b9c85c5888487878e8c8e">[email&#160;protected]</span></a>.
+Before emailing your question, please consider asking it on the discord instead.
+This way, the entire class will benefit from your question.</p>
+<h1>Schedule</h1>
+<p>This is a <strong>TENTATIVE</strong> schedule.</p>
+<ul>
+<li>Module 1: Introduction and Using Linux. 1/13 – 1/19</li>
+<li>Module 2: Dealing with Data and Access Control. 1/20 – 1/26</li>
+<li>Module 3: Talking Web and SQL Playground. 1/27 – 2/02</li>
+<li>Module 4: Web Security. 1/27 – 2/09</li>
+<li>Module 5: Computing 101. 2/10 – 2/23</li>
+<li>Module 6: Network Security. 2/24 – 3/09</li>
+<li>Module 7: Cryptography. 3/17 – 3/30</li>
+<li>Module 8: Reverse Engineering. 3/31 – 4/13</li>
+<li>Module 9: Binary Security. 4/14 – 4/27</li>
+<li>Module 10: Integrated Security. 4/28 – 5/11</li>
+</ul>
+<p>See <a href="/dojo/cse365-s2025/course/grades">the grades page</a> for precise due dates (we may not be as quick to update this syllabus or Canvas).</p>
+<h1>Grading</h1>
+<p>This course will be graded on a 100-point scale: earn all 100 points and you have a 100% (A+) in the course.
+There will be 10 modules, each worth 10 points.
+Each module will have 1 participation point, 3 checkpoint points, 5 challenge points, and 1 reflection point, for a total of 10 points.</p>
+<p>Modules will be assigned on Mondays at 12:00am UTC-7 (start of day).
+There will be a steady pace of deadlines throughout the semester, after which it will not be possible to earn the associated points (with an exception for the challenge grade, discussed below).</p>
+<p>You will be able to see your current grade at any time on the <a href="/dojo/cse365-s2025/course/grades">grades page</a>.</p>
+<h2>Challenges (50%)</h2>
+<p>The majority of your grade will come from solving challenges.</p>
+<p>Each module will have a set of challenges that you must solve.
+Within a module, each challenge will be worth the same amount of points.
+At the end of a challenge, you will receive a &quot;flag&quot;, which makes it very clear that you have completed the challenge.
+You must submit these flags to receive credit for the challenge.</p>
+<p>Partial credit will be given for partial completion of the challenges.
+For example, if you solve 7 out of 10 challenges in a module, you will receive 35% of the module grade (out of the 50% available for challenges).</p>
+<p>Late credit will be given for challenges, but at a reduced rate: 80% per late solve, or in other words, a 20% penalty for solving a challenge late.
+Challenges solved on-time will not be negatively impacted by late solves: late solves can only help your grade.
+As a reminder, when one module ends, the next will begin, and so counting on having time to complete challenges after the module deadline is not a good strategy.</p>
+<p>This will be due either 1 week or 2 weeks, depending on the module, after the module is assigned: Sunday at 11:59pm UTC-7 (end of day).</p>
+<h2>Checkpoints (30%)</h2>
+<p>Each module will have a &quot;checkpoint&quot;, which is a deadline by which you must solve half of the challenges in the module.
+The checkpoint helps to ensure that you are making steady progress throughout the semester.
+In return for your consistent effort, your grade is effectively &quot;boosted&quot; on the first half of the challenges, which are often easier than the second half.</p>
+<p>Partial credit will be given for partial completion of the checkpoint.</p>
+<p>Late credit will not be given for checkpoints.</p>
+<p>This will be due 1 week after the module is assigned: Sunday at 11:59pm UTC-7 (end of day).</p>
+<h2>Participation (10%)</h2>
+<p>Your participation grade will be based on watching lectures.</p>
+<p>Each module will have lectures that you are required to watch.
+These lectures will be available online, allowing you to watch them at your own pace.</p>
+<p>We will use various methods throughout the semester to ensure that you are watching the lectures.
+It will be clear to you whether or not you are receiving credit.</p>
+<p>Partial credit will be given for partial completion of the lectures.</p>
+<p>Late credit will not be given for participation.</p>
+<p>This will be due 1 week after the module is assigned: Sunday at 11:59pm UTC-7 (end of day).</p>
+<h2>Reflections (10%)</h2>
+<p>Each module will have a &quot;reflection&quot;, which is a set of questions that you must answer and a technical writeup of your approach to and takeaways from the challenges.
+You may also optionally provide feedback on the module.
+This is your opportunity to reflect on what you learned in the module, and to provide us with feedback and an understanding of how things are going for you.</p>
+<p>Partial credit will not be possible for reflections.</p>
+<p>Late credit will not be given for reflections.</p>
+<p>This will be due 2 days after the challenges deadline for the module (e.g., either 9 days or 16 days after the module is assigned, depending on the module): Tuesday at 11:59pm UTC-7 (end of day).</p>
+<h2>Early Progress</h2>
+<p>We run the pwn.college platform, and make all of the content publicly available to the world.
+You may decide to work on challenges before (or after) the semester, or work on challenges not-yet-assigned throughout the semester.
+If you solve a challenge that ends up being part of an assignment in this course, that challenge is solved, and you will receive course credit for that (however, you may not receive leaderboard credit in the course dojo).
+This includes the situation where you decide to retake the course.
+You may prefer to make a new account, to get a fresh slate, or simply solve already-solved challenges again to make sure you are adequately prepared for later challenges; however, this is not required, unless you have prior academic integrity violations on the platform (or are concerned some of your progress may be due to academic integrity violations).
+All of this being said, we make <strong>no guarantees</strong> on which challenges will or will not be included in an assignment, until that assignment is released: if you work ahead, you do so at your own <em>risk</em> (hopefully you still learn something useful!).
+You should assume that things will change, as we continue to iterate and improve this course over time.
+Furthermore, while we hold this policy <em>this</em> semester, there are <strong>no guarantees</strong> that this policy will hold in <em>future</em> semesters.</p>
+<h2>Extension Requests</h2>
+<p>Please understand that we believe deadlines to be an important mechanism for ensuring success in this class.
+When one module ends, the next begins, and so an extension on one module can negatively impact the next.
+And so, in our experience, extensions often <em>hurt</em> students.
+Steady progress in the course is critical to success.</p>
+<p>That being said, we understand that things come up, and we aren't unreasonable people.</p>
+<p>Our extension policy will allow exceptions (of up to 7 days) for the following:</p>
+<ul>
+<li>Personal Health</li>
+<li>Family Health/Obligations</li>
+<li>Professional Obligations</li>
+<li>Official ASU Team/Club/Course Activity</li>
+<li><a href="https://eoss.asu.edu/accessibility">SAILS</a></li>
+</ul>
+<p>In addition, every student may request and use up to a total of 7 days of no-questions-asked extensions throughout the entire semester.
+The maximum extension available on any assignment is 7 days, and extensions will be granted in 1-day increments (if you want a 1-hour extension, that is a 1-day extension).
+Extensions will impact all parts of a module.
+For example, if you receive a 1-day extension on the checkpoint, you will also receive a 1-day extension on the challenges, participation, and reflection deadlines (and vice versa); this would use 1-day of your no-questions-asked extensions (if you did not have a specified, allowed reason).
+Once you have used all of your no-questions-asked extension request days, you may not ask for more, or try to trade-in past days to optimize your grade.
+All requests to use no-questions-asked extension days are final, and it is your responsibility to keep track of how many days you have requested.
+We are trying our best to be reasonable and help you out--this policy is &quot;our best offer&quot; and we will not negotiate, argue, or make exceptions.</p>
+<p>In order to collect all extension requests into a single location, please <a href="https://forms.gle/8vaAsgbdh294Pnt56">make your request here</a>.
+Do not make your request over email, Canvas, or Discord--doing so will not be considered a valid request, and you will be redirected to review this syllabus.
+You will specify the module, reason, and the number of days to extend the module past the original deadline.
+For example, if a deadline is Sunday at 11:59pm, and you specify &quot;2&quot;, it will be extended to Tuesday at 11:59pm.
+If you request multiple extensions for the same module, only the most recent will be considered (they will not add together).</p>
+<p>You must request the extension within 48 hours after the deadline for the assignment.
+Your request will be automatically provisionally granted: you should see a <code>*</code> on <a href="/dojo/cse365-s2025/course/grades">the grades page</a> next to the assignment dates with your extended date within 24 hours.
+If, after manually reviewing your request, we determine your request to be unreasonable, we will remove your extension.
+Please do not be unreasonable with your requests.
+Do not abuse this semi-automated system.</p>
+<h2>Extra Credit</h2>
+<p>You should not expect any extra credit in this course.
+That being said, there is a bug bounty program that you may participate in if you find any security issues in the course infrastructure, for which you may earn extra credit.
+In general, you should probably expect that earning points through the bug bounty program will be more difficult than earning points through the regular course assignments, but you may find it to be a fun and rewarding challenge.</p>
+<h3>pwn.college Bug Bounty Program</h3>
+<p>Any <em>responsibly-disclosed</em> <em>serious</em> <em>security issues</em> in the course platform will be eligible for extra credit.</p>
+<p>For example, a bug that allows you to bypass the &quot;intended&quot; solution for a few challenges within a module, may be worth 1-5% exta credit; a bug that allows you to bypass the &quot;intended&quot; solution for all challenges within a module, may be worth 5-10% extra credit.
+To qualify, this bug must truly <em>bypass</em> the intended solution.
+In some cases there may be multiple intended solutions, or you might arrive at the intended solution for a later challenge, which works for multiple challenges: this is not eligible for the bug bounty program.
+In general, if it feels like you're able to solve challenges without using and exploring the concepts discussed in the module, you may have found a bug that is eligible for the bug bounty program.
+Feel free to ask and we'll let you know, but some challenges may have an intentionally &quot;clever&quot; solution that we are aware of, and are fine with.</p>
+<p>A bug that allows you to bypass the &quot;intended&quot; solution for all challenges within the course, leak sensitive user data, escape your workspace, or otherwise have a significantly serious impact on the platform, may be worth 10-20% extra credit--and maybe even a job if you're interested.
+Boring denial-of-service bugs are not eligible for the bug bounty program, but there may some exceptions for particularly interesting or creative denial-of-service bugs that we might not have considered, and may be able to actually fix.
+If there's a threat model we haven't considered here, and you find a bug that abuses that threat model, let us know and we'll consider it.</p>
+<p>We appreciate when you let us know about typos and grammatical errors, or other minor issues in the course platform, but please do not report them as security issues.
+If you spam us with minor non-security issues, trying to qualify them as part of this bug bounty program, you may earn yourself a penalty of up to 5% <em>negative</em> extra credit.
+Allowances will be made for honest mistakes leading to a spurious bug bounty filing, but please don't waste our time on purpose.</p>
+<p>Abusing security issues without responsibly disclosing them will be considered an Academic Integrity Violation: don't do it.
+Instead, earn yourself some extra credit, help us improve the platform, learn something new, and maybe even get a job!</p>
+<h2>Letter Grade Calculation</h2>
+<p>The final grade percentage will be translated to letter grades with the following cutoffs:</p>
+<table>
+<thead>
+<tr>
+<th>Percentage Grade</th>
+<th>Letter Grade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&gt;= 100</td>
+<td>A+</td>
+</tr>
+<tr>
+<td>&gt;= 93</td>
+<td>A</td>
+</tr>
+<tr>
+<td>&gt;= 90</td>
+<td>A-</td>
+</tr>
+<tr>
+<td>&gt;= 87</td>
+<td>B+</td>
+</tr>
+<tr>
+<td>&gt;= 83</td>
+<td>B</td>
+</tr>
+<tr>
+<td>&gt;= 80</td>
+<td>B-</td>
+</tr>
+<tr>
+<td>&gt;= 77</td>
+<td>C+</td>
+</tr>
+<tr>
+<td>&gt;= 70</td>
+<td>C</td>
+</tr>
+<tr>
+<td>&lt; 70</td>
+<td>E</td>
+</tr>
+</tbody>
+</table>
+<p>The course will end on May 11th at 11:59pm UTC-7 (end of day), at which point final grades will be calculated and submitted to ASU.
+There will be no exceptions to this deadline: ASU requires that grades be submitted on May 12th, and so no further extensions can be granted.</p>
+<h2>Curves</h2>
+<p>If necessary, we will curve on an <em>individual module basis</em>.
+We will decide on these curves promptly.
+There will be no course-wide curve.</p>
+<p>&quot;Academic Dishonesty includes ... [a]ttempting to influence or change any Academic Evaluation, or academic record for reasons having no relevance to academic achievement.&quot;
+Do not ask us to curve or &quot;round up&quot; your grade: doing so is an Academic Integrity Violation.
+The grading policy is very clear and very explicit; you should always know what your grade is and what you can do to improve your grade--through your own achievements.</p>
+<h2>Example Scenarios</h2>
+<p><strong>&quot;Cs get degrees!&quot;</strong> <br />
+A student that watches all the lectures (earning full 10% participation), does the reflections (another 10%), reaches every checkpoint (another 30%), thus solving half of the challenges of each module (another 25%, though rounded down in the case of an odd number of chals per module), and does literally nothing else, will get about 75% in the course.</p>
+<p><strong>The Procrastinator.</strong> <br />
+A student that solves all challenges before their respective module due dates but misses all the checkpoints will earn a 70% in the course (provided they earn full participation and reflection grades).
+Do the checkoints.</p>
+<p><strong>The Extreme Procrastinator.</strong> <br />
+A student that turns into Rainman and solves all challenges on the last day of the semester will earn (provided they have full participation and reflection) 10% reflection + 10% participation + 0% checkpoint + 40% = 60% and an Orange Belt.
+Don't be an extreme procrastinator.</p>
+<p><strong>Almost There.</strong> <br />
+A student that solves everything, perfectly on time, but misses one challenge will get a 99.something% and get an A.</p>
+<h1>Getting Help</h1>
+<p>The majority of your time in this course will be spent solving challenges, on your own.
+Inevitably, you may run into problems that have you feeling truly stuck.
+When this happens, we encourage you to take a break, review the course resources, and then try again.
+But if you're still stuck, we encourage you to ask for help.</p>
+<h2>Discord</h2>
+<p>The <a href="https://discord.gg/pwncollege">course Discord</a> is the primary place to ask for help, and students are also encouraged to help each other.
+One of the final ways to master a concept is to teach it to someone else.</p>
+<p>There is a delicate balance between being <strong>excessively</strong> &quot;helpful&quot;, and learning.</p>
+<p>If you are asking for help, you should be asking for help on a concept, not on how to solve a specific challenge.
+The ultimate goal here is to learn, not for someone to help you improve your grade.</p>
+<p>If you are providing help, you should be helping someone understand a concept, not how to solve a specific challenge.
+The ultimate goal here is to learn, not to help someone improve their grade or to show off that you already understand the concept.
+Guiding someone is a difficult skill--it can even be frustrating at times.
+&quot;Why don't you just...&quot; or &quot;It's easy, just...&quot; or &quot;Just run this command...&quot; are not helpful.</p>
+<p>Instead, help should be about uncovering misunderstandings--about invalidating hypotheses.
+Presumably the student has tried to do something, and it doesn't work--there is a hypothesis that is objectively incorrect, even if it might feel correct.
+Why is it incorrect?
+Ideally, you shouldn't provide the answer to that question, but instead guide the student towards invalidating the hypothesis for themselves.
+Put yourself in the student's shoes: if you had that misunderstanding--that hypothesis--how would you go about invalidating it?
+Is there a command you might run?
+Some documentation you might read?
+You're the expert here, you have some thought process that allowed you to succeed where the student is currently failing.
+Or maybe you never had that misunderstanding--now you have the opportunity to invalidate a hypothesis you may have never considered or thought about.
+Reveal your thought process to them so that they may replicate it in the future without your help.</p>
+<p>If you're asking for help, it is important to remember that you should be putting in the effort that makes you deserving of help.
+Low effort requests for help are a good way to get low effort responses.
+This includes blindly regergitating what an LLM has told you without making an effort to understand it.</p>
+<p>As part of the process of asking for help, and providing help, <em>you may not discuss full or significant portions of a challenge's solution</em>.
+The challenges explore important concepts, and so it is fine to discuss the challenges--but you must focus on the concepts, not the solutions.
+The challenges must still be solved individually, and providing a solution--for example, asking someone to debug your buggy solution script--is an Academic Integrity Violation.
+Feel free to discuss ideas important to the challenge, or tools which may be useful.</p>
+<p>If there is any confusion, just ask!
+We try to assume good intentions, but egregious violations are an Academic Integrity Violation.
+Note that, in the entire history of pwn.college, no one has received an AIV for any public activity or help on our discord.
+Don't worry, be reasonable, and help your peers!</p>
+<h2>Recitations</h2>
+<p>This course has daily (Monday-Friday) recitations during the week from 4:30 to 5:45 in BYAC 190 and 260.
+Teaching Assistants will be available during this time to provide you with assistance and answer questions.</p>
+<p>Can't make it?
+No problem!
+The Discord will still be the primary place to ask for and receive help.
+Helping on Discord is part of our TA and instructor team's duties.</p>
+<h2>Office Hours</h2>
+<p>This course has office hours that will be held online weekly on <a href="https://www.twitch.tv/pwncollege">Twitch</a>.
+Every office hour might look a little different, but in general you can expect to see a mix of live problem solving, Q&amp;A, general discussion--and good vibes.
+The hope is to provide you with a more interactive experience, and give you an understanding of how an expert might approach a problem.
+You are encouraged to attend/watch office hours, but they are not required, and you can catch up on office hours you may have missed <a href="https://www.twitch.tv/pwncollege/videos">after the fact</a>.
+You might find it useful to at least spend a few minutes every week jumping around the videos after the fact looking to see if there are any interesting problems or discussions that you might find valuable--there can be a lot of valuable nuggets in there.</p>
+<h2>SENSAI and Other Generative AI</h2>
+<p>This course allows you to use generative AI.</p>
+<p>It seems clear to us that generative AI can be an incredibly powerful tool for learning, and will likely be a critical part of the future of education.
+However, as a warning, we have already seen generative AI be extremely detrimental to many students' success in this course.
+If the LLM is doing more thinking than you, you may be on a fast-track to fail this course.
+There are a lot of concepts to learn, and many concepts build on each other.
+While an LLM may trivially solve some of the earlier challenges, doing so will rob you of the experience and understanding necessary to complete later challenges, when the LLM may not as easily come to your rescue.
+Furthermore, we have instructed our TAs to <em>not</em> help you debug partial-solutions that are obviously LLM-generated, which you clearly have little-to-no understanding of, and so the TAs will not come to your rescue either.
+Earlier (easier) challenges provide the foundation necessary for you to make progress on the later (harder) challenges; if you are missing an understanding developed in prior challenges, you will be expected to return to those earlier challenges to develop that understanding.
+<strong>Do not let the LLMs dig your educational-grave</strong>.</p>
+<p>It seems equally clear to us that generative AI will be an incredibly powerful tool in your future career as a computer scientist.
+So it makes sense to learn how to use it effectively now.
+But just because it can solve a challenge with minimal effort for you, doesn't mean that you should let it.
+There's a reason students learn to add and multiply numbers without a calculator before they learn to use a calculator--even when most professionals will end up using a calculator for most of their number-crunching.
+It's about building a foundation of understanding that you can continue to build on--when the problems aren't small toy problems anymore.
+If the LLM is more important to solving problems than you are, you may be on a fast-track to fail in the job market.
+<strong>Do not let the LLMs dig your professional-grave</strong>.</p>
+<p>Your goal while using generative AI in this course should always be to <em>learn</em>, not simply to improve your grade.
+Asking an LLM to just solve the challenge for you is <em>bad</em>.
+However, asking it insightful questions to better understand a concept or to clarify the syntax for an idea you have already conceptualized can be incredibly beneficial to your learning and success.</p>
+<p>We provide <a href="/sensai.html">SENSAI</a>, a GPT-4 instance augmented with data from your running challenge.
+If you find it useful, feel free to use it to your heart's content, or until you get rate-limited.</p>
+<p>Please keep Academic Integrity principles in mind while using generative AI.
+If your solution is unreasonably similar to another student's and you blame it on AI, your argument will be rejected.
+Using SENSAI may allow us to investigate your claims; using other AI platforms definitely will not.
+It is your responsibility to generate your own solution.
+If you're concerned about generative AI producing the same solution for another student, consider this a warning against copying your solution from an LLM.
+We are reasonable people here, but LLMs will not be your &quot;Get Out of Jail Free&quot; card.</p>
+<h2>Peer Collaboration</h2>
+<p>As discussed above, you are encouraged to collaborate with your peers.
+However, you may <strong>only</strong> collaborate in the official <a href="https://discord.gg/pwncollege">pwn.college Discord</a> and in CSE 365 recitations.
+Any discussion of course material on <strong>any</strong> other Discord, even quasi-official Discords such as the ASU Hacking Club, or elsewhere, will be considered an Academic Integrity Violation.</p>
+<h1>Honors Contracts</h1>
+<p>This course offers honors contracts!
+Honors students must create a custom pwn.college module on a computing topic of their choice, and submit it as a contribution to the <a href="https://pwn.college/honors-dojo~ef9ed69f/">Honors Dojo</a>.
+There should be 4-10 challenges progressively teaching the concept, as well as either accompanying text or lecture videos (at least 10 minutes per challenge) to help explain ideas.
+Interested students should contact the instructors over email.</p>
+<h1>Recommended Textbook</h1>
+<p>There is no recommended textbook for this course.
+Any reading material assigned will be from publicly-available sources on the internet.</p>
+<h1>Plagiarism and Cheating</h1>
+<p>Plagiarism or any form of cheating in assignments or projects is subject to serious academic penalty.
+To understand your responsibilities as a student read: <a href="http://www.asu.edu/aad/manuals/usi/usi104-01.html">ASU Student Code of Conduct</a> and <a href="http://provost.asu.edu/academicintegrity/policy">ASU Student Academic Integrity Policy</a>.
+There is a zero tolerance policy in this class: any violation of the academic integrity policy will result in a zero on the assignment and the violation will be reported to the Dean’s office.
+Plagiarism is taken very seriously in this course.</p>
+<p>Examples of academic integrity violations include (but are not limited to):</p>
+<ul>
+<li>Solving challenges as a group.</li>
+<li>Using or referencing someone else's solution to solve a challenge.</li>
+<li>Sharing any amount of solution code with another student, even if it is just a few lines.</li>
+<li>Using external online resources which specifically reference pwn.college, CSE 365, or directly address an assignment challenge.</li>
+<li>Copying significant portions of a solution from an LLM or other generative AI.</li>
+<li>Sharing a flag with another student.</li>
+</ul>
+<p>Posting your assignment solutions online is expressly forbidden, and will be considered a violation of the academic integrity policy.
+Note that this includes working out of a public Github repository.
+The <a href="https://education.github.com/pack">Github Student Developer Pack</a> provides unlimited private repositories while you are a student, making it easy to begin with a private GitHub repository.</p>
+<p>If you are ever even slightly unsure, just ask us!</p>
+<h1>Additional Information</h1>
+<p>Information in the syllabus may be subject to change with reasonable advance notice.</p>
+<p>Students requesting disability accommodations should register with the Disability Resource Center (DRC) and present the instructor with appropriate documentation from the DRC.</p>
+<p>Title IX is a federal law that provides that no person be excluded on the basis of sex from participation in, be denied benefits of, or be subjected to discrimination under any education program or activity.
+Both Title IX and university policy make clear that sexual violence and harassment based on sex is prohibited.
+An individual who believes they have been subjected to sexual violence or harassed on the basis of sex can seek support, including counseling and academic support, from the university.
+If you or someone you know has been harassed on the basis of sex or sexually assaulted, you can find information and resources at <a href="https://sexualviolenceprevention.asu.edu/faqs">https://sexualviolenceprevention.asu.edu/faqs</a>.</p>
+<p>As mandated reporters, we are obligated to report any information we become aware of regarding alleged acts of sexual discrimination, including sexual violence and dating violence.
+ASU Counseling Services, <a href="https://eoss.asu.edu/counseling">https://eoss.asu.edu/counseling</a>, is available if you wish discuss any concerns confidentially and privately.</p>
+<p>Syllabus copyright 2025, along with all lectures and course-related written materials.
+During this course students are prohibited from making audio, video, digital, or other recordings during class, or selling notes to or being paid for taking notes by any person or commercial firm without the express written permission of the faculty member teaching this course.
+Be reasonable.</p>
+
+          
+        </div>
+
+        
+        <div class="tab-pane fade" id="setup" role="tabpanel">
+          <ol>
+            <li class="setup-incomplete">Create a pwn.college account <a href="/register.html">here</a>. You can use an existing account, or create a new one specifically for the course. The username <strong>will be visible publicly</strong>: if you want to be anonymous, do not use your real name.</li>
+            
+              <li class="setup-incomplete">Create a Discord account <a href="https://discord.com/register">here</a>. You can use an existing account, or create a new one specifically for the course.</li>
+              <li class="setup-incomplete">Join the pwn.college Discord server <a href="https://discord.gg/pwncollege">here</a>. This is where you will be able to discuss the challenges with your peers and see official course announcements.</li>
+              <li class="setup-incomplete">Link your pwn.college account with your Discord <a href="/settings#discord">here</a>. As a verified student, you will receive an official course role in Discord for viewing course announcements.</li>
+            
+            <li class="setup-incomplete">Link your pwn.college account with your ASU Student ID (10-digit number) <a href="identity">here</a>. This is how we will be able to give you your official course grade, and how we will be able to verify your student status for an official course role in Discord.</li>
+          </ol>
+          
+            <p>Setup incomplete.</p>
+          
+          <p></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </main>
+
+    <footer class="footer">
+      <div class="container text-center" style="line-height: 20px; opacity: 0.7">
+        <small>
+          Powered by <strong>pwn.college</strong><br>
+          Interested in dedicated training or tailored services for your organization?
+          <a href="https://llc.pwn.college/">Find out more</a>.
+        </small>
+      </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="/themes/dojo_theme/static/js/vendor.bundle.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/core.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/helpers.min.js?d=0cd72d60"></script>
+
+    
+    <script defer src="/themes/dojo_theme/static/js/pages/main.min.js?d=0cd72d60"></script>
+    
+
+    <script defer src="/themes/dojo_theme/static/js/dojo/util.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/dojo/navbar.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/dojo/popup.min.js?d=0cd72d60"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+
+    
+<script defer src="/themes/dojo_theme/static/js/dojo/course.min.js?d=0cd72d60"></script>
+<script defer src="/themes/dojo_theme/static/js/dojo/grades.min.js?d=0cd72d60"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => loadGrades("#grades"));
+</script>
+
+
+
+    <script>
+      window.addEventListener('load', function() {
+        if (typeof renderMathInElement !== 'undefined') {
+          renderMathInElement(document.body, {
+            delimiters: [
+              {left: '\\[', right: '\\]', display: true},
+              {left: '\\(', right: '\\)', display: false}
+            ],
+            throwOnError: false,
+            strict: false,
+            ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          });
+        }
+      });
+    </script>
+
+    
+
+    
+
+    
+    
+  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c44f34a9a69e60c',t:'MTc2OTQ4MjMwOA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

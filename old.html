@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+    <head>
+        <style>
+            html {
+                /* For Chrome, Safari, and Opera */
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+
+                /* For Internet Explorer and Edge */
+                -ms-overflow-style: none;
+
+                /* For Firefox */
+                scrollbar-width: none;
+
+                height: 100%;
+            }
+
+            body {
+                height: 100%;
+                margin: 0;
+            }
+
+            iframe {
+                width: 100%;
+                height: 100%;
+            }
+
+            #overlay {
+                position: absolute;
+                top: 10vh;
+                left: 0;
+                width: 100%;
+                height: 90vh;
+                margin: 0;
+                padding: 0;
+                /* background-color: red; */
+            }
+        </style>
+
+        <script>
+            window.addEventListener("keypress", function (e) {
+                console.log(e.keyCode);
+            });
+        </script>
+    </head>
+    <body>
+        <div id="overlay"></div>
+        <iframe src="https://pwn.college"></iframe>
+    </body>
+</html>

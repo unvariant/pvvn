@@ -1,0 +1,2563 @@
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>pwn.college</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="pwn.college">
+    <meta property="og:description" content="Learn to Hack!">
+    <meta property="og:image" content="https://pwn.college/themes/dojo_theme/static/img/dojo/ninja.png?d=0cd72d60">
+
+    <link rel="icon" href="/themes/dojo_theme/static/img/favicon.png?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/fonts.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/main.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/core.min.css?d=0cd72d60">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceMono-Regular.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceMono-Bold.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceGrotesk-VariableFont_wght.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <style>
+      @font-face {
+        font-family: 'Space Mono';
+        src: url("/themes/dojo_theme/static/font/SpaceMono-Regular.ttf?d=0cd72d60") format('truetype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Space Mono';
+        src: url("/themes/dojo_theme/static/font/SpaceMono-Bold.ttf?d=0cd72d60") format('truetype');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Space Grotesk';
+        src: url("/themes/dojo_theme/static/font/SpaceGrotesk-VariableFont_wght.ttf?d=0cd72d60") format('truetype');
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/custom.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    
+    
+
+    
+    <script type="text/javascript">
+      var init = {
+	  'urlRoot': "",
+	  'csrfNonce': "a5535ce4910028c06502f57e236bf020d405041ffaeff23114a34a0de0a3d309",
+	  'userMode': "users",
+	  'userId': 0,
+	  'start': null,
+	  'end': null,
+	  'theme_settings': null,
+          'dojo': "ctf-archive",
+          'module': ""
+      }
+    </script>
+    
+  </head>
+  <body>
+    
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top">
+  <div class="container">
+    <a href="/" class="brand-mono-bold wordmark">
+      
+      <span class="brand-white">pwn</span><span class="brand-dot-white">.</span><span class="brand-white">college</span>
+      
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#base-navbars"
+            aria-controls="base-navbars" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="base-navbars">
+      <div class="d-none d-md-block" style="border-left: 2px solid white; height: 20px; margin: 0 20px;"></div>
+      <ul class="navbar-nav mr-auto">
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/dojos">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Dojos">
+      <i class="fas fa-torii-gate d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-torii-gate pr-1"></i>
+      
+      Dojos
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/workspace">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Workspace">
+      <i class="fas fa-desktop d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-desktop pr-1"></i>
+      
+      Workspace
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/sensai.html" target="_blank">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Help">
+      <i class="fas fa-question d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-question pr-1"></i>
+      
+      Help
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="https://discord.gg/pwncollege" target="_blank">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Chat">
+      <i class="fas fa-comments d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-comments pr-1"></i>
+      
+      Chat
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="#">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Search">
+      <i class="fas fa-search d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-search pr-1"></i>
+      
+      Search
+      
+    </span>
+  </a>
+</li>
+
+      </ul>
+      <hr class="d-sm-flex d-md-flex d-lg-none">
+      <ul class="navbar-nav ml-md-auto d-block d-sm-flex d-md-flex">
+        
+        
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/register.html">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Register">
+      <i class="fas fa-user-plus d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-user-plus pr-1"></i>
+      
+      Register
+      
+    </span>
+  </a>
+</li>
+
+        
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/login.html">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Login">
+      <i class="fas fa-sign-in-alt d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-sign-in-alt pr-1"></i>
+      
+      Login
+      
+    </span>
+  </a>
+</li>
+
+        
+
+        <li class="nav-item">
+          <a class="nav-link close-link" href="javascript:void(0)">
+            <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Hide Navbar">
+              <i class="fas caret-up d-none d-md-block d-lg-none"></i>
+            </span>
+            <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+              <i class="fas fa-caret-up pr-1"></i>
+              <span class="d-lg-none">Hide Navbar</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="navbar-pulldown">
+  <i class="fas fa-fw fa-caret-down" title="Show navigation bar"></i>
+</div>
+
+<div id="searchModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document" style="margin: 10vh auto; max-width: 650px; width: 80%;">
+    <div class="modal-content bg-dark text-white rounded-lg shadow-lg">
+      <div class="modal-body p-4">
+        <form id="searchForm">
+          <div class="input-group input-group-lg">
+            <div class="input-group-prepend">
+              <span class="input-group-text bg-secondary border-0 text-white">
+                <i class="fas fa-search"></i>
+              </span>
+            </div>
+            <input type="text" id="searchInput" class="form-control bg-dark text-white border-0" placeholder="Search..." autocomplete="off">
+            <div class="input-group-append">
+              <button type="button" class="btn btn-outline-light" data-dismiss="modal">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <div id="searchResults" class="mt-3">
+          <!-- Results will be inserted here dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <main role="main">
+      
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="brand-white brand-mono-bold">CTF Archive<span class="brand-dot">.</span></h1>
+  </div>
+</div>
+<div class="container">
+  <div>
+
+
+</div>
+
+  
+  <div>
+    
+      <a href="https://github.com/pwncollege/ctf-archive/edit/main/DESCRIPTION.md#L1"
+         target="_blank"
+         class="github-edit-link"
+         title="Edit on GitHub">
+        <i class="fas fa-edit"></i>
+      </a>
+    
+    <p>Welcome to the CTF Archive! This is a comprehensive collection of challenges from past Capture The Flag competitions.</p>
+<p>This is an open source archive and we welcome contributions.</p>
+<p>The link to the github repo: <a href="https://github.com/pwncollege/ctf-archive">https://github.com/pwncollege/ctf-archive</a></p>
+<p>These modules serve as a resource for cybersecurity enthusiasts, providing easy access to preserved challenges that have been featured in previous CTF events. Whether you are looking to hone your skills, prepare for upcoming competitions, or simply explore the rich history of CTF challenges, this archive offers a robust platform for your endeavors.</p>
+<p>Explore the CTF Archive, where you can access, analyze, and learn from some of the most intriguing and educational challenges the cybersecurity community has encountered.</p>
+<p>Happy learning and hacking!</p>
+<hr />
+<p><strong>NOTE: This module is an archive of amazing work done by heroes of the CTF community, not an active competitive event!</strong> Credit for the challenges goes to their individual authors, which we will strive to properly attribute wherever possible. This dojo's &quot;scoreboard&quot; is meant for you to track your own progress, not as a comparison against others.</p>
+<hr />
+<p><strong>Other CTF preservation efforts!</strong></p>
+<ul>
+<li>The <a href="https://cryptohack.org/challenges/ctf-archive/">CryptoHack CTF Archive</a> maintains runnable cryptography challenges from past CTFs!</li>
+<li><a href="https://github.com/sajjadium/ctf-archives">Sajjadium's CTF Archives</a> and <a href="https://r3kapig-not1on.notion.site/Index-docs-format-09007cb92ef649838d8057a64f0d99dc">r3kapig's Notion</a> preserve challenge files from prior CTFs.</li>
+<li>You can play a lot of OOO's DEF CON CTF challenges at <a href="https://archive.ooo/">archive.ooo</a>.</li>
+<li><a href="https://ctftime.org">CTFtime</a> saves the metadata of the world's CTFs!</li>
+</ul>
+
+  </div>
+  <br>
+  
+
+  <div class="row text-center">
+    
+    
+  </div>
+
+  <br>
+
+  
+  <h2 class="row">Award: <b>🏁</b></h2>
+  <br>
+  
+
+  
+  <h2 class="row">Stats</h2>
+  <div id="stats-dashboard" class="stats-dashboard">
+  <div class="stat-card">
+    <div class="stat-card-header">Dojo Stats</div>
+    <div class="stat-container">
+      <div class="stat-box">
+        <div class="stat-label">Total Solves</div>
+        <div class="stat-value">
+  <div class="stat-value">
+    7,547
+    
+      <span class="stat-trend trend-down">
+        ▼99%
+      </span>
+    
+  </div></div>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-label">Hacking Now</div>
+        <div class="stat-value">
+  <div class="stat-value">
+    0
+    
+      <span class="stat-trend trend-neutral"></span>
+    
+  </div></div>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-label">Unique Hackers</div>
+        <div class="stat-value">
+  <div class="stat-value">
+    713
+    
+      <span class="stat-trend trend-down">
+        ▼99%
+      </span>
+    
+  </div></div>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-label">Challenges</div>
+        <div class="stat-value">
+  <div class="stat-value">
+    703
+    
+      <span class="stat-trend trend-neutral"></span>
+    
+  </div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-card-header">Activity History</div>
+    <div class="chart-container">
+      <canvas id="activity-chart"
+              data-labels='["Today", "1w ago", "1mo ago", "2mo ago"]'
+              data-solves='[0, 1, 2, 0]'
+              data-users='[0, 1, 1, 0]'>
+      </canvas>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-card-header">Recent Awardees</div>
+    <div class="recent-awards">
+      
+        
+        <div class="recent-item">
+          <a href="/hacker/9362" class="brand-mono">
+            Alchemy1729
+          </a>
+          <div class="recent-time">
+              08/04/24 07:43 AM
+          </div>
+        </div>
+        
+      
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-card-header">Recent Solves</div>
+    <div class="recent-activity">
+      
+        
+        <div class="recent-item">
+          REV - 100 - Square Cipher
+          <div class="recent-time">01/24/26 11:20 AM</div>
+        </div>
+        
+        <div class="recent-item">
+          PWN - mini golfing
+          <div class="recent-time">01/23/26 08:41 PM</div>
+        </div>
+        
+        <div class="recent-item">
+          CRYPTO - 100 - 2
+          <div class="recent-time">01/23/26 08:18 PM</div>
+        </div>
+        
+        <div class="recent-item">
+          CRYPTO - 100 - 1
+          <div class="recent-time">01/23/26 08:13 PM</div>
+        </div>
+        
+        <div class="recent-item">
+          REVERSE - StringCheese
+          <div class="recent-time">01/21/26 12:48 PM</div>
+        </div>
+        
+      
+    </div>
+  </div>
+</div>
+
+<script>
+function initializeChart() {
+  const chartCanvas = document.getElementById('activity-chart');
+  if (!chartCanvas || typeof Chart === 'undefined') {
+    setTimeout(initializeChart, 100);
+    return;
+  }
+
+  const parseData = (attr, fallback) => {
+    try {
+      const value = chartCanvas.dataset[attr];
+      return value ? JSON.parse(value) : fallback;
+    } catch (e) {
+      console.error(`Error parsing ${attr}:`, e);
+      return fallback;
+    }
+  };
+
+  const labels = parseData('labels', ['Today', '1w ago', '1mo ago', '2mo ago']);
+  const solvesData = parseData('solves', [0, 0, 0, 0]);
+  const usersData = parseData('users', [0, 0, 0, 0]);
+
+  // Chart.js config
+  Chart.defaults.color = '#ffffff';
+  Chart.defaults.font.family = "'Space Mono', 'JetBrains Mono', 'Consolas', monospace";
+  Chart.defaults.font.size = 9;
+
+  new Chart(chartCanvas.getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Daily Solves',
+          data: solvesData,
+          backgroundColor: 'rgba(120, 190, 32, 0.7)',
+          borderColor: '#78be20',
+          borderWidth: 1
+        },
+        {
+          label: 'Daily Users',
+          data: usersData,
+          backgroundColor: 'rgba(0, 163, 224, 0.7)',
+          borderColor: '#00a3e0',
+          borderWidth: 1
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {
+        intersect: false,
+        mode: 'index'
+      },
+      scales: {
+        x: {
+          grid: {
+            display: false
+          },
+          ticks: {
+            color: '#747474',
+            maxRotation: 25,
+            minRotation: 15
+          }
+        },
+        y: {
+          beginAtZero: true,
+          grid: {
+            color: 'rgba(72, 72, 72, 0.3)'
+          },
+          ticks: {
+            color: '#747474'
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          backgroundColor: 'rgba(0, 0, 0, 0.9)',
+          titleColor: '#ffffff',
+          bodyColor: '#ffffff',
+          borderColor: '#484848',
+          borderWidth: 1,
+          cornerRadius: 4,
+          padding: 8,
+          displayColors: true,
+          callbacks: {
+            title: function(context) {
+              return `${context[0].label}`;
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
+if (document.readyState === 'loading') {
+  if (!window.chartInitialized) {
+    window.chartInitialized = true;
+    document.addEventListener('DOMContentLoaded', initializeChart);
+  }
+} else {
+  initializeChart();
+}
+</script>
+  <div class="row"></div>
+
+  <br>
+
+  <h2 class="row">Modules</h2>
+  <br>
+  <ul class="card-list">
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/csawctf2011/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">CSAW CTF 2011</h4>
+        
+        <p class="card-text"><br>0 / 16<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/csawctf2012/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">CSAW CTF 2012</h4>
+        
+        <p class="card-text"><br>0 / 7<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/csawctf2014/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">CSAW CTF 2014</h4>
+        
+        <p class="card-text"><br>0 / 10<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/csaw2017/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">CSAW 2017 Quals</h4>
+        
+        <p class="card-text"><br>0 / 14<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/csawctfquals2020/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">CSAW Quals CTF 2020</h4>
+        
+        <p class="card-text"><br>0 / 1<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/csawctfquals2021/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">CSAW Quals CTF 2021</h4>
+        
+        <p class="card-text"><br>0 / 6<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/csawctfquals2024/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">CSAW Quals CTF 2024</h4>
+        
+        <p class="card-text"><br>0 / 8<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/0ctf2017/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">0CTF 2017 Quals</h4>
+        
+        <p class="card-text"><br>0 / 3<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/0ctf2018/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">0CTF/TCTF 2018</h4>
+        
+        <p class="card-text"><br>0 / 6<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/0ctf2019/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">0CTF/TCTF 2019 Quals</h4>
+        
+        <p class="card-text"><br>0 / 9<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/0ctf2021quals/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">0CTF/TCTF 2021 Quals</h4>
+        
+        <p class="card-text"><br>0 / 2<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/codegate2011/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Codegate CTF 2011</h4>
+        
+        <p class="card-text"><br>0 / 9<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/codegatectf2012/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Codegate CTF 2012</h4>
+        
+        <p class="card-text"><br>0 / 9<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/codegatectf2013/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Codegate CTF 2013</h4>
+        
+        <p class="card-text"><br>0 / 1<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/codegateprelims2014/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Codegate Preliminary CTF 2014</h4>
+        
+        <p class="card-text"><br>0 / 8<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/imaginaryctf2021/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">ImaginaryCTF 2021</h4>
+        
+        <p class="card-text"><br>0 / 6<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/imaginaryctf2022/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">ImaginaryCTF 2022</h4>
+        
+        <p class="card-text"><br>0 / 10<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/imaginaryctf2023/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">ImaginaryCTF 2023</h4>
+        
+        <p class="card-text"><br>0 / 9<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/imaginaryctf2024/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">ImaginaryCTF 2024</h4>
+        
+        <p class="card-text"><br>0 / 4<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/downunderctf2020/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">DownUnderCTF 2020</h4>
+        
+        <p class="card-text"><br>0 / 15<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/downunderctf2021/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">DownUnderCTF 2021</h4>
+        
+        <p class="card-text"><br>0 / 9<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/downunderctf2022/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">DownUnderCTF 2022</h4>
+        
+        <p class="card-text"><br>0 / 7<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/downunderctf2024/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">DownUnderCTF 2024</h4>
+        
+        <p class="card-text"><br>0 / 7<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/downunderctf2025/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">DownUnderCTF 2025</h4>
+        
+        <p class="card-text"><br>0 / 8<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/angstromctf2016/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">ångstromCTF 2016</h4>
+        
+        <p class="card-text"><br>0 / 23<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/angstromctf2017/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">ångstromCTF 2017</h4>
+        
+        <p class="card-text"><br>0 / 6<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/angstromctf2018/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">ångstromCTF 2018</h4>
+        
+        <p class="card-text"><br>0 / 13<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/angstromctf2019/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">ångstromctf 2019</h4>
+        
+        <p class="card-text"><br>0 / 11<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/angstromctf2022/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">ångstromctf 2022</h4>
+        
+        <p class="card-text"><br>0 / 10<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/angstromctf2024/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">ångstromCTF 2024</h4>
+        
+        <p class="card-text"><br>0 / 14<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/asisctf2013/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">ASIS CTF 2013</h4>
+        
+        <p class="card-text"><br>0 / 9<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/asisctf2014/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">ASIS CTF 2014</h4>
+        
+        <p class="card-text"><br>0 / 2<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/cryptoctf2020/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Crypto CTF 2020</h4>
+        
+        <p class="card-text"><br>0 / 6<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/cryptoctf2021/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Crypto CTF 2021</h4>
+        
+        <p class="card-text"><br>0 / 14<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/hsctf2019/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">HSCTF 2019</h4>
+        
+        <p class="card-text"><br>0 / 18<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/hsctf2020/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">HSCTF 2020</h4>
+        
+        <p class="card-text"><br>0 / 9<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/hsctf2021/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">HSCTF 2021</h4>
+        
+        <p class="card-text"><br>0 / 6<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/corctf2021/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">corCTF 2021</h4>
+        
+        <p class="card-text"><br>0 / 11<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/corctf2022/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">corCTF 2022</h4>
+        
+        <p class="card-text"><br>0 / 6<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/hitconctf2018/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">HITCON 2018</h4>
+        
+        <p class="card-text"><br>0 / 5<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/hitcon2017quals/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">HITCON 2017 Quals</h4>
+        
+        <p class="card-text"><br>0 / 11<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/cryptoversectf2022/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Cryptoverse CTF 2022</h4>
+        
+        <p class="card-text"><br>0 / 6<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/cryptoversectf2023/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Cryptoverse CTF 2023</h4>
+        
+        <p class="card-text"><br>0 / 11<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/patriotctf2022/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">PatriotCTF 2022</h4>
+        
+        <p class="card-text"><br>0 / 14<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/patriotctf2023/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">PatriotCTF 2023</h4>
+        
+        <p class="card-text"><br>0 / 6<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/uiuctf2022/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">UIUCTF 2022</h4>
+        
+        <p class="card-text"><br>0 / 4<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/uiuctf2023/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">UIUCTF 2023</h4>
+        
+        <p class="card-text"><br>0 / 14<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/uiuctf2024/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">UIUCTF 2024</h4>
+        
+        <p class="card-text"><br>0 / 1<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/hkcertctf2020/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">HK Cyber Security New Generation CTF Challenge 2020</h4>
+        
+        <p class="card-text"><br>0 / 4<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/hkcertctf2021/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">HK Cyber Security New Generation CTF Challenge 2021</h4>
+        
+        <p class="card-text"><br>0 / 5<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/hkcertctf2022/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">HK Cyber Security New Generation CTF Challenge 2022</h4>
+        
+        <p class="card-text"><br>0 / 7<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/byuctf2022/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">BYUCTF 2022</h4>
+        
+        <p class="card-text"><br>0 / 11<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/byuctf2023/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">BYUCTF 2023</h4>
+        
+        <p class="card-text"><br>0 / 11<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/byuctf2024/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">BYUCTF 2024</h4>
+        
+        <p class="card-text"><br>0 / 11<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/sekaictf2022/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">SekaiCTF 2022</h4>
+        
+        <p class="card-text"><br>0 / 2<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/sekaictf2023/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">SekaiCTF 2023</h4>
+        
+        <p class="card-text"><br>0 / 1<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/grehack2012/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">GreHack-2012</h4>
+        
+        <p class="card-text"><br>0 / 2<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/29c3ctf2012/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">29c3 CTF 2012</h4>
+        
+        <p class="card-text"><br>0 / 4<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/gitsctf2012/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Ghost in the Shellcode 2012</h4>
+        
+        <p class="card-text"><br>0 / 5<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/ectf2014/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">ECTF 2014</h4>
+        
+        <p class="card-text"><br>0 / 8<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/hackluctf2011/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Hack.lu CTF 2011</h4>
+        
+        <p class="card-text"><br>0 / 5<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/ritsec2019/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">ritsec2019</h4>
+        
+        <p class="card-text"><br>0 / 4<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/backdoorctf2019/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">BackdoorCTF 2019</h4>
+        
+        <p class="card-text"><br>0 / 8<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/justctf2019/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">justCTF2019</h4>
+        
+        <p class="card-text"><br>0 / 9<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/picoctf2019/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">picoCTF 2019</h4>
+        
+        <p class="card-text"><br>0 / 17<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/neverlan2019/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">NeverLAN CTF 2019</h4>
+        
+        <p class="card-text"><br>0 / 7<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/googlectf2020/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Google Capture The Flag 2020</h4>
+        
+        <p class="card-text"><br>0 / 1<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/0x41414141ctf2021/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">0x41414141 CTF 2021</h4>
+        
+        <p class="card-text"><br>0 / 14<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/wtfctf2021/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">wtfCTF 2021</h4>
+        
+        <p class="card-text"><br>0 / 3<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/zh3r0ctf2021/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Zh3r0 CTF V2</h4>
+        
+        <p class="card-text"><br>0 / 12<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/tastelessctf2021/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">TastelessCTF 2021</h4>
+        
+        <p class="card-text"><br>0 / 1<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/vsctf2022/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">vsCTF 2022</h4>
+        
+        <p class="card-text"><br>0 / 3<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/accessdeniedctf2022/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Access-Denied 2022</h4>
+        
+        <p class="card-text"><br>0 / 11<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/techcompfest2022/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">TECHCOMFEST 2022</h4>
+        
+        <p class="card-text"><br>0 / 1<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/plaidctf/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">PlaidCTF</h4>
+        
+        <p class="card-text"><br>0 / 7<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/noobzctf2023/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">n00bzCTF 2023</h4>
+        
+        <p class="card-text"><br>0 / 6<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/tamuctf2024/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">TAMUctf 2024</h4>
+        
+        <p class="card-text"><br>0 / 2<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/r3ctf2024/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">R3CTF/YUANHENGCTF 2024</h4>
+        
+        <p class="card-text"><br>0 / 6<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/greycattheflag2022/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Grey Cat The Flag 2022</h4>
+        
+        <p class="card-text"><br>0 / 5<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/ccscctf2020/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Cyprus Cyber Security Challenge (CCSC) CTF 2020</h4>
+        
+        <p class="card-text"><br>0 / 5<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/defconquals2018/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">DEF CON CTF Quals 2018</h4>
+        
+        <p class="card-text"><br>0 / 1<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/isitdtuctf2024/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">ISITDTU CTF 2024</h4>
+        
+        <p class="card-text"><br>0 / 4<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/utctf24/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">UTCTF 2024</h4>
+        
+        <p class="card-text"><br>0 / 19<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/m0leconteaserctf2025/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">m0leCon CTF Teaser 2025</h4>
+        
+        <p class="card-text"><br>0 / 4<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/cactusconctf2025/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">CactusCon13 CTF 2025</h4>
+        
+        <p class="card-text"><br>0 / 6<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/irisctf2025/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">IrisCTF 2025</h4>
+        
+        <p class="card-text"><br>0 / 4<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/l3akctf2025/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">L3akCTF 2025</h4>
+        
+        <p class="card-text"><br>0 / 6<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/sekaictf2025/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">SekaiCTF 2025</h4>
+        
+        <p class="card-text"><br>0 / 5<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/dicectfquals2025/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">DiceCTF 2025 Quals</h4>
+        
+        <p class="card-text"><br>0 / 5<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/buckeyectf2025/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">BuckeyeCTF 2025</h4>
+        
+        <p class="card-text"><br>0 / 2<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/ctf-archive/uoftctf2026/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">UofTCTF 2026</h4>
+        
+        <p class="card-text"><br>0 / 1<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+  </ul>
+
+  
+  <br>
+
+  <h2 class="row" id="scoreboard-heading">30-Day Scoreboard:</h2>
+  <br>
+  
+  <div class="scoreboard-controls row">
+  <p>
+  <span id="scoreboard-control-week"><a href="javascript:loadScoreboard(7, 1)">7-Day</a></span> |
+  <span id="scoreboard-control-month"><a href="javascript:loadScoreboard(30, 1)">30-Day</a></span> |
+  <span id="scoreboard-control-all"><a href="javascript:loadScoreboard(0, 1)">All-Time</a></span>
+  </p>
+</div>
+<div class="scoreboard row">
+  <div class="col-md-12 p-0">
+    <table class="table table-striped">
+	    <thead>
+	      <tr>
+	        <td scope="col" class="col-md-1"><b>Rank</b></td>
+          <td scope="col" class="col-md-1"></td>
+	        <td scope="col" class="col-md-4"><b>Hacker</b></td>
+	        <td scope="col" class="col-md-4"><b>Badges</b></td>
+	        <td scope="col" class="col-md-1"></td>
+	        <td scope="col" class="col-md-1"><b>Score</b></td>
+	      </tr>
+	    </thead>
+	    <tbody id="scoreboard">
+	    </tbody>
+    </table>
+  </div>
+  <div>
+    <ul id="scoreboard-pages" class="p-0">
+    </ul>
+  </div>
+</div>
+
+  
+
+  
+</div>
+
+    </main>
+
+    <footer class="footer">
+      <div class="container text-center" style="line-height: 20px; opacity: 0.7">
+        <small>
+          Powered by <strong>pwn.college</strong><br>
+          Interested in dedicated training or tailored services for your organization?
+          <a href="https://llc.pwn.college/">Find out more</a>.
+        </small>
+      </div>
+    </footer>
+
+    <script defer src="/themes/dojo_theme/static/js/vendor.bundle.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/core.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/helpers.min.js?d=0cd72d60"></script>
+
+    
+    <script defer src="/themes/dojo_theme/static/js/pages/main.min.js?d=0cd72d60"></script>
+    
+
+    <script defer src="/themes/dojo_theme/static/js/dojo/util.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/dojo/navbar.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/dojo/popup.min.js?d=0cd72d60"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+
+    
+<script defer onload="loadScoreboard(30, 1);" src="/themes/dojo_theme/static/js/dojo/scoreboard.min.js?d=0cd72d60"></script>
+<script defer src="/themes/dojo_theme/static/js/dojo/copy.min.js?d=0cd72d60"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <script>
+      window.addEventListener('load', function() {
+        if (typeof renderMathInElement !== 'undefined') {
+          renderMathInElement(document.body, {
+            delimiters: [
+              {left: '\\[', right: '\\]', display: true},
+              {left: '\\(', right: '\\)', display: false}
+            ],
+            throwOnError: false,
+            strict: false,
+            ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          });
+        }
+      });
+    </script>
+
+    
+
+    
+
+    
+    
+  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c44f8a92a053975',t:'MTc2OTQ4MjUyOA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

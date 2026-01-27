@@ -1,0 +1,1622 @@
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>pwn.college</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="pwn.college">
+    <meta property="og:description" content="Learn to Hack!">
+    <meta property="og:image" content="https://pwn.college/themes/dojo_theme/static/img/dojo/ninja.png?d=0cd72d60">
+
+    <link rel="icon" href="/themes/dojo_theme/static/img/favicon.png?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/fonts.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/main.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/core.min.css?d=0cd72d60">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceMono-Regular.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceMono-Bold.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceGrotesk-VariableFont_wght.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <style>
+      @font-face {
+        font-family: 'Space Mono';
+        src: url("/themes/dojo_theme/static/font/SpaceMono-Regular.ttf?d=0cd72d60") format('truetype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Space Mono';
+        src: url("/themes/dojo_theme/static/font/SpaceMono-Bold.ttf?d=0cd72d60") format('truetype');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Space Grotesk';
+        src: url("/themes/dojo_theme/static/font/SpaceGrotesk-VariableFont_wght.ttf?d=0cd72d60") format('truetype');
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/custom.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    
+    
+
+    
+    <script type="text/javascript">
+      var init = {
+	  'urlRoot': "",
+	  'csrfNonce': "627ffe3b3d495093d2598430d8db3714e7be67a3d4d08c8f7ef900b7f1fea429",
+	  'userMode': "users",
+	  'userId': 0,
+	  'start': null,
+	  'end': null,
+	  'theme_settings': null,
+          'dojo': "",
+          'module': ""
+      }
+    </script>
+    
+  </head>
+  <body>
+    
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top">
+  <div class="container">
+    <a href="/" class="brand-mono-bold wordmark">
+      
+      <span class="brand-white">pwn</span><span class="brand-dot-white">.</span><span class="brand-white">college</span>
+      
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#base-navbars"
+            aria-controls="base-navbars" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="base-navbars">
+      <div class="d-none d-md-block" style="border-left: 2px solid white; height: 20px; margin: 0 20px;"></div>
+      <ul class="navbar-nav mr-auto">
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/dojos">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Dojos">
+      <i class="fas fa-torii-gate d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-torii-gate pr-1"></i>
+      
+      Dojos
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/workspace">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Workspace">
+      <i class="fas fa-desktop d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-desktop pr-1"></i>
+      
+      Workspace
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/sensai.html" target="_blank">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Help">
+      <i class="fas fa-question d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-question pr-1"></i>
+      
+      Help
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="https://discord.gg/pwncollege" target="_blank">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Chat">
+      <i class="fas fa-comments d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-comments pr-1"></i>
+      
+      Chat
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="#">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Search">
+      <i class="fas fa-search d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-search pr-1"></i>
+      
+      Search
+      
+    </span>
+  </a>
+</li>
+
+      </ul>
+      <hr class="d-sm-flex d-md-flex d-lg-none">
+      <ul class="navbar-nav ml-md-auto d-block d-sm-flex d-md-flex">
+        
+        
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/register.html">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Register">
+      <i class="fas fa-user-plus d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-user-plus pr-1"></i>
+      
+      Register
+      
+    </span>
+  </a>
+</li>
+
+        
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/login.html">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Login">
+      <i class="fas fa-sign-in-alt d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-sign-in-alt pr-1"></i>
+      
+      Login
+      
+    </span>
+  </a>
+</li>
+
+        
+
+        <li class="nav-item">
+          <a class="nav-link close-link" href="javascript:void(0)">
+            <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Hide Navbar">
+              <i class="fas caret-up d-none d-md-block d-lg-none"></i>
+            </span>
+            <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+              <i class="fas fa-caret-up pr-1"></i>
+              <span class="d-lg-none">Hide Navbar</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="navbar-pulldown">
+  <i class="fas fa-fw fa-caret-down" title="Show navigation bar"></i>
+</div>
+
+<div id="searchModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document" style="margin: 10vh auto; max-width: 650px; width: 80%;">
+    <div class="modal-content bg-dark text-white rounded-lg shadow-lg">
+      <div class="modal-body p-4">
+        <form id="searchForm">
+          <div class="input-group input-group-lg">
+            <div class="input-group-prepend">
+              <span class="input-group-text bg-secondary border-0 text-white">
+                <i class="fas fa-search"></i>
+              </span>
+            </div>
+            <input type="text" id="searchInput" class="form-control bg-dark text-white border-0" placeholder="Search..." autocomplete="off">
+            <div class="input-group-append">
+              <button type="button" class="btn btn-outline-light" data-dismiss="modal">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <div id="searchResults" class="mt-3">
+          <!-- Results will be inserted here dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <main role="main">
+      
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="brand-mono-bold wordmark-large"><span class="brand-white">pwn</span><span class="brand-dot brand-blink">.</span><span class="brand-green">dojos</span></h1>
+  </div>
+</div>
+
+<div class="container">
+  <p>The material on pwn.college is split into a number of "dojos", with each dojo typically covering a high-level topic.
+  <b>The material is designed to be tackled in order.</b>
+  You can, of course, jump around, but keep in mind that each dojo expects you to know everything taught by the previous ones.
+
+  <p><br><br>
+  <h2>Getting Started &mdash; Learn the Basics!</h2>
+  These first few dojos are designed to help you Get Started with the platform.
+  Start here before venturing onwards!
+
+  <ul class="card-list">
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/welcome.html">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Start Here</h4>
+        
+        <div class="card-icon">
+          <img src="/belt/white.svg">
+          
+        </div>
+        
+        <p class="card-text">17 Hacking<br>2 Modules<br>10 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/linux-luminarium">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Linux Luminarium</h4>
+        
+        <div class="card-icon">
+          
+          🐧
+        </div>
+        
+        <p class="card-text">164 Hacking<br>17 Modules<br>128 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/computing-101">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Computing 101</h4>
+        
+        <div class="card-icon">
+          
+          💻
+        </div>
+        
+        <p class="card-text">35 Hacking<br>7 Modules<br>69 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/fundamentals">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Playing With Programs</h4>
+        
+        <div class="card-icon">
+          
+          🔤
+        </div>
+        
+        <p class="card-text">25 Hacking<br>4 Modules<br>116 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+  </ul>
+
+  <p>After completing the dojos above, dive into the Core Material below!
+
+  <p><br><br>
+  <h2>Core Material &mdash; Earn Your Belts!</h2>
+
+  <p>These dojos form the official pwn.college curriculum, taking you on a curated journey through the art of hacking.
+  As you progress and build your skills, like in a martial art, you will earn <a href="belts">belts</a> for completing dojo after dojo.
+  We won't stop you from jumping around if you want (and have the requisite skills), but you must earn belts sequentially.
+
+  <ul class="card-list">
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/intro-to-cybersecurity">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Intro to Cybersecurity</h4>
+        
+        <div class="card-icon">
+          <img src="/belt/orange.svg">
+          
+        </div>
+        
+        <p class="card-text">89 Hacking<br>7 Modules<br>183 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/program-security">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Program Security</h4>
+        
+        <div class="card-icon">
+          <img src="/belt/yellow.svg">
+          
+        </div>
+        
+        <p class="card-text">32 Hacking<br>5 Modules<br>159 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/system-security">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">System Security</h4>
+        
+        <div class="card-icon">
+          <img src="/belt/green.svg">
+          
+        </div>
+        
+        <p class="card-text">11 Hacking<br>6 Modules<br>93 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/software-exploitation">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Software Exploitation</h4>
+        
+        <div class="card-icon">
+          <img src="/belt/blue.svg">
+          
+        </div>
+        
+        <p class="card-text">9 Hacking<br>5 Modules<br>90 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+  </ul>
+
+  <p>After completing the dojos above, not only will you be added to the <a href="belts">belts</a> page, but <i>we will send you actual pwn.college-embroidered belts</i>!
+  <p>To get your belt, <a href="/cdn-cgi/l/email-protection#e8989f86a8989f86c68b8784848d8f8d">send us an email</a> from the email address associated with your pwn.college account.
+  We’ll then get your belt over to you (eventually)!
+  Note that, due to logistical challenges, we're currently only <i>shipping</i> belts to hackers after they earn their blue belt.
+  Until then, we will belt you in person, at ASU or some security conference.
+
+  <p id="community-dojos"><br><br>
+  <h2>Community Material &mdash; Earn Badges!</h2>
+
+  <p>No matter how much material we create, there is always more to learn!
+  This section contains additional dojos created by the pwn.college community.
+  Some are designed to be tackled after you complete the dojos above, whereas others are open to anyone interested in more specialized topics.
+
+  <ul class="card-list">
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/archive">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">pwn.college Archives</h4>
+        
+        <div class="card-icon">
+          
+          📘
+        </div>
+        
+        <p class="card-text">2 Hacking<br>7 Modules<br>201 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/acsac-ctfs">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">ACSAC CTFs</h4>
+        
+        <div class="card-icon">
+          
+          🌴
+        </div>
+        
+        <p class="card-text"><br>2 Modules<br>20 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/advent-of-pwn">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Advent of Pwn</h4>
+        
+        <div class="card-icon">
+          
+          🎅
+        </div>
+        
+        <p class="card-text"><br>1 Module<br>12 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/arm-architecture">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">ARM Architecture</h4>
+        
+        <div class="card-icon">
+          
+          🦾
+        </div>
+        
+        <p class="card-text">3 Hacking<br>2 Modules<br>28 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/cryptomania">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Cryptographic Exploitation</h4>
+        
+        <div class="card-icon">
+          
+          🔐
+        </div>
+        
+        <p class="card-text"><br>7 Modules<br>39 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/ctf-archive">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">CTF Archive</h4>
+        
+        <div class="card-icon">
+          
+          🏁
+        </div>
+        
+        <p class="card-text"><br>91 Modules<br>703 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/demo-dojo">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Demo dojo</h4>
+        
+        <p class="card-text"><br>1 Module<br>0 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/intro-to-programming-languages">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Intro to Programming Languages</h4>
+        
+        <div class="card-icon">
+          
+          🔣
+        </div>
+        
+        <p class="card-text">7 Hacking<br>23 Modules<br>234 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/quarterly-quiz">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">The Quarterly Quiz</h4>
+        
+        <div class="card-icon">
+          
+          📝
+        </div>
+        
+        <p class="card-text"><br>2 Modules<br>13 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/windows-warzone">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Windows Warzone</h4>
+        
+        <div class="card-icon">
+          
+          🪟
+        </div>
+        
+        <p class="card-text">1 Hacking<br>2 Modules<br>17 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/xnu">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">XNU Dojo</h4>
+        
+        <div class="card-icon">
+          
+          🍎
+        </div>
+        
+        <p class="card-text">1 Hacking<br>6 Modules<br>61 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/adversarial-ml-dojo~3c016843">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Adversarial Machine Learning Dojo</h4>
+        
+        <p class="card-text"><br>5 Modules<br>3 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/az-ctf-2025~6fbdc1d4">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Arizona CTF 2025</h4>
+        
+        <div class="card-icon">
+          
+          🔱
+        </div>
+        
+        <p class="card-text"><br>5 Modules<br>23 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/robwaz-dojo~289c5b68">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">ARM Dojo</h4>
+        
+        <div class="card-icon">
+          
+          🦾
+        </div>
+        
+        <p class="card-text"><br>1 Module<br>15 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/aturt13-dojo~4fac9429">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">aturt13 Dojo</h4>
+        
+        <div class="card-icon">
+          
+          🐢
+        </div>
+        
+        <p class="card-text"><br>3 Modules<br>15 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/content-injection~24cec712">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Content Injection</h4>
+        
+        <div class="card-icon">
+          
+          💉
+        </div>
+        
+        <p class="card-text"><br>5 Modules<br>10 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/cybher-dojo~598bd45d">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">CybHer Dojo</h4>
+        
+        <div class="card-icon">
+          
+          ✨
+        </div>
+        
+        <p class="card-text">12 Hacking<br>8 Modules<br>104 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/dc33-dca-dojo~49335f5f">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Defcon 33 Defcon Academy Dojo</h4>
+        
+        <p class="card-text"><br>4 Modules<br>7 Challenges<br></p>
+        
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/codesprouts~a2cb8d41">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Desert CodeSprouts</h4>
+        
+        <div class="card-icon">
+          
+          💡
+        </div>
+        
+        <p class="card-text"><br>3 Modules<br>7 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/districtcon~f1b3d7f0">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">DistrictCon pwn.college Challenges</h4>
+        
+        <p class="card-text"><br>1 Module<br>2 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/dos-dojo~c41cb03a">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">DOS Dojo</h4>
+        
+        <div class="card-icon">
+          
+          💾
+        </div>
+        
+        <p class="card-text"><br>2 Modules<br>10 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/fluffy~ea96493b">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Fluffy’s Adventure</h4>
+        
+        <div class="card-icon">
+          
+          🦊
+        </div>
+        
+        <p class="card-text"><br>7 Modules<br>24 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/fuzz~c7f7b8c2">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Fuzz Dojo</h4>
+        
+        <div class="card-icon">
+          
+          🐇
+        </div>
+        
+        <p class="card-text">1 Hacking<br>3 Modules<br>16 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/gca-ctf~8018193d">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">GCA CTF</h4>
+        
+        <p class="card-text"><br>8 Modules<br>104 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/hacker-history~43f7181b">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Hacker History</h4>
+        
+        <div class="card-icon">
+          
+          🧙
+        </div>
+        
+        <p class="card-text"><br>2 Modules<br>8 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/hanto-dojo~8c1cc454">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Hanto Dojo</h4>
+        
+        <div class="card-icon">
+          
+          🐍
+        </div>
+        
+        <p class="card-text"><br>7 Modules<br>44 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/honors-dojo~28e0e34e">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Honors Dojo</h4>
+        
+        <div class="card-icon">
+          
+          ⌨
+        </div>
+        
+        <p class="card-text"><br>2 Modules<br>11 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/honors-dojo~9d345510">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Honors Dojo</h4>
+        
+        <div class="card-icon">
+          
+          ⌨
+        </div>
+        
+        <p class="card-text"><br>3 Modules<br>17 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/honors-dojo~ef9ed69f">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Honors Dojo</h4>
+        
+        <div class="card-icon">
+          
+          ⌨
+        </div>
+        
+        <p class="card-text"><br>3 Modules<br>17 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/m0nst3r-dojo~5b4ffee2">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Hunter Dojo</h4>
+        
+        <div class="card-icon">
+          
+          🗿
+        </div>
+        
+        <p class="card-text"><br>1 Module<br>4 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/hydra~792145b7">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Hydra Dojo</h4>
+        
+        <div class="card-icon">
+          
+          🐉
+        </div>
+        
+        <p class="card-text"><br>1 Module<br>8 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/kalevala~64ddc78a">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Kalevala</h4>
+        
+        <div class="card-icon">
+          
+          🐻
+        </div>
+        
+        <p class="card-text"><br>3 Modules<br>20 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/kernel-exercise-collection~433e348b">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Kernel Exercise Collection</h4>
+        
+        <div class="card-icon">
+          
+          🧰
+        </div>
+        
+        <p class="card-text"><br>1 Module<br>6 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/kitten-dojo~d5c9bdf3">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Kitten Playground</h4>
+        
+        <div class="card-icon">
+          
+          🐈
+        </div>
+        
+        <p class="card-text">1 Hacking<br>1 Module<br>1 Challenge<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/rehosting~fbf8a0a3">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Linux Firmware Rehosting</h4>
+        
+        <div class="card-icon">
+          
+          🪺
+        </div>
+        
+        <p class="card-text">1 Hacking<br>3 Modules<br>13 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/linux-lunacy~9b739db1">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Linux Lunacy</h4>
+        
+        <div class="card-icon">
+          
+          🤡
+        </div>
+        
+        <p class="card-text"><br>3 Modules<br>13 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/pancake-house~e3289d98">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Pancake House</h4>
+        
+        <p class="card-text"><br>1 Module<br>1 Challenge<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/privilege-escalation~6d04fe7a">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Privilege Escalation</h4>
+        
+        <div class="card-icon">
+          
+          🪪
+        </div>
+        
+        <p class="card-text">4 Hacking<br>4 Modules<br>559 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/pwntools~9b09c9dc">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Pwntools Tutorials</h4>
+        
+        <div class="card-icon">
+          
+          🏴
+        </div>
+        
+        <p class="card-text">1 Hacking<br>1 Module<br>12 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/red-team-dojo~a9fb8d5a">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Red Team Dojo</h4>
+        
+        <p class="card-text"><br>1 Module<br>3 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/shell-lin-do~148f65dd">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">The Art of the Shell</h4>
+        
+        <div class="card-icon">
+          
+          🐚
+        </div>
+        
+        <p class="card-text"><br>5 Modules<br>55 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/thaw~84f102b7">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">The House Always Wins</h4>
+        
+        <div class="card-icon">
+          
+          🎲
+        </div>
+        
+        <p class="card-text"><br>1 Module<br>9 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/westworld~d30d9828">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Westworld Dojo</h4>
+        
+        <div class="card-icon">
+          
+          🤖
+        </div>
+        
+        <p class="card-text"><br>1 Module<br>2 Challenges<br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+  </ul>
+
+  <p><br><br>
+  <h2>The Courses &mdash; Earning Credit</h2>
+
+  <p>We leverage the above material to run a number of courses on this platform.
+  For the most part, these courses import the above material, though some might introduce new concepts and challenges.
+
+  <ul class="card-list">
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/cse365-s2026">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">CSE 365 - Spring 2026</h4>
+        
+        <p class="card-text">100 Hacking<br>2 Modules<br>232 Challenges<br></p>
+        
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/cse466-f2025">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">CSE 466 - Fall 2025</h4>
+        
+        <p class="card-text">3 Hacking<br>12 Modules<br>248 Challenges<br></p>
+        
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/cse539-s2025">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">CSE 539 - Spring 2025</h4>
+        
+        <p class="card-text"><br>7 Modules<br>44 Challenges<br></p>
+        
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/cse598-avr-f2024">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">CSE 598 AVR - Fall 2024</h4>
+        
+        <p class="card-text"><br>7 Modules<br>62 Challenges<br></p>
+        
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/cse598-avr-f2025">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">CSE 598 - AVR - Fall 2025</h4>
+        
+        <p class="card-text"><br>2 Modules<br>1 Challenge<br></p>
+        
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/reversing-hell">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">CSE 598 Rev&amp;PA - Fall 2025</h4>
+        
+        <div class="card-icon">
+          
+          🏆
+        </div>
+        
+        <p class="card-text"><br>12 Modules<br>103 Challenges<br></p>
+        
+        
+      </div>
+    </li>
+  </a>
+    
+      
+      
+      <a class="text-decoration-none" href="/dojo/cse598-se-s2025">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">CSE 598 - Spring 2025</h4>
+        
+        <p class="card-text">1 Hacking<br>7 Modules<br>107 Challenges<br></p>
+        
+        
+      </div>
+    </li>
+  </a>
+    
+    
+  </ul>
+
+  
+
+  
+
+</div>
+
+    </main>
+
+    <footer class="footer">
+      <div class="container text-center" style="line-height: 20px; opacity: 0.7">
+        <small>
+          Powered by <strong>pwn.college</strong><br>
+          Interested in dedicated training or tailored services for your organization?
+          <a href="https://llc.pwn.college/">Find out more</a>.
+        </small>
+      </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="/themes/dojo_theme/static/js/vendor.bundle.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/core.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/helpers.min.js?d=0cd72d60"></script>
+
+    
+    <script defer src="/themes/dojo_theme/static/js/pages/main.min.js?d=0cd72d60"></script>
+    
+
+    <script defer src="/themes/dojo_theme/static/js/dojo/util.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/dojo/navbar.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/dojo/popup.min.js?d=0cd72d60"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+
+    
+
+
+    <script>
+      window.addEventListener('load', function() {
+        if (typeof renderMathInElement !== 'undefined') {
+          renderMathInElement(document.body, {
+            delimiters: [
+              {left: '\\[', right: '\\]', display: true},
+              {left: '\\(', right: '\\)', display: false}
+            ],
+            throwOnError: false,
+            strict: false,
+            ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          });
+        }
+      });
+    </script>
+
+    
+
+    
+
+    
+    
+  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c4508079b5ede83',t:'MTc2OTQ4MzE1Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

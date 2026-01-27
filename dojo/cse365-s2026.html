@@ -1,0 +1,927 @@
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>pwn.college</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="pwn.college">
+    <meta property="og:description" content="Learn to Hack!">
+    <meta property="og:image" content="https://pwn.college/themes/dojo_theme/static/img/dojo/ninja.png?d=0cd72d60">
+
+    <link rel="icon" href="/themes/dojo_theme/static/img/favicon.png?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/fonts.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/main.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/core.min.css?d=0cd72d60">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceMono-Regular.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceMono-Bold.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceGrotesk-VariableFont_wght.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <style>
+      @font-face {
+        font-family: 'Space Mono';
+        src: url("/themes/dojo_theme/static/font/SpaceMono-Regular.ttf?d=0cd72d60") format('truetype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Space Mono';
+        src: url("/themes/dojo_theme/static/font/SpaceMono-Bold.ttf?d=0cd72d60") format('truetype');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Space Grotesk';
+        src: url("/themes/dojo_theme/static/font/SpaceGrotesk-VariableFont_wght.ttf?d=0cd72d60") format('truetype');
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/custom.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    
+    
+
+    
+    <script type="text/javascript">
+      var init = {
+	  'urlRoot': "",
+	  'csrfNonce': "a5535ce4910028c06502f57e236bf020d405041ffaeff23114a34a0de0a3d309",
+	  'userMode': "users",
+	  'userId': 0,
+	  'start': null,
+	  'end': null,
+	  'theme_settings': null,
+          'dojo': "cse365-s2026",
+          'module': ""
+      }
+    </script>
+    
+  </head>
+  <body>
+    
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top">
+  <div class="container">
+    <a href="/" class="brand-mono-bold wordmark">
+      
+      <span class="brand-white">pwn</span><span class="brand-dot-white">.</span><span class="brand-white">college</span>
+      
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#base-navbars"
+            aria-controls="base-navbars" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="base-navbars">
+      <div class="d-none d-md-block" style="border-left: 2px solid white; height: 20px; margin: 0 20px;"></div>
+      <ul class="navbar-nav mr-auto">
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/dojos">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Dojos">
+      <i class="fas fa-torii-gate d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-torii-gate pr-1"></i>
+      
+      Dojos
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/workspace">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Workspace">
+      <i class="fas fa-desktop d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-desktop pr-1"></i>
+      
+      Workspace
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/sensai.html" target="_blank">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Help">
+      <i class="fas fa-question d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-question pr-1"></i>
+      
+      Help
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="https://discord.gg/pwncollege" target="_blank">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Chat">
+      <i class="fas fa-comments d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-comments pr-1"></i>
+      
+      Chat
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="#">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Search">
+      <i class="fas fa-search d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-search pr-1"></i>
+      
+      Search
+      
+    </span>
+  </a>
+</li>
+
+      </ul>
+      <hr class="d-sm-flex d-md-flex d-lg-none">
+      <ul class="navbar-nav ml-md-auto d-block d-sm-flex d-md-flex">
+        
+        
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/register.html">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Register">
+      <i class="fas fa-user-plus d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-user-plus pr-1"></i>
+      
+      Register
+      
+    </span>
+  </a>
+</li>
+
+        
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/login.html">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Login">
+      <i class="fas fa-sign-in-alt d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-sign-in-alt pr-1"></i>
+      
+      Login
+      
+    </span>
+  </a>
+</li>
+
+        
+
+        <li class="nav-item">
+          <a class="nav-link close-link" href="javascript:void(0)">
+            <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Hide Navbar">
+              <i class="fas caret-up d-none d-md-block d-lg-none"></i>
+            </span>
+            <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+              <i class="fas fa-caret-up pr-1"></i>
+              <span class="d-lg-none">Hide Navbar</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="navbar-pulldown">
+  <i class="fas fa-fw fa-caret-down" title="Show navigation bar"></i>
+</div>
+
+<div id="searchModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document" style="margin: 10vh auto; max-width: 650px; width: 80%;">
+    <div class="modal-content bg-dark text-white rounded-lg shadow-lg">
+      <div class="modal-body p-4">
+        <form id="searchForm">
+          <div class="input-group input-group-lg">
+            <div class="input-group-prepend">
+              <span class="input-group-text bg-secondary border-0 text-white">
+                <i class="fas fa-search"></i>
+              </span>
+            </div>
+            <input type="text" id="searchInput" class="form-control bg-dark text-white border-0" placeholder="Search..." autocomplete="off">
+            <div class="input-group-append">
+              <button type="button" class="btn btn-outline-light" data-dismiss="modal">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <div id="searchResults" class="mt-3">
+          <!-- Results will be inserted here dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <main role="main">
+      
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="brand-white brand-mono-bold">CSE 365 - Spring 2026<span class="brand-dot">.</span></h1>
+  </div>
+</div>
+<div class="container">
+  <div>
+
+
+</div>
+
+  
+  <div>
+    
+      <a href="https://github.com/pwncollege/cse365-s2026/edit/main/DESCRIPTION.md#L1"
+         target="_blank"
+         class="github-edit-link"
+         title="Edit on GitHub">
+        <i class="fas fa-edit"></i>
+      </a>
+    
+    <h2>Course Links</h2>
+<p><i class="course-icon fas fa-chart-bar"></i> <a href="/dojo/cse365-s2026/course/grades"><strong>Grades and Deadlines</strong></a> <br />
+<i class="course-icon fas fa-hourglass-half"></i> <a href="https://forms.gle/wnZUSZm4vbroQC2U8"><strong>Extension Requests</strong></a> <br />
+<i class="course-icon fas fa-laptop-code"></i> <a href="/dojo/cse365-s2026/course/setup"><strong>Student Setup</strong></a> <br />
+<i class="course-icon fas fa-bullhorn"></i> <a href="https://discord.com/channels/750635557666816031/1460029930757951620"><strong>Announcements</strong></a> <br />
+<i class="course-icon fas fa-scroll"></i> <a href="/dojo/cse365-s2026/course/syllabus"><strong>Syllabus</strong></a> <br />
+<i class="course-icon fas fa-university"></i> <a href="https://asu.instructure.com/courses/248193"><strong>Canvas</strong></a></p>
+<p><i class="course-icon fa fa-envelope"></i> <a href="/cdn-cgi/l/email-protection#36554553050003764641581855595a5a535153"><strong>Email</strong></a> <br />
+<i class="course-icon fab fa-discord"></i> <a href="https://discord.gg/pwncollege"><strong>Discord</strong></a> <br />
+<i class="course-icon fab fa-youtube"></i> <a href="https://youtube.com/pwncollege"><strong>YouTube</strong></a> <br />
+<i class="course-icon fab fa-twitch"></i> <a href="https://twitch.tv/pwncollege"><strong>Twitch</strong></a> <br />
+<i class="course-icon fab fa-github"></i> <a href="https://github.com/pwncollege"><strong>GitHub</strong></a></p>
+<h2>Course Calendar Deadlines</h2>
+<div id="calendar">
+  <div id="calendar-container">
+    <table id="calendar-body">
+      <thead>
+        <tr>
+          <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+  <table id="upcoming-table"></table>
+</div>
+<br>
+<h2>Module Reflections</h2>
+<p>These reflections are for <strong>ASU students only</strong>, and so if you are not an ASU student, you will not be able to access them; don't worry though, you're really not missing out on too much: we're just asking ASU students a few questions and encouraging them to reflect on the module. As a reminder, these are <strong>graded and due shortly after the end of the module</strong>.</p>
+<p>You should not complete a reflection until you are &quot;done&quot; with the module (e.g., your next task is the <em>next</em> module; it's okay if you later come back to complete some late solves).
+The idea is to reflect back on the module, not just quickly complete the reflection for points.
+If you complete reflections excessively early, your reflection points may be reduced or removed.</p>
+<p>We will make announcements in the course announcements channel, and update here, when reflections are released.</p>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const deadlines = {
+    "Module 1": { "Lectures": "2026-01-15", "Checkpoint": "2026-01-15", "Challenges": "2026-01-18", "Reflection": "2026-01-20", "Quiz": "2026-01-20" },
+    "Module 2": { "Lectures": "2026-01-25", "Checkpoint": "2026-01-25", "Challenges": "2026-02-01", "Reflection": "2026-02-03", "Quiz": "2026-02-03" },
+    "Module 3": { "Lectures": "2026-02-08", "Checkpoint": "2026-02-08", "Challenges": "2026-02-15", "Reflection": "2026-02-17", "Quiz": "2026-02-17" },
+    "Module 4": { "Lectures": "2026-02-22", "Checkpoint": "2026-02-22", "Challenges": "2026-03-01", "Reflection": "2026-03-03", "Quiz": "2026-03-03" },
+    "Module 5": { "Lectures": "2026-03-08", "Checkpoint": "2026-03-08", "Challenges": "2026-03-22", "Reflection": "2026-03-24", "Quiz": "2026-03-24" },
+    "Module 6": { "Lectures": "2026-03-29", "Checkpoint": "2026-03-29", "Challenges": "2026-04-05", "Reflection": "2026-04-07", "Quiz": "2026-04-07" },
+    "Module 7": { "Lectures": "2026-04-12", "Checkpoint": "2026-04-12", "Challenges": "2026-04-19", "Reflection": "2026-04-21", "Quiz": "2026-04-21" },
+    "Module 8": { "Lectures": "2026-04-26", "Checkpoint": "2026-04-26", "Challenges": "2026-05-03", "Reflection": "2026-05-05", "Quiz": "2026-05-05" },
+  };
+
+  const millisecondsPerMinute = 60000;
+  const millisecondsPerDay = 86400000;
+  const minutesOffsetFromLocalTimeZone = -7 * 60;
+
+  const shiftByTimezone = date =>
+    new Date(date.getTime() + minutesOffsetFromLocalTimeZone * millisecondsPerMinute);
+
+  const formatDateYearMonthDay = date => {
+    const shifted = shiftByTimezone(date);
+    const year = shifted.getUTCFullYear();
+    const month = String(shifted.getUTCMonth() + 1).padStart(2, "0");
+    const day = String(shifted.getUTCDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  const midnightTimestampForDateString = dateString =>
+    new Date(`${dateString}T00:00:00-07:00`).getTime();
+
+  const endOfDayTimestampForDateString = dateString =>
+    new Date(`${dateString}T23:59:59-07:00`).getTime();
+
+  const eventsByDateString = Object.entries(deadlines).reduce((map, [moduleLabel, categoryMap]) => {
+    const moduleNumber = Number(moduleLabel.match(/\d+/)[0]);
+    Object.entries(categoryMap).forEach(([category, dateString]) => {
+      (map[dateString] ??= []).push({ moduleNumber, category });
+    });
+    return map;
+  }, {});
+
+  const allDateStrings = Object.keys(eventsByDateString);
+  const earliestDateString = allDateStrings.reduce((left, right) => (left < right ? left : right));
+  const latestDateString = allDateStrings.reduce((left, right) => (left > right ? left : right));
+  const rangeStartTimestamp = midnightTimestampForDateString(earliestDateString);
+  const rangeEndTimestamp = midnightTimestampForDateString(latestDateString);
+
+  const startDayOfWeek = shiftByTimezone(new Date(rangeStartTimestamp)).getUTCDay();
+  const endDayOfWeek = shiftByTimezone(new Date(rangeEndTimestamp)).getUTCDay();
+
+  const calendarStartTimestamp = rangeStartTimestamp - startDayOfWeek * millisecondsPerDay;
+  const calendarEndTimestamp = rangeEndTimestamp + (6 - endDayOfWeek) * millisecondsPerDay;
+
+  const calendarWeeks = [];
+  for (let timestamp = calendarStartTimestamp; timestamp <= calendarEndTimestamp; timestamp += millisecondsPerDay) {
+    if (!calendarWeeks.length || calendarWeeks.at(-1).length === 7) calendarWeeks.push([]);
+    calendarWeeks.at(-1).push(new Date(timestamp));
+  }
+
+  const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  const todayString = formatDateYearMonthDay(new Date());
+  const calendarBody = document.getElementById("calendar-body");
+
+  let lastRenderedMonthLabel = "";
+  calendarWeeks.forEach(weekDates => {
+    const representativeDate =
+      weekDates.find(date => date.getTime() >= rangeStartTimestamp && date.getTime() <= rangeEndTimestamp) ||
+      weekDates[0];
+
+    const shiftedRepresentative = shiftByTimezone(representativeDate);
+    const monthLabel = `${monthNames[shiftedRepresentative.getUTCMonth()]} ${shiftedRepresentative.getUTCFullYear()}`;
+
+    if (monthLabel !== lastRenderedMonthLabel) {
+      const monthRow = document.createElement("tr");
+      monthRow.className = "month-row";
+      const monthCell = Object.assign(document.createElement("td"), { colSpan: 7, textContent: monthLabel });
+      monthRow.appendChild(monthCell);
+      calendarBody.appendChild(monthRow);
+      lastRenderedMonthLabel = monthLabel;
+    }
+
+    const weekRow = document.createElement("tr");
+    weekDates.forEach(currentDate => {
+      const dayCell = document.createElement("td");
+      const currentDateString = formatDateYearMonthDay(currentDate);
+      if (currentDateString === todayString) dayCell.classList.add("today");
+
+      const dayNumberDiv = Object.assign(document.createElement("div"), {
+        className: "date",
+        textContent: shiftByTimezone(currentDate).getUTCDate()
+      });
+      dayCell.appendChild(dayNumberDiv);
+
+      (eventsByDateString[currentDateString] || []).forEach(eventItem => {
+        const taskDiv = Object.assign(document.createElement("div"), {
+          className: "task",
+          textContent: `#${eventItem.moduleNumber} ${eventItem.category}`
+        });
+        dayCell.appendChild(taskDiv);
+      });
+
+      weekRow.appendChild(dayCell);
+    });
+    calendarBody.appendChild(weekRow);
+  });
+
+  const upcomingEvents = allDateStrings.flatMap(dateString =>
+    eventsByDateString[dateString].map(eventItem => ({
+      ...eventItem,
+      timestamp: endOfDayTimestampForDateString(dateString)
+    }))
+  );
+
+  const nowTimestamp = Date.now();
+  const nextFiveEvents = upcomingEvents
+    .filter(eventItem => eventItem.timestamp > nowTimestamp)
+    .sort((left, right) => left.timestamp - right.timestamp)
+    .slice(0, 5);
+
+  const formatTimeDifference = milliseconds => {
+    let remainingMinutes = Math.floor(milliseconds / millisecondsPerMinute);
+    if (remainingMinutes < 1) return "less than a minute";
+    const days = Math.floor(remainingMinutes / 1440); remainingMinutes -= days * 1440;
+    const hours = Math.floor(remainingMinutes / 60);  remainingMinutes -= hours * 60;
+    const parts = [];
+    if (days) parts.push(`${days} day${days > 1 ? "s" : ""}`);
+    if (hours) parts.push(`${hours} hour${hours > 1 ? "s" : ""}`);
+    if (remainingMinutes) parts.push(`${remainingMinutes} minute${remainingMinutes > 1 ? "s" : ""}`);
+    return parts.length > 1 ? `${parts[0]}, ${parts[1]}` : parts[0];
+  };
+
+  const upcomingTable = document.getElementById("upcoming-table");
+  const upcomingHeaderRow = document.createElement("tr");
+  const upcomingHeaderCell = Object.assign(document.createElement("th"), { colSpan: 2, textContent: "Upcoming" });
+  upcomingHeaderRow.appendChild(upcomingHeaderCell);
+  upcomingTable.appendChild(upcomingHeaderRow);
+
+  nextFiveEvents.forEach(eventItem => {
+    const row = document.createElement("tr");
+    const nameCell = Object.assign(document.createElement("td"), { textContent: `#${eventItem.moduleNumber} ${eventItem.category}` });
+    const timeCell = Object.assign(document.createElement("td"), { textContent: `In ${formatTimeDifference(eventItem.timestamp - nowTimestamp)}` });
+    row.appendChild(nameCell);
+    row.appendChild(timeCell);
+    upcomingTable.appendChild(row);
+  });
+</script>
+<style>
+  .course-icon {
+    width: 1.5em;
+  }
+
+  #calendar {
+    width: 100%;
+    background-color: #111;
+    border: 1px solid #ccc;
+  }
+  #calendar-body {
+    width: 100%;
+    margin: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  #calendar-body th,
+  #calendar-body td {
+    border: 1px solid #ccc;
+    padding: 4px;
+    width: 14.28%;
+    vertical-align: top;
+  }
+  #calendar-body thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: #222;
+    text-align: center;
+  }
+  #calendar-container {
+    height: 480px;
+    border: 1px solid #ccc;
+    margin: -1px;
+    overflow: auto;
+  }
+  #calendar-body .date {
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+  #calendar-body .task {
+    font-size: 0.85em;
+    margin-bottom: 2px;
+  }
+  #calendar-body .month-row td {
+    text-align: center;
+    font-weight: bold;
+    padding: 6px;
+    background: #222;
+  }
+  #calendar-body td.today {
+    background: #222;
+  }
+  #upcoming-table {
+    width: auto;
+    margin: 0 auto 16px;
+    border-collapse: collapse;
+    table-layout: auto;
+  }
+  #upcoming-table th,
+  #upcoming-table td {
+    border: none;
+    padding: 4px;
+    white-space: nowrap;
+  }
+  #upcoming-table th {
+    text-align: center;
+    font-weight: bold;
+  }
+  #upcoming-table td:first-child {
+    text-align: left;
+    padding-right: 16px;
+  }
+  #upcoming-table td:last-child {
+    text-align: right;
+  }
+</style>
+
+  </div>
+  <br>
+  
+
+  <div class="row text-center">
+    
+    
+  </div>
+
+  <br>
+
+  
+
+  
+  <h2 class="row">Stats</h2>
+  <div id="stats-dashboard" class="stats-dashboard">
+  <div class="stat-card">
+    <div class="stat-card-header">Dojo Stats</div>
+    <div class="stat-container">
+      <div class="stat-box">
+        <div class="stat-label">Total Solves</div>
+        <div class="stat-value">
+  <div class="stat-value">
+    138,083
+    
+      <span class="stat-trend trend-up">
+        ▲14%
+      </span>
+    
+  </div></div>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-label">Hacking Now</div>
+        <div class="stat-value">
+  <div class="stat-value">
+    99
+    
+      <span class="stat-trend trend-neutral"></span>
+    
+  </div></div>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-label">Unique Hackers</div>
+        <div class="stat-value">
+  <div class="stat-value">
+    3,162
+    
+      <span class="stat-trend trend-up">
+        ▲23%
+      </span>
+    
+  </div></div>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-label">Challenges</div>
+        <div class="stat-value">
+  <div class="stat-value">
+    232
+    
+      <span class="stat-trend trend-neutral"></span>
+    
+  </div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-card-header">Activity History</div>
+    <div class="chart-container">
+      <canvas id="activity-chart"
+              data-labels='["Today", "1w ago", "1mo ago", "2mo ago"]'
+              data-solves='[9865, 8312, 0, 0]'
+              data-users='[826, 674, 0, 0]'>
+      </canvas>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-card-header">Recent Awardees</div>
+    <div class="recent-awards">
+      
+        <div class="recent-item">No awards yet</div>
+      
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-card-header">Recent Solves</div>
+    <div class="recent-activity">
+      
+        
+        <div class="recent-item">
+          HTTP Host Header (curl)
+          <div class="recent-time">01/27/26 02:55 AM</div>
+        </div>
+        
+        <div class="recent-item">
+          Reading Input
+          <div class="recent-time">01/27/26 02:55 AM</div>
+        </div>
+        
+        <div class="recent-item">
+          Composite Conditions
+          <div class="recent-time">01/27/26 02:55 AM</div>
+        </div>
+        
+        <div class="recent-item">
+          Multiple globs
+          <div class="recent-time">01/27/26 02:54 AM</div>
+        </div>
+        
+        <div class="recent-item">
+          grepping for a needle in a haystack
+          <div class="recent-time">01/27/26 02:54 AM</div>
+        </div>
+        
+      
+    </div>
+  </div>
+</div>
+
+<script>
+function initializeChart() {
+  const chartCanvas = document.getElementById('activity-chart');
+  if (!chartCanvas || typeof Chart === 'undefined') {
+    setTimeout(initializeChart, 100);
+    return;
+  }
+
+  const parseData = (attr, fallback) => {
+    try {
+      const value = chartCanvas.dataset[attr];
+      return value ? JSON.parse(value) : fallback;
+    } catch (e) {
+      console.error(`Error parsing ${attr}:`, e);
+      return fallback;
+    }
+  };
+
+  const labels = parseData('labels', ['Today', '1w ago', '1mo ago', '2mo ago']);
+  const solvesData = parseData('solves', [0, 0, 0, 0]);
+  const usersData = parseData('users', [0, 0, 0, 0]);
+
+  // Chart.js config
+  Chart.defaults.color = '#ffffff';
+  Chart.defaults.font.family = "'Space Mono', 'JetBrains Mono', 'Consolas', monospace";
+  Chart.defaults.font.size = 9;
+
+  new Chart(chartCanvas.getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Daily Solves',
+          data: solvesData,
+          backgroundColor: 'rgba(120, 190, 32, 0.7)',
+          borderColor: '#78be20',
+          borderWidth: 1
+        },
+        {
+          label: 'Daily Users',
+          data: usersData,
+          backgroundColor: 'rgba(0, 163, 224, 0.7)',
+          borderColor: '#00a3e0',
+          borderWidth: 1
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {
+        intersect: false,
+        mode: 'index'
+      },
+      scales: {
+        x: {
+          grid: {
+            display: false
+          },
+          ticks: {
+            color: '#747474',
+            maxRotation: 25,
+            minRotation: 15
+          }
+        },
+        y: {
+          beginAtZero: true,
+          grid: {
+            color: 'rgba(72, 72, 72, 0.3)'
+          },
+          ticks: {
+            color: '#747474'
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          backgroundColor: 'rgba(0, 0, 0, 0.9)',
+          titleColor: '#ffffff',
+          bodyColor: '#ffffff',
+          borderColor: '#484848',
+          borderWidth: 1,
+          cornerRadius: 4,
+          padding: 8,
+          displayColors: true,
+          callbacks: {
+            title: function(context) {
+              return `${context[0].label}`;
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
+if (document.readyState === 'loading') {
+  if (!window.chartInitialized) {
+    window.chartInitialized = true;
+    document.addEventListener('DOMContentLoaded', initializeChart);
+  }
+} else {
+  initializeChart();
+}
+</script>
+  <div class="row"></div>
+
+  <br>
+
+  <h2 class="row">Modules</h2>
+  <br>
+  <ul class="card-list">
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/cse365-s2026/module-1/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Module 1</h4>
+        
+        <p class="card-text">8 Hacking<br>0 / 153<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+    
+    
+    
+    
+      <a class="text-decoration-none" href="/cse365-s2026/module-2/">
+    <li class="card card-small">
+      <div class="card-body">
+        <h4 class="card-title">Module 2</h4>
+        
+        <p class="card-text">91 Hacking<br>0 / 79<br><br></p>
+        
+        
+        <div class="progress-bar" style="width: 0.0%">
+          
+        </div>
+        
+      </div>
+    </li>
+  </a>
+    
+    
+  </ul>
+
+  
+  <br>
+
+  <h2 class="row" id="scoreboard-heading">30-Day Scoreboard:</h2>
+  <br>
+  
+  <div class="scoreboard-controls row">
+  <p>
+  <span id="scoreboard-control-week"><a href="javascript:loadScoreboard(7, 1)">7-Day</a></span> |
+  <span id="scoreboard-control-month"><a href="javascript:loadScoreboard(30, 1)">30-Day</a></span> |
+  <span id="scoreboard-control-all"><a href="javascript:loadScoreboard(0, 1)">All-Time</a></span>
+  </p>
+</div>
+<div class="scoreboard row">
+  <div class="col-md-12 p-0">
+    <table class="table table-striped">
+	    <thead>
+	      <tr>
+	        <td scope="col" class="col-md-1"><b>Rank</b></td>
+          <td scope="col" class="col-md-1"></td>
+	        <td scope="col" class="col-md-4"><b>Hacker</b></td>
+	        <td scope="col" class="col-md-4"><b>Badges</b></td>
+	        <td scope="col" class="col-md-1"></td>
+	        <td scope="col" class="col-md-1"><b>Score</b></td>
+	      </tr>
+	    </thead>
+	    <tbody id="scoreboard">
+	    </tbody>
+    </table>
+  </div>
+  <div>
+    <ul id="scoreboard-pages" class="p-0">
+    </ul>
+  </div>
+</div>
+
+  
+
+  
+</div>
+
+    </main>
+
+    <footer class="footer">
+      <div class="container text-center" style="line-height: 20px; opacity: 0.7">
+        <small>
+          Powered by <strong>pwn.college</strong><br>
+          Interested in dedicated training or tailored services for your organization?
+          <a href="https://llc.pwn.college/">Find out more</a>.
+        </small>
+      </div>
+    </footer>
+
+    <script defer src="/themes/dojo_theme/static/js/vendor.bundle.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/core.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/helpers.min.js?d=0cd72d60"></script>
+
+    
+    <script defer src="/themes/dojo_theme/static/js/pages/main.min.js?d=0cd72d60"></script>
+    
+
+    <script defer src="/themes/dojo_theme/static/js/dojo/util.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/dojo/navbar.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/dojo/popup.min.js?d=0cd72d60"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+
+    
+<script defer onload="loadScoreboard(30, 1);" src="/themes/dojo_theme/static/js/dojo/scoreboard.min.js?d=0cd72d60"></script>
+<script defer src="/themes/dojo_theme/static/js/dojo/copy.min.js?d=0cd72d60"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <script>
+      window.addEventListener('load', function() {
+        if (typeof renderMathInElement !== 'undefined') {
+          renderMathInElement(document.body, {
+            delimiters: [
+              {left: '\\[', right: '\\]', display: true},
+              {left: '\\(', right: '\\)', display: false}
+            ],
+            throwOnError: false,
+            strict: false,
+            ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          });
+        }
+      });
+    </script>
+
+    
+
+    
+
+    
+    
+  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c44f9294e513975',t:'MTc2OTQ4MjU0OA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

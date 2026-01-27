@@ -1,0 +1,3281 @@
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>pwn.college</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="pwn.college">
+    <meta property="og:description" content="Learn to Hack!">
+    <meta property="og:image" content="https://pwn.college/themes/dojo_theme/static/img/dojo/ninja.png?d=0cd72d60">
+
+    <link rel="icon" href="/themes/dojo_theme/static/img/favicon.png?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/fonts.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/main.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/core.min.css?d=0cd72d60">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceMono-Regular.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceMono-Bold.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/themes/dojo_theme/static/font/SpaceGrotesk-VariableFont_wght.ttf?d=0cd72d60" as="font" type="font/ttf" crossorigin="anonymous">
+    <style>
+      @font-face {
+        font-family: 'Space Mono';
+        src: url("/themes/dojo_theme/static/font/SpaceMono-Regular.ttf?d=0cd72d60") format('truetype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Space Mono';
+        src: url("/themes/dojo_theme/static/font/SpaceMono-Bold.ttf?d=0cd72d60") format('truetype');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Space Grotesk';
+        src: url("/themes/dojo_theme/static/font/SpaceGrotesk-VariableFont_wght.ttf?d=0cd72d60") format('truetype');
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
+    <link rel="stylesheet" href="/themes/dojo_theme/static/css/custom.min.css?d=0cd72d60">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    
+
+    
+
+<style>
+.scroll-disabled {
+  overflow: hidden;
+}
+
+.challenge-workspace {
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+
+.challenge-iframe {
+  display: block;
+  width: 100%;
+  min-height: 60vh;
+  aspect-ratio: 16/9;
+  border: 0;
+}
+
+.challenge-iframe-fs {
+  aspect-ratio: unset !important;
+  height: calc(100vh - 2.5em - 10px);
+}
+
+.challenge-init {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.challenge-hidden {
+  visibility: hidden;
+  max-height: 0 !important;
+}
+
+.workspace-fullscreen {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  z-index: 1031;/* Navbar z-index + 1 */
+  bottom: -16px;
+  right: 0;
+  background-color: #111;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.workspace-fullscreen .iframe-wrapper {
+  display: flex;
+}
+
+.workspace-ssh {
+  padding: 1em;
+  margin-bottom: 1em;
+  background-color: var(--foreground);
+  border-radius: 0.5em;
+}
+
+
+.challenge-hidden .workspace-ssh {
+  display: none !important;
+}
+</style>
+
+
+
+
+    
+    <script type="text/javascript">
+      var init = {
+	  'urlRoot': "",
+	  'csrfNonce': "a5535ce4910028c06502f57e236bf020d405041ffaeff23114a34a0de0a3d309",
+	  'userMode': "users",
+	  'userId': 0,
+	  'start': null,
+	  'end': null,
+	  'theme_settings': null,
+          'dojo': "thaw~84f102b7",
+          'module': "thaw"
+      }
+    </script>
+    
+  </head>
+  <body>
+    
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top">
+  <div class="container">
+    <a href="/" class="brand-mono-bold wordmark">
+      
+      <span class="brand-white">pwn</span><span class="brand-dot-white">.</span><span class="brand-white">college</span>
+      
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#base-navbars"
+            aria-controls="base-navbars" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="base-navbars">
+      <div class="d-none d-md-block" style="border-left: 2px solid white; height: 20px; margin: 0 20px;"></div>
+      <ul class="navbar-nav mr-auto">
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/dojos">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Dojos">
+      <i class="fas fa-torii-gate d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-torii-gate pr-1"></i>
+      
+      Dojos
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/workspace">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Workspace">
+      <i class="fas fa-desktop d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-desktop pr-1"></i>
+      
+      Workspace
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/sensai.html" target="_blank">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Help">
+      <i class="fas fa-question d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-question pr-1"></i>
+      
+      Help
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="https://discord.gg/pwncollege" target="_blank">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Chat">
+      <i class="fas fa-comments d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-comments pr-1"></i>
+      
+      Chat
+      
+    </span>
+  </a>
+</li>
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="#">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Search">
+      <i class="fas fa-search d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-search pr-1"></i>
+      
+      Search
+      
+    </span>
+  </a>
+</li>
+
+      </ul>
+      <hr class="d-sm-flex d-md-flex d-lg-none">
+      <ul class="navbar-nav ml-md-auto d-block d-sm-flex d-md-flex">
+        
+        
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/register.html">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Register">
+      <i class="fas fa-user-plus d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-user-plus pr-1"></i>
+      
+      Register
+      
+    </span>
+  </a>
+</li>
+
+        
+
+        
+<li class="nav-item">
+  
+  <a class="nav-link" href="/login.html">
+  
+    <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Login">
+      <i class="fas fa-sign-in-alt d-none d-md-block d-lg-none" style="width: 20px"></i>
+    </span>
+    <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+      <i class="fas fa-sign-in-alt pr-1"></i>
+      
+      Login
+      
+    </span>
+  </a>
+</li>
+
+        
+
+        <li class="nav-item">
+          <a class="nav-link close-link" href="javascript:void(0)">
+            <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Hide Navbar">
+              <i class="fas caret-up d-none d-md-block d-lg-none"></i>
+            </span>
+            <span class="d-sm-block d-md-none d-lg-block text-nowrap">
+              <i class="fas fa-caret-up pr-1"></i>
+              <span class="d-lg-none">Hide Navbar</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="navbar-pulldown">
+  <i class="fas fa-fw fa-caret-down" title="Show navigation bar"></i>
+</div>
+
+<div id="searchModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document" style="margin: 10vh auto; max-width: 650px; width: 80%;">
+    <div class="modal-content bg-dark text-white rounded-lg shadow-lg">
+      <div class="modal-body p-4">
+        <form id="searchForm">
+          <div class="input-group input-group-lg">
+            <div class="input-group-prepend">
+              <span class="input-group-text bg-secondary border-0 text-white">
+                <i class="fas fa-search"></i>
+              </span>
+            </div>
+            <input type="text" id="searchInput" class="form-control bg-dark text-white border-0" placeholder="Search..." autocomplete="off">
+            <div class="input-group-append">
+              <button type="button" class="btn btn-outline-light" data-dismiss="modal">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <div id="searchResults" class="mt-3">
+          <!-- Results will be inserted here dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <main role="main">
+      
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="brand-white brand-mono-bold">Main</h1>
+    <br>
+    <h2 class="module-dojo"><a class="brand-white brand-mono-bold" href="/dojo/thaw~84f102b7">The House Always Wins<span class="brand-dot">.</span></a></h2>
+
+    
+  </div>
+</div>
+<div class="container">
+
+  
+
+  
+  
+
+  
+
+  <div class="accordion" id="module-content">
+    
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-1">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-1" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-1" aria-expanded="false" aria-controls="challenges-body-1">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="1" data-challenge-id="thaw1" data-challenge-name="Level1" id="challenges-header-1">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Level1</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                107 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-1" class="collapse" aria-labelledby="module-content-header-1" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                <p>Welcome to &quot;The House Always Wins!&quot;</p>
+<p>This dojo is centered around PRNGs (Pseudo-Random Number Generators)
+and the exploitation of the &quot;pseudo&quot; part.</p>
+<p>If you have any experience with reverse-engineering and want to learn
+by doing, feel free to stop reading now and go dig around in the bins -
+all main challenges should be solvable without any guidance!</p>
+<p>If you get stuck and need a hint, or want to learn more about the
+intended approach and the concepts behind it - each challenge has a
+series of encrypted hints. Dectypting them is easy:</p>
+<blockquote>
+<p>$ echo &quot;aGFpIGhld3dvdSBpbWEgaGludCA6Mwo=&quot; | base64 -d</p>
+</blockquote>
+<pre><code>       ^^^ that's the enctypted hint in base64
+</code></pre>
+<p>In any case, good luck!
+-CyanBun96</p>
+<p>Overview
+<code>TGV2ZWwgMSAtIFR1dG9yaWFsCgpEaWZmaWN1bHR5OgogIFJ1bGVzOiBbKi0tXSAoMTAgd2luIHN0cmVhaywgMjAwMCByb3VuZHMpCiAgU2VlZDogIFhYWFhYIChnZXRlbnRyb3B5KQogIFBSTkc6ICBbKioqXSAoTEFGKQo=</code></p>
+<p>Description
+<code>VGhlIGZpcnN0IGxldmVsIGlzIGludHJvZHVjdG9yeSAtIGFsbCB5b3UgbmVlZCB0byBkbyBpcyB3aW4gMTAgdGltZXMKaW4gYSByb3chIFdpdGggY2hhbmNlcyBiZWluZyA1MC81MCwgdGhhdCBzaG91bGQgdGFrZSBhcm91bmQgMjA0OCB0cmllcwpvbiBhdmVyYWdlLiBUaGUgMjAwMCByb3VuZCBsaW1pdCBtaWdodCB0cmlwIHlvdSB1cCBhIGJpdCwgYnV0IHlvdSBjYW4KcmV0cnkgdGhlIGNoYWxsZW5nZSBhcyBtdWNoIGFzIHlvdSB3YW50Lgo=</code></p>
+<p>Intended approach
+<code>VGhlIFBSTkcgaW4gdGhpcyBsZXZlbCBpcyBxdWl0ZSBzdHJvbmcsIGFuZCB0aGUgc2VlZCAoaW5pdGlhbCBzdGF0ZSkgaXMKcHJhY3RpY2FsbHkgdW5jcmFja2FibGUuIFRoZSB3aW4gY29uZGl0aW9uIGlzIGVhc3kgZW5vdWdoIHRob3VnaCwgdGh1cy4uLgoKQnJ1dGVmb3JjZSEgVGhpcyBsZXZlbCBpcyBtb3N0bHkgaGVyZSB0byBoZWxwIHlvdSBhdXRvbWF0ZSB0aGUgaW50ZXJhY3Rpb25zCnRocm91Z2ggc29tZXRoaW5nIGxpa2UgcHdudG9vbHMgZm9yIFB5dGhvbi4gV2hpbGUgeW91LCB0ZWNobmljYWxseSwgY2FuCnNvbHZlIGV2ZXJ5IGNoYWxsZW5nZSBpbiB0aGUgbWFpbiBkb2pvIHdpdGggcGVuLCBwYXBlciBhbmQgcG93ZXIgb2Ygd2lsbCwKYXV0b21hdGlvbiBpcyBleHBlY3RlZCBhbmQgbm90IGNvbnNpZGVyZWQgY2hlYXRpbmcuCgpGZWVkaW5nIGFueSB2YWxpZCBpbnB1dCAoJzEnIG9yICcwJyBpbiBBU0NJSSArIG5ld2xpbmUpIDIwMDAgdGltZXMgc2hvdWxkCmRvIHRoZSB0cmljayEK</code></p>
+<p>Algorithms and implementation details
+<code>TGluZWFyIEFkZGl0aXZlIEZlZWRiYWNrIHJhbmRvbSBudW1iZXIgZ2VuZXJhdG9yIGlzIGEgc2xpZ2h0bHkgYWRqdXN0ZWQKKGxpdGVyYWxseSAxIGJpdCBvZiBkaWZmZXJlbmNlKSB2ZXJzaW9uIG9mIHRoZSBnbGliYydzIGRlZmF1bHQgcmFuZCgpClRoZSBkZXRhaWxzIGFuZCByZWFzb25zIGZvciB0aGVtIHdpbGwgYmUgZGlzY3Vzc2VkIGxhdGVyLi4uCgpnZXRlbnRyb3B5KCkgY2FsbHMgZ2V0cmFuZG9tKCkgdW5kZXIgdGhlIGhvb2QsIHdoaWNoIHJlYWRzIGZyb20gdGhlIHNhbWUKc291cmNlIGFzIC9kZXYvdXJhbmRvbS4gSWYgeW91IGhhcHBlbiB0byBjcmFjayBpdCAtIGV4cGVjdCBnbG9iYWwgY2hhb3MuCgpTb3VyY2VzOgptYW4gMyByYW5kb20KbWFuIDMgZ2V0ZW50cm9weQptYW4gMiBnZXRyYW5kb20K</code></p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="thaw">
+                <input id="challenge" type="hidden" value="thaw1">
+                <input id="challenge-id" type="hidden" value="5409">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e38b8280888691a3878c898ccd93948dcd808c8f8f868486">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="5409" data-challenge-name="Level1">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/thaw~84f102b7/surveys/thaw/thaw1" id="survey-notification" class="survey alert-dismissable w-100 survey-id-5409" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-2">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-2" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-2" aria-expanded="false" aria-controls="challenges-body-2">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="2" data-challenge-id="thaw2" data-challenge-name="Level2" id="challenges-header-2">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Level2</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                71 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-2" class="collapse" aria-labelledby="module-content-header-2" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                <p>Overview
+<code>TGV2ZWwgMiAtIEZpeGVkIHNlZWQgYXR0YWNrCgpEaWZmaWN1bHR5OgogIFJ1bGVzOiBbKioqXSAoNzc3IHdpbiBzdHJlYWssIDIwMDAgcm91bmRzKQogIFNlZWQ6ICBbKi0tXSAoZml4ZWQpCiAgUFJORzogIFhYWFhYIChMQUYgYnV0IHN0cm9uZ2VyKQo=</code></p>
+<p>Description
+<code>VGhlIHNlY29uZCBsZXZlbCByZXF1aXJlcyBzb21lIGFjdHVhbCBSTkcgZXhwbG9pdGF0aW9uIQpNb3N0IFJOR3MgYXJlIGp1c3QgYSBjb21wbGljYXRlZCBmb3JtdWxhIHRoYXQgb3V0cHV0cyBudW1iZXJzIHRoYXQKb25seSBzZWVtIHJhbmRvbS4gVGhleSByZXF1aXJlIGEgc2VlZCB2YWx1ZSAtIHRoZSBmaXJzdCB2YWx1ZQp0aGF0J3MgZ29pbmcgdG8gaW5mbHVlbmNlIGV2ZXJ5IG51bWJlciBnZW5lcmF0ZWQgYnkgdGhlIFJORy4KSWYgdGhlIHNlZWQgdmFsdWUgaXMgdGhlIHNhbWUsIHRoZSBnZW5lcmF0ZWQgbnVtYmVycyB3aWxsIGFsc28KYmUgdGhlIHNhbWUgZXZlcnkgdGltZS4KCkNhc2UgaW4gcG9pbnQgLSBNaW5lY3JhZnQhIFlvdSBjYW4gZ2VuZXJhdGUgdGhlIHNhbWUgcmFuZG9tIHdvcmxkCmFzIGxvbmcgYXMgeW91IGtub3cgdGhlIHNlZWQuCg==</code></p>
+<p>Intended approach
+<code>VGhlIGFsZ29yaXRobSBpdHNlbGYgZG9lc24ndCBnaXZlIHlvdSBlbm91Z2ggaW5mb3JtYXRpb24gYWJvdXQgaXRzCmludGVybmFsIHN0YXRlIHRvIGF0dGFjayBpdCwgc28gZm9jdXMgb24gZXhwbG9pdGluZyB0aGUgZml4ZWQgc2VlZC4KCklmIHlvdSBkbyBmaW5kIGEgd2F5IHRvIGF0dGFjayB0aGUgYWxnb3JpdGhtIGxldCBtZSBrbm93IHRob3VnaDspCg==</code></p>
+<p>Hint 1
+<code>VGhlIHNlZWQgaXMgdW5pcXVlIGZvciBldmVyeW9uZSBiZWNhdXNlIGl0IGlzIGJhc2VkIG9uIHlvdXIgL2ZsYWcuClRoaXMgYWxzbyBtZWFucyB0aGF0IGEgaGFyZGNvZGVkIHNvbHV0aW9uIGZvciBwcmFjdGljZSBtb2RlIHdpbGwKbm90IHdvcmsgaW4gY2hhbGxlbmdlIG1vZGUgYmVjYXVzZSB0aGUgZmxhZ3MgYXJlIGRpZmZlcmVudCEK</code></p>
+<p>Hint 2
+<code>VGhlIGludGVuZGVkIHNvbHV0aW9uIHJlcXVpcmVzIHJlc3RhcnRpbmcgdGhlIGNoYWxsZW5nZSBwcm9ncmFtIG9uY2Uu</code></p>
+<p>Hint 3
+<code>VGhpcyBjaGFsbGVuZ2UgaXMgYWxzbyBzdXBwb3NlZCB0byB0ZWFjaCB5b3UgdG8gc3RvcmUgb3V0cHV0cyAtIHlvdSdsbApiZSBkb2luZyB0aGF0IGEgbG90IGluIGZ1dHVyZSBjaGFsbGVuZ2VzLgo=</code></p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="thaw">
+                <input id="challenge" type="hidden" value="thaw2">
+                <input id="challenge-id" type="hidden" value="5410">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ed858c8e86889fad89828782c39d9a83c38e828181888a88">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="5410" data-challenge-name="Level2">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/thaw~84f102b7/surveys/thaw/thaw2" id="survey-notification" class="survey alert-dismissable w-100 survey-id-5410" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-3">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-3" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-3" aria-expanded="false" aria-controls="challenges-body-3">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="3" data-challenge-id="thaw3" data-challenge-name="Level3" id="challenges-header-3">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Level3</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                46 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-3" class="collapse" aria-labelledby="module-content-header-3" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                <p>Overview
+<code>TGV2ZWwgMyAtIFByZWRpY3RhYmxlIHNlZWQgYXR0YWNrCgpEaWZmaWN1bHR5OgogIFJ1bGVzOiBbKioqXSAoNzc3IHdpbiBzdHJlYWssIDIwMDAgcm91bmRzKQogIFNlZWQ6ICBbKiotXSAodGltZSgwKSkKICBQUk5HOiAgWFhYWFggKGdsaWJjIHJhbmQoKSkK</code></p>
+<p>Description
+<code>VGhlIHRoaXJkIGxldmVsIGlzIHN0aWxsIGEgc2VlZCBhdHRhY2ssIGJ1dCBhIGJpdCBtb3JlIGFkdmFuY2VkLgpTaW5jZSB1c2luZyBhIGZpeGVkIHNlZWQgZm9yIFJOR3Mga2luZGEgZGVmZWF0cyB0aGUgcHVycG9zZSwgbW9zdApwcm9ncmFtcyB1c2Ugc29tZSB2YWx1ZSB0aGF0IGNoYW5nZXMganVzdCBlbm91Z2ggdG8gbm90IGJlIHRoZSBzYW1lCmFjcm9zcyBtdWx0aXBsZSBsYXVuY2hlcy4KCkNhc2UgaW4gcG9pbnQgLSBNaW5lY3JhZnQhIEl0IHVzZXMgKG9yIGF0IGxlYXN0IHVzZWQgYXQgc29tZSBwb2ludCkKdGhlIGN1cnJlbnQgdGltZSBhcyB0aGUgd29ybGQgc2VlZCBpZiBubyBzZWVkIGlzIHNwZWNpZmllZC4K</code></p>
+<p>Intended approach
+<code>SWYgeW91IGNhbiBnZW5lcmF0ZSB0aGUgc2FtZSBudW1iZXJzIGFzIHRoZSBjaGFsbGVuZ2UsIHlvdSBjYW4gcHJlZGljdAp0aGUgYW5zd2VycyEgWW91IGp1c3QgbmVlZCB0byBmaWd1cmUgb3V0IGEgd2F5IHRvIGNvcHkgdGhlIGludGVybmFsIHN0YXRlCm9mIHRoZSBjaGFsbGVuZ2UncyBSTkcuIFRoaXMgd2lsbCBiZSB0aGUgd2F5IHRvIGdvIGZvciB0aGUgcmVzdCBvZiB0aGUgbWFpbgpjaGFsbGVuZ2VzIC0gY29weSB0aGUgc3RhdGUsIGNvcHkgdGhlIGFsZ29yaXRobSwgd2luIQo=</code></p>
+<p>Hint 1
+<code>VGhpcyBpcyB0aGUgb25seSBjaGFsbGVuZ2Ugd2l0aG91dCBhIGhhcmRjb2RlZCBQUk5HIGFsZ29yaXRobSAtIHRoYXQncwpieSBkZXNpZ24sIHRvIG1ha2UgaXQgZWFzaWVyLiBZb3UgYXJlIG5vdCBzdXBwb3NlZCB0byByZXZlcnNlLWVuZ2luZWVyIGl0IC0KeW91IGNhbiB1c2UgaXQgYXMtaXMuCg==</code></p>
+<p>Hint 2
+<code>VGhlIG9yaWdpbmFsIHByb2dyYW0gd2FzIHdyaXR0ZW4gaW4gQywgYW5kIHRoZSBlYXNpZXN0IHNvbHV0aW9uIHdvdWxkIGJlCnRvIGp1c3QgY2xvbmUgdGhlIHJlbGV2YW50IHBhcnRzIGluIGEgQyBwcm9ncmFtIG9mIHlvdXIgb3duLgo=</code></p>
+<p>Technical note
+<code>VGhpcyBjaGFsbGVuZ2Ugd2FzIGNvbXBpbGVkIGFuZCB0ZXN0ZWQgd2l0aCB3aXRoIGdjYyAxNC4xLjEgYW5kIGdsaWJjIDIuMzkuClRoZSByYW5kKCkncyBhbGdvcml0aG0gaGFzbid0IGNoYW5nZWQgaW4gYSB3aGlsZSBhbmQgdGhlcmUgaXMgbm8gcmVhc29uCnRvIGV4cGVjdCBpdCB0bywgYnV0IHlvdSBuZXZlciBrbm93Li4uClJlY29tcGlsaW5nIHRoZSBzb3VyY2UgZm9yIHNvbWUgb3RoZXIgT1Mgb3IgYXJjaGl0ZWN0dXJlIG1heSByZW5kZXIgdGhlCmNoYWxsZW5nZSB1bnNvbHZhYmxlLCBpbiB0aGVvcnkuICJJdCBEZXBlbmRzIih0bSkK</code></p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="thaw">
+                <input id="challenge" type="hidden" value="thaw3">
+                <input id="challenge-id" type="hidden" value="5411">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="553d34363e302715313a3f3a7b25223b7b363a3939303230">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="5411" data-challenge-name="Level3">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/thaw~84f102b7/surveys/thaw/thaw3" id="survey-notification" class="survey alert-dismissable w-100 survey-id-5411" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-4">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-4" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-4" aria-expanded="false" aria-controls="challenges-body-4">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="4" data-challenge-id="thaw4" data-challenge-name="Level4" id="challenges-header-4">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Level4</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                42 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-4" class="collapse" aria-labelledby="module-content-header-4" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                <p>Overview
+<code>TGV2ZWwgNCAtIExGU1IgMQoKRGlmZmljdWx0eToKICBSdWxlczogWyoqKl0gKDc3NyB3aW4gc3RyZWFrLCAyMDAwIHJvdW5kcykKICBTZWVkOiAgWyotLV0gKGZpeGVkKQogIFBSTkc6ICBbKi0tXSAoNy1iaXQgTEZTUikKCg==</code></p>
+<p>Description
+<code>Tm93IGNvbWVzIHRoZSBmdW4gcGFydCAtIHByZWRpY3RpbmcgZnV0dXJlIG91dHB1dHMgb24gcHJldmlvdXMgb3V0cHV0cyBhbG9uZSEKVGhlIFBSTkcgaW1wbGVtZW50ZWQgaGVyZSBpcyBhIExpbmVhciBGZWVkYmFjayBTaGlmdCBSZWdpc3RlciAtIG9uZSBvZiB0aGUKc2ltcGxlc3QsIHlldCBlZmZlY3RpdmUgYW5kIGVsZWdhbnQgc29sdXRpb25zIGZvciBSTkcuIENoZWNrIHRoZSBmb2xsb3dpbmcKaGludCBhbmQgcGxheSBhcm91bmQgd2l0aCB0aGUgbGZzcl90b3kgaW4gL2NoYWxsZW5nZS8gdG8gZ2V0IHRoZSBoYW5nIG9mIGl0IQoK</code></p>
+<p>LFSR basics
+<code>TGluZWFyIC0gaXQgY2FuIGJlIHJldmVyc2VkIQpGZWVkYmFjayAtIGl0IGZlZWRzIGl0J3Mgb3duIHZhbHVlcyBiYWNrIHRvIGl0c2VsZiEKU2hpZnQgLSB0YWtlIGFsbCB0aGUgYml0cyBhbmQgbW92ZSB0aGVtIHJpZ2h0IG9uZSBwbGFjZSEKUmVnaXN0ZXIgLSB0aGF0J3Mgd2hlcmUgdGhlIGJpdHMgYXJlIHN0b3JlZCEKCkxldCdzIHRha2UgMTAxMTAgYXMgdGhlIGluaXRpYWwgc3RhdGUsIHdpdGggInRhcHMiIGF0IDIgYW5kIDMuCkZpcnN0LCB3ZSBmaWd1cmUgb3V0IHRoZSBmZWVkYmFjayBwYXJ0LiBXZSBuZWVkIHRvIGdldCBhIG5ldyBiaXQsIGFuZCB0aGUKdGFwcyBhcmUgZ29pbmcgdG8gYmUgdGhlIHNvdXJjZS4KCiAxIDAgMSAxIDAKICAgICBeIF4KVGhvc2UgdHdvIGdldCBYT1InZCB0b2dldGhlciB0byBnZXQgdGhlIG5ldyBiaXQuClhPUiAoXikgPSBlWGNsdXNpdmUgT1IgPSAwIGlmIG51bWJlcnMgYXJlIHNhbWUgYW5kIDEgaWYgdGhleSdyZSBkaWZmZXJlbnQKMSBeIDEgPSAwIC0gdGhhdCdzIG91ciBuZXcgYml0IQoKTm93IGZvciB0aGUgc2hpZnQhIEl0IGVmZmVjdGl2ZWx5IGRpdmlkZXMgdGhlIG51bWJlciByZXByZXNlbnRlZCBieSB0aGUgYml0cwpieSB0d28sIGFuZCBjYW4gYmUgZG9uZSB3aXRoICJudW1iZXIgPj4gMSIgb3IgIm51bWJlciAvIDIiIGluIEMuCgogMSAwIDEgMSAwID4+CiAgdiAgIHYgICB2CiAuIDEgMCAxIDEgPj4gMAogXm5ld15zdGF0ZSAgIF5vdXRwdXQhCgpUaGUgb3V0cHV0IGlzIHVzZWQgImFzLWlzIiB0byBkZWNpZGUgdGhlIGNvaW4gZmxpcCBpbiB0aGUgY2hhbGxlbmdlLCBhbmQgZnVsbApudW1iZXJzIGNhbiBiZSBnZW5lcmF0ZWQgYnkgcmVhZGluZyBtdWx0aXBsZSBiaXRzIGluIGEgbG9vcC4KTm93IHdlIGdldCB0aGUgbmV3IGJpdCB3ZSBjYWxjdWxhdGVkIGVhcmxpZXIgYW5kIHBsYWNlIGl0IG9uIHRoZSBsZWZ0OgoKIC4gMSAwIDEgMQogdgogMCAxIDAgMSAxCgpBbmQgbm93IHdlIHN0YXJ0IG92ZXIhCgowMTAxMSA+PiAxMDEwMSA+PiAxCiAgdnYgICAgIF4KICAwXjE9MT4+XgoKMTAxMDEgPj4gMTEwMTAgPj4gMQogIHZ2ICAgICBeCiAgMV4wPTE+Pl4KCjExMDEwID4+IDExMTAxID4+IDAKICB2diAgICAgXgogIDBeMT0xPj5eCgoxLiBDYWxjdWxhdGUgdGhlIG5ldyBiaXQgYnkgWE9SaW5nIHRoZSB2YWx1ZXMgYXQgdGhlIHRhcHMuCjIuIFJlYWQgdGhlIGxlYXN0IHNpZ25pZmljYW50IGJpdCB0byBnZXQgdGhlIG91dHB1dC4KMy4gU2hpZnQgYWxsIGJpdHMgdG8gdGhlIHJpZ2h0Lgo0LiBOZXcgYml0IGlzIHRoZSBuZXcgbW9zdCBzaWduaWdpY2FudCBiaXQuCjUuIFJlcGVhdCEKClRoaXMgaXMgaG93IHRoZSBMRlNSIGlzIGltcGxlbWVudGVkIGluIHRoZSBjaGFsbGVuZ2VzIDQgYW5kIDUsIGJ1dCBpdCBjYW4gdGFrZQptYW55IGZvcm1zIGFuZCBiZSBjb21iaW5lZCB3aXRoIG90aGVyIGFsZ29yaXRobXMgdG8gbWFrZSBpdCBzdHJvbmdlciEKCkxGU1JzIGFyZSB2ZXJ5IHBvcHVsYXIsIHNvIGFueSBxdWVycnkgaW4gYSBzZWFyY2ggZW5naW5lIG9yIHZpZGVvIGhvc3Rpbmcgc2l0ZQpvZiB5b3VyIGNob2ljZSB3aWxsIGNvbWUgdXAgd2l0aCBtYW55IG1vcmUgcmVzdWx0cyBhbmQgZXhwbGFuYXRpb25zLgoKYWxzbyBwbGF5IHdpdGggTEZTUiBUb3kgaW4gL2NoYWxsZW5nZS8gaXRzIFZlcnkgQ29vbCBpZiBpIGRvIHNheSBzbyBteXNlbGY7KQo=</code></p>
+<p>Intended approach
+<code>V2hpbGUgdGhpcyBjaGFsbGVuZ2UncyBpbXBsZW1lbnRhdGlvbiBvZiBMRlNSIGNhbiBiZSBiZWF0ZW4gaW4gc2V2ZXJhbCB3YXlzLAppdCBpcyBtb3N0bHkgaW50ZW5kZWQgYXMgYSBwcmFjdGljYWwgZ3VpZGUgb24gaW5mZXJpbmcgdGhlIFJORydzIGludGVybmFsCnN0YXRlIGZyb20gaXRzIG91dHB1dHMgYWxvbmUuIFJldmVyc2UtZW5naW5lZXIgdGhlIGFsZ29yaXRobSwgZ2V0IGEgZmV3CnJlc3VsdHMgZnJvbSB0aGUgY2hhbGxlbmdlIGFuZCB1c2UgdGhlbSB0byBtYXRjaCB0aGUgY2hhbGxlbmdlJ3Mgb3V0cHV0cyEKCg==</code></p>
+<p>Hint 1
+<code>SW4gY2FzZSBvZiBMRlNScywgeW91IGNhbiBnZXQgdGhlIGluaXRpYWwgc3RhdGUgYnkganVzdCByZWFkaW5nIHRoZSBhbW1vdW50Cm9mIGJpdHMgZXF1YWwgdG8gTEZTUidzIGxlbmd0aC4gQ29tYmluZSB0aGF0IGFuZCB0aGUgZmFjdCB0aGF0IHRoZSBzZWVkIGlzCmZpeGVkIHRvIGRldmVsb3AgYSBmbGV4aWJsZSBzb2x1dGlvbiB0aGF0IGNhbiBiZSByZXVzZWQgaW4gdGhlIGZ1dHVyZS4KCg==</code></p>
+<p>Bonus hint
+<code>TEZTUidzIG91dHB1dHMgbG9vcCBhcm91bmQgYWZ0ZXIgMiB0byB0aGUgcG93ZXIgb2YgTEZTUidzIGxlbmd0aCBtaW51cyBvbmUuCkhlcmUgaXQncyAyKio3LTE9MTI3LCBzbyBleHBsb2l0aW5nIHRoYXQgaXMgYSB2YWxpZCBhcHByb2FjaCEKVGhlIG5leHQgY2hhbGxlbmdlIHRob3VnaC4uLgoK</code></p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="thaw">
+                <input id="challenge" type="hidden" value="thaw4">
+                <input id="challenge-id" type="hidden" value="5412">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="761e17151d13043612191c19580601185815191a1a131113">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="5412" data-challenge-name="Level4">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/thaw~84f102b7/surveys/thaw/thaw4" id="survey-notification" class="survey alert-dismissable w-100 survey-id-5412" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-5">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-5" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-5" aria-expanded="false" aria-controls="challenges-body-5">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="5" data-challenge-id="thaw5" data-challenge-name="Level5" id="challenges-header-5">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Level5</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                33 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-5" class="collapse" aria-labelledby="module-content-header-5" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                <p>Overview
+<code>TGV2ZWwgNSAtIExGU1IgMgoKRGlmZmljdWx0eToKICBSdWxlczogWyoqKl0gKDc3NyB3aW4gc3RyZWFrLCAyMDAwIHJvdW5kcykKICBTZWVkOiAgWFhYWFggKGdldGVudHJvcHkpCiAgUFJORzogIFsqKi1dICgzMS1iaXQgTEZTUikKCg==</code></p>
+<p>Description
+<code>SXQncyBsZXZlbCA0LCBidXQgaGFyZGVyISBUaGUgTEZTUidzIHBlcmlvZCBpcyAyKiozMS0xIHNvIHlvdSBjYW4ndCBleHBsb2l0CnRoYXQsIGFuZCB0aGUgc2VlZCBpcyBhbHNvIHVucHJlZGljdGFibGUuIFRoZSBhbGdvcml0aG0gaXMgdGhlIHNhbWUgdGhvdWdoLApzbyBpZiB5b3Ugc29sdmVkIDQganVzdCB0aGUgcmlnaHQgd2F5LCBhbGwgaXQncyBnb2luZyB0byB0YWtlIGhlcmUgaXMKYWRqdXN0aW5nIGEgZmV3IHZhcmlhYmxlcyEKCg==</code></p>
+<p>Intended approach
+<code>VGhlIExGU1IncyBsZW5ndGggYW5kIHRoZSB0YXBzJyBwb3NpdGlvbnMgYXJlIHRoZSBvbmx5IHRoaW5ncyB5b3UgaGF2ZSB0bwphZGp1c3QgaWYgeW91ciBpbXBsZW1lbnRhdGlvbiBpcyBnZW5lcmljIGVub3VnaC4KCg==</code></p>
+<p>Bonus hint
+<code>TEZTUnMgd2l0aCBzaW1wbGUgcmF0aW9zIGJldHdlZW4gdGhlIGxlbmd0aCBhbmQgdGFwIHBvc2l0aW9ucyBjYW4gZ2VuZXJhdGUKcmVhbGx5IGZ1bmt5IHBhdHRlcm5zIHdoZW4geW91IHByaW50IHRoZSByZXN1bHRzIG91dCBpbiB0d28gZGltZW5zaW9ucyEKVGhhdCdzIHdoeSB0aGlzIGNoYWxsZW5nZSB1c2VzIHByaW1lIG51bWJlcnMgZm9yIHRob3NlIDopCgo=</code></p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="thaw">
+                <input id="challenge" type="hidden" value="thaw5">
+                <input id="challenge-id" type="hidden" value="5413">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1870797b737d6a587c77727736686f76367b7774747d7f7d">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="5413" data-challenge-name="Level5">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/thaw~84f102b7/surveys/thaw/thaw5" id="survey-notification" class="survey alert-dismissable w-100 survey-id-5413" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-6">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-6" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-6" aria-expanded="false" aria-controls="challenges-body-6">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="6" data-challenge-id="thaw6" data-challenge-name="Level6" id="challenges-header-6">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Level6</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                31 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-6" class="collapse" aria-labelledby="module-content-header-6" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                <p>Overview
+<code>TGV2ZWwgNiAtIFJlYWwgcmFuZCgpIQoKRGlmZmljdWx0eToKICBSdWxlczogWyoqKl0gKDc3NyB3aW4gc3RyZWFrLCAyMDAwIHJvdW5kcykKICBTZWVkOiAgWFhYWFggKGdldGVudHJvcHkpCiAgUFJORzogIFsqKi1dIChnbGliYyByYW5kKCkgVFlQRV8wKQoK</code></p>
+<p>Description
+<code>WW91J3ZlIHJlYWNoZWQgdGhlIFJlYWwgUFJORyBMZXZlbCEgVGhlIGFsZ29yaXRobSB1c2VkIGhlcmUgaXMgYSB2ZXJiYXRpbSBjb3B5Cm9mIHRoZSBvbmUgdXNlZCBpbiByYW5kKCkhIE9yIHJhdGhlciwgImFuIiBhbGdvcml0aG0gZnJvbSBpdC4uLiBUaGUgZ2xpYmMKaW1wbGVtZW50YXRpb24gc3VwcG9ydHMgdmFyaW91cyBzdGF0ZSBsZW5ndGhzLCBhbmQgaXQgdXNlcyBhIGRpZmZlcmVudAphbGdvcml0aG0gZm9yIGFsbCBsZW5ndGhzIGJ1dCB0aGUgc2hvcnRlc3QuIEEgbXVjaCBzaW1wbGVyIG9uZS4gQW5kIHRoZQpiaW5hcnkgZG9lc24ndCBjYWxsIHJhbmQoKSBlaXRoZXIgLSB0aGUgYWxnb3JpdGhtIGlzIGEgZnVuY3Rpb24gaW4gdGhlIG1haW4KcHJvZ3JhbSBzbyB0aGF0IHlvdSBkb24ndCBoYXZlIHRvIGRpdmUgaW50byBzaGFyZWQgbGlicyB3aGVuIGRlYnVnZ2luZy4gU3RpbGwsCml0J3MgYWxtb3N0IFJlYWwhIFRoYXQncyBwb3dlcmZ1bCBzdHVmZiB5b3UncmUgZGVsdmluZyBpbnRvIQoK</code></p>
+<p>Relevant code snippet
+<code>U291cmNlOiBnbGliYy0yLjM5LCByYW5kb21fci5jLCBsaW5lIDM1MwoKaW50IF9fcmFuZG9tX3Ioc3RydWN0IHJhbmRvbV9kYXRhICpidWYsIGludDMyX3QgKnJlc3VsdCkKLi4uCmlmIChidWYtPnJhbmRfdHlwZSA9PSBUWVBFXzApCiAgICB7CiAgICAgIGludDMyX3QgdmFsID0gKChzdGF0ZVswXSAqIDExMDM1MTUyNDVVKSArIDEyMzQ1VSkgJiAweDdmZmZmZmZmOwogICAgICBzdGF0ZVswXSA9IHZhbDsKICAgICAgKnJlc3VsdCA9IHZhbDsKICAgIH0KLi4uCgpUaGUgX19yYW5kb21fciBmdW5jdGlvbiB0YWtlcyBhIGZ1bGwgcmFuZG9tX2RhdGEgc3RydWN0IGFuZCBwdWxscyB0aGUgc3RhdGUKb3V0IG9mIHRoYXQsIGJ1dCBmb3IgVFlQRV8wIHRoZSByZXN0IG9mIHRoZSBzdHJ1Y3R1cmUgaXMgaXJyZWxldmFudC4gSXQgaGFzCmJlZW4gcmVwbGFjZWQgYnkgYSBzaW5nbGUgdmFyaWFibGUgaW4gdGhlIGNoYWxsZW5nZSBiaW5hcnkuCgo=</code></p>
+<p>Intended approach
+<code>U28gZmFyIHlvdSd2ZSBiZWVuIHJlYWRpbmcgYW5kIHdyaXRpbmcgb25lcyBhbmQgemVyb2VzLCBhbmQgaXQgZG9lc24ndCBzdG9wCmhlcmUhIFdoaWxlIHRoZSBzdGF0ZSBpcyBzdG9yZWQgYXMgYW4gaW50ZWdlciwgaXQncyBzdGlsbCBhIGJ1bmNoIG9mIG9uZXMgYW5kCnplcm9lcyB1bmRlcm5lYXRoLiBUaGUgY2hhbGxlbmdlIGdldHMgb25lIG51bWJlciBhbmQgc3BsaXRzIGl0IGludG8gbXVsdGlwbGUKdmFsdWVzIC0ganVzdCBsaWtlIGluIGNoYWxsZW5nZXMgMS0zLiBUaGUgYWxnb3JpdGhtIGhlcmUgcmVxdWlyZXMgYSBiaXQgbW9yZQp0aGFuIFhPUmluZyBhbmQgc2hpZnRpbmcsIGJ1dCBpdCdzIHN0aWxsIGEgb25lLWxpbmVyLgoK</code></p>
+<p>Fun fact
+<code>QW5vdGhlciB3b3JkIGZvciAiemVybyIgaXMgImNpcGhlciIhCkFuZCBub3cgeW91J3JlIGJyZWF0aGluZyBtYW51YWxseS4KCg==</code></p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="thaw">
+                <input id="challenge" type="hidden" value="thaw6">
+                <input id="challenge-id" type="hidden" value="5414">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f991989a929c8bb99d969396d7898e97d79a9695959c9e9c">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="5414" data-challenge-name="Level6">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/thaw~84f102b7/surveys/thaw/thaw6" id="survey-notification" class="survey alert-dismissable w-100 survey-id-5414" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-7">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-7" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-7" aria-expanded="false" aria-controls="challenges-body-7">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="7" data-challenge-id="thaw7" data-challenge-name="Level7" id="challenges-header-7">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Level7</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                28 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-7" class="collapse" aria-labelledby="module-content-header-7" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                <p>Overview
+<code>TGV2ZWwgNyAtIFJlYWwgcmFuZCgpLCBmb3IgcmVhbCB0aGlzIHRpbWUhCgpEaWZmaWN1bHR5OgogIFJ1bGVzOiBbKioqXSAoNzc3IHdpbiBzdHJlYWssIDIwMDAgcm91bmRzKQogIFNlZWQ6ICBYWFhYWCAoZ2V0ZW50cm9weSkKICBQUk5HOiAgWyoqKl0gKGdsaWJjIHJhbmQoKSkKCg==</code></p>
+<p>Description
+<code>VGhlIGZpbmFsIGJvc3MhCkdvb2QgbHVjay4KSSBtZWFuLCB5b3UgbWFkZSBpdCB0aGlzIGZhci4KSSBiZWxpZXZlIGluIHlvdSEKCg==</code></p>
+<p>Implementation details
+<code>UmFudCB0aW1lIQoKbWFuIDMgcmFuZG9tIHN0YXRlcyAiVGhlIHJhbmRvbSgpIGZ1bmN0aW9uIHVzZXMgYSBub25saW5lYXIgYWRkaXRpdmUgZmVlZGJhY2sKcmFuZG9tIG51bWJlciBnZW5lcmF0b3IuLi4iLiBUaGUgbm9uLWxpbmVhciBiaXQ/IEl0J3MgbGl0ZXJhbGx5IGEgYml0LiBBIHNpbmdsZQpiaXQgb2Ygbm9ubGluZWFyaXR5LiBIZXJlJ3MgdGhlIGNvZGUgZnJvbSByYW5kb21fci5jOgouLi4KLyogQ2h1Y2tpbmcgbGVhc3QgcmFuZG9tIGJpdC4gICovCiAgICAgICpyZXN1bHQgPSB2YWwgPj4gMTsKLi4uCkV2ZXJ5dGhpbmcgZWxzZSBhYm91dCBpdCBpcyB0b3RhbGx5IGxpbmVhci4gVGh1cyBrbm93aW5nIHRoZSBzdGF0ZSB5b3UgY2FuCnByZWRpY3QgdGhlIG5leHQgb3V0cHV0IHdpdGggNTAvNTAgY2hhbmNlcy4KCkFuZCBpdCdzIG5vdCBzb21lIGZ1biBub24tbGluZWFyIGZ1bmN0aW9uIGVpdGhlciAtIGl0IGp1c3QgeWVldHMgdGhlIHNhbWUgYml0LgoKVGhhdCdzIG9uZSBiaXQgYXdheSBmcm9tIHBlcmZlY3Rpb24uIEkgaGF0ZSBpdC4KClRoZSBvcmlnaW5hbCB2ZXJzaW9uIG9mIHRoaXMgY2hhbGxlbmdlIGFjdHVhbGx5IGNhbGxlZCByYW5kKCksIGFuZCBhcyBmYXIgYXMgSSdtCmNvbmNlcm5lZCBpdCdzIHZpcnR1YWxseSBpbXBvc3NpYmxlIHRvIHNvbHZlIGl0IGRldGVybWluaXN0aWNhbGx5LgpOb3cgdGhlIGNoYWxsZW5nZSB1c2VzIGFuIGFsZ29yaXRobSB0aGF0J3MgcHJhY3RpY2FsbHkgdGhlIHNhbWUsIGV4Y2VwdCBmb3IgdGhpcwpvbmUgYml0LiBUaGF0IG1lYW5zIGEgZ29vZCBzb2x1dGlvbiBjYW4gc29sdmUgaXQgaW4gdGhlIHNhbWUgbnVtYmVyIG9mIHR1cm5zCmV2ZXJ5IHRpbWUsIGFuZCBub3RoaW5nIGlzIGxlZnQgdXAgdG8gUk5Hc3VzLgoKSWYgeW91IHdhbnQgdG8gY3JhY2sgYWN0dWFsIHJhbmQoKSAtIGl0J3MganVzdCBhIGZldyBtaW5vciBhZGp1c3RtZW50cyB0byB0aGUKc2FtZSBhbGdvcml0aG0uIEkndmUgZGVjaWRlZCB0aGF0IHRoZSBjaGFsbGVuZ2UgaXMgY2xvc2UgZW5vdWdoIHRvIHN0aWxsIGJlCmp1c3QgYXMgZWR1Y2F0aW9uYWwgd2l0aG91dCB0aGUgdW5uZWVkZWQgY29pbiBmbGlwLiBUaGUgbWFpbiBwb2ludCBvZiB0aGlzCnNlcmllcyBpcyB0byBpbGx1c3RyYXRlIHRoZSB2dWxuZXJhYmlsaXRpZXMgb2YgbGluZWFyIFBSTkdzIGluIGEgc2F0aXNmeWluZyBhbmQKZW1wb3dlcmluZyB3YXksIGFuZCBrZWVwaW5nIHRoYXQgc2luZ2xlIGJpdCBvZiBwdXJlIGNoYW5jZSB3b3VsZCBiZSBsaWtlCmRlY29yYXRpbmcgYSBnb3JnZW91cyBjYWtlIHdpdGggYSBjaGVycnkgbWFkZSBvZiBzaGl0LiA8L3JhbnQ+Cgo=</code></p>
+<p>Final note - read after finishing
+<code>VGhhbmsgeW91IGZvciBwbGF5aW5nIFRIQVchIEkgaG9wZSB5b3UgaGFkIGFzIG11Y2ggZnVuIGFzIEkgZGlkIG1ha2luZyBpdCA8MwpJZiB5b3UgaGF2ZSBhbnkgZmVlZGJhY2sgb3Igb3RoZXIgdGhvdWdodHMgdG8gc2hhcmUgLSBjeWFuYnVuOTZAZ21haWwuY29tCiAgLUN5YW4KCmMyYjEzZTIzY2FiY2YwZTJhNzViZTI0MTU4NTFlMmQzCgo=</code></p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="thaw">
+                <input id="challenge" type="hidden" value="thaw7">
+                <input id="challenge-id" type="hidden" value="5415">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3850595b535d4a785c57525716484f56165b5754545d5f5d">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="5415" data-challenge-name="Level7">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/thaw~84f102b7/surveys/thaw/thaw7" id="survey-notification" class="survey alert-dismissable w-100 survey-id-5415" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-8">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-8" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-8" aria-expanded="false" aria-controls="challenges-body-8">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="8" data-challenge-id="thaw77" data-challenge-name="Level77" id="challenges-header-8">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Level77</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                23 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-8" class="collapse" aria-labelledby="module-content-header-8" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                <p>Overview
+<code>TGV2ZWwgNzcgLSBQbG90IFR3aXN0CgpEaWZmaWN1bHR5OgogIFJ1bGVzOiBbKiotXSAoNzc3IHdpbiBzdHJlYWssIDMwMDAwIHJvdW5kcykKICBTZWVkOiAgWFhYWFggKGdldGVudHJvcHkpCiAgUFJORzogIFsqKioqXShNVDE5OTM3KQo=</code></p>
+<p>Description
+<code>TWVyc2VubmUgVHdpc3RlciwgYWthIE1UMTk5MzcKRmlyc3Qgb2YgYWxsLCBvbmUgb2YgdGhlIGNvb2xlciBQUk5HIG5hbWVzLgpBbmQgdGhlIGNvb2xuZXNzIGRvZXNuJ3Qgc3RvcCB0aGVyZSEKSXQncyB1c2VkIGV2ZXJ5d2hlcmUgLSBQeXRob24ncyByYW5kb20sIGZvciBleGFtcGxlLgpBbmQgdGhlcmUncyBhIHJlYXNvbjogaXQncyBRdWl0ZSBHb29kIQo4LzEwIGFsZ28sIGxpa2UgaXQgYSBsb3QsIHdpbGwgdXNlIGFnYWluLgo=</code></p>
+<p>Implementation details
+<code>VGhpcyBjaGFsbGVuZ2UgaW1wbGVtZW50cyB0aGUgTVQxOTkzNyB2YXJpYW50IC0gdGhlIHN0YW5kYXJkLgpUaGUgb2JqZWN0IG5hbWVzIGhhdmUgYXJlIGV4cG9ydGVkIHNvIHRoZSB2YXJpYWJsZSBuYW1lcyB5b3UnbGwKc2VlIGluIHNvbWUgZGVjb21waWxlcnMgd2lsbCBiZSB0aGUgc2FtZSBhcyBpbiBtb3N0IHNvdXJjZXMuCg==</code></p>
+<p>Intended approach
+<code>V2hpbGUgbG9va2luZyBhdCB0aGUgc291cmNlIGNvZGUgd2FzIGtpbmRhIGltcGxpZWQgYXMgYW4gb3B0aW9uIGJlZm9yZSwgaXQncwptb3JlIG9yIGxlc3MgZXhwZWN0ZWQgaW4gdGhpcyBvbmUgLSAvY2hhbGxlbmdlLzc3LmMgd2FzIHdyaXR0ZW4gdG8gYmUgcmVhZC4KKHRoZSBvdGhlcnMgd2VyZSB3cml0dGVuIHRvIGp1c3Qgd29yayBsb2wpLiBTaW5jZSBtb3N0IGRlc2NyaXB0aW9ucyBkZWx2ZSBpbnRvCmRldGFpbHMgdGhhdCBhcmUgb3V0c2lkZSBvZiBvdXIgc2NvcGUgKGNyYWNraW5nKSwgdGhlIGNvZGUgaGFzIGJlZW4gc2ltcGxpZmllZAphbmQgY29tbWVudGVkIHJlbGF0aXZlbHkgdGhvcm91Z2hseS4KClRob3VnaCB0aGUgYWxnb3JpdGhtIGl0c2VsZiBtYXkgc2VlbSBpbnRpbWlkYXRpbmcgYXQgZmlyc3QsIHRoZSBhcHByb2FjaCBpcwp0aGUgc2FtZSBhcyBiZWZvcmUgLSByZWFkIHNvbWUgb3V0cHV0cywgZGVkdWNlIHRoZSBpbnRlcm5hbCBzdGF0ZSwgcHJlZGljdC4K</code></p>
+<p>Hints
+<code>VGhlIGJpZ2dlc3QgbmV3IHRoaW5nIHdlJ3JlIGludGVyZXN0ZWQgaW4gaXMgdGhlIHRlbXBlcmluZyBwcm9jZXNzLiBXaGlsZQp0cmlja3ksIGZ1bGwgInVudGVtcGVyaW5nIiBpcyB0b3RhbGx5IHBvc3NpYmxlIGFuZCB3aWxsIGFsbG93IHlvdSB0byByZWNvdmVyCnRoZSBudW1iZXIgdGhhdCdzIGRpcmVjdGx5IHdyaXR0ZW4gdG8gdGhlIHN0YXRlIGFycmF5LiBZb3Uga25vdyB3aGF0IHRvIGRvCmZyb20gdGhlcmUgOykK</code></p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="thaw">
+                <input id="challenge" type="hidden" value="thaw77">
+                <input id="challenge-id" type="hidden" value="5468">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="345c55575f514674505b5e5b1a44435a1a575b5858515351">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="5468" data-challenge-name="Level77">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/thaw~84f102b7/surveys/thaw/thaw77" id="survey-notification" class="survey alert-dismissable w-100 survey-id-5468" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+      
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+  <div class="accordion-item">
+    <div class="accordion-item-header" id="module-content-header-9">
+      <h2 class="mb-0 button-wrapper">
+        <button id="challenges-header-button-9" class="btn btn-link text-decoration-none w-100 challenge-button-2 collapsed " type="button" data-toggle="collapse" data-target="#challenges-body-9" aria-expanded="false" aria-controls="challenges-body-9">
+          
+          
+            <h4 class="accordion-item-name challenge-name " data-challenge-index="9" data-challenge-id="thaw777" data-challenge-name="Level777" id="challenges-header-9">
+                <i class="challenge-icon pr-3 fas fa-flag challenge-unsolved "></i>
+                
+                <span class="pr-2">Level777</span>
+                
+                
+            </h4>
+            <span class="challenge-header-right">
+              
+              <span class="total-solves">
+                21 solves
+              </span>
+            </span>
+          
+        
+        </button>
+      </h2>
+    </div>
+
+    <div id="challenges-body-9" class="collapse" aria-labelledby="module-content-header-9" data-parent="#module-content">
+      <div class="accordion-item-body">
+        
+          
+            <div class="embed-responsive challenge-description">
+              
+                
+                
+                <p>Overview
+<code>TGV2ZWwgNzc3IC0gVGhlIERMQwoKRGlmZmljdWx0eToKICBSdWxlczogWyoqKl0gKDc3NyB3aW4gc3RyZWFrLCAxMDAwIHJvdW5kcykKICBTZWVkOiAgWFhYWFggKGdldGVudHJvcHkpCiAgUFJORzogIFsqKioqKl14b3Jvc2hpcm8xMjgrKQoK</code></p>
+<p>Description
+<code>WG9yb3NoaXJvIG9uZS10d28tZWlnaHQuLi4gUGx1cy4KbmdsIHRoZSBuYW1lIGlzIGhhbGYgdGhlIHJlYXNvbiBpIGNob3NlIGl0CnByb3BlciBmaW5hbCBib3NzIG5hbWUgcmlnaHQgdGhlcmUKMTAvMTAsIGJ1dCBvbmx5IGlmIHlvdSBwcm9ub3VuY2UgeG9ybyBhcyB6b3JvCkl0cyBuYW1lIGhhcyBhbiBhY3R1YWwgbWVhbmluZywgdG9vIQpYT1IgLSBST3RhdGUgLSBTSElmdCAtIFJPdGF0ZQpSb3RhdGUgb3BlcmF0aW9uIGlzIGFzIHNpbXBsZSBhcyB0aGUgb3RoZXIgdHdvClRoaW5rIHlvdSBjYW4gaGFuZGxlIHRoaXMgb25lPyB9OjMKCg==</code></p>
+<p>Approach
+<code>QWxyaWdodCwgdGhlIHByZXZpb3VzIHNlY3Rpb24ncyB0b25lIG1heSBzZWVtIGEgYml0IGRpc2luZ2VudW91cyBhZnRlciB5b3UgcHV0CnNvbWUgdGltZSBpbnRvIHNvbHZpbmcgdGhpcyBjaGFsbGVuZ2UuIFRoZSB0aGluZyBpcywgd2hpbGUgaXQgKmlzKiBkZWZpbml0ZWx5CnNvbHZhYmxlLCBpbiB0aGVvcnksIEkgaGF2ZW4ndCBmb3VuZCBhIGdvb2Qgd2F5IHRvIGRvIGl0LgoKV2hhdCdzIGEgZ29vZCB3YXk/IFRoZSBraW5kIHRoYXQgd2FzIGludGVuZGVkIGluIHRoZSBwcmV2aW91cyBjaGFsbHMuIFRha2luZwphcGFydCB0aGUgYWxnb3JpdGhtLCB1bmRlcnN0YW5kaW5nIGl0IHRob3JvdWdobHkgYW5kIGRldGVybWluaXN0aWNhbGx5IHNvbHZpbmcKdGhlIHRoaW5nIGxpa2UgYSBmYW5jeSBtYXRoIGVxdWF0aW9uLiBGb3IgdGhpcyBvbmUsIHVuZm9ydHVuYXRlbHksIEkgY291bGRuJ3QKZmluZCBhbnkgcHVibGljIHNvbHV0aW9ucyB0aGF0IHdvdWxkIHJldmVyc2UgaXQgdGhpcyB3YXkuIFRoZSBvbmx5IHJlbGF0aXZlbHkKcmVsaWFibGUgc29sdXRpb24gaW52b2x2ZXMgdXNpbmcgejMuCgp6MyBpcyBhIG1hZ2ljIHRvb2wgd2hlcmUgeW91IGNhbiBzdHVmZiBzb21lIG51bWJlcnMgYW5kIGl0IHdpbGwgZ2l2ZSB5b3UgdGhlCmFuc3dlci4gV2VsbCwgbWF5LiBBYm91dCA1MC81MCBjaGFuY2UgaW4gbXkgdGVzdHMuIFRoZSBleGFjdCBraW5kIG9mIG1hZ2ljIGl0CmVtcGxveXMgbWFrZXMgbWUgZmVlbCBkdW1iIGFuZCBpcyBhYnNvbHV0ZWx5IGJleW9uZCB0aGlzIG1vZHVsZSdzIGFscmVhZHkKc3RyZXRjaGVkIHNjb3BlLiBBbmQgZXZlbiB0aGVuIGl0IGNhbid0IGZpbmQgdGhlIHNvbHV0aW9uIHJlbGlhYmx5IQoKVGhlIHRoaW5nIGlzLCBhIGRldGVybWluaXN0aWMgc29sdXRpb24gKklTKiBwb3NzaWJsZSwgYW5kIGV2ZW4gaW5jcmVkaWJseSBlYXN5CnRvIGltcGxlbWVudCEgSnVzdCBicnV0ZWZvcmNlIHRoZSAxMjggYml0IHN0YXRlLi4uIGFpbnQgbm9ib2R5IGdvdCB0aW1lIGZvciBkYXQKCklmIHlvdSBkbyBzb2x2ZSB0aGlzIG9uZSwgdGFrZSBhIGxvb2sgYXQgdGhlIG5leHQgc2VjdGlvbi4KCg==</code></p>
+<p>The True End
+<code>TGV2ZWwgNzc3Nzc3NwoKRGlmZmljdWx0eToKICBSdWxlczogWyoqKioqKjc3NyB3aW4gc3RyZWFrLCAxMDAwIHJvdW5kcywgNzc3IHRpbWVzKQogIFNlZWQ6ICBYWFhYWCAoZ2V0ZW50cm9weSkKICBQUk5HOiAgWyoqKioqXXhvcm9zaGlybzEyOCspCgogIFRoZSBzdGF0ZSBtdXN0IHJlc2V0IGFmdGVyIGVhY2ggZnVsbCB3aW4gc3RyZWFrLgogIE9ubHkgYSBkZXRlcm1pbmlzdGljIHNvbHV0aW9uIHdpbGwgd29yay4KCiAgLUN5YW4KCg==</code></p>
+
+              
+            </div>
+            <div class="challenge-init row">
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-play fa-lg"></i>Start
+                </button>
+              </div>
+              
+              <div class="col-md-3 form=group text-center">
+                <button id="challenge-priv" type="submit" class="btn btn-md btn-outline-secondary challenge-init">
+                  <i class="fas fa-unlock fa-lg"></i>Privileged
+                </button>
+              </div>
+              
+              <div class="col-md-6">
+                <input id="module" type="hidden" value="thaw">
+                <input id="challenge" type="hidden" value="thaw777">
+                <input id="challenge-id" type="hidden" value="5804">
+                <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+              </div>
+            </div>
+            <div class="challenge-workspace challenge-hidden">
+              <div class="iframe-wrapper">
+                
+              </div>
+              <div class="workspace-ssh">
+                <h3>Connect with SSH</h3>
+                Link your <a href="/settings#ssh-key" target="_blank">SSH key</a>, then connect with: <code>ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c0a8a1a3aba5b280a4afaaafeeb0b7aeeea3afacaca5a7a5">[email&#160;protected]</a></code>
+              </div>
+              <style>
+  :root {
+    --background: #111;
+    --foreground: #222;
+    --highlight: #6c757d;
+    --error: #800000;
+    --warn: #d0c000;
+  }
+
+  .SSH {
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .workspace-controls {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .workspace-control {
+    margin: 2px 2px;
+    border-width: 0px;
+    border-radius: 1em;
+    background-color: var(--foreground);
+  }
+
+  button.workspace-control {
+    width: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace-control input {
+    height: 100% !important;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #fff;
+    background-color: var(--foreground);
+    border: 0;
+    border-color: #000 !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+  }
+
+  .workspace-control input::placeholder {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .workspace-control input.disabled {
+    color: var(--highlight);
+  }
+
+  .workspace-control select,
+  .workspace-control input:focus,
+  .workspace-control input:hover {
+    outline: 0 !important;
+  }
+
+  .workspace-control select {
+    height: 100%;
+    padding-left: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--highlight);
+    font-weight: 700;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 2;
+  }
+
+  .workspace-highlight {
+    color: var(--highlight);
+  }
+
+  .workspace-input {
+    padding-left: 1em;
+  }
+
+  .workspace-selector-body {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .workspace-control-spacer {
+    flex: 1;
+  }
+
+  @keyframes banner-animation {
+    0% {
+      left: 50%;
+      width: 0%;
+    }
+    5% {
+      left: 10%;
+      width: 80%;
+    }
+    95% {
+      left: 10%;
+      width: 80%;
+      border-width: 2px;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    100% {
+      left: 50%;
+      width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .animate-banner {
+    animation-name: banner-animation;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  .animate-banner-fast {
+    animation-name: banner-animation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display: block !important;
+  }
+
+  #workspace-notification-banner {
+    position: absolute;
+    background-color: var(--foreground);
+    color: #fff;
+    border-color: var(--brand-green);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1em;
+    padding: 1em;
+    height: 4em;
+    bottom: 4em;
+    white-space: normal;
+    text-align: center;
+    overflow: hidden;
+    display: none;
+  }
+
+  .burger {
+    position: absolute;
+    z-index: 1;
+  }
+</style>
+
+<div class="workspace-controls">
+  <div id="workspace-notification-banner"></div>
+  <div title="Change workspace" class="workspace-selector-body workspace-control">
+    <i class="fas fa-bars workspace-highlight burger"></i>
+    <select id="workspace-select">
+      
+      <option value="terminal: 7681">&#160;&#160;Terminal</option><!-- I hate it :( -->
+      
+      <option value="code: 8080">&#160;&#160;Code</option><!-- I hate it :( -->
+      
+      <option value="desktop: 6080">&#160;&#160;Desktop</option><!-- I hate it :( -->
+      
+      <option value="ssh: ">&#160;&#160;SSH</option><!-- I hate it :( -->
+      
+    </select>
+  </div>
+  <div title="Enter flag" class="workspace-control workspace-input">
+    <i class="fas fa-flag workspace-highlight input-icon"></i>
+    <input id="flag-input" type="text" placeholder="Flag">
+    <input type="hidden" id="current-challenge-id" value="5804" data-challenge-name="Level777">
+  </div>
+  <div class="workspace-control-spacer"></div>
+  <button id="challenge-restart" title="Restart challenge" class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start">
+    <i class="fas fa-redo"></i>
+  </button>
+  
+  <button id="workspace-change-privilege"
+      title="Restart privileged"
+      class="workspace-control btn btn-md btn-outline-secondary btn-challenge-start"
+      data-privileged="false">
+    <i class="fas fa-lock"></i>
+  </button>
+  
+  <button id="fullscreen" title="Toggle fullscreen" class="workspace-control btn btn-md btn-outline-secondary">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row survey-row">
+              <div class="col-md-12">
+                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/thaw~84f102b7/surveys/thaw/thaw777" id="survey-notification" class="survey alert-dismissable w-100 survey-id-5804" role="alert" style="display: none;">
+                  
+                </form>
+              </div>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+
+        
+        
+      
+    
+  </div>
+
+  <br>
+  
+
+  
+
+  <h2 class="row" id="scoreboard-heading">30-Day Scoreboard:</h2>
+  <p>This scoreboard reflects solves for challenges in this module after the module launched in this dojo.</p>
+  
+  <div class="scoreboard-controls row">
+  <p>
+  <span id="scoreboard-control-week"><a href="javascript:loadScoreboard(7, 1)">7-Day</a></span> |
+  <span id="scoreboard-control-month"><a href="javascript:loadScoreboard(30, 1)">30-Day</a></span> |
+  <span id="scoreboard-control-all"><a href="javascript:loadScoreboard(0, 1)">All-Time</a></span>
+  </p>
+</div>
+<div class="scoreboard row">
+  <div class="col-md-12 p-0">
+    <table class="table table-striped">
+	    <thead>
+	      <tr>
+	        <td scope="col" class="col-md-1"><b>Rank</b></td>
+          <td scope="col" class="col-md-1"></td>
+	        <td scope="col" class="col-md-4"><b>Hacker</b></td>
+	        <td scope="col" class="col-md-4"><b>Badges</b></td>
+	        <td scope="col" class="col-md-1"></td>
+	        <td scope="col" class="col-md-1"><b>Score</b></td>
+	      </tr>
+	    </thead>
+	    <tbody id="scoreboard">
+	    </tbody>
+    </table>
+  </div>
+  <div>
+    <ul id="scoreboard-pages" class="p-0">
+    </ul>
+  </div>
+</div>
+
+  
+
+</div>
+
+    </main>
+
+    <footer class="footer">
+      <div class="container text-center" style="line-height: 20px; opacity: 0.7">
+        <small>
+          Powered by <strong>pwn.college</strong><br>
+          Interested in dedicated training or tailored services for your organization?
+          <a href="https://llc.pwn.college/">Find out more</a>.
+        </small>
+      </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="/themes/dojo_theme/static/js/vendor.bundle.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/core.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/helpers.min.js?d=0cd72d60"></script>
+
+    
+    <script defer src="/themes/dojo_theme/static/js/pages/main.min.js?d=0cd72d60"></script>
+    
+
+    <script defer src="/themes/dojo_theme/static/js/dojo/util.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/dojo/navbar.min.js?d=0cd72d60"></script>
+    <script defer src="/themes/dojo_theme/static/js/dojo/popup.min.js?d=0cd72d60"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+
+    
+<script defer src="/themes/dojo_theme/static/js/dojo/actionbar.min.js?d=0cd72d60"></script>
+<script defer src="/themes/dojo_theme/static/js/dojo/challenges.min.js?d=0cd72d60"></script>
+<script defer onload="loadScoreboard(30, 1);" src="/themes/dojo_theme/static/js/dojo/scoreboard.min.js?d=0cd72d60"></script>
+
+
+
+    <script>
+      window.addEventListener('load', function() {
+        if (typeof renderMathInElement !== 'undefined') {
+          renderMathInElement(document.body, {
+            delimiters: [
+              {left: '\\[', right: '\\]', display: true},
+              {left: '\\(', right: '\\)', display: false}
+            ],
+            throwOnError: false,
+            strict: false,
+            ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          });
+        }
+      });
+    </script>
+
+    
+
+    
+
+    
+    
+  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c44fe645ff13975',t:'MTc2OTQ4Mjc2Mg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
