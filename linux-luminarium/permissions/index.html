@@ -4,13 +4,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>pwn.college</title>
+    <title>pvvn.college</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta property="og:title" content="pwn.college">
+    <meta property="og:title" content="pvvn.college">
     <meta property="og:description" content="Learn to Hack!">
-    <meta property="og:image" content="https://pwn.college/themes/dojo_theme/static/img/dojo/ninja.png?d=0cd72d60">
+    <meta property="og:image" content="https://pvvn.college/themes/dojo_theme/static/img/dojo/ninja.png?d=0cd72d60">
 
     <link rel="icon" href="/themes/dojo_theme/static/img/favicon.png?d=0cd72d60">
     <link rel="stylesheet" href="/themes/dojo_theme/static/css/fonts.min.css?d=0cd72d60">
@@ -138,7 +138,7 @@
   <div class="container">
     <a href="/" class="brand-mono-bold wordmark">
       
-      <span class="brand-white">pwn</span><span class="brand-dot-white">.</span><span class="brand-white">college</span>
+      <span class="brand-white">pvvn</span><span class="brand-dot-white">.</span><span class="brand-white">college</span>
       
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#base-navbars"
@@ -202,7 +202,7 @@
         
 <li class="nav-item">
   
-  <a class="nav-link" href="https://discord.gg/pwncollege" target="_blank">
+  <a class="nav-link" href="https://discord.gg/pvvncollege" target="_blank">
   
     <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Chat">
       <i class="fas fa-comments d-none d-md-block d-lg-none" style="width: 20px"></i>
@@ -339,7 +339,7 @@
   
   <div>
     
-      <a href="https://github.com/pwncollege/linux-luminarium/edit/master/permissions/DESCRIPTION.md#L1"
+      <a href="https://github.com/pvvncollege/linux-luminarium/edit/master/permissions/DESCRIPTION.md#L1"
          target="_blank"
          class="github-edit-link"
          title="Edit on GitHub">
@@ -350,20 +350,20 @@
 <p>In Linux, files have different permissions or file modes.
 You can check out the permissions of a file or directory using <code>ls -l</code>.
 Let's make some files and look at their permissions:</p>
-<pre><code class="language-console">hacker@dojo:~$ mkdir pwn_directory
+<pre><code class="language-console">hacker@dojo:~$ mkdir pvvn_directory
 hacker@dojo:~$ touch college_file
 hacker@dojo:~$ ls -l
 total 4
 -rw-r--r-- 1 hacker hacker    0 May 22 13:42 college_file
-drwxr-xr-x 2 hacker hacker 4096 May 22 13:42 pwn_directory
+drwxr-xr-x 2 hacker hacker 4096 May 22 13:42 pvvn_directory
 hacker@dojo:~$
 </code></pre>
 <p>Lots of information there, and we'll learn about a lot of it in this module!
 For now, let's look at the output above at a high level:</p>
 <h4>The File Type</h4>
 <p>The first character of each line represents the file type.
-In <code>pwn_directory</code>'s case, the <code>d</code> indicates that it's a directory, and in <code>college_file</code>'s case, the <code>-</code> represents that it's a normal file.
-There are other types as well, and you will encounter some of them later in your pwn.college journey.</p>
+In <code>pvvn_directory</code>'s case, the <code>d</code> indicates that it's a directory, and in <code>college_file</code>'s case, the <code>-</code> represents that it's a normal file.
+There are other types as well, and you will encounter some of them later in your pvvn.college journey.</p>
 <h4>The Permissions</h4>
 <p>The next nine characters are the actual access permissions of the file or directory, split into 3 characters denoting the permissions that the user who owns the file (termed the &quot;owner&quot;) has to the file, 3 characters denoting the permissions that the group that owns the file (termed the &quot;group&quot;) has to the file, and 3 characters denoting the permissions that all other access (e.g., by other users and other groups) has to the file.
 We will learn all about these later in the module.</p>
@@ -646,7 +646,7 @@ Let's get started!</p>
               
                 
                 
-                  <a href="https://github.com/pwncollege/linux-luminarium/edit/master/permissions/chown/DESCRIPTION.md#L1"
+                  <a href="https://github.com/pvvncollege/linux-luminarium/edit/master/permissions/chown/DESCRIPTION.md#L1"
                      target="_blank"
                      class="github-edit-link"
                      title="Edit on GitHub">
@@ -660,7 +660,7 @@ Most often, in your day-to-day life, that user is the user you log in as every d
 But even on a non-shared system (such as your personal PC), Linux still has many &quot;service&quot; user accounts for different tasks.</p>
 <p>The two most important user accounts are:</p>
 <ol>
-<li>Your user account! On pwn.college, this is the <code>hacker</code> user, regardless of what your username is.</li>
+<li>Your user account! On pvvn.college, this is the <code>hacker</code> user, regardless of what your username is.</li>
 <li><code>root</code>. This is the administrative account and, in most security situations, the ultimate prize. If you take over the <code>root</code> user, you've almost certainly achieved your hacking objective!</li>
 </ol>
 <p>So what?
@@ -676,7 +676,7 @@ hacker@dojo:~$
 When we try to read it as the <code>hacker</code> user, we are denied.
 However, if we were <code>root</code> (a hacker's dream!), we would have no problem reading this file:</p>
 <pre><code class="language-console">root@dojo:~# cat /flag
-pwn.college{demo_flag}
+pvvn.college{demo_flag}
 root@dojo:~#
 </code></pre>
 <p>Interestingly, we can change the ownership of files!
@@ -685,17 +685,17 @@ This is done via the <code>chown</code> (<strong>ch</strong>ange <strong>own</st
 </code></pre>
 <p>Typically, <code>chown</code> can only be invoked by the <code>root</code> user.
 Let's pretend that we're <code>root</code> again (that never gets old!), and watch a typical use of <code>chown</code>:</p>
-<pre><code class="language-console">root@dojo:~# mkdir pwn_directory
+<pre><code class="language-console">root@dojo:~# mkdir pvvn_directory
 root@dojo:~# touch college_file
 root@dojo:~# ls -l
 total 4
 -rw-r--r-- 1 root root    0 May 22 13:42 college_file
-drwxr-xr-x 2 root root 4096 May 22 13:42 pwn_directory
+drwxr-xr-x 2 root root 4096 May 22 13:42 pvvn_directory
 root@dojo:~# chown hacker college_file
 root@dojo:~# ls -l
 total 4
 -rw-r--r-- 1 hacker root    0 May 22 13:42 college_file
-drwxr-xr-x 2 root   root 4096 May 22 13:42 pwn_directory
+drwxr-xr-x 2 root   root 4096 May 22 13:42 pvvn_directory
 root@dojo:~#
 </code></pre>
 <p><code>college_file</code>'s owner has been changed to the <code>hacker</code> user, and now <code>hacker</code> can do with it whatever <code>root</code> had been able to do with it!
@@ -943,7 +943,7 @@ Use this power wisely and chown away!</p>
             </div>
             <div class="row survey-row">
               <div class="col-md-12">
-                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/linux-luminarium/surveys/permissions/chown" id="survey-notification" class="survey alert-dismissable w-100 survey-id-4611" role="alert" style="display: none;">
+                <form target="survey-target" method="post" action="/pvvncollege_api/v1/dojos/linux-luminarium/surveys/permissions/chown" id="survey-notification" class="survey alert-dismissable w-100 survey-id-4611" role="alert" style="display: none;">
                   
                 </form>
               </div>
@@ -1010,7 +1010,7 @@ Use this power wisely and chown away!</p>
               
                 
                 
-                  <a href="https://github.com/pwncollege/linux-luminarium/edit/master/permissions/chgrp/DESCRIPTION.md#L1"
+                  <a href="https://github.com/pvvncollege/linux-luminarium/edit/master/permissions/chgrp/DESCRIPTION.md#L1"
                      target="_blank"
                      class="github-edit-link"
                      title="Edit on GitHub">
@@ -1027,7 +1027,7 @@ hacker@dojo:~$
 </code></pre>
 <p>Here, the <code>hacker</code> user is <em>only</em> in the <code>hacker</code> group.
 The most common use-case for groups is to control access to different system resources.
-For example, &quot;Privileged Mode&quot; in pwn.college grants you root access to allow better debugging and so on.
+For example, &quot;Privileged Mode&quot; in pvvn.college grants you root access to allow better debugging and so on.
 This is handled by giving you an extra group when you launch in Privileged Mode:</p>
 <pre><code class="language-console">hacker@dojo:~$ id
 uid=1000(hacker) gid=1000(hacker) groups=1000(hacker),27(sudo)
@@ -1061,17 +1061,17 @@ hacker@dojo:~$
 <p>Here, the flag file is owned by the <code>root</code> user and the <code>root</code> group, and the <code>hacker</code> user is neither the <code>root</code> user nor a member of the <code>root</code> group, so the file cannot be accessed.
 Luckily, group ownership can be changed with the <code>chgrp</code> (<strong>ch</strong>ange <strong>gr</strong>ou<strong>p</strong>) command!
 Unless you are the owner of the file <em>and</em> a member in the new group, this typically requires <code>root</code> access, so let's check it out as <code>root</code>:</p>
-<pre><code class="language-console">root@dojo:~# mkdir pwn_directory
+<pre><code class="language-console">root@dojo:~# mkdir pvvn_directory
 root@dojo:~# touch college_file
 root@dojo:~# ls -l
 total 4
 -rw-r--r-- 1 root root    0 May 22 13:42 college_file
-drwxr-xr-x 2 root root 4096 May 22 13:42 pwn_directory
+drwxr-xr-x 2 root root 4096 May 22 13:42 pvvn_directory
 root@dojo:~# chgrp hacker college_file
 root@dojo:~# ls -l
 total 4
 -rw-r--r-- 1 root hacker    0 May 22 13:42 college_file
-drwxr-xr-x 2 root root   4096 May 22 13:42 pwn_directory
+drwxr-xr-x 2 root root   4096 May 22 13:42 pvvn_directory
 root@dojo:~#
 </code></pre>
 <p>In this level, I have made the flag readable by whatever group owns it, but this group is currently <code>root</code>.
@@ -1317,7 +1317,7 @@ Change the group ownership of the flag file, and read the flag!</p>
             </div>
             <div class="row survey-row">
               <div class="col-md-12">
-                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/linux-luminarium/surveys/permissions/chgrp" id="survey-notification" class="survey alert-dismissable w-100 survey-id-5271" role="alert" style="display: none;">
+                <form target="survey-target" method="post" action="/pvvncollege_api/v1/dojos/linux-luminarium/surveys/permissions/chgrp" id="survey-notification" class="survey alert-dismissable w-100 survey-id-5271" role="alert" style="display: none;">
                   
                 </form>
               </div>
@@ -1384,7 +1384,7 @@ Change the group ownership of the flag file, and read the flag!</p>
               
                 
                 
-                  <a href="https://github.com/pwncollege/linux-luminarium/edit/master/permissions/chgrp-random/DESCRIPTION.md#L1"
+                  <a href="https://github.com/pvvncollege/linux-luminarium/edit/master/permissions/chgrp-random/DESCRIPTION.md#L1"
                      target="_blank"
                      class="github-edit-link"
                      title="Edit on GitHub">
@@ -1637,7 +1637,7 @@ You will need to use the <code>id</code> command to figure that name out, then <
             </div>
             <div class="row survey-row">
               <div class="col-md-12">
-                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/linux-luminarium/surveys/permissions/chgrp-random" id="survey-notification" class="survey alert-dismissable w-100 survey-id-5272" role="alert" style="display: none;">
+                <form target="survey-target" method="post" action="/pvvncollege_api/v1/dojos/linux-luminarium/surveys/permissions/chgrp-random" id="survey-notification" class="survey alert-dismissable w-100 survey-id-5272" role="alert" style="display: none;">
                   
                 </form>
               </div>
@@ -1704,7 +1704,7 @@ You will need to use the <code>id</code> command to figure that name out, then <
               
                 
                 
-                  <a href="https://github.com/pwncollege/linux-luminarium/edit/master/permissions/chmod-flag/DESCRIPTION.md#L1"
+                  <a href="https://github.com/pvvncollege/linux-luminarium/edit/master/permissions/chmod-flag/DESCRIPTION.md#L1"
                      target="_blank"
                      class="github-edit-link"
                      title="Edit on GitHub">
@@ -1714,12 +1714,12 @@ You will need to use the <code>id</code> command to figure that name out, then <
                 <p>So now we're well-versed in ownership.
 Let's talk about the other side of the coin: file permissions.
 Recall our example:</p>
-<pre><code class="language-console">hacker@dojo:~$ mkdir pwn_directory
+<pre><code class="language-console">hacker@dojo:~$ mkdir pvvn_directory
 hacker@dojo:~$ touch college_file
 hacker@dojo:~$ ls -l
 total 4
 -rw-r--r-- 1 hacker hacker    0 May 22 13:42 college_file
-drwxr-xr-x 2 hacker hacker 4096 May 22 13:42 pwn_directory
+drwxr-xr-x 2 hacker hacker 4096 May 22 13:42 pvvn_directory
 hacker@dojo:~$
 </code></pre>
 <p>As a reminder, the first character is the file type.
@@ -1776,17 +1776,17 @@ More examples:</p>
 <li><code>a-rwx</code> removes all permissions for the user, group, and world</li>
 </ul>
 <p>So:</p>
-<pre><code class="language-console">root@dojo:~# mkdir pwn_directory
+<pre><code class="language-console">root@dojo:~# mkdir pvvn_directory
 root@dojo:~# touch college_file
 root@dojo:~# ls -l
 total 4
 -rw-r--r-- 1 root root    0 May 22 13:42 college_file
-drwxr-xr-x 2 root root 4096 May 22 13:42 pwn_directory
+drwxr-xr-x 2 root root 4096 May 22 13:42 pvvn_directory
 root@dojo:~# chmod go-rwx *
 root@dojo:~# ls -l
 total 4
 -rw------- 1 hacker root    0 May 22 13:42 college_file
-drwx------ 2 root   root 4096 May 22 13:42 pwn_directory
+drwx------ 2 root   root 4096 May 22 13:42 pvvn_directory
 root@dojo:~#
 </code></pre>
 <p>In this challenge, you must change the permissions of the <code>/flag</code> file to read it!
@@ -2034,7 +2034,7 @@ Go and solve this!</p>
             </div>
             <div class="row survey-row">
               <div class="col-md-12">
-                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/linux-luminarium/surveys/permissions/chmod-flag" id="survey-notification" class="survey alert-dismissable w-100 survey-id-5273" role="alert" style="display: none;">
+                <form target="survey-target" method="post" action="/pvvncollege_api/v1/dojos/linux-luminarium/surveys/permissions/chmod-flag" id="survey-notification" class="survey alert-dismissable w-100 survey-id-5273" role="alert" style="display: none;">
                   
                 </form>
               </div>
@@ -2101,7 +2101,7 @@ Go and solve this!</p>
               
                 
                 
-                  <a href="https://github.com/pwncollege/linux-luminarium/edit/master/permissions/execute/DESCRIPTION.md#L1"
+                  <a href="https://github.com/pvvncollege/linux-luminarium/edit/master/permissions/execute/DESCRIPTION.md#L1"
                      target="_blank"
                      class="github-edit-link"
                      title="Edit on GitHub">
@@ -2371,7 +2371,7 @@ Remember your <code>chmod</code>, and get <code>/challenge/run</code> to tell yo
             </div>
             <div class="row survey-row">
               <div class="col-md-12">
-                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/linux-luminarium/surveys/permissions/execute" id="survey-notification" class="survey alert-dismissable w-100 survey-id-4612" role="alert" style="display: none;">
+                <form target="survey-target" method="post" action="/pvvncollege_api/v1/dojos/linux-luminarium/surveys/permissions/execute" id="survey-notification" class="survey alert-dismissable w-100 survey-id-4612" role="alert" style="display: none;">
                   
                 </form>
               </div>
@@ -2438,7 +2438,7 @@ Remember your <code>chmod</code>, and get <code>/challenge/run</code> to tell yo
               
                 
                 
-                  <a href="https://github.com/pwncollege/linux-luminarium/edit/master/permissions/chmod/DESCRIPTION.md#L1"
+                  <a href="https://github.com/pvvncollege/linux-luminarium/edit/master/permissions/chmod/DESCRIPTION.md#L1"
                      target="_blank"
                      class="github-edit-link"
                      title="Edit on GitHub">
@@ -2447,7 +2447,7 @@ Remember your <code>chmod</code>, and get <code>/challenge/run</code> to tell yo
                 
                 <p>You think you can <code>chmod</code>?
 Let's practice!</p>
-<p>This challenge will ask you to change the permissions of the <code>/challenge/pwn</code> file in specific ways a few times in a row.
+<p>This challenge will ask you to change the permissions of the <code>/challenge/pvvn</code> file in specific ways a few times in a row.
 If you get the permissions wrong, the game will reset and you can try again.
 If you get the permissions right eight times in a row, the challenge will let you <code>chmod</code> <code>/flag</code> to make it readable for yourself :-)
 Launch <code>/challenge/run</code> to get started!</p>
@@ -2691,7 +2691,7 @@ Launch <code>/challenge/run</code> to get started!</p>
             </div>
             <div class="row survey-row">
               <div class="col-md-12">
-                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/linux-luminarium/surveys/permissions/chmod" id="survey-notification" class="survey alert-dismissable w-100 survey-id-4610" role="alert" style="display: none;">
+                <form target="survey-target" method="post" action="/pvvncollege_api/v1/dojos/linux-luminarium/surveys/permissions/chmod" id="survey-notification" class="survey alert-dismissable w-100 survey-id-4610" role="alert" style="display: none;">
                   
                 </form>
               </div>
@@ -2754,7 +2754,7 @@ Launch <code>/challenge/run</code> to get started!</p>
               
                 
                 
-                  <a href="https://github.com/pwncollege/linux-luminarium/edit/master/permissions/chmod-absolute/DESCRIPTION.md#L1"
+                  <a href="https://github.com/pvvncollege/linux-luminarium/edit/master/permissions/chmod-absolute/DESCRIPTION.md#L1"
                      target="_blank"
                      class="github-edit-link"
                      title="Edit on GitHub">
@@ -2773,12 +2773,12 @@ For example:</p>
 Say, you want to set <code>rw</code> for the owning user, but only <code>r</code> for the owning group?
 You can achieve this by chaining multiple modes to <code>chmod</code> with <code>,</code>!</p>
 <ul>
-<li><code>chmod u=rw,g=r /challenge/pwn</code> will set the user permissions to read and write, and the group permissions to read-only</li>
-<li><code>chmod a=r,u=rw /challenge/pwn</code> will set the user permissions to read and write, and the group and world permissions to read-only</li>
+<li><code>chmod u=rw,g=r /challenge/pvvn</code> will set the user permissions to read and write, and the group permissions to read-only</li>
+<li><code>chmod a=r,u=rw /challenge/pvvn</code> will set the user permissions to read and write, and the group and world permissions to read-only</li>
 </ul>
 <p>Additionally, you can zero out permissions with <code>-</code>:</p>
 <ul>
-<li><code>chmod u=rw,g=r,o=- /challenge/pwn</code> will set the user permissions to read and write, the group permissions to read-only, and the world permissions to nothing at all</li>
+<li><code>chmod u=rw,g=r,o=- /challenge/pvvn</code> will set the user permissions to read and write, the group permissions to read-only, and the world permissions to nothing at all</li>
 </ul>
 <p>Keep in mind, that <code>-</code>, appearing after <code>=</code> is in a different context than if it appeared directly after the <code>u</code>, <code>g</code>, or <code>o</code> (in which case, it would cause specific bits to be removed, not everything).</p>
 <p>This level extends the previous level by requesting more radical permission changes, which you will need <code>=</code> and <code>,</code>-chaining to achieve.
@@ -3023,7 +3023,7 @@ Good luck!</p>
             </div>
             <div class="row survey-row">
               <div class="col-md-12">
-                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/linux-luminarium/surveys/permissions/chmod-absolute" id="survey-notification" class="survey alert-dismissable w-100 survey-id-4913" role="alert" style="display: none;">
+                <form target="survey-target" method="post" action="/pvvncollege_api/v1/dojos/linux-luminarium/surveys/permissions/chmod-absolute" id="survey-notification" class="survey alert-dismissable w-100 survey-id-4913" role="alert" style="display: none;">
                   
                 </form>
               </div>
@@ -3086,7 +3086,7 @@ Good luck!</p>
               
                 
                 
-                  <a href="https://github.com/pwncollege/linux-luminarium/edit/master/permissions/setuid/DESCRIPTION.md#L1"
+                  <a href="https://github.com/pvvncollege/linux-luminarium/edit/master/permissions/setuid/DESCRIPTION.md#L1"
                      target="_blank"
                      class="github-edit-link"
                      title="Edit on GitHub">
@@ -3096,7 +3096,7 @@ Good luck!</p>
                 <p>As you explored in the previous module, there are many cases in which non-<code>root</code> users need elevated access to do certain system tasks.
 The system admin can't be there to give them the password every time a user wanted to do a task that only <code>root</code>/sudoers can do.
 Instead, the &quot;Set User ID&quot; (SUID) permission bit allows the user to run a program as the owner of that program's file.</p>
-<p>This is actually the exact mechanism used to let the challenge programs you run read the flag or, outside of pwn.college, to enable system administration tools such as <code>su</code>, <code>sudo</code>, and so on.
+<p>This is actually the exact mechanism used to let the challenge programs you run read the flag or, outside of pvvn.college, to enable system administration tools such as <code>su</code>, <code>sudo</code>, and so on.
 The permissions of a file with SUID look like this:</p>
 <pre><code class="language-console">hacker@dojo:~$ ls -l /usr/bin/sudo
 -rwsr-xr-x 1 root root 232416 Dec 1 11:45 /usr/bin/sudo
@@ -3351,7 +3351,7 @@ You will learn more about this <a href="/fundamentals/program-misuse/">in the Pr
             </div>
             <div class="row survey-row">
               <div class="col-md-12">
-                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/linux-luminarium/surveys/permissions/setuid" id="survey-notification" class="survey alert-dismissable w-100 survey-id-4613" role="alert" style="display: none;">
+                <form target="survey-target" method="post" action="/pvvncollege_api/v1/dojos/linux-luminarium/surveys/permissions/setuid" id="survey-notification" class="survey alert-dismissable w-100 survey-id-4613" role="alert" style="display: none;">
                   
                 </form>
               </div>
@@ -3415,9 +3415,9 @@ You will learn more about this <a href="/fundamentals/program-misuse/">in the Pr
     <footer class="footer">
       <div class="container text-center" style="line-height: 20px; opacity: 0.7">
         <small>
-          Powered by <strong>pwn.college</strong><br>
+          Powered by <strong>pvvn.college</strong><br>
           Interested in dedicated training or tailored services for your organization?
-          <a href="https://llc.pwn.college/">Find out more</a>.
+          <a href="https://llc.pvvn.college/">Find out more</a>.
         </small>
       </div>
     </footer>

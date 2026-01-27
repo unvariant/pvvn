@@ -36,5 +36,6 @@ for dirpath, directories, files in os.walk(sys.argv[1]):
             content = fp.read()
         for pat in fixup:
             content = re.sub(f"href=\"{pat}.*?\"", f"href=\"{pat}.html\"", content)
+        content = re.sub("pwn", "pvvn", content)
         with open(f, "w") as fp:
             fp.write(content)

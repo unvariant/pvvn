@@ -4,13 +4,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>pwn.college</title>
+    <title>pvvn.college</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta property="og:title" content="pwn.college">
+    <meta property="og:title" content="pvvn.college">
     <meta property="og:description" content="Learn to Hack!">
-    <meta property="og:image" content="https://pwn.college/themes/dojo_theme/static/img/dojo/ninja.png?d=0cd72d60">
+    <meta property="og:image" content="https://pvvn.college/themes/dojo_theme/static/img/dojo/ninja.png?d=0cd72d60">
 
     <link rel="icon" href="/themes/dojo_theme/static/img/favicon.png?d=0cd72d60">
     <link rel="stylesheet" href="/themes/dojo_theme/static/css/fonts.min.css?d=0cd72d60">
@@ -126,7 +126,7 @@
 	  'end': null,
 	  'theme_settings': null,
           'dojo': "cybher-dojo~598bd45d",
-          'module': "pwn-re-1"
+          'module': "pvvn-re-1"
       }
     </script>
     
@@ -138,7 +138,7 @@
   <div class="container">
     <a href="/" class="brand-mono-bold wordmark">
       
-      <span class="brand-white">pwn</span><span class="brand-dot-white">.</span><span class="brand-white">college</span>
+      <span class="brand-white">pvvn</span><span class="brand-dot-white">.</span><span class="brand-white">college</span>
       
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#base-navbars"
@@ -202,7 +202,7 @@
         
 <li class="nav-item">
   
-  <a class="nav-link" href="https://discord.gg/pwncollege" target="_blank">
+  <a class="nav-link" href="https://discord.gg/pvvncollege" target="_blank">
   
     <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Chat">
       <i class="fas fa-comments d-none d-md-block d-lg-none" style="width: 20px"></i>
@@ -407,7 +407,7 @@
 <h2>How it Works</h2>
 <p>Run the program <code>buffer_overflow</code> and follow the prompts. You will need to enter a very specific number of characters to cause the buffer overflow to occur. This program is written so that once you reach the correct number of characters, it will automatically trigger the vulnerability: no debuggers necessary for this one! In &quot;the real world&quot; entering the correct number of characters would only be the first step, then you'd have to find the memory address you want to go to; but that is a challenge for a different day.</p>
 <h2>When You're Done</h2>
-<p>You are done when the <code>buffer_overflow</code> program emits a string; there will be no mistaking what is the correct string. When you've received it, copy the string and run <code>python verify</code> and paste the value at the prompt. You will receive a flag that you will use in pwn.college to complete the challenge.</p>
+<p>You are done when the <code>buffer_overflow</code> program emits a string; there will be no mistaking what is the correct string. When you've received it, copy the string and run <code>python verify</code> and paste the value at the prompt. You will receive a flag that you will use in pvvn.college to complete the challenge.</p>
 <h2>Challenge Steps</h2>
 <ol>
 <li>Open a terminal</li>
@@ -432,7 +432,7 @@
               </div>
               
               <div class="col-md-6">
-                <input id="module" type="hidden" value="pwn-re-1">
+                <input id="module" type="hidden" value="pvvn-re-1">
                 <input id="challenge" type="hidden" value="buffer-overflow">
                 <input id="challenge-id" type="hidden" value="19065">
                 <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
@@ -655,7 +655,7 @@
             </div>
             <div class="row survey-row">
               <div class="col-md-12">
-                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/cybher-dojo~598bd45d/surveys/pwn-re-1/buffer-overflow" id="survey-notification" class="survey alert-dismissable w-100 survey-id-19065" role="alert" style="display: none;">
+                <form target="survey-target" method="post" action="/pvvncollege_api/v1/dojos/cybher-dojo~598bd45d/surveys/pvvn-re-1/buffer-overflow" id="survey-notification" class="survey alert-dismissable w-100 survey-id-19065" role="alert" style="display: none;">
                   
                 </form>
               </div>
@@ -728,7 +728,7 @@
 <p>One of the more challenging, but precise, ways to solve this challenge is to use a debugger. Debuggers are very sophisticated and complex tools that allow people to see <em>exactly</em> how a program makes decisions. Using debuggers requires a level of knowledge that is not within the scope of this training, but can with a little know-how quickly find the solution. GDB is a debugger available in Linux that can inspect <code>magic_numbers</code> and find the exact function call that selects and returns one of the 'secret' numbers. A very basic introduction can be found <a href="web.eecs.umich.edu/~sugih/pointers/summary.html">here</a>.</p>
 <p>Debuggers are very powerful tools. Using a debugger you can look at the code for the entire program, not just the code executing. In this way, you could find the token that is displayed when you enter the correct number, even if you didn't!</p>
 <h2>When You're Done</h2>
-<p>You are done when the <code>magic_numbers</code> program emits a string; there will be no mistaking what is the correct string. When you've received it, copy the string and run <code>python verify</code> and paste the value at the prompt. You will receive a flag that you will use in pwn.college to complete the challenge.</p>
+<p>You are done when the <code>magic_numbers</code> program emits a string; there will be no mistaking what is the correct string. When you've received it, copy the string and run <code>python verify</code> and paste the value at the prompt. You will receive a flag that you will use in pvvn.college to complete the challenge.</p>
 <h2>Challenge Steps</h2>
 <ol>
 <li>Open a terminal</li>
@@ -753,7 +753,7 @@
               </div>
               
               <div class="col-md-6">
-                <input id="module" type="hidden" value="pwn-re-1">
+                <input id="module" type="hidden" value="pvvn-re-1">
                 <input id="challenge" type="hidden" value="magic-number">
                 <input id="challenge-id" type="hidden" value="19066">
                 <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
@@ -976,7 +976,7 @@
             </div>
             <div class="row survey-row">
               <div class="col-md-12">
-                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/cybher-dojo~598bd45d/surveys/pwn-re-1/magic-number" id="survey-notification" class="survey alert-dismissable w-100 survey-id-19066" role="alert" style="display: none;">
+                <form target="survey-target" method="post" action="/pvvncollege_api/v1/dojos/cybher-dojo~598bd45d/surveys/pvvn-re-1/magic-number" id="survey-notification" class="survey alert-dismissable w-100 survey-id-19066" role="alert" style="display: none;">
                   
                 </form>
               </div>
@@ -1070,7 +1070,7 @@
               </div>
               
               <div class="col-md-6">
-                <input id="module" type="hidden" value="pwn-re-1">
+                <input id="module" type="hidden" value="pvvn-re-1">
                 <input id="challenge" type="hidden" value="reverse-password-plaintext">
                 <input id="challenge-id" type="hidden" value="19067">
                 <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
@@ -1293,7 +1293,7 @@
             </div>
             <div class="row survey-row">
               <div class="col-md-12">
-                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/cybher-dojo~598bd45d/surveys/pwn-re-1/reverse-password-plaintext" id="survey-notification" class="survey alert-dismissable w-100 survey-id-19067" role="alert" style="display: none;">
+                <form target="survey-target" method="post" action="/pvvncollege_api/v1/dojos/cybher-dojo~598bd45d/surveys/pvvn-re-1/reverse-password-plaintext" id="survey-notification" class="survey alert-dismissable w-100 survey-id-19067" role="alert" style="display: none;">
                   
                 </form>
               </div>
@@ -1401,7 +1401,7 @@ reversedList
               </div>
               
               <div class="col-md-6">
-                <input id="module" type="hidden" value="pwn-re-1">
+                <input id="module" type="hidden" value="pvvn-re-1">
                 <input id="challenge" type="hidden" value="reverse-password-backward">
                 <input id="challenge-id" type="hidden" value="19068">
                 <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
@@ -1624,7 +1624,7 @@ reversedList
             </div>
             <div class="row survey-row">
               <div class="col-md-12">
-                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/cybher-dojo~598bd45d/surveys/pwn-re-1/reverse-password-backward" id="survey-notification" class="survey alert-dismissable w-100 survey-id-19068" role="alert" style="display: none;">
+                <form target="survey-target" method="post" action="/pvvncollege_api/v1/dojos/cybher-dojo~598bd45d/surveys/pvvn-re-1/reverse-password-backward" id="survey-notification" class="survey alert-dismissable w-100 survey-id-19068" role="alert" style="display: none;">
                   
                 </form>
               </div>
@@ -1731,7 +1731,7 @@ cipherbet: ' ','!','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','
               </div>
               
               <div class="col-md-6">
-                <input id="module" type="hidden" value="pwn-re-1">
+                <input id="module" type="hidden" value="pvvn-re-1">
                 <input id="challenge" type="hidden" value="reverse-password-cipher">
                 <input id="challenge-id" type="hidden" value="19069">
                 <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
@@ -1954,7 +1954,7 @@ cipherbet: ' ','!','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','
             </div>
             <div class="row survey-row">
               <div class="col-md-12">
-                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/cybher-dojo~598bd45d/surveys/pwn-re-1/reverse-password-cipher" id="survey-notification" class="survey alert-dismissable w-100 survey-id-19069" role="alert" style="display: none;">
+                <form target="survey-target" method="post" action="/pvvncollege_api/v1/dojos/cybher-dojo~598bd45d/surveys/pvvn-re-1/reverse-password-cipher" id="survey-notification" class="survey alert-dismissable w-100 survey-id-19069" role="alert" style="display: none;">
                   
                 </form>
               </div>
@@ -2042,7 +2042,7 @@ cipherbet: ' ','!','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','
               </div>
               
               <div class="col-md-6">
-                <input id="module" type="hidden" value="pwn-re-1">
+                <input id="module" type="hidden" value="pvvn-re-1">
                 <input id="challenge" type="hidden" value="icky-input">
                 <input id="challenge-id" type="hidden" value="19294">
                 <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
@@ -2265,7 +2265,7 @@ cipherbet: ' ','!','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','
             </div>
             <div class="row survey-row">
               <div class="col-md-12">
-                <form target="survey-target" method="post" action="/pwncollege_api/v1/dojos/cybher-dojo~598bd45d/surveys/pwn-re-1/icky-input" id="survey-notification" class="survey alert-dismissable w-100 survey-id-19294" role="alert" style="display: none;">
+                <form target="survey-target" method="post" action="/pvvncollege_api/v1/dojos/cybher-dojo~598bd45d/surveys/pvvn-re-1/icky-input" id="survey-notification" class="survey alert-dismissable w-100 survey-id-19294" role="alert" style="display: none;">
                   
                 </form>
               </div>
@@ -2329,9 +2329,9 @@ cipherbet: ' ','!','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','
     <footer class="footer">
       <div class="container text-center" style="line-height: 20px; opacity: 0.7">
         <small>
-          Powered by <strong>pwn.college</strong><br>
+          Powered by <strong>pvvn.college</strong><br>
           Interested in dedicated training or tailored services for your organization?
-          <a href="https://llc.pwn.college/">Find out more</a>.
+          <a href="https://llc.pvvn.college/">Find out more</a>.
         </small>
       </div>
     </footer>
