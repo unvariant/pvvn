@@ -7,12 +7,17 @@ for dirpath, directories, files in os.walk(sys.argv[1]):
     for file in files:
         orig = parent / file
         if "?" in file:
-            file = file[:file.index("?")]
+            file = file[: file.index("?")]
             new = parent / file
             if new.exists():
                 orig.unlink()
             else:
                 orig.rename(new)
+
+    for file in directories + files:
+        orig = parent / file
+        if "pwn" in file:
+            orig.rename(parent / file.replace("pwn", "pvvn"))
 
 import re
 
@@ -35,7 +40,7 @@ for dirpath, directories, files in os.walk(sys.argv[1]):
         with open(f) as fp:
             content = fp.read()
         for pat in fixup:
-            content = re.sub(f"href=\"{pat}.*?\"", f"href=\"{pat}.html\"", content)
+            content = re.sub(f'href="{pat}.*?"', f'href="{pat}.html"', content)
         content = re.sub("pwn", "pvvn", content)
         with open(f, "w") as fp:
             fp.write(content)
